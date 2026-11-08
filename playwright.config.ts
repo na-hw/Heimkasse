@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/** E2E tests run against the browser build (IndexedDB adapter). */
+/** E2E tests run against the static production build in a browser (IndexedDB adapter). */
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -15,9 +15,9 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: "npx next dev --port 3100",
+    command: "npm run build && node e2e/serve-static.mjs",
     url: "http://localhost:3100",
     reuseExistingServer: true,
-    timeout: 120_000,
+    timeout: 180_000,
   },
 });
