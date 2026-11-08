@@ -1,0 +1,37 @@
+.tile {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--tile-color) 15%, var(--color-surface));
+  color: var(--tile-color);
+}
+
+.sm {
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: var(--radius-sm);
+}
+.sm svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.md {
+  inline-size: 40px;
+  block-size: 40px;
+}
+.md svg {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.lg {
+  inline-size: 52px;
+  block-size: 52px;
+  border-radius: var(--radius-lg);
+}
+.lg svg {
+  inline-size: 26px;
+  block-size: 26px;
+}
