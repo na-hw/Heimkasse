@@ -33,6 +33,13 @@
   color: var(--color-text-muted);
 }
 
+@media (pointer: coarse) {
+  .clear {
+    inline-size: var(--touch-target);
+    block-size: var(--touch-target);
+  }
+}
+
 .clear:hover {
   background: var(--color-surface-hover);
 }
