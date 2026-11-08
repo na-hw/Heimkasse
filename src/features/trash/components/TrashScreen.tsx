@@ -82,6 +82,13 @@ export function TrashScreen() {
           detail: format.money(r.type === "income" ? r.amount_cents : -r.amount_cents),
           deletedAt: r.deleted_at ?? "",
         }));
+      case "budgets":
+        return data.budgets.map((b) => ({
+          id: b.id,
+          name: catName(b.category_id),
+          detail: format.money(b.amount_cents),
+          deletedAt: b.deleted_at ?? "",
+        }));
     }
   };
 
