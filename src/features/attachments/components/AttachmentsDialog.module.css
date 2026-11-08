@@ -81,7 +81,7 @@
 
 .previewImage {
   max-inline-size: 100%;
-  max-block-size: 60vh;
+  max-block-size: 60dvh;
   object-fit: contain;
   border-radius: var(--radius-md);
   background: var(--color-surface-sunken);
