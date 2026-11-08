@@ -1,9 +1,11 @@
 import {
   ArrowLeftRight,
+  ChartPie,
   FolderTree,
   House,
   Landmark,
   Palette,
+  PiggyBank,
   Repeat,
   Settings,
   Trash2,
@@ -16,6 +18,8 @@ export type NavLabelKey =
   | "nav.accounts"
   | "nav.categories"
   | "nav.recurring"
+  | "nav.budgets"
+  | "nav.reports"
   | "nav.trash"
   | "nav.settings"
   | "nav.design";
@@ -43,8 +47,10 @@ export const NAV_ITEMS: readonly NavItem[] = [
     icon: ArrowLeftRight,
     mobile: true,
   },
-  { id: "accounts", href: "/accounts/", labelKey: "nav.accounts", icon: Landmark, mobile: true },
-  { id: "recurring", href: "/recurring/", labelKey: "nav.recurring", icon: Repeat, mobile: true },
+  { id: "budgets", href: "/budgets/", labelKey: "nav.budgets", icon: PiggyBank, mobile: true },
+  { id: "reports", href: "/reports/", labelKey: "nav.reports", icon: ChartPie, mobile: true },
+  { id: "accounts", href: "/accounts/", labelKey: "nav.accounts", icon: Landmark, mobile: false },
+  { id: "recurring", href: "/recurring/", labelKey: "nav.recurring", icon: Repeat, mobile: false },
   {
     id: "categories",
     href: "/categories/",
