@@ -1,0 +1,39 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-7);
+  padding-inline: var(--space-4);
+  text-align: center;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  inline-size: 56px;
+  block-size: 56px;
+  margin-block-end: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-soft-text);
+}
+
+.icon svg {
+  inline-size: 26px;
+  block-size: 26px;
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.description {
+  max-inline-size: 32rem;
+  color: var(--color-text-muted);
+}
+
+.action {
+  margin-block-start: var(--space-3);
+}
