@@ -6,6 +6,7 @@ import { ruleStatus } from "./schedule";
 import {
   bookNext,
   createRule,
+  resumeRule,
   generateDueTransactions,
   skipNext,
   updateRule,

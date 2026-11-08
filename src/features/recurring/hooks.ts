@@ -13,6 +13,7 @@ import {
   createRule,
   generateDueTransactions,
   resumeRule,
+  resumeRule,
   skipNext,
   updateRule,
 } from "./service";
@@ -29,9 +30,16 @@ export function useRecurringMutations() {
   const { t } = useTranslation();
 
   const create = useDataMutation({
-    mutationFn: (repos, input: Omit<RecurringRuleCreate, "next_run_date">) =>
-      createRule(repos, input),
-    onSuccess: () => toast.success(t("recurring.created")),
+    mutationFn: async (repos, input: Omit<RecurringRuleCreate, "next_run_date">) => {
+      await createRule(repos, input);
+      // Book past occurrences right away (start date in the past).
+      return generateDueTransactions(repos, todayIso());
+    },
+    onSuccess: (generated) =>
+      toast.success(
+        t("recurring.created"),
+        generated > 0 ? { description: t("recurring.generated", { count: generated }) } : undefined,
+      ),
   });
 
   const update = useDataMutation({
@@ -41,8 +49,10 @@ export function useRecurringMutations() {
   });
 
   const setPaused = useDataMutation({
-    mutationFn: (repos, { id, paused }: { id: string; paused: boolean }) =>
-      repos.recurringRules.update(id, { paused }),
+    mutationFn: (repos, { rule, paused }: { rule: RecurringRule; paused: boolean }) =>
+      paused
+        ? repos.recurringRules.update(rule.id, { paused: true })
+        : resumeRule(repos, rule, todayIso()),
     onSuccess: (_r, { paused }) =>
       toast.success(t(paused ? "recurring.paused" : "recurring.resumed")),
   });
