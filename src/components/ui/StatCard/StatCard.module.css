@@ -8,6 +8,7 @@
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-xs);
+  container-type: inline-size;
 }
 
 .top {
@@ -44,6 +45,14 @@
   font-variant-numeric: tabular-nums;
   line-height: var(--line-height-tight);
   overflow-wrap: anywhere;
+}
+
+/* Two cards side by side on a phone: large amounts would overflow the card at full size. */
+@container (max-width: 11rem) {
+  .value,
+  .value > * {
+    font-size: var(--font-size-lg);
+  }
 }
 
 .trend {

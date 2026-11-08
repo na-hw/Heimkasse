@@ -27,4 +27,6 @@
 
 .muted {
   color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
 }
