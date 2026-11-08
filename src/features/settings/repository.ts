@@ -59,4 +59,13 @@ export class SettingsRepository extends BaseRepository<Setting, SettingCreate, S
     if (existing) await this.update(existing.id, { value });
     else await this.create({ key, value });
   }
+
+  /** Deletes the row stored under `key` (no-op if missing). */
+  async removeValue(key: string): Promise<void> {
+    const rows = await this.list({
+      where: [{ field: "key", op: "eq", value: key }],
+      deleted: "include",
+    });
+    if (rows.length > 0) await this.purge(rows.map((r) => r.id));
+  }
 }
