@@ -1,10 +1,11 @@
 .calendar {
   --rdp-accent-color: var(--color-primary);
   --rdp-accent-background-color: var(--color-primary-soft);
+  /* 7 columns must fit next to the popover's collision padding, panel padding and border on 320px screens. */
+  --rdp-day-width: min(44px, calc((100vw - 3.5rem) / 7));
   --rdp-day-height: 44px;
-  --rdp-day-width: 44px;
+  --rdp-day_button-width: calc(var(--rdp-day-width) - 4px);
   --rdp-day_button-height: 40px;
-  --rdp-day_button-width: 40px;
   --rdp-day_button-border-radius: var(--radius-full);
   --rdp-selected-border: 2px solid var(--color-primary);
   --rdp-today-color: var(--color-primary);
