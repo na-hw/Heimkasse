@@ -15,7 +15,15 @@
     "collapseSidebar": "Seitenleiste einklappen",
     "expandSidebar": "Seitenleiste ausklappen",
     "search": "Suchen …",
-    "openCommandPalette": "Befehlspalette öffnen"
+    "openCommandPalette": "Befehlspalette öffnen",
+    "transactions": "Buchungen",
+    "accounts": "Konten",
+    "categories": "Kategorien",
+    "recurring": "Wiederkehrend",
+    "trash": "Papierkorb",
+    "more": "Mehr",
+    "moreTitle": "Weitere Bereiche",
+    "quickAdd": "Neue Buchung"
   },
   "common": {
     "save": "Speichern",
@@ -40,7 +48,26 @@
     "no": "Nein",
     "noResults": "Keine Ergebnisse",
     "selectPlaceholder": "Auswählen …",
-    "searchPlaceholder": "Suchen …"
+    "searchPlaceholder": "Suchen …",
+    "actions": "Aktionen",
+    "actionsFor": "Aktionen für {{name}}",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "moved": "Verschoben",
+    "archive": "Archivieren",
+    "unarchive": "Wiederherstellen aus Archiv",
+    "apply": "Anwenden",
+    "reset": "Zurücksetzen",
+    "create": "Anlegen",
+    "saveChanges": "Änderungen speichern",
+    "duplicate": "Duplizieren",
+    "none": "Keine",
+    "all": "Alle",
+    "filter": "Filter",
+    "selectMode": "Auswählen",
+    "done": "Fertig",
+    "archivedBadge": "Archiviert",
+    "systemBadge": "Standard"
   },
   "theme": {
     "system": "System",
@@ -122,7 +149,8 @@
       "not_found": "Der Eintrag wurde nicht gefunden.",
       "validation_failed": "Die Eingaben sind ungültig.",
       "write_failed": "Die Änderung konnte nicht gespeichert werden.",
-      "unknown": "Ein unerwarteter Fehler ist aufgetreten."
+      "unknown": "Ein unerwarteter Fehler ist aufgetreten.",
+      "in_use": "Der Eintrag wird noch verwendet."
     }
   },
   "validation": {
@@ -230,7 +258,41 @@
       "gifts": "Geschenke",
       "salary": "Gehalt",
       "other_income": "Sonstige Einnahmen"
-    }
+    },
+    "title": "Kategorien",
+    "description": "Ordne Einnahmen und Ausgaben zu. Unterkategorien helfen beim Detail.",
+    "add": "Kategorie anlegen",
+    "addSub": "Unterkategorie anlegen",
+    "new": "Neue Kategorie",
+    "edit": "Kategorie bearbeiten",
+    "archivedSection": "Archivierte Kategorien",
+    "subcategoryCount_one": "{{count}} Unterkategorie",
+    "subcategoryCount_other": "{{count}} Unterkategorien",
+    "empty": {
+      "title": "Keine Kategorien",
+      "text": "Lege eine Kategorie an, um Buchungen zuzuordnen."
+    },
+    "fields": {
+      "name": "Name",
+      "type": "Art",
+      "parent": "Oberkategorie",
+      "parentNone": "Keine (Hauptkategorie)"
+    },
+    "created": "Kategorie angelegt",
+    "saved": "Kategorie gespeichert",
+    "deleted": "Kategorie in den Papierkorb verschoben",
+    "archived": "Kategorie archiviert",
+    "unarchived": "Kategorie wiederhergestellt",
+    "deleteConfirm": {
+      "title": "Kategorie löschen?",
+      "text": "„{{name}}“ und ihre Unterkategorien werden in den Papierkorb verschoben."
+    },
+    "archiveInstead": {
+      "title": "Kategorie wird verwendet",
+      "text": "„{{name}}“ (inkl. Unterkategorien) wird von {{count}} Buchungen, Regeln oder Budgets verwendet und kann nicht gelöscht werden. Sie wird stattdessen archiviert: Sie verschwindet aus Auswahllisten, bestehende Zuordnungen bleiben erhalten.",
+      "confirm": "Archivieren"
+    },
+    "uncategorized": "Ohne Kategorie"
   },
   "design": {
     "title": "Komponenten",
@@ -308,5 +370,311 @@
       "emptyAction": "Eintrag anlegen",
       "errorText": "Die Daten konnten nicht geladen werden."
     }
+  },
+  "colors": {
+    "label": "Farbe",
+    "teal": "Petrol",
+    "green": "Grün",
+    "olive": "Oliv",
+    "amber": "Bernstein",
+    "orange": "Orange",
+    "red": "Rot",
+    "pink": "Pink",
+    "purple": "Lila",
+    "indigo": "Indigo",
+    "blue": "Blau",
+    "cyan": "Cyan",
+    "gray": "Grau"
+  },
+  "icons": {
+    "label": "Symbol",
+    "home": "Haus",
+    "receipt": "Beleg",
+    "zap": "Strom",
+    "flame": "Gas/Heizung",
+    "wifi": "Internet",
+    "radio": "Rundfunk",
+    "shopping-cart": "Einkauf",
+    "bus": "Bus",
+    "train": "Bahn",
+    "fuel": "Tanken",
+    "car": "Auto",
+    "shield": "Versicherung",
+    "heart-pulse": "Gesundheit",
+    "umbrella": "Schutz",
+    "sofa": "Wohnen",
+    "spray-can": "Haushalt",
+    "shirt": "Kleidung",
+    "ticket": "Freizeit",
+    "utensils": "Essen",
+    "coffee": "Café",
+    "graduation-cap": "Bildung",
+    "repeat": "Abo",
+    "gift": "Geschenk",
+    "briefcase": "Arbeit",
+    "coins": "Münzen",
+    "piggy-bank": "Sparschwein",
+    "wallet": "Geldbörse",
+    "landmark": "Bank",
+    "credit-card": "Karte",
+    "banknote": "Bargeld",
+    "plane": "Reise",
+    "baby": "Kind",
+    "paw-print": "Haustier",
+    "dumbbell": "Sport",
+    "book": "Buch",
+    "music": "Musik",
+    "smartphone": "Handy",
+    "wrench": "Reparatur",
+    "tag": "Etikett",
+    "circle": "Kreis"
+  },
+  "tagInput": {
+    "placeholder": "Tag eingeben, Enter drücken",
+    "remove": "Tag {{tag}} entfernen"
+  },
+  "accounts": {
+    "title": "Konten",
+    "description": "Girokonten, Bargeld, Kreditkarten und PayPal.",
+    "add": "Konto anlegen",
+    "new": "Neues Konto",
+    "edit": "Konto bearbeiten",
+    "totalBalance": "Gesamtsaldo",
+    "balance": "Saldo",
+    "archivedSection": "Archivierte Konten",
+    "empty": {
+      "title": "Noch keine Konten",
+      "text": "Lege dein erstes Konto an, z. B. dein Girokonto oder Bargeld."
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "z. B. Sparkasse Giro",
+      "type": "Kontoart",
+      "initialBalance": "Anfangssaldo",
+      "initialBalanceHint": "Kontostand vor der ersten erfassten Buchung. Darf negativ sein."
+    },
+    "created": "Konto angelegt",
+    "saved": "Konto gespeichert",
+    "deleted": "Konto in den Papierkorb verschoben",
+    "archived": "Konto archiviert",
+    "unarchived": "Konto wiederhergestellt",
+    "deleteConfirm": {
+      "title": "Konto löschen?",
+      "text": "„{{name}}“ wird in den Papierkorb verschoben."
+    },
+    "archiveInstead": {
+      "title": "Konto wird verwendet",
+      "text": "„{{name}}“ wird von {{count}} Buchungen oder Regeln verwendet und kann nicht gelöscht werden. Es wird stattdessen archiviert: Es verschwindet aus Auswahllisten, alle Buchungen bleiben erhalten.",
+      "confirm": "Archivieren"
+    }
+  },
+  "paymentMethods": {
+    "card": "Karte",
+    "cash": "Bar",
+    "bank_transfer": "Überweisung",
+    "direct_debit": "Lastschrift",
+    "paypal": "PayPal",
+    "other": "Sonstiges"
+  },
+  "taxCategories": {
+    "work_expenses": "Werbungskosten",
+    "home_office": "Home-Office",
+    "craftsman_services": "Handwerkerleistungen",
+    "household_services": "Haushaltsnahe Dienstleistungen",
+    "medical_costs": "Krankheitskosten",
+    "donations": "Spenden",
+    "insurance": "Versicherungen"
+  },
+  "transactions": {
+    "title": "Buchungen",
+    "description": "Alle Einnahmen, Ausgaben und Umbuchungen.",
+    "add": "Buchung erfassen",
+    "new": "Neue Buchung",
+    "edit": "Buchung bearbeiten",
+    "duplicateTitle": "Buchung duplizieren",
+    "types": {
+      "expense": "Ausgabe",
+      "income": "Einnahme",
+      "transfer": "Umbuchung"
+    },
+    "fields": {
+      "type": "Art",
+      "amount": "Betrag",
+      "date": "Datum",
+      "account": "Konto",
+      "fromAccount": "Von Konto",
+      "toAccount": "Auf Konto",
+      "category": "Kategorie",
+      "payee": "Empfänger / Zahler",
+      "payeePlaceholder": "z. B. REWE",
+      "note": "Notiz",
+      "paymentMethod": "Zahlungsart",
+      "tags": "Tags",
+      "taxCategory": "Steuerkategorie",
+      "none": "Keine Angabe",
+      "more": "Weitere Angaben"
+    },
+    "needAccount": {
+      "title": "Zuerst ein Konto anlegen",
+      "text": "Buchungen gehören immer zu einem Konto.",
+      "action": "Konto anlegen"
+    },
+    "empty": {
+      "title": "Noch keine Buchungen",
+      "text": "Erfasse deine erste Ausgabe oder Einnahme."
+    },
+    "emptyFiltered": {
+      "title": "Keine Treffer",
+      "text": "Keine Buchung passt zu Suche und Filtern."
+    },
+    "created": "Buchung gespeichert",
+    "saved": "Änderungen gespeichert",
+    "deleted_one": "{{count}} Buchung gelöscht",
+    "deleted_other": "{{count}} Buchungen gelöscht",
+    "restored": "Wiederhergestellt",
+    "transferTo": "→ {{account}}",
+    "transferFrom": "← {{account}}",
+    "search": "Buchungen durchsuchen",
+    "listLabel": "Buchungen nach Tag",
+    "rowSummary": "{{title}}, {{amount}}, {{date}}",
+    "count_one": "{{count}} Buchung",
+    "count_other": "{{count}} Buchungen",
+    "dayNet": "Tagessumme",
+    "bulk": {
+      "selected_one": "{{count}} ausgewählt",
+      "selected_other": "{{count}} ausgewählt",
+      "delete": "Löschen",
+      "changeCategory": "Kategorie ändern",
+      "clear": "Auswahl aufheben",
+      "selectAll": "Alle auswählen"
+    },
+    "changeCategory": {
+      "title": "Kategorie ändern",
+      "description_one": "Neue Kategorie für {{count}} Buchung.",
+      "description_other": "Neue Kategorie für {{count}} Buchungen.",
+      "done_one": "Kategorie für {{count}} Buchung geändert",
+      "done_other": "Kategorie für {{count}} Buchungen geändert"
+    },
+    "filters": {
+      "title": "Filter",
+      "open": "Filter öffnen",
+      "dateRange": "Zeitraum",
+      "accounts": "Konto",
+      "categories": "Kategorie",
+      "types": "Art",
+      "amountMin": "Betrag ab",
+      "amountMax": "Betrag bis",
+      "tags": "Tag",
+      "taxCategory": "Steuerkategorie",
+      "any": "Alle",
+      "reset": "Filter zurücksetzen",
+      "active_one": "{{count}} Filter aktiv",
+      "active_other": "{{count}} Filter aktiv"
+    },
+    "sort": {
+      "label": "Sortierung",
+      "dateDesc": "Neueste zuerst",
+      "dateAsc": "Älteste zuerst",
+      "amountDesc": "Höchster Betrag",
+      "amountAsc": "Niedrigster Betrag"
+    }
+  },
+  "recurring": {
+    "title": "Wiederkehrend",
+    "description": "Miete, Abos, Versicherungen – automatisch gebucht.",
+    "add": "Regel anlegen",
+    "new": "Neue wiederkehrende Zahlung",
+    "edit": "Regel bearbeiten",
+    "empty": {
+      "title": "Keine wiederkehrenden Zahlungen",
+      "text": "Lege z. B. Miete, Rundfunkbeitrag oder Abos einmal an – Heimkasse bucht sie automatisch."
+    },
+    "fields": {
+      "frequency": "Rhythmus",
+      "interval": "Alle",
+      "intervalHint": "z. B. 2 = jeden zweiten Termin",
+      "startDate": "Erster Termin",
+      "startDateHint": "Liegt der Start in der Vergangenheit, werden vergangene Termine automatisch nachgebucht.",
+      "endDate": "Letzter Termin",
+      "autoCreate": "Automatisch buchen",
+      "autoCreateHint": "Aus: Fällige Termine erscheinen unter „Anstehend“ und werden erst nach Bestätigung gebucht."
+    },
+    "frequencies": {
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "quarterly": "Vierteljährlich",
+      "yearly": "Jährlich"
+    },
+    "every": {
+      "weekly_one": "Wöchentlich",
+      "weekly_other": "Alle {{count}} Wochen",
+      "monthly_one": "Monatlich",
+      "monthly_other": "Alle {{count}} Monate",
+      "quarterly_one": "Vierteljährlich",
+      "quarterly_other": "Alle {{count}} Quartale",
+      "yearly_one": "Jährlich",
+      "yearly_other": "Alle {{count}} Jahre"
+    },
+    "nextDate": "Nächster Termin: {{date}}",
+    "status": {
+      "active": "Aktiv",
+      "paused": "Pausiert",
+      "ended": "Beendet"
+    },
+    "pause": "Pausieren",
+    "resume": "Fortsetzen",
+    "skip": "Nächsten Termin überspringen",
+    "paused": "Regel pausiert",
+    "resumed": "Regel fortgesetzt",
+    "skipped": "Termin übersprungen",
+    "created": "Regel angelegt",
+    "saved": "Regel gespeichert – gilt für künftige Termine",
+    "deleted": "Regel in den Papierkorb verschoben",
+    "deleteConfirm": {
+      "title": "Regel löschen?",
+      "text": "Künftige Termine werden nicht mehr gebucht. Bereits erstellte Buchungen bleiben erhalten."
+    },
+    "upcoming": {
+      "title": "Anstehend",
+      "description": "Termine der nächsten 30 Tage.",
+      "empty": "In den nächsten 30 Tagen steht nichts an.",
+      "due": "Fällig",
+      "book": "Jetzt buchen",
+      "booked": "Gebucht",
+      "manual": "Manuell"
+    },
+    "generated_one": "{{count}} wiederkehrende Buchung erstellt",
+    "generated_other": "{{count}} wiederkehrende Buchungen erstellt",
+    "listTitle": "Regeln"
+  },
+  "trash": {
+    "title": "Papierkorb",
+    "description": "Gelöschte Einträge wiederherstellen oder endgültig entfernen.",
+    "tabs": {
+      "transactions": "Buchungen",
+      "accounts": "Konten",
+      "categories": "Kategorien",
+      "recurring": "Regeln"
+    },
+    "empty": {
+      "title": "Papierkorb ist leer",
+      "text": "Gelöschte Einträge erscheinen hier und können wiederhergestellt werden."
+    },
+    "deletedAt": "Gelöscht am {{date}}",
+    "restore": "Wiederherstellen",
+    "purge": "Endgültig löschen",
+    "emptyTrash": "Papierkorb leeren",
+    "purgeConfirm": {
+      "title": "Endgültig löschen?",
+      "text": "„{{name}}“ wird unwiderruflich gelöscht."
+    },
+    "emptyConfirm": {
+      "title": "Papierkorb leeren?",
+      "text": "Alle {{count}} Einträge in diesem Bereich werden unwiderruflich gelöscht.",
+      "confirm": "Endgültig löschen"
+    },
+    "restored": "Wiederhergestellt",
+    "purged": "Endgültig gelöscht",
+    "accountInUse": "Dieses Konto wird noch von Buchungen verwendet. Lösche zuerst diese Buchungen endgültig."
   }
 }

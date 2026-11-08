@@ -15,7 +15,15 @@
     "collapseSidebar": "جمع کردن نوار کناری",
     "expandSidebar": "باز کردن نوار کناری",
     "search": "جستجو …",
-    "openCommandPalette": "باز کردن پالت فرمان"
+    "openCommandPalette": "باز کردن پالت فرمان",
+    "transactions": "تراکنش‌ها",
+    "accounts": "حساب‌ها",
+    "categories": "دسته‌بندی‌ها",
+    "recurring": "تکراری‌ها",
+    "trash": "سطل زباله",
+    "more": "بیشتر",
+    "moreTitle": "بخش‌های دیگر",
+    "quickAdd": "تراکنش جدید"
   },
   "common": {
     "save": "ذخیره",
@@ -40,7 +48,26 @@
     "no": "خیر",
     "noResults": "نتیجه‌ای یافت نشد",
     "selectPlaceholder": "انتخاب کنید …",
-    "searchPlaceholder": "جستجو …"
+    "searchPlaceholder": "جستجو …",
+    "actions": "عملیات",
+    "actionsFor": "عملیات برای {{name}}",
+    "moveUp": "انتقال به بالا",
+    "moveDown": "انتقال به پایین",
+    "moved": "جابه‌جا شد",
+    "archive": "بایگانی",
+    "unarchive": "خارج کردن از بایگانی",
+    "apply": "اعمال",
+    "reset": "بازنشانی",
+    "create": "ایجاد",
+    "saveChanges": "ذخیرهٔ تغییرات",
+    "duplicate": "تکثیر",
+    "none": "هیچ‌کدام",
+    "all": "همه",
+    "filter": "فیلتر",
+    "selectMode": "انتخاب",
+    "done": "تمام",
+    "archivedBadge": "بایگانی‌شده",
+    "systemBadge": "پیش‌فرض"
   },
   "theme": {
     "system": "سیستم",
@@ -122,7 +149,8 @@
       "not_found": "مورد مورد نظر پیدا نشد.",
       "validation_failed": "ورودی‌ها نامعتبر هستند.",
       "write_failed": "تغییر ذخیره نشد.",
-      "unknown": "خطای غیرمنتظره‌ای رخ داد."
+      "unknown": "خطای غیرمنتظره‌ای رخ داد.",
+      "in_use": "این مورد هنوز در حال استفاده است."
     }
   },
   "validation": {
@@ -230,7 +258,41 @@
       "gifts": "هدیه‌ها",
       "salary": "حقوق",
       "other_income": "سایر درآمدها"
-    }
+    },
+    "title": "دسته‌بندی‌ها",
+    "description": "درآمدها و هزینه‌ها را دسته‌بندی کنید. زیردسته‌ها جزئیات بیشتری می‌دهند.",
+    "add": "افزودن دسته",
+    "addSub": "افزودن زیردسته",
+    "new": "دستهٔ جدید",
+    "edit": "ویرایش دسته",
+    "archivedSection": "دسته‌های بایگانی‌شده",
+    "subcategoryCount_one": "{{count}} زیردسته",
+    "subcategoryCount_other": "{{count}} زیردسته",
+    "empty": {
+      "title": "دسته‌ای وجود ندارد",
+      "text": "برای دسته‌بندی تراکنش‌ها یک دسته بسازید."
+    },
+    "fields": {
+      "name": "نام",
+      "type": "نوع",
+      "parent": "دستهٔ والد",
+      "parentNone": "ندارد (دستهٔ اصلی)"
+    },
+    "created": "دسته ایجاد شد",
+    "saved": "دسته ذخیره شد",
+    "deleted": "دسته به سطل زباله رفت",
+    "archived": "دسته بایگانی شد",
+    "unarchived": "دسته از بایگانی خارج شد",
+    "deleteConfirm": {
+      "title": "دسته حذف شود؟",
+      "text": "«{{name}}» و زیردسته‌هایش به سطل زباله منتقل می‌شوند."
+    },
+    "archiveInstead": {
+      "title": "این دسته در حال استفاده است",
+      "text": "«{{name}}» (همراه زیردسته‌ها) در {{count}} تراکنش، قاعده یا بودجه استفاده شده و قابل حذف نیست. به‌جای آن بایگانی می‌شود: از فهرست‌های انتخاب حذف می‌شود ولی ارتباط‌های موجود حفظ می‌شوند.",
+      "confirm": "بایگانی"
+    },
+    "uncategorized": "بدون دسته"
   },
   "design": {
     "title": "کامپوننت‌ها",
@@ -308,5 +370,311 @@
       "emptyAction": "افزودن مورد",
       "errorText": "داده‌ها بارگذاری نشدند."
     }
+  },
+  "colors": {
+    "label": "رنگ",
+    "teal": "سبزآبی",
+    "green": "سبز",
+    "olive": "زیتونی",
+    "amber": "کهربایی",
+    "orange": "نارنجی",
+    "red": "قرمز",
+    "pink": "صورتی",
+    "purple": "بنفش",
+    "indigo": "نیلی",
+    "blue": "آبی",
+    "cyan": "فیروزه‌ای",
+    "gray": "خاکستری"
+  },
+  "icons": {
+    "label": "نماد",
+    "home": "خانه",
+    "receipt": "رسید",
+    "zap": "برق",
+    "flame": "گاز/گرمایش",
+    "wifi": "اینترنت",
+    "radio": "رادیو و تلویزیون",
+    "shopping-cart": "خرید",
+    "bus": "اتوبوس",
+    "train": "قطار",
+    "fuel": "سوخت",
+    "car": "خودرو",
+    "shield": "بیمه",
+    "heart-pulse": "سلامت",
+    "umbrella": "محافظت",
+    "sofa": "خانه و مبلمان",
+    "spray-can": "خانه‌داری",
+    "shirt": "پوشاک",
+    "ticket": "تفریح",
+    "utensils": "غذا",
+    "coffee": "کافه",
+    "graduation-cap": "آموزش",
+    "repeat": "اشتراک",
+    "gift": "هدیه",
+    "briefcase": "کار",
+    "coins": "سکه",
+    "piggy-bank": "قلک",
+    "wallet": "کیف پول",
+    "landmark": "بانک",
+    "credit-card": "کارت",
+    "banknote": "پول نقد",
+    "plane": "سفر",
+    "baby": "کودک",
+    "paw-print": "حیوان خانگی",
+    "dumbbell": "ورزش",
+    "book": "کتاب",
+    "music": "موسیقی",
+    "smartphone": "موبایل",
+    "wrench": "تعمیرات",
+    "tag": "برچسب",
+    "circle": "دایره"
+  },
+  "tagInput": {
+    "placeholder": "برچسب را بنویسید و Enter بزنید",
+    "remove": "حذف برچسب {{tag}}"
+  },
+  "accounts": {
+    "title": "حساب‌ها",
+    "description": "حساب‌های بانکی، پول نقد، کارت اعتباری و پی‌پال.",
+    "add": "افزودن حساب",
+    "new": "حساب جدید",
+    "edit": "ویرایش حساب",
+    "totalBalance": "موجودی کل",
+    "balance": "موجودی",
+    "archivedSection": "حساب‌های بایگانی‌شده",
+    "empty": {
+      "title": "هنوز حسابی ندارید",
+      "text": "اولین حساب خود را بسازید، مثلاً حساب بانکی یا پول نقد."
+    },
+    "fields": {
+      "name": "نام",
+      "namePlaceholder": "مثلاً Sparkasse Giro",
+      "type": "نوع حساب",
+      "initialBalance": "موجودی اولیه",
+      "initialBalanceHint": "موجودی پیش از اولین تراکنش ثبت‌شده. می‌تواند منفی باشد."
+    },
+    "created": "حساب ایجاد شد",
+    "saved": "حساب ذخیره شد",
+    "deleted": "حساب به سطل زباله رفت",
+    "archived": "حساب بایگانی شد",
+    "unarchived": "حساب از بایگانی خارج شد",
+    "deleteConfirm": {
+      "title": "حساب حذف شود؟",
+      "text": "«{{name}}» به سطل زباله منتقل می‌شود."
+    },
+    "archiveInstead": {
+      "title": "این حساب در حال استفاده است",
+      "text": "«{{name}}» در {{count}} تراکنش یا قاعده استفاده شده و قابل حذف نیست. به‌جای آن بایگانی می‌شود: از فهرست‌های انتخاب حذف می‌شود ولی همهٔ تراکنش‌ها باقی می‌مانند.",
+      "confirm": "بایگانی"
+    }
+  },
+  "paymentMethods": {
+    "card": "کارت",
+    "cash": "نقدی",
+    "bank_transfer": "انتقال بانکی",
+    "direct_debit": "برداشت مستقیم (Lastschrift)",
+    "paypal": "پی‌پال",
+    "other": "سایر"
+  },
+  "taxCategories": {
+    "work_expenses": "هزینه‌های شغلی (Werbungskosten)",
+    "home_office": "دفتر خانگی (Home-Office)",
+    "craftsman_services": "خدمات فنی (Handwerkerleistungen)",
+    "household_services": "خدمات منزل (haushaltsnahe Dienstleistungen)",
+    "medical_costs": "هزینه‌های درمانی (Krankheitskosten)",
+    "donations": "کمک‌های خیریه (Spenden)",
+    "insurance": "بیمه‌ها (Versicherungen)"
+  },
+  "transactions": {
+    "title": "تراکنش‌ها",
+    "description": "همهٔ درآمدها، هزینه‌ها و انتقال‌ها.",
+    "add": "ثبت تراکنش",
+    "new": "تراکنش جدید",
+    "edit": "ویرایش تراکنش",
+    "duplicateTitle": "تکثیر تراکنش",
+    "types": {
+      "expense": "هزینه",
+      "income": "درآمد",
+      "transfer": "انتقال"
+    },
+    "fields": {
+      "type": "نوع",
+      "amount": "مبلغ",
+      "date": "تاریخ",
+      "account": "حساب",
+      "fromAccount": "از حساب",
+      "toAccount": "به حساب",
+      "category": "دسته",
+      "payee": "گیرنده / پرداخت‌کننده",
+      "payeePlaceholder": "مثلاً REWE",
+      "note": "یادداشت",
+      "paymentMethod": "روش پرداخت",
+      "tags": "برچسب‌ها",
+      "taxCategory": "دستهٔ مالیاتی",
+      "none": "نامشخص",
+      "more": "جزئیات بیشتر"
+    },
+    "needAccount": {
+      "title": "ابتدا یک حساب بسازید",
+      "text": "هر تراکنش به یک حساب تعلق دارد.",
+      "action": "افزودن حساب"
+    },
+    "empty": {
+      "title": "هنوز تراکنشی ثبت نشده",
+      "text": "اولین هزینه یا درآمد خود را ثبت کنید."
+    },
+    "emptyFiltered": {
+      "title": "نتیجه‌ای یافت نشد",
+      "text": "هیچ تراکنشی با جستجو و فیلترها مطابقت ندارد."
+    },
+    "created": "تراکنش ذخیره شد",
+    "saved": "تغییرات ذخیره شد",
+    "deleted_one": "{{count}} تراکنش حذف شد",
+    "deleted_other": "{{count}} تراکنش حذف شد",
+    "restored": "بازیابی شد",
+    "transferTo": "← {{account}}",
+    "transferFrom": "→ {{account}}",
+    "search": "جستجو در تراکنش‌ها",
+    "listLabel": "تراکنش‌ها به تفکیک روز",
+    "rowSummary": "{{title}}، {{amount}}، {{date}}",
+    "count_one": "{{count}} تراکنش",
+    "count_other": "{{count}} تراکنش",
+    "dayNet": "جمع روز",
+    "bulk": {
+      "selected_one": "{{count}} مورد انتخاب شد",
+      "selected_other": "{{count}} مورد انتخاب شد",
+      "delete": "حذف",
+      "changeCategory": "تغییر دسته",
+      "clear": "لغو انتخاب",
+      "selectAll": "انتخاب همه"
+    },
+    "changeCategory": {
+      "title": "تغییر دسته",
+      "description_one": "دستهٔ جدید برای {{count}} تراکنش.",
+      "description_other": "دستهٔ جدید برای {{count}} تراکنش.",
+      "done_one": "دستهٔ {{count}} تراکنش تغییر کرد",
+      "done_other": "دستهٔ {{count}} تراکنش تغییر کرد"
+    },
+    "filters": {
+      "title": "فیلترها",
+      "open": "باز کردن فیلترها",
+      "dateRange": "بازهٔ زمانی",
+      "accounts": "حساب",
+      "categories": "دسته",
+      "types": "نوع",
+      "amountMin": "مبلغ از",
+      "amountMax": "مبلغ تا",
+      "tags": "برچسب",
+      "taxCategory": "دستهٔ مالیاتی",
+      "any": "همه",
+      "reset": "بازنشانی فیلترها",
+      "active_one": "{{count}} فیلتر فعال",
+      "active_other": "{{count}} فیلتر فعال"
+    },
+    "sort": {
+      "label": "مرتب‌سازی",
+      "dateDesc": "جدیدترین",
+      "dateAsc": "قدیمی‌ترین",
+      "amountDesc": "بیشترین مبلغ",
+      "amountAsc": "کمترین مبلغ"
+    }
+  },
+  "recurring": {
+    "title": "تکراری‌ها",
+    "description": "اجاره، اشتراک‌ها، بیمه‌ها – ثبت خودکار.",
+    "add": "افزودن قاعده",
+    "new": "پرداخت تکراری جدید",
+    "edit": "ویرایش قاعده",
+    "empty": {
+      "title": "پرداخت تکراری وجود ندارد",
+      "text": "مثلاً اجاره، Rundfunkbeitrag یا اشتراک‌ها را یک بار تعریف کنید – Heimkasse آن‌ها را خودکار ثبت می‌کند."
+    },
+    "fields": {
+      "frequency": "دوره",
+      "interval": "هر",
+      "intervalHint": "مثلاً ۲ = یکی در میان",
+      "startDate": "اولین سررسید",
+      "startDateHint": "اگر شروع در گذشته باشد، سررسیدهای گذشته خودکار ثبت می‌شوند.",
+      "endDate": "آخرین سررسید",
+      "autoCreate": "ثبت خودکار",
+      "autoCreateHint": "خاموش: سررسیدها در «پیش رو» نمایش داده می‌شوند و پس از تأیید ثبت می‌شوند."
+    },
+    "frequencies": {
+      "weekly": "هفتگی",
+      "monthly": "ماهانه",
+      "quarterly": "سه‌ماهه",
+      "yearly": "سالانه"
+    },
+    "every": {
+      "weekly_one": "هفتگی",
+      "weekly_other": "هر {{count}} هفته",
+      "monthly_one": "ماهانه",
+      "monthly_other": "هر {{count}} ماه",
+      "quarterly_one": "سه‌ماهه",
+      "quarterly_other": "هر {{count}} فصل",
+      "yearly_one": "سالانه",
+      "yearly_other": "هر {{count}} سال"
+    },
+    "nextDate": "سررسید بعدی: {{date}}",
+    "status": {
+      "active": "فعال",
+      "paused": "متوقف",
+      "ended": "پایان‌یافته"
+    },
+    "pause": "توقف",
+    "resume": "ادامه",
+    "skip": "رد کردن سررسید بعدی",
+    "paused": "قاعده متوقف شد",
+    "resumed": "قاعده ادامه یافت",
+    "skipped": "سررسید رد شد",
+    "created": "قاعده ایجاد شد",
+    "saved": "قاعده ذخیره شد – برای سررسیدهای آینده اعمال می‌شود",
+    "deleted": "قاعده به سطل زباله رفت",
+    "deleteConfirm": {
+      "title": "قاعده حذف شود؟",
+      "text": "سررسیدهای آینده دیگر ثبت نمی‌شوند. تراکنش‌های ثبت‌شده باقی می‌مانند."
+    },
+    "upcoming": {
+      "title": "پیش رو",
+      "description": "سررسیدهای ۳۰ روز آینده.",
+      "empty": "در ۳۰ روز آینده موردی نیست.",
+      "due": "سررسید شده",
+      "book": "ثبت کن",
+      "booked": "ثبت شد",
+      "manual": "دستی"
+    },
+    "generated_one": "{{count}} تراکنش تکراری ثبت شد",
+    "generated_other": "{{count}} تراکنش تکراری ثبت شد",
+    "listTitle": "قاعده‌ها"
+  },
+  "trash": {
+    "title": "سطل زباله",
+    "description": "موارد حذف‌شده را بازیابی یا برای همیشه پاک کنید.",
+    "tabs": {
+      "transactions": "تراکنش‌ها",
+      "accounts": "حساب‌ها",
+      "categories": "دسته‌ها",
+      "recurring": "قاعده‌ها"
+    },
+    "empty": {
+      "title": "سطل زباله خالی است",
+      "text": "موارد حذف‌شده اینجا نمایش داده می‌شوند و قابل بازیابی هستند."
+    },
+    "deletedAt": "حذف‌شده در {{date}}",
+    "restore": "بازیابی",
+    "purge": "حذف دائمی",
+    "emptyTrash": "خالی کردن سطل زباله",
+    "purgeConfirm": {
+      "title": "حذف دائمی؟",
+      "text": "«{{name}}» برای همیشه حذف می‌شود."
+    },
+    "emptyConfirm": {
+      "title": "سطل زباله خالی شود؟",
+      "text": "همهٔ {{count}} مورد این بخش برای همیشه حذف می‌شوند.",
+      "confirm": "حذف دائمی"
+    },
+    "restored": "بازیابی شد",
+    "purged": "برای همیشه حذف شد",
+    "accountInUse": "این حساب هنوز در تراکنش‌ها استفاده می‌شود. ابتدا آن تراکنش‌ها را برای همیشه حذف کنید."
   }
 }
