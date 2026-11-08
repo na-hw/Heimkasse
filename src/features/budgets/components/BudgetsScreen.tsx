@@ -131,7 +131,10 @@ export function BudgetsScreen() {
                 const name = category ? categoryDisplayName(t, category) : "";
                 return (
                   <li key={status.budget.id} className={styles.row}>
-                    <CategoryIcon icon={category?.icon ?? "tag"} color={category?.color ?? "gray"} />
+                    <CategoryIcon
+                      icon={category?.icon ?? "tag"}
+                      color={category?.color ?? "gray"}
+                    />
                     <div className={styles.main}>
                       <BudgetProgress status={status} name={name} />
                       <p className={styles.meta}>
@@ -186,4 +189,3 @@ export function BudgetsScreen() {
     </>
   );
 }
-

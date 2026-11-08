@@ -10,7 +10,13 @@ import { queryKeys } from "@/features/queryKeys";
 import type { Repositories } from "@/features/repositories";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 
-export const TRASH_KINDS = ["transactions", "accounts", "categories", "recurring", "budgets"] as const;
+export const TRASH_KINDS = [
+  "transactions",
+  "accounts",
+  "categories",
+  "recurring",
+  "budgets",
+] as const;
 export type TrashKind = (typeof TRASH_KINDS)[number];
 
 const repoFor = (repos: Repositories, kind: TrashKind) =>
