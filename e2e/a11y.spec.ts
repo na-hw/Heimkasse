@@ -118,7 +118,9 @@ test.describe("reflow (200 % zoom ≙ 320 px)", () => {
     const grid = page.getByRole("grid");
     await expect(grid).toBeVisible();
     const box = await grid.boundingBox();
-    expect(box!.x).toBeGreaterThanOrEqual(0);
-    expect(box!.x + box!.width).toBeLessThanOrEqual(320);
+    expect(box).not.toBeNull();
+    const { x = -1, width = Infinity } = box ?? {};
+    expect(x).toBeGreaterThanOrEqual(0);
+    expect(x + width).toBeLessThanOrEqual(320);
   });
 });
