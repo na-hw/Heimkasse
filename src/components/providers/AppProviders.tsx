@@ -5,6 +5,7 @@ import { Direction } from "radix-ui";
 import { type ReactNode, useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import { LiveRegion, Toaster } from "@/components/ui";
+import { LockGate } from "@/features/security/components/LockGate";
 import { LANGUAGE_DIRECTION } from "@/lib/i18n/config";
 import { i18n } from "@/lib/i18n/i18n";
 import { usePreferences } from "@/lib/preferences/store";
@@ -22,7 +23,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <Direction.Provider dir={dir}>
           <PreferencesEffects />
-          <StorageGate>{children}</StorageGate>
+          <StorageGate>
+            <LockGate>{children}</LockGate>
+          </StorageGate>
           <Toaster dir={dir} />
           <LiveRegion />
         </Direction.Provider>

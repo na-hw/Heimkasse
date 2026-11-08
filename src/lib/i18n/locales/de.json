@@ -181,7 +181,10 @@
     "min": "Der Wert muss mindestens {{min}} sein.",
     "max": "Der Wert darf höchstens {{max}} sein.",
     "positive": "Der Betrag muss größer als 0 sein.",
-    "confirmationMismatch": "Bitte gib genau „{{word}}“ ein."
+    "confirmationMismatch": "Bitte gib genau „{{word}}“ ein.",
+    "minLength": "Bitte mindestens {{min}} Zeichen.",
+    "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+    "wrongPassword": "Das Passwort ist falsch."
   },
   "amount": {
     "spokenNegative": "minus {{value}}",
@@ -1347,6 +1350,41 @@
       "runNow": "Jetzt sichern",
       "ran": "Automatische Sicherung gespeichert",
       "failed": "Automatische Sicherung fehlgeschlagen"
+    }
+  },
+  "security": {
+    "title": "App-Sperre",
+    "description": "Schützt Heimkasse beim Start mit einem Passwort. Die Daten selbst werden dadurch nicht verschlüsselt.",
+    "active": "Aktiv",
+    "setPassword": "Passwort festlegen",
+    "setHint": "Es gibt keine Wiederherstellung: Wer das Passwort vergisst, kann nur alle Daten löschen. Exportiere regelmäßig eine Sicherung.",
+    "changePassword": "Passwort ändern",
+    "removeLock": "Sperre entfernen",
+    "lockNow": "Jetzt sperren",
+    "autoLock": "Automatisch sperren",
+    "autoLockHint": "Nach dieser Zeit ohne Bedienung wird die App gesperrt.",
+    "autoLockOff": "Nur beim Start",
+    "autoLockMinutes_one": "Nach {{formatted}} Minute",
+    "autoLockMinutes_other": "Nach {{formatted}} Minuten",
+    "enabled": "App-Sperre aktiviert",
+    "changed": "Passwort geändert",
+    "disabled": "App-Sperre entfernt",
+    "fields": {
+      "password": "Passwort",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "newHint": "Mindestens 4 Zeichen.",
+      "confirm": "Passwort wiederholen"
+    },
+    "lockScreen": {
+      "title": "Heimkasse ist gesperrt",
+      "text": "Gib dein Passwort ein, um fortzufahren.",
+      "unlock": "Entsperren",
+      "wrong": "Falsches Passwort.",
+      "wait": "Zu viele Versuche. Bitte warte {{seconds}} Sekunden.",
+      "forgot": "Passwort vergessen?",
+      "resetTitle": "App zurücksetzen?",
+      "resetText": "Ohne Passwort ist kein Zugriff möglich. Du kannst die App nur zurücksetzen: Dabei werden alle Daten auf diesem Gerät gelöscht – danach kannst du eine Sicherung wiederherstellen. Gib zur Bestätigung „{{word}}“ ein."
     }
   }
 }

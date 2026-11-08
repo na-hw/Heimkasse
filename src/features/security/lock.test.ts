@@ -41,7 +41,9 @@ describe("app lock", () => {
   });
 
   it("persists and removes the lock in settings", async () => {
-    const storage = ADAPTER_FACTORIES[0]!.create();
+    const [sqlite] = ADAPTER_FACTORIES;
+    if (!sqlite) throw new Error("no adapter");
+    const storage = sqlite.create();
     await storage.init();
     const repos = createRepositories({ storage });
     expect(await loadLock(repos)).toBeNull();

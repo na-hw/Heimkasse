@@ -20,6 +20,7 @@ export const queryKeys = {
   importPresets: ["import", "presets"] as const,
   attachments: ["attachments"] as const,
   backup: ["backup"] as const,
+  security: ["security"] as const,
   overview: ["overview"] as const,
 };
 
@@ -37,6 +38,7 @@ const DATA_KEYS = [
   ["import"] as const,
   queryKeys.attachments,
   queryKeys.backup,
+  queryKeys.security,
   queryKeys.overview,
 ];
 
