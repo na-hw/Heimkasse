@@ -19,6 +19,7 @@ export * from "./DropdownMenu";
 export * from "./EmptyState";
 export * from "./ErrorState";
 export * from "./Fab";
+export * from "./FileInput";
 export * from "./FormField";
 export * from "./IconButton";
 export * from "./IconPicker";
