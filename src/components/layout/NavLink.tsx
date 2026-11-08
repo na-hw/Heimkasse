@@ -13,10 +13,12 @@ interface NavLinkProps {
   activeClassName: string;
   /** Icon-only mode (collapsed sidebar): label becomes tooltip + accessible name. */
   iconOnly?: boolean;
+  /** Called after the link is activated (e.g. to close a sheet). */
+  onNavigate?: () => void;
 }
 
 /** Navigation link with aria-current for the active page. */
-export function NavLink({ item, className, activeClassName, iconOnly }: NavLinkProps) {
+export function NavLink({ item, className, activeClassName, iconOnly, onNavigate }: NavLinkProps) {
   const { t } = useTranslation();
   const pathname = usePathname();
   const active = isActivePath(pathname, item.href);
@@ -28,6 +30,7 @@ export function NavLink({ item, className, activeClassName, iconOnly }: NavLinkP
       className={cn(className, active && activeClassName)}
       aria-current={active ? "page" : undefined}
       aria-label={iconOnly ? label : undefined}
+      onClick={onNavigate}
     >
       <Icon aria-hidden="true" />
       <span className={iconOnly ? "visually-hidden" : undefined}>{label}</span>
