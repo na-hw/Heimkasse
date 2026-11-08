@@ -220,7 +220,8 @@
   },
   "toast": {
     "region": "Benachrichtigungen ({{hotkey}})",
-    "dismiss": "Benachrichtigung schließen"
+    "dismiss": "Benachrichtigung schließen",
+    "label": "Benachrichtigung"
   },
   "accountTypes": {
     "bank": "Girokonto",

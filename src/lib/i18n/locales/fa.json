@@ -220,7 +220,8 @@
   },
   "toast": {
     "region": "اعلان‌ها ({{hotkey}})",
-    "dismiss": "بستن اعلان"
+    "dismiss": "بستن اعلان",
+    "label": "اعلان"
   },
   "accountTypes": {
     "bank": "حساب بانکی",

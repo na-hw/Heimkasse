@@ -63,7 +63,11 @@ export function Toaster({ dir }: { dir: "ltr" | "rtl" }) {
           </ToastPrimitive.Root>
         );
       })}
-      <ToastPrimitive.Viewport className={styles.viewport} />
+      {/* Radix replaces {hotkey} with the actual shortcut (F8). */}
+      <ToastPrimitive.Viewport
+        className={styles.viewport}
+        label={t("toast.region", { hotkey: "{hotkey}" })}
+      />
     </ToastPrimitive.Provider>
   );
 }
