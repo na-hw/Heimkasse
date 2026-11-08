@@ -1,0 +1,8 @@
+.header {
+  padding-block: var(--space-4) var(--space-2);
+  padding-inline: var(--space-5);
+}
+
+.footer {
+  margin-block-start: var(--space-4);
+}
