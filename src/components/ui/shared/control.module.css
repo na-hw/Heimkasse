@@ -1,0 +1,120 @@
+/* Shared look for text-like form controls (Input, Textarea, Select trigger, pickers). */
+.control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  inline-size: 100%;
+  min-block-size: var(--control-height-md);
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  text-align: start;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
+}
+
+.control:hover:not([data-disabled], :disabled) {
+  border-color: var(--color-text-subtle);
+}
+
+.control:focus-within,
+.control:focus-visible {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  outline: none;
+}
+
+.control[aria-invalid="true"],
+.control[data-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.control[aria-invalid="true"]:focus-within,
+.control[data-invalid="true"]:focus-within {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 25%, transparent);
+}
+
+.control:disabled,
+.control[data-disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-surface-sunken);
+}
+
+.placeholder {
+  color: var(--color-text-subtle);
+}
+
+.adornment {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.bareInput {
+  flex: 1;
+  min-inline-size: 0;
+  block-size: 100%;
+  min-block-size: calc(var(--control-height-md) - 2px);
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.bareInput::placeholder {
+  color: var(--color-text-subtle);
+}
+
+/* Floating panels (popover, select, menus) */
+.panel {
+  z-index: var(--z-popover);
+  min-inline-size: 12rem;
+  max-block-size: min(24rem, var(--radix-popper-available-height, 24rem));
+  overflow: auto;
+  padding: var(--space-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-lg);
+  animation: panelIn var(--duration-fast) var(--easing-standard);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--touch-target);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.item[data-highlighted],
+.item[aria-selected="true"] {
+  background: var(--color-surface-hover);
+}
+
+.item[data-disabled],
+.item[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
