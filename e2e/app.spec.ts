@@ -99,4 +99,15 @@ test.describe("responsive navigation", () => {
       await expect(bottom).toBeHidden();
     }
   });
+
+  test("tab lists do not scroll vertically", async ({ page }) => {
+    await page.goto("/categories/");
+    const tabs = page.getByRole("tablist").first();
+    await expect(tabs).toBeVisible();
+    const { scroll, client } = await tabs.evaluate((el) => ({
+      scroll: el.scrollHeight,
+      client: el.clientHeight,
+    }));
+    expect(scroll).toBeLessThanOrEqual(client);
+  });
 });
