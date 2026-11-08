@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useRepositories } from "@/components/providers/RepositoriesContext";
 import { toast } from "@/components/ui";
 import { purgeAccount } from "@/features/accounts/service";
+import { purgeWithAttachments } from "@/features/attachments/service";
 import { purgeCategory } from "@/features/categories/service";
 import { purgeGoals } from "@/features/goals/service";
 import { purgeMeters } from "@/features/meters/service";
@@ -89,6 +90,8 @@ async function purge(repos: Repositories, kind: TrashKind, ids: readonly string[
   else if (kind === "categories") for (const id of ids) await purgeCategory(repos, id);
   else if (kind === "meters") await purgeMeters(repos, ids);
   else if (kind === "goals") await purgeGoals(repos, ids);
+  else if (kind === "transactions") await purgeWithAttachments(repos, "transaction", ids);
+  else if (kind === "contracts") await purgeWithAttachments(repos, "contract", ids);
   else await repoFor(repos, kind).purge(ids);
 }
 
