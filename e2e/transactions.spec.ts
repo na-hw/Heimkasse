@@ -17,7 +17,7 @@ test.describe("accounts & transactions", () => {
     await page.goto("/transactions/");
     await addExpense(page, "45,99", "REWE", "Lebensmittel");
 
-    const row = page.getByRole("button", { name: /^REWE, -45,99/ });
+    const row = page.getByRole("button", { name: /^REWE .*-45,99/ });
     await expect(row).toBeVisible();
     await expect(page.getByText("1 Buchung", { exact: true })).toBeVisible();
 
@@ -26,7 +26,7 @@ test.describe("accounts & transactions", () => {
     const dialog = page.getByRole("dialog", { name: "Buchung bearbeiten" });
     await dialog.getByLabel("Betrag").fill("50");
     await page.getByRole("button", { name: "Änderungen speichern" }).click();
-    await expect(page.getByRole("button", { name: /^REWE, -50,00/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^REWE .*-50,00/ })).toBeVisible();
 
     // Balance reflects the expense
     await page.goto("/accounts/");
@@ -40,7 +40,7 @@ test.describe("accounts & transactions", () => {
     await page.getByRole("menuitem", { name: "Löschen" }).click();
     await expect(page.getByRole("button", { name: /^REWE/ })).toBeHidden();
     await page.getByRole("button", { name: "Rückgängig" }).click();
-    await expect(page.getByRole("button", { name: /^REWE, -50,00/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^REWE .*-50,00/ })).toBeVisible();
   });
 
   test("searches and bulk-deletes transactions, then restores from trash", async ({ page }) => {
@@ -83,7 +83,7 @@ test.describe("accounts & transactions", () => {
     );
 
     await page.goto("/transactions/");
-    await expect(page.getByRole("button", { name: /^Rundfunkbeitrag, -18,36/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Rundfunkbeitrag .*-18,36/ })).toBeVisible();
   });
 });
 

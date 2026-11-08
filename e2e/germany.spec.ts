@@ -27,7 +27,7 @@ test.describe("Germany features", () => {
 
     // The first payment (today) was booked by the linked rule.
     await page.goto("/transactions/");
-    await expect(page.getByRole("button", { name: /^Telekom, -29,99/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Telekom .*-29,99/ })).toBeVisible();
 
     await page.goto("/contracts/");
     await page.getByRole("button", { name: "Aktionen für Handyvertrag" }).click();

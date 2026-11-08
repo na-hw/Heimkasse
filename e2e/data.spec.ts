@@ -67,9 +67,9 @@ test.describe("data management", () => {
     await expect(page.getByRole("heading", { name: "Import abgeschlossen" })).toBeVisible();
 
     await page.getByRole("link", { name: "Zu den Buchungen" }).click();
-    await expect(page.getByRole("button", { name: /^REWE, -45,10/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^REWE .*-45,10/ })).toBeVisible();
     await expect(
-      page.getByRole("button", { name: /^Arbeitgeber GmbH, \+2\.500,00/ }),
+      page.getByRole("button", { name: /^Arbeitgeber GmbH .*\+2\.500,00/ }),
     ).toBeVisible();
 
     // Same file again: everything is recognised as already imported.
@@ -99,13 +99,13 @@ test.describe("data management", () => {
       mimeType: "text/plain",
       buffer: Buffer.from("x"),
     });
-    await expect(page.getByText("Dateityp nicht unterstützt")).toBeVisible();
+    await expect(page.getByText("Dateityp nicht unterstützt").first()).toBeVisible();
 
     await dialog.getByRole("button", { name: "kassenbon.png löschen" }).click();
     await expect(dialog.getByText("Noch keine Belege")).toBeVisible();
     await dialog.getByRole("button", { name: "Schließen" }).click();
     await expect(dialog).toBeHidden();
-    await expect(page.getByRole("button", { name: /^Baumarkt, -12,50/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Baumarkt .*-12,50/ })).toBeVisible();
   });
 
   test("exports a backup, deletes all data and restores it", async ({ page }) => {
@@ -125,7 +125,7 @@ test.describe("data management", () => {
     await expect(finalButton).toBeDisabled();
     await confirm.getByRole("textbox").fill("LÖSCHEN");
     await finalButton.click();
-    await expect(page.getByText("Alle Daten wurden gelöscht")).toBeVisible();
+    await expect(page.getByText("Alle Daten wurden gelöscht").first()).toBeVisible();
     await page.goto("/accounts/");
     await expect(page.getByText("Sparbuch")).toBeHidden();
 
@@ -136,7 +136,7 @@ test.describe("data management", () => {
       mimeType: "application/json",
       buffer: Buffer.from('{"app":"other"}'),
     });
-    await expect(page.getByText("keine gültige Heimkasse-Sicherung")).toBeVisible();
+    await expect(page.getByText("keine gültige Heimkasse-Sicherung").first()).toBeVisible();
 
     await chooseFile(page, "Sicherung wiederherstellen", {
       name: file.suggestedFilename(),
@@ -146,7 +146,7 @@ test.describe("data management", () => {
     const restore = page.getByRole("alertdialog", { name: "Sicherung wiederherstellen?" });
     await expect(restore).toContainText("1 Konten");
     await restore.getByRole("button", { name: "Daten ersetzen" }).click();
-    await expect(page.getByText("Sicherung wiederhergestellt")).toBeVisible();
+    await expect(page.getByText("Sicherung wiederhergestellt").first()).toBeVisible();
     await page.goto("/accounts/");
     await expect(page.getByText("Sparbuch")).toBeVisible();
   });
