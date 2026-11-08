@@ -1,0 +1,43 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--touch-target), 1fr));
+  gap: var(--space-1);
+  max-block-size: 12rem;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.item {
+  display: grid;
+  place-items: center;
+  block-size: var(--touch-target);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+}
+
+.item:hover {
+  background: var(--color-surface-hover);
+}
+
+.item svg {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.item[data-state="checked"] {
+  border-color: var(--tile-color);
+  background: color-mix(in srgb, var(--tile-color) 15%, var(--color-surface));
+  color: var(--tile-color);
+}
