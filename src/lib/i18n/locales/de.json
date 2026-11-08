@@ -1,0 +1,312 @@
+{
+  "app": {
+    "name": "Kiseh",
+    "tagline": "Dein Haushaltsbuch – privat und offline",
+    "loading": "Kiseh wird geladen …",
+    "pageTitle": "{{page}} · Kiseh"
+  },
+  "nav": {
+    "home": "Übersicht",
+    "settings": "Einstellungen",
+    "design": "Komponenten",
+    "mainNavigation": "Hauptnavigation",
+    "mobileNavigation": "Navigation",
+    "skipToContent": "Zum Inhalt springen",
+    "collapseSidebar": "Seitenleiste einklappen",
+    "expandSidebar": "Seitenleiste ausklappen",
+    "search": "Suchen …",
+    "openCommandPalette": "Befehlspalette öffnen"
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
+    "retry": "Erneut versuchen",
+    "loading": "Wird geladen …",
+    "add": "Hinzufügen",
+    "back": "Zurück",
+    "undo": "Rückgängig",
+    "restore": "Wiederherstellen",
+    "clear": "Leeren",
+    "optional": "optional",
+    "required": "Pflichtfeld",
+    "more": "Mehr",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "yes": "Ja",
+    "no": "Nein",
+    "noResults": "Keine Ergebnisse",
+    "selectPlaceholder": "Auswählen …",
+    "searchPlaceholder": "Suchen …"
+  },
+  "theme": {
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Guten Morgen",
+      "afternoon": "Guten Tag",
+      "evening": "Guten Abend"
+    },
+    "intro": "Alle Daten bleiben ausschließlich auf diesem Gerät.",
+    "statusTitle": "Datenstatus",
+    "accounts": "Konten",
+    "categories": "Kategorien",
+    "storage": "Speicher",
+    "schemaVersion": "Datenbankversion",
+    "customizeTitle": "Kiseh anpassen",
+    "customizeText": "Sprache, Darstellung, Zahlen und Kalender kannst du in den Einstellungen festlegen.",
+    "openSettings": "Einstellungen öffnen"
+  },
+  "storage": {
+    "sqlite": "SQLite (lokal)",
+    "indexeddb": "Browser (IndexedDB)"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "description": "Änderungen werden sofort übernommen und lokal gespeichert.",
+    "saved": "Einstellung gespeichert",
+    "sections": {
+      "language": "Sprache & Region",
+      "appearance": "Darstellung",
+      "budget": "Budget & Kalender"
+    },
+    "language": {
+      "label": "Sprache"
+    },
+    "theme": {
+      "label": "Farbschema",
+      "hint": "„System“ folgt der Einstellung deines Betriebssystems."
+    },
+    "digitStyle": {
+      "label": "Ziffern",
+      "hint": "Gilt nur für die persische Oberfläche.",
+      "persian": "Persisch (۱۲۳)",
+      "latin": "Lateinisch (123)"
+    },
+    "calendar": {
+      "label": "Kalenderanzeige",
+      "hint": "Gilt nur für die persische Oberfläche. Gespeichert wird immer gregorianisch.",
+      "gregorian": "Gregorianisch",
+      "jalali": "Persisch (Jalali)"
+    },
+    "weekStart": {
+      "label": "Erster Wochentag"
+    },
+    "currency": {
+      "label": "Währung"
+    },
+    "budgetMonthStartDay": {
+      "label": "Budget-Monat beginnt am",
+      "hint": "Z. B. am Gehaltstag. Erlaubt sind Tag 1 bis 28.",
+      "option": "{{day}}. des Monats"
+    }
+  },
+  "errors": {
+    "title": "Etwas ist schiefgelaufen",
+    "routeDescription": "Diese Seite konnte nicht angezeigt werden. Deine Daten sind nicht betroffen.",
+    "storageTitle": "Datenspeicher nicht verfügbar",
+    "storageDescription": "Die lokale Datenbank konnte nicht geöffnet werden.",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundDescription": "Diese Seite gibt es nicht.",
+    "goHome": "Zur Übersicht",
+    "details": "Technische Details",
+    "codes": {
+      "storage_unavailable": "Der Datenspeicher ist nicht verfügbar.",
+      "storage_init_failed": "Die Datenbank konnte nicht vorbereitet werden.",
+      "not_found": "Der Eintrag wurde nicht gefunden.",
+      "validation_failed": "Die Eingaben sind ungültig.",
+      "write_failed": "Die Änderung konnte nicht gespeichert werden.",
+      "unknown": "Ein unerwarteter Fehler ist aufgetreten."
+    }
+  },
+  "validation": {
+    "required": "Bitte fülle dieses Feld aus.",
+    "invalidAmount": "Bitte gib einen gültigen Betrag ein, z. B. 12,50.",
+    "invalidNumber": "Bitte gib eine gültige Zahl ein.",
+    "invalidDate": "Bitte wähle ein gültiges Datum.",
+    "tooLong": "Bitte höchstens {{max}} Zeichen.",
+    "min": "Der Wert muss mindestens {{min}} sein.",
+    "max": "Der Wert darf höchstens {{max}} sein.",
+    "positive": "Der Betrag muss größer als 0 sein.",
+    "confirmationMismatch": "Bitte gib genau „{{word}}“ ein."
+  },
+  "amount": {
+    "spokenNegative": "minus {{value}}",
+    "spokenPositive": "plus {{value}}",
+    "income": "Einnahme",
+    "expense": "Ausgabe"
+  },
+  "a11y": {
+    "loading": "Inhalt wird geladen",
+    "required": "erforderlich",
+    "trendUp": "gestiegen um {{value}}",
+    "trendDown": "gesunken um {{value}}",
+    "trendFlat": "unverändert",
+    "progress": "{{label}}: {{value}}"
+  },
+  "dataTable": {
+    "selectAll": "Alle Zeilen auswählen",
+    "selectRow": "Zeile auswählen",
+    "sortAscending": "aufsteigend sortiert",
+    "sortDescending": "absteigend sortiert",
+    "sortBy": "Sortieren nach {{column}}",
+    "selectedCount_one": "{{count}} Zeile ausgewählt",
+    "selectedCount_other": "{{count}} Zeilen ausgewählt",
+    "pageOf": "Seite {{page}} von {{pages}}",
+    "previousPage": "Vorherige Seite",
+    "nextPage": "Nächste Seite",
+    "rowCount_one": "{{count}} Eintrag",
+    "rowCount_other": "{{count}} Einträge"
+  },
+  "chart": {
+    "viewChart": "Diagramm",
+    "viewTable": "Tabelle",
+    "views": "Darstellung wählen"
+  },
+  "datePicker": {
+    "chooseDate": "Datum wählen",
+    "chooseRange": "Zeitraum wählen",
+    "rangeSeparator": "bis",
+    "clear": "Datum entfernen"
+  },
+  "combobox": {
+    "search": "Suchen …",
+    "empty": "Nichts gefunden"
+  },
+  "command": {
+    "title": "Befehlspalette",
+    "placeholder": "Seite oder Befehl suchen …",
+    "empty": "Keine passenden Befehle",
+    "groups": {
+      "navigation": "Navigation",
+      "preferences": "Einstellungen"
+    },
+    "switchLanguage": "Sprache wechseln: {{language}}",
+    "setTheme": "Farbschema: {{theme}}"
+  },
+  "toast": {
+    "region": "Benachrichtigungen ({{hotkey}})",
+    "dismiss": "Benachrichtigung schließen"
+  },
+  "accountTypes": {
+    "bank": "Girokonto",
+    "cash": "Bargeld",
+    "credit_card": "Kreditkarte",
+    "paypal": "PayPal"
+  },
+  "categoryTypes": {
+    "income": "Einnahme",
+    "expense": "Ausgabe"
+  },
+  "categories": {
+    "builtin": {
+      "rent": "Kaltmiete",
+      "utilities": "Nebenkosten",
+      "energy": "Strom & Gas",
+      "internet_phone": "Internet & Telefon",
+      "broadcast_fee": "Rundfunkbeitrag",
+      "groceries": "Lebensmittel",
+      "transport": "Mobilität",
+      "transport_deutschlandticket": "Deutschlandticket",
+      "transport_fuel": "Tanken",
+      "insurance": "Versicherungen",
+      "insurance_health": "Krankenversicherung",
+      "insurance_liability": "Haftpflicht",
+      "insurance_household": "Hausrat",
+      "insurance_car": "Kfz-Versicherung",
+      "health": "Gesundheit",
+      "household": "Haushalt",
+      "clothing": "Kleidung",
+      "leisure": "Freizeit",
+      "restaurants": "Restaurants & Café",
+      "education": "Bildung",
+      "subscriptions": "Abos",
+      "gifts": "Geschenke",
+      "salary": "Gehalt",
+      "other_income": "Sonstige Einnahmen"
+    }
+  },
+  "design": {
+    "title": "Komponenten",
+    "description": "Interaktive Übersicht aller UI-Bausteine (nur in der Entwicklung sichtbar).",
+    "sections": {
+      "buttons": "Buttons",
+      "forms": "Formulare",
+      "overlays": "Dialoge & Overlays",
+      "feedback": "Feedback",
+      "data": "Daten",
+      "states": "Zustände"
+    },
+    "variants": {
+      "primary": "Primär",
+      "secondary": "Sekundär",
+      "ghost": "Dezent",
+      "danger": "Gefährlich",
+      "loading": "Lädt"
+    },
+    "form": {
+      "title": "Beispielformular",
+      "name": "Bezeichnung",
+      "nameHint": "Wird in Listen angezeigt.",
+      "amount": "Betrag",
+      "quantity": "Menge",
+      "date": "Datum",
+      "range": "Zeitraum",
+      "type": "Art",
+      "category": "Kategorie",
+      "note": "Notiz",
+      "recurring": "Wiederkehrend",
+      "accept": "Angaben sind korrekt",
+      "submitted": "Formular ist gültig"
+    },
+    "overlays": {
+      "openDialog": "Dialog öffnen",
+      "dialogTitle": "Beispieldialog",
+      "dialogText": "Der Fokus bleibt im Dialog und kehrt beim Schließen zurück.",
+      "openConfirm": "Bestätigung öffnen",
+      "confirmTitle": "Wirklich löschen?",
+      "confirmText": "Diese Aktion kann nicht rückgängig gemacht werden.",
+      "confirmWord": "LÖSCHEN",
+      "openSheet": "Seitenpanel öffnen",
+      "sheetTitle": "Seitenpanel",
+      "openMenu": "Menü öffnen",
+      "popover": "Popover öffnen",
+      "popoverText": "Inhalt eines Popovers.",
+      "tooltip": "Hilfetext als Tooltip"
+    },
+    "feedback": {
+      "toastSuccess": "Erfolgs-Toast",
+      "toastUndo": "Toast mit Rückgängig",
+      "toastError": "Fehler-Toast",
+      "toastSavedTitle": "Gespeichert",
+      "toastDeletedTitle": "Eintrag gelöscht",
+      "toastRestored": "Wiederhergestellt",
+      "toastErrorTitle": "Speichern fehlgeschlagen",
+      "budget": "Budget Lebensmittel",
+      "balance": "Kontostand",
+      "income": "Einnahmen",
+      "expenses": "Ausgaben"
+    },
+    "data": {
+      "categoriesTable": "Eingebaute Kategorien",
+      "name": "Name",
+      "type": "Art",
+      "parent": "Oberkategorie",
+      "subcategoriesChart": "Unterkategorien je Kategorie",
+      "subcategoriesChartDescription": "Anzahl der eingebauten Unterkategorien.",
+      "count": "Anzahl"
+    },
+    "states": {
+      "emptyTitle": "Noch keine Einträge",
+      "emptyText": "Lege deinen ersten Eintrag an, um loszulegen.",
+      "emptyAction": "Eintrag anlegen",
+      "errorText": "Die Daten konnten nicht geladen werden."
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "app": {
+    "name": "کیسه",
+    "tagline": "دفتر هزینه‌های خانه – خصوصی و آفلاین",
+    "loading": "کیسه در حال بارگذاری است …",
+    "pageTitle": "{{page}} · کیسه"
+  },
+  "nav": {
+    "home": "نمای کلی",
+    "settings": "تنظیمات",
+    "design": "کامپوننت‌ها",
+    "mainNavigation": "ناوبری اصلی",
+    "mobileNavigation": "ناوبری",
+    "skipToContent": "پرش به محتوا",
+    "collapseSidebar": "جمع کردن نوار کناری",
+    "expandSidebar": "باز کردن نوار کناری",
+    "search": "جستجو …",
+    "openCommandPalette": "باز کردن پالت فرمان"
+  },
+  "common": {
+    "save": "ذخیره",
+    "cancel": "انصراف",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "close": "بستن",
+    "confirm": "تأیید",
+    "retry": "تلاش دوباره",
+    "loading": "در حال بارگذاری …",
+    "add": "افزودن",
+    "back": "بازگشت",
+    "undo": "برگرداندن",
+    "restore": "بازیابی",
+    "clear": "پاک کردن",
+    "optional": "اختیاری",
+    "required": "الزامی",
+    "more": "بیشتر",
+    "previous": "قبلی",
+    "next": "بعدی",
+    "yes": "بله",
+    "no": "خیر",
+    "noResults": "نتیجه‌ای یافت نشد",
+    "selectPlaceholder": "انتخاب کنید …",
+    "searchPlaceholder": "جستجو …"
+  },
+  "theme": {
+    "system": "سیستم",
+    "light": "روشن",
+    "dark": "تیره"
+  },
+  "home": {
+    "greeting": {
+      "morning": "صبح بخیر",
+      "afternoon": "روز بخیر",
+      "evening": "عصر بخیر"
+    },
+    "intro": "همهٔ داده‌ها فقط روی همین دستگاه می‌مانند.",
+    "statusTitle": "وضعیت داده‌ها",
+    "accounts": "حساب‌ها",
+    "categories": "دسته‌بندی‌ها",
+    "storage": "محل ذخیره",
+    "schemaVersion": "نسخهٔ پایگاه داده",
+    "customizeTitle": "شخصی‌سازی کیسه",
+    "customizeText": "زبان، ظاهر، اعداد و تقویم را می‌توانید در تنظیمات تعیین کنید.",
+    "openSettings": "باز کردن تنظیمات"
+  },
+  "storage": {
+    "sqlite": "SQLite (محلی)",
+    "indexeddb": "مرورگر (IndexedDB)"
+  },
+  "settings": {
+    "title": "تنظیمات",
+    "description": "تغییرات بلافاصله اعمال و به‌صورت محلی ذخیره می‌شوند.",
+    "saved": "تنظیمات ذخیره شد",
+    "sections": {
+      "language": "زبان و منطقه",
+      "appearance": "ظاهر",
+      "budget": "بودجه و تقویم"
+    },
+    "language": {
+      "label": "زبان"
+    },
+    "theme": {
+      "label": "پوسته",
+      "hint": "«سیستم» از تنظیمات سیستم‌عامل شما پیروی می‌کند."
+    },
+    "digitStyle": {
+      "label": "ارقام",
+      "hint": "فقط برای رابط فارسی اعمال می‌شود.",
+      "persian": "فارسی (۱۲۳)",
+      "latin": "لاتین (123)"
+    },
+    "calendar": {
+      "label": "نمایش تقویم",
+      "hint": "فقط برای رابط فارسی. تاریخ‌ها همیشه میلادی ذخیره می‌شوند.",
+      "gregorian": "میلادی",
+      "jalali": "شمسی (جلالی)"
+    },
+    "weekStart": {
+      "label": "اولین روز هفته"
+    },
+    "currency": {
+      "label": "واحد پول"
+    },
+    "budgetMonthStartDay": {
+      "label": "شروع ماه بودجه",
+      "hint": "مثلاً روز واریز حقوق. روز ۱ تا ۲۸ مجاز است.",
+      "option": "روز {{day}} ماه"
+    }
+  },
+  "errors": {
+    "title": "مشکلی پیش آمد",
+    "routeDescription": "این صفحه نمایش داده نشد. داده‌های شما آسیبی ندیده‌اند.",
+    "storageTitle": "پایگاه داده در دسترس نیست",
+    "storageDescription": "پایگاه دادهٔ محلی باز نشد.",
+    "notFoundTitle": "صفحه پیدا نشد",
+    "notFoundDescription": "چنین صفحه‌ای وجود ندارد.",
+    "goHome": "رفتن به نمای کلی",
+    "details": "جزئیات فنی",
+    "codes": {
+      "storage_unavailable": "محل ذخیره‌سازی در دسترس نیست.",
+      "storage_init_failed": "پایگاه داده آماده نشد.",
+      "not_found": "مورد مورد نظر پیدا نشد.",
+      "validation_failed": "ورودی‌ها نامعتبر هستند.",
+      "write_failed": "تغییر ذخیره نشد.",
+      "unknown": "خطای غیرمنتظره‌ای رخ داد."
+    }
+  },
+  "validation": {
+    "required": "لطفاً این فیلد را پر کنید.",
+    "invalidAmount": "لطفاً مبلغ معتبری وارد کنید، مثلاً ۱۲٫۵۰.",
+    "invalidNumber": "لطفاً عدد معتبری وارد کنید.",
+    "invalidDate": "لطفاً تاریخ معتبری انتخاب کنید.",
+    "tooLong": "حداکثر {{max}} نویسه مجاز است.",
+    "min": "مقدار باید دست‌کم {{min}} باشد.",
+    "max": "مقدار باید حداکثر {{max}} باشد.",
+    "positive": "مبلغ باید بیشتر از صفر باشد.",
+    "confirmationMismatch": "لطفاً دقیقاً «{{word}}» را وارد کنید."
+  },
+  "amount": {
+    "spokenNegative": "منفی {{value}}",
+    "spokenPositive": "مثبت {{value}}",
+    "income": "درآمد",
+    "expense": "هزینه"
+  },
+  "a11y": {
+    "loading": "محتوا در حال بارگذاری است",
+    "required": "الزامی",
+    "trendUp": "{{value}} افزایش",
+    "trendDown": "{{value}} کاهش",
+    "trendFlat": "بدون تغییر",
+    "progress": "{{label}}: {{value}}"
+  },
+  "dataTable": {
+    "selectAll": "انتخاب همهٔ ردیف‌ها",
+    "selectRow": "انتخاب ردیف",
+    "sortAscending": "مرتب‌شده صعودی",
+    "sortDescending": "مرتب‌شده نزولی",
+    "sortBy": "مرتب‌سازی بر اساس {{column}}",
+    "selectedCount_one": "{{count}} ردیف انتخاب شد",
+    "selectedCount_other": "{{count}} ردیف انتخاب شد",
+    "pageOf": "صفحهٔ {{page}} از {{pages}}",
+    "previousPage": "صفحهٔ قبل",
+    "nextPage": "صفحهٔ بعد",
+    "rowCount_one": "{{count}} مورد",
+    "rowCount_other": "{{count}} مورد"
+  },
+  "chart": {
+    "viewChart": "نمودار",
+    "viewTable": "جدول",
+    "views": "انتخاب نوع نمایش"
+  },
+  "datePicker": {
+    "chooseDate": "انتخاب تاریخ",
+    "chooseRange": "انتخاب بازهٔ زمانی",
+    "rangeSeparator": "تا",
+    "clear": "حذف تاریخ"
+  },
+  "combobox": {
+    "search": "جستجو …",
+    "empty": "چیزی پیدا نشد"
+  },
+  "command": {
+    "title": "پالت فرمان",
+    "placeholder": "جستجوی صفحه یا فرمان …",
+    "empty": "فرمانی پیدا نشد",
+    "groups": {
+      "navigation": "ناوبری",
+      "preferences": "تنظیمات"
+    },
+    "switchLanguage": "تغییر زبان: {{language}}",
+    "setTheme": "پوسته: {{theme}}"
+  },
+  "toast": {
+    "region": "اعلان‌ها ({{hotkey}})",
+    "dismiss": "بستن اعلان"
+  },
+  "accountTypes": {
+    "bank": "حساب بانکی",
+    "cash": "پول نقد",
+    "credit_card": "کارت اعتباری",
+    "paypal": "پی‌پال"
+  },
+  "categoryTypes": {
+    "income": "درآمد",
+    "expense": "هزینه"
+  },
+  "categories": {
+    "builtin": {
+      "rent": "اجاره (بدون شارژ)",
+      "utilities": "شارژ ساختمان (Nebenkosten)",
+      "energy": "برق و گاز",
+      "internet_phone": "اینترنت و تلفن",
+      "broadcast_fee": "عوارض رادیو و تلویزیون (Rundfunkbeitrag)",
+      "groceries": "خواربار",
+      "transport": "حمل‌ونقل",
+      "transport_deutschlandticket": "بلیت دویچلند",
+      "transport_fuel": "سوخت",
+      "insurance": "بیمه‌ها",
+      "insurance_health": "بیمهٔ درمانی",
+      "insurance_liability": "بیمهٔ مسئولیت (Haftpflicht)",
+      "insurance_household": "بیمهٔ لوازم منزل (Hausrat)",
+      "insurance_car": "بیمهٔ خودرو",
+      "health": "سلامت",
+      "household": "خانه‌داری",
+      "clothing": "پوشاک",
+      "leisure": "اوقات فراغت",
+      "restaurants": "رستوران و کافه",
+      "education": "آموزش",
+      "subscriptions": "اشتراک‌ها",
+      "gifts": "هدیه‌ها",
+      "salary": "حقوق",
+      "other_income": "سایر درآمدها"
+    }
+  },
+  "design": {
+    "title": "کامپوننت‌ها",
+    "description": "نمای تعاملی همهٔ اجزای رابط کاربری (فقط در حالت توسعه).",
+    "sections": {
+      "buttons": "دکمه‌ها",
+      "forms": "فرم‌ها",
+      "overlays": "دیالوگ‌ها و لایه‌ها",
+      "feedback": "بازخورد",
+      "data": "داده‌ها",
+      "states": "وضعیت‌ها"
+    },
+    "variants": {
+      "primary": "اصلی",
+      "secondary": "ثانویه",
+      "ghost": "کم‌رنگ",
+      "danger": "خطرناک",
+      "loading": "در حال بارگذاری"
+    },
+    "form": {
+      "title": "فرم نمونه",
+      "name": "عنوان",
+      "nameHint": "در فهرست‌ها نمایش داده می‌شود.",
+      "amount": "مبلغ",
+      "quantity": "مقدار",
+      "date": "تاریخ",
+      "range": "بازهٔ زمانی",
+      "type": "نوع",
+      "category": "دسته‌بندی",
+      "note": "یادداشت",
+      "recurring": "تکرارشونده",
+      "accept": "اطلاعات درست است",
+      "submitted": "فرم معتبر است"
+    },
+    "overlays": {
+      "openDialog": "باز کردن دیالوگ",
+      "dialogTitle": "دیالوگ نمونه",
+      "dialogText": "فوکوس داخل دیالوگ می‌ماند و پس از بستن برمی‌گردد.",
+      "openConfirm": "باز کردن تأییدیه",
+      "confirmTitle": "واقعاً حذف شود؟",
+      "confirmText": "این کار قابل برگشت نیست.",
+      "confirmWord": "حذف",
+      "openSheet": "باز کردن پنل کناری",
+      "sheetTitle": "پنل کناری",
+      "openMenu": "باز کردن منو",
+      "popover": "باز کردن پاپ‌اوور",
+      "popoverText": "محتوای پاپ‌اوور.",
+      "tooltip": "متن راهنما به‌صورت تولتیپ"
+    },
+    "feedback": {
+      "toastSuccess": "اعلان موفقیت",
+      "toastUndo": "اعلان با برگرداندن",
+      "toastError": "اعلان خطا",
+      "toastSavedTitle": "ذخیره شد",
+      "toastDeletedTitle": "مورد حذف شد",
+      "toastRestored": "بازیابی شد",
+      "toastErrorTitle": "ذخیره ناموفق بود",
+      "budget": "بودجهٔ خواربار",
+      "balance": "موجودی",
+      "income": "درآمدها",
+      "expenses": "هزینه‌ها"
+    },
+    "data": {
+      "categoriesTable": "دسته‌بندی‌های پیش‌فرض",
+      "name": "نام",
+      "type": "نوع",
+      "parent": "دستهٔ والد",
+      "subcategoriesChart": "زیردسته‌ها در هر دسته",
+      "subcategoriesChartDescription": "تعداد زیردسته‌های پیش‌فرض.",
+      "count": "تعداد"
+    },
+    "states": {
+      "emptyTitle": "هنوز موردی وجود ندارد",
+      "emptyText": "برای شروع، اولین مورد را ثبت کنید.",
+      "emptyAction": "افزودن مورد",
+      "errorText": "داده‌ها بارگذاری نشدند."
+    }
+  }
+}
