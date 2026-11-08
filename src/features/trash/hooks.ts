@@ -6,6 +6,8 @@ import { useRepositories } from "@/components/providers/RepositoriesContext";
 import { toast } from "@/components/ui";
 import { purgeAccount } from "@/features/accounts/service";
 import { purgeCategory } from "@/features/categories/service";
+import { purgeGoals } from "@/features/goals/service";
+import { purgeMeters } from "@/features/meters/service";
 import { queryKeys } from "@/features/queryKeys";
 import type { Repositories } from "@/features/repositories";
 import { useDataMutation } from "@/features/shared/useDataMutation";
@@ -16,6 +18,10 @@ export const TRASH_KINDS = [
   "categories",
   "recurring",
   "budgets",
+  "contracts",
+  "meters",
+  "settlements",
+  "goals",
 ] as const;
 export type TrashKind = (typeof TRASH_KINDS)[number];
 
@@ -26,6 +32,10 @@ const repoFor = (repos: Repositories, kind: TrashKind) =>
     categories: repos.categories,
     recurring: repos.recurringRules,
     budgets: repos.budgets,
+    contracts: repos.contracts,
+    meters: repos.meters,
+    settlements: repos.utilitySettlements,
+    goals: repos.savingsGoals,
   })[kind];
 
 /** All soft-deleted entities, newest deletions first. */
@@ -38,14 +48,38 @@ export function useTrash() {
         deleted: "only" as const,
         orderBy: [{ field: "deleted_at", direction: "desc" as const }],
       };
-      const [transactions, accounts, categories, recurring, budgets] = await Promise.all([
+      const [
+        transactions,
+        accounts,
+        categories,
+        recurring,
+        budgets,
+        contracts,
+        meters,
+        settlements,
+        goals,
+      ] = await Promise.all([
         repos.transactions.list(opts),
         repos.accounts.list(opts),
         repos.categories.list(opts),
         repos.recurringRules.list(opts),
         repos.budgets.list(opts),
+        repos.contracts.list(opts),
+        repos.meters.list(opts),
+        repos.utilitySettlements.list(opts),
+        repos.savingsGoals.list(opts),
       ]);
-      return { transactions, accounts, categories, recurring, budgets };
+      return {
+        transactions,
+        accounts,
+        categories,
+        recurring,
+        budgets,
+        contracts,
+        meters,
+        settlements,
+        goals,
+      };
     },
   });
 }
@@ -53,6 +87,8 @@ export function useTrash() {
 async function purge(repos: Repositories, kind: TrashKind, ids: readonly string[]) {
   if (kind === "accounts") for (const id of ids) await purgeAccount(repos, id);
   else if (kind === "categories") for (const id of ids) await purgeCategory(repos, id);
+  else if (kind === "meters") await purgeMeters(repos, ids);
+  else if (kind === "goals") await purgeGoals(repos, ids);
   else await repoFor(repos, kind).purge(ids);
 }
 

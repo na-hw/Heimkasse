@@ -89,6 +89,34 @@ export function TrashScreen() {
           detail: format.money(b.amount_cents),
           deletedAt: b.deleted_at ?? "",
         }));
+      case "contracts":
+        return data.contracts.map((c) => ({
+          id: c.id,
+          name: c.name,
+          detail: [c.provider, format.money(c.amount_cents)].filter(Boolean).join(" · "),
+          deletedAt: c.deleted_at ?? "",
+        }));
+      case "meters":
+        return data.meters.map((m) => ({
+          id: m.id,
+          name: m.name,
+          detail: t(`meters.types.${m.type}`),
+          deletedAt: m.deleted_at ?? "",
+        }));
+      case "settlements":
+        return data.settlements.map((s) => ({
+          id: s.id,
+          name: format.date(`${s.year}-01-01`, "year"),
+          detail: format.money(s.actual_cost_cents),
+          deletedAt: s.deleted_at ?? "",
+        }));
+      case "goals":
+        return data.goals.map((g) => ({
+          id: g.id,
+          name: g.name,
+          detail: format.money(g.target_cents),
+          deletedAt: g.deleted_at ?? "",
+        }));
     }
   };
 

@@ -8,6 +8,8 @@ import {
   softDeleteCategory,
 } from "@/features/categories/service";
 import { createRepositories, type Repositories } from "@/features/repositories";
+import { purgeGoals } from "@/features/goals/service";
+import { purgeMeters } from "@/features/meters/service";
 import { changeCategory } from "@/features/transactions/service";
 import { ADAPTER_FACTORIES } from "@/test/adapters";
 
@@ -128,5 +130,22 @@ describe.each(ADAPTER_FACTORIES)("entity services on $name", ({ create }) => {
     await changeCategory(repos, [a.id, b.id], salary?.id ?? null);
     const updated = await repos.transactions.list();
     expect(updated.every((t) => t.category_id === salary?.id)).toBe(true);
+  });
+
+  it("purges meters and goals together with their children", async () => {
+    const meter = await repos.meters.create({ name: "Strom", type: "electricity", unit: "kWh" });
+    await repos.meterReadings.create({ meter_id: meter.id, date: "2026-01-01", value: 10 });
+    const goal = await repos.savingsGoals.create({ name: "Urlaub", target_cents: 1000_00 });
+    await repos.goalContributions.create({
+      goal_id: goal.id,
+      amount_cents: 50_00,
+      date: "2026-01-01",
+    });
+    await purgeMeters(repos, [meter.id]);
+    await purgeGoals(repos, [goal.id]);
+    expect(await repos.meterReadings.count({ deleted: "include" })).toBe(0);
+    expect(await repos.goalContributions.count({ deleted: "include" })).toBe(0);
+    expect(await repos.meters.get(meter.id)).toBeNull();
+    expect(await repos.savingsGoals.get(goal.id)).toBeNull();
   });
 });
