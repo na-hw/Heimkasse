@@ -1,0 +1,58 @@
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  inline-size: var(--touch-target);
+  block-size: var(--touch-target);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.iconButton:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+}
+
+.icon svg {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.secondary {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+}
+
+.primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  color: var(--color-on-primary);
+}
+
+.sm {
+  inline-size: var(--control-height-sm);
+  block-size: var(--control-height-sm);
+}
+
+@media (pointer: coarse) {
+  .sm {
+    inline-size: var(--touch-target);
+    block-size: var(--touch-target);
+  }
+}
