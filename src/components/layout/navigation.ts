@@ -1,12 +1,31 @@
-import { House, Palette, Settings, type LucideIcon } from "lucide-react";
+import {
+  ArrowLeftRight,
+  FolderTree,
+  House,
+  Landmark,
+  Palette,
+  Repeat,
+  Settings,
+  Trash2,
+  type LucideIcon,
+} from "lucide-react";
+
+export type NavLabelKey =
+  | "nav.home"
+  | "nav.transactions"
+  | "nav.accounts"
+  | "nav.categories"
+  | "nav.recurring"
+  | "nav.trash"
+  | "nav.settings"
+  | "nav.design";
 
 export interface NavItem {
   id: string;
   href: string;
-  /** Translation key of the label. */
-  labelKey: "nav.home" | "nav.settings" | "nav.design";
+  labelKey: NavLabelKey;
   icon: LucideIcon;
-  /** Shown in the mobile bottom navigation (max. 5 items). */
+  /** Shown directly in the mobile bottom navigation; others go to "More". */
   mobile: boolean;
   /** Placed at the bottom of the sidebar. */
   secondary?: boolean;
@@ -17,6 +36,30 @@ export interface NavItem {
 /** Single source of truth for app navigation. New features add their route here. */
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: "home", href: "/", labelKey: "nav.home", icon: House, mobile: true },
+  {
+    id: "transactions",
+    href: "/transactions/",
+    labelKey: "nav.transactions",
+    icon: ArrowLeftRight,
+    mobile: true,
+  },
+  { id: "accounts", href: "/accounts/", labelKey: "nav.accounts", icon: Landmark, mobile: true },
+  { id: "recurring", href: "/recurring/", labelKey: "nav.recurring", icon: Repeat, mobile: true },
+  {
+    id: "categories",
+    href: "/categories/",
+    labelKey: "nav.categories",
+    icon: FolderTree,
+    mobile: false,
+  },
+  {
+    id: "trash",
+    href: "/trash/",
+    labelKey: "nav.trash",
+    icon: Trash2,
+    mobile: false,
+    secondary: true,
+  },
   {
     id: "design",
     href: "/design/",
@@ -31,11 +74,12 @@ export const NAV_ITEMS: readonly NavItem[] = [
     href: "/settings/",
     labelKey: "nav.settings",
     icon: Settings,
-    mobile: true,
+    mobile: false,
     secondary: true,
   },
 ];
 
+/** Bottom navigation holds at most 5 entries: 4 destinations + "More". */
 export const MAX_BOTTOM_NAV_ITEMS = 5;
 
 export function visibleNavItems(): NavItem[] {
