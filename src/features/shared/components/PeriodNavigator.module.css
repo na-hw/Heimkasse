@@ -1,0 +1,13 @@
+.navigator {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.label {
+  min-inline-size: 10rem;
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
