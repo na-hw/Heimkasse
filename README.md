@@ -61,7 +61,7 @@ e2e/                    Playwright tests
 - **RTL-ready:** use logical properties only (`margin-inline-start`, `padding-block`, `inset-inline-end`, `inline-size` …), never `left`/`right`/`width`-style physical properties for layout. `<html lang/dir>` follows the language setting (`fa` → `rtl`, `de` → `ltr`); directional icons use `DirectionalIcon`.
 - **Theme:** follows `prefers-color-scheme`; can be forced with `<html data-theme="light|dark">`.
 - **Accessible primitives:** interactive components are built on `radix-ui`; every list has loading, empty and error states.
-- **i18n:** no hard-coded UI strings; keys are typed, `fa.json` must match `de.json` (checked by TypeScript and tests).
+- **i18n:** German is the default language, Persian (RTL) is selectable in settings. No hard-coded UI strings; keys are typed, `fa.json` must match `de.json` (checked by TypeScript and tests).
 
 ## Database
 

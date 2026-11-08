@@ -9,7 +9,7 @@ import { i18n } from "@/lib/i18n/i18n";
  */
 export default function GlobalError({ reset }: { error: Error; reset: () => void }) {
   const t = i18n.t.bind(i18n);
-  const lang = i18n.language === "de" ? "de" : "fa";
+  const lang = i18n.language === "fa" ? "fa" : "de";
   return (
     <html lang={lang} dir={lang === "fa" ? "rtl" : "ltr"}>
       <body>

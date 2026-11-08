@@ -1,7 +1,7 @@
-export const LANGUAGES = ["fa", "de"] as const;
+export const LANGUAGES = ["de", "fa"] as const;
 export type Language = (typeof LANGUAGES)[number];
 
-export const DEFAULT_LANGUAGE: Language = "fa";
+export const DEFAULT_LANGUAGE: Language = "de";
 
 export type TextDirection = "ltr" | "rtl";
 

@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { LANGUAGES } from "@/lib/i18n/config";
+import { DEFAULT_LANGUAGE, LANGUAGES } from "@/lib/i18n/config";
 
 /** Persisted user preferences (stored as key/value rows in the settings table). */
 export const preferencesSchema = z.object({
-  language: z.enum(LANGUAGES).default("fa"),
+  language: z.enum(LANGUAGES).default(DEFAULT_LANGUAGE),
   theme: z.enum(["system", "light", "dark"]).default("system"),
   digitStyle: z.enum(["persian", "latin"]).default("persian"),
   calendar: z.enum(["gregorian", "jalali"]).default("gregorian"),

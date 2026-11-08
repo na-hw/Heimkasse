@@ -26,9 +26,9 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Persian (RTL) is the default; the boot script applies the saved language/theme before paint.
+  // German (LTR) is the default; the boot script applies the saved language/theme before paint.
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning>
+    <html lang="de" dir="ltr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
       </head>
