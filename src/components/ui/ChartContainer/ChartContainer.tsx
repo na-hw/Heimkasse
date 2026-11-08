@@ -84,6 +84,7 @@ export function ChartContainer<R>({
   );
   // Visible table: keyboard-scrollable region. Hidden (chart view): plain table for screen readers.
   const table = (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable regions must be keyboard-reachable (WCAG 2.1.1)
     <div className={styles.tableScroll} role="region" aria-label={title} tabIndex={0}>
       {tableElement}
     </div>
