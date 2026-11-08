@@ -82,15 +82,7 @@
       "afternoon": "Guten Tag",
       "evening": "Guten Abend"
     },
-    "intro": "Alle Daten bleiben ausschließlich auf diesem Gerät.",
-    "statusTitle": "Datenstatus",
-    "accounts": "Konten",
-    "categories": "Kategorien",
-    "storage": "Speicher",
-    "schemaVersion": "Datenbankversion",
-    "customizeTitle": "Heimkasse anpassen",
-    "customizeText": "Sprache, Darstellung, Zahlen und Kalender kannst du in den Einstellungen festlegen.",
-    "openSettings": "Einstellungen öffnen"
+    "intro": "Alle Daten bleiben ausschließlich auf diesem Gerät."
   },
   "storage": {
     "sqlite": "SQLite (lokal)",
@@ -103,7 +95,8 @@
     "sections": {
       "language": "Sprache & Region",
       "appearance": "Darstellung",
-      "budget": "Budget & Kalender"
+      "budget": "Budget & Kalender",
+      "data": "Daten"
     },
     "language": {
       "label": "Sprache"
@@ -134,6 +127,12 @@
       "label": "Budget-Monat beginnt am",
       "hint": "Z. B. am Gehaltstag. Erlaubt sind Tag 1 bis 28.",
       "option": "{{day}}. des Monats"
+    },
+    "data": {
+      "accounts": "Konten",
+      "categories": "Kategorien",
+      "storage": "Speicher",
+      "schemaVersion": "Datenbankversion"
     }
   },
   "errors": {
@@ -724,6 +723,54 @@
       "warning": "Budget „{{name}}“: {{percent}} verbraucht",
       "exceeded": "Budget „{{name}}“ überschritten",
       "detail": "{{spent}} von {{amount}} in diesem Zeitraum"
+    }
+  },
+  "dashboard": {
+    "period": "Budgetmonat {{start}} – {{end}}",
+    "balance": "Gesamtsaldo",
+    "income": "Einnahmen",
+    "expense": "Ausgaben",
+    "savingsRate": "Sparquote",
+    "noIncome": "Keine Einnahmen",
+    "net": "Saldo des Monats: {{amount}}",
+    "vsPrevious": "ggü. Vormonat",
+    "previousValue": "Vormonat: {{amount}}",
+    "welcome": {
+      "title": "Willkommen bei Heimkasse",
+      "text": "Lege zuerst ein Konto an – z. B. dein Girokonto oder deine Geldbörse. Danach kannst du Buchungen erfassen.",
+      "action": "Konto anlegen"
+    },
+    "budgets": {
+      "title": "Budgets",
+      "description": "Stand im aktuellen Budgetmonat",
+      "empty": "Noch keine Budgets. Lege Limits fest, um rechtzeitig gewarnt zu werden.",
+      "create": "Budget anlegen",
+      "all": "Alle Budgets"
+    },
+    "upcoming": {
+      "title": "Anstehende Zahlungen",
+      "description": "Die nächsten 14 Tage",
+      "empty": "In den nächsten 14 Tagen stehen keine wiederkehrenden Zahlungen an.",
+      "all": "Alle Regeln",
+      "total": "Summe: {{amount}}"
+    },
+    "topCategories": {
+      "title": "Top-Ausgabenkategorien",
+      "description": "Aktueller Budgetmonat",
+      "empty": "In diesem Zeitraum gibt es noch keine Ausgaben.",
+      "report": "Zu den Berichten"
+    }
+  },
+  "reports": {
+    "columns": {
+      "category": "Kategorie",
+      "amount": "Betrag",
+      "share": "Anteil",
+      "month": "Monat",
+      "income": "Einnahmen",
+      "expense": "Ausgaben",
+      "net": "Saldo",
+      "balance": "Vermögen"
     }
   }
 }

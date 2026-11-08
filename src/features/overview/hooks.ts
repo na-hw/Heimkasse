@@ -1,21 +1,47 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useRepositories } from "@/components/providers/RepositoriesContext";
-import { queryKeys } from "@/features/queryKeys";
+import { useMemo } from "react";
+import { useAccounts } from "@/features/accounts/hooks";
+import { useCurrentBudgetPeriod } from "@/features/budgets/hooks";
+import { useAllCategories } from "@/features/categories/hooks";
+import { useRecurringRules } from "@/features/recurring/hooks";
+import { combineQueries } from "@/features/shared/combineQueries";
+import { useAllTransactions } from "@/features/transactions/hooks";
+import { usePreferences } from "@/lib/preferences/store";
+import { todayIso } from "@/lib/utils/dates";
+import { shiftBudgetPeriod } from "@/lib/utils/period";
+import { buildDashboard } from "./dashboard";
 
-/** Counts and storage info for the overview page. */
-export function useOverviewStats() {
-  const repos = useRepositories();
-  return useQuery({
-    queryKey: [...queryKeys.overview, "stats"],
-    queryFn: async () => {
-      const [accounts, categories, schemaVersion] = await Promise.all([
-        repos.accounts.count(),
-        repos.categories.count(),
-        repos.storage.schemaVersion(),
-      ]);
-      return { accounts, categories, schemaVersion, storage: repos.storage.kind };
-    },
-  });
+/** Dashboard figures for the current budget month compared with the previous one. */
+export function useDashboard() {
+  const accounts = useAccounts();
+  const transactions = useAllTransactions();
+  const categories = useAllCategories();
+  const rules = useRecurringRules();
+  const period = useCurrentBudgetPeriod();
+  const startDay = usePreferences((s) => s.budgetMonthStartDay);
+  const today = todayIso();
+
+  const data = useMemo(
+    () =>
+      accounts.data && transactions.data && categories.data && rules.data
+        ? buildDashboard({
+            accounts: accounts.data.all,
+            transactions: transactions.data,
+            categories: categories.data,
+            rules: rules.data,
+            period,
+            previousPeriod: shiftBudgetPeriod(period, -1, startDay),
+            today,
+          })
+        : undefined,
+    [accounts.data, transactions.data, categories.data, rules.data, period, startDay, today],
+  );
+
+  return {
+    data,
+    hasAccounts: accounts.data ? accounts.data.all.length > 0 : undefined,
+    period,
+    ...combineQueries([accounts, transactions, categories, rules]),
+  };
 }

@@ -1,81 +1,77 @@
 "use client";
 
-import { Database, FolderTree, Landmark, Layers, Settings } from "lucide-react";
-import Link from "next/link";
+import { Landmark, Plus } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Card, ErrorState, PageHeader, StatCard } from "@/components/ui";
+import { Button, Card, EmptyState, ErrorState, PageHeader } from "@/components/ui";
+import { AccountFormDialog } from "@/features/accounts/components/AccountFormDialog";
 import { useErrorMessage } from "@/lib/errors/useErrorMessage";
 import { useFormat } from "@/lib/i18n/useFormat";
 import { useDocumentTitle } from "@/lib/utils/useDocumentTitle";
-import { useOverviewStats } from "../hooks";
 import { greetingKey } from "../greeting";
+import { useDashboard } from "../hooks";
+import { BudgetStatusCard } from "./BudgetStatusCard";
+import { DashboardKpis } from "./DashboardKpis";
+import { TopCategoriesCard } from "./TopCategoriesCard";
+import { UpcomingPaymentsCard } from "./UpcomingPaymentsCard";
 import styles from "./OverviewScreen.module.css";
 
-/** Start page: greeting, local data status and a pointer to settings. */
+/** Dashboard: key figures of the budget month, budgets, upcoming payments, top categories. */
 export function OverviewScreen() {
   const { t } = useTranslation();
   const format = useFormat();
   const errorMessage = useErrorMessage();
-  const stats = useOverviewStats();
+  const dashboard = useDashboard();
+  const [accountFormOpen, setAccountFormOpen] = useState(false);
   useDocumentTitle(t("nav.home"));
+  const { data, period } = dashboard;
 
   return (
     <>
-      <PageHeader title={t(greetingKey(new Date()))} description={t("home.intro")} />
-      <div className={styles.grid}>
-        <section aria-labelledby="status-heading" className={styles.status}>
-          <h2 id="status-heading" className={styles.sectionTitle}>
-            {t("home.statusTitle")}
-          </h2>
-          {stats.isError ? (
-            <ErrorState
-              description={errorMessage(stats.error)}
-              onRetry={() => void stats.refetch()}
-            />
-          ) : (
-            <div className={styles.stats}>
-              <StatCard
-                label={t("home.accounts")}
-                icon={<Landmark />}
-                loading={stats.isPending}
-                value={stats.data ? format.number(stats.data.accounts) : null}
-              />
-              <StatCard
-                label={t("home.categories")}
-                icon={<FolderTree />}
-                loading={stats.isPending}
-                value={stats.data ? format.number(stats.data.categories) : null}
-              />
-              <StatCard
-                label={t("home.storage")}
-                icon={<Database />}
-                loading={stats.isPending}
-                value={
-                  stats.data ? (
-                    <span className={styles.small}>{t(`storage.${stats.data.storage}`)}</span>
-                  ) : null
-                }
-              />
-              <StatCard
-                label={t("home.schemaVersion")}
-                icon={<Layers />}
-                loading={stats.isPending}
-                value={stats.data ? format.number(stats.data.schemaVersion) : null}
-              />
-            </div>
-          )}
-        </section>
-        <Card title={t("home.customizeTitle")} description={t("home.customizeText")}>
-          <div>
-            <Button asChild variant="primary">
-              <Link href="/settings/">
-                <Settings aria-hidden="true" />
-                {t("home.openSettings")}
-              </Link>
-            </Button>
-          </div>
+      <PageHeader
+        title={t(greetingKey(new Date()))}
+        description={t("dashboard.period", {
+          start: format.date(period.start, "medium"),
+          end: format.date(period.end, "medium"),
+        })}
+      />
+      {dashboard.isError ? (
+        <ErrorState
+          description={errorMessage(dashboard.error)}
+          onRetry={() => void dashboard.refetch()}
+        />
+      ) : dashboard.hasAccounts === false ? (
+        <Card>
+          <EmptyState
+            icon={<Landmark />}
+            title={t("dashboard.welcome.title")}
+            description={t("dashboard.welcome.text")}
+            action={
+              <Button
+                variant="primary"
+                iconStart={<Plus />}
+                onClick={() => setAccountFormOpen(true)}
+              >
+                {t("dashboard.welcome.action")}
+              </Button>
+            }
+          />
         </Card>
-      </div>
+      ) : (
+        <div className={styles.layout}>
+          <DashboardKpis data={data} />
+          <div className={styles.columns}>
+            <BudgetStatusCard />
+            {data && <UpcomingPaymentsCard items={data.upcoming} />}
+          </div>
+          {data && <TopCategoriesCard items={data.topCategories} />}
+        </div>
+      )}
+      <AccountFormDialog
+        open={accountFormOpen}
+        onOpenChange={setAccountFormOpen}
+        nextSortOrder={0}
+      />
     </>
   );
 }
