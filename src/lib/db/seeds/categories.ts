@@ -23,6 +23,13 @@ export const BUILTIN_CATEGORIES: readonly BuiltinCategory[] = [
     icon: "home",
   },
   {
+    id: "1d22178c-c68c-4daf-9452-12ab1c07a281",
+    key: "rent_warm",
+    type: "expense",
+    color: "teal",
+    icon: "home",
+  },
+  {
     id: "e871a7d4-4da4-430e-bbbf-c40aee031a8a",
     key: "utilities",
     type: "expense",
@@ -191,10 +198,14 @@ export const BUILTIN_CATEGORIES: readonly BuiltinCategory[] = [
   },
 ];
 
-/** Builds idempotent insert operations for the given built-in categories. */
+/**
+ * Builds idempotent insert operations for the given built-in categories.
+ * Parents and sort order come from the full list, so categories seeded by a
+ * later migration get the same values as on a fresh install.
+ */
 export function builtinCategoryOps(categories: readonly BuiltinCategory[], now: string): WriteOp[] {
-  const idByKey = new Map(categories.map((c) => [c.key, c.id]));
-  return categories.map((c, index) => ({
+  const idByKey = new Map(BUILTIN_CATEGORIES.map((c) => [c.key, c.id]));
+  return categories.map((c) => ({
     type: "insert",
     table: "categories",
     onConflict: "ignore",
@@ -211,7 +222,7 @@ export function builtinCategoryOps(categories: readonly BuiltinCategory[], now: 
       icon: c.icon,
       is_system: true,
       archived: false,
-      sort_order: index,
+      sort_order: BUILTIN_CATEGORIES.indexOf(c),
     },
   }));
 }

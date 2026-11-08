@@ -9,7 +9,7 @@ test.describe("app shell", () => {
     await page.goto("/settings/");
     const data = page.getByRole("region", { name: "Daten" });
     await expect(data.getByText("Kategorien", { exact: true })).toBeVisible();
-    await expect(data.getByText("24", { exact: true })).toBeVisible();
+    await expect(data.getByText("25", { exact: true })).toBeVisible();
   });
 
   test("switches to Persian instantly and persists it", async ({ page }) => {
@@ -43,11 +43,11 @@ test.describe("app shell", () => {
     await page.getByRole("radio", { name: "فارسی" }).click();
     await expect(page.getByRole("status").filter({ hasText: "تنظیمات ذخیره شد" })).toBeAttached();
     const data = page.getByRole("region", { name: "داده‌ها" });
-    await expect(data.getByText("۲۴", { exact: true })).toBeVisible();
+    await expect(data.getByText("۲۵", { exact: true })).toBeVisible();
 
     await page.getByRole("radio", { name: "لاتین (123)" }).click();
     await expect(page.getByRole("status").filter({ hasText: "تنظیمات ذخیره شد" })).toBeAttached();
-    await expect(data.getByText("24", { exact: true })).toBeVisible();
+    await expect(data.getByText("25", { exact: true })).toBeVisible();
   });
 
   test("skip link jumps to the main content", async ({ page }) => {

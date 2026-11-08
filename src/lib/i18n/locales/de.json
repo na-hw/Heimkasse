@@ -258,6 +258,7 @@
   "categories": {
     "builtin": {
       "rent": "Kaltmiete",
+      "rent_warm": "Warmmiete",
       "utilities": "Nebenkosten",
       "energy": "Strom & Gas",
       "internet_phone": "Internet & Telefon",

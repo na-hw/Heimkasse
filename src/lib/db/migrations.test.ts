@@ -70,21 +70,21 @@ describe("sqlite migration safety", () => {
   it("rolls back a failing migration completely and retries on next start", async () => {
     const executor = createNodeSqliteExecutor();
     const broken: Migration = {
-      version: 2,
+      version: LATEST_SCHEMA_VERSION + 1,
       name: "broken",
       addColumns: [{ table: "accounts", column: "iban", def: { type: "text", nullable: true } }],
       seed: () => [{ type: "insert", table: "accounts", row: { id: "x" } }],
     };
     const adapter = new TauriSqliteAdapter(executor, [...MIGRATIONS, broken], () => FIXED_NOW);
     await expect(adapter.init()).rejects.toThrow();
-    expect(await adapter.schemaVersion()).toBe(1);
+    expect(await adapter.schemaVersion()).toBe(LATEST_SCHEMA_VERSION);
     const columns = await executor.select({ sql: 'PRAGMA table_info("accounts")', params: [] });
     expect(columns.map((c) => c.name)).not.toContain("iban");
   });
 
   it("refuses to open a database created by a newer app version", async () => {
     const executor = createNodeSqliteExecutor();
-    const future: Migration = { version: 2, name: "future" };
+    const future: Migration = { version: LATEST_SCHEMA_VERSION + 1, name: "future" };
     await new TauriSqliteAdapter(executor, [...MIGRATIONS, future]).init();
     await expect(new TauriSqliteAdapter(executor, MIGRATIONS).init()).rejects.toMatchObject({
       code: "storage_init_failed",
@@ -95,7 +95,7 @@ describe("sqlite migration safety", () => {
     const executor = createNodeSqliteExecutor();
     await new TauriSqliteAdapter(executor, MIGRATIONS).init();
     const v2: Migration = {
-      version: 2,
+      version: LATEST_SCHEMA_VERSION + 1,
       name: "add_iban",
       addColumns: [{ table: "accounts", column: "iban", def: { type: "text", nullable: true } }],
     };
@@ -106,13 +106,32 @@ describe("sqlite migration safety", () => {
 });
 
 describe("indexeddb migration upgrades", () => {
+  it("adds the warm rent category to a version 1 database after Kaltmiete", async () => {
+    const name = "heimkasse-warm-rent-test";
+    const v1 = new BrowserAdapter(name, MIGRATIONS.slice(0, 1), () => FIXED_NOW);
+    await v1.init();
+    await v1.close();
+    const upgraded = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);
+    await upgraded.init();
+    expect(await upgraded.count("categories")).toBe(BUILTIN_CATEGORIES.length);
+    const [rent] = await upgraded.find("categories", {
+      where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent" }],
+    });
+    const [warm] = await upgraded.find("categories", {
+      where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent_warm" }],
+    });
+    expect(warm).toMatchObject({ type: "expense", parent_id: null, is_system: true });
+    expect(Number(warm?.sort_order)).toBe(Number(rent?.sort_order) + 1);
+    await upgraded.destroy();
+  });
+
   it("upgrades an existing database to a new version with seeds", async () => {
     const name = "heimkasse-upgrade-test";
     const v1 = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);
     await v1.init();
     await v1.close();
     const v2: Migration = {
-      version: 2,
+      version: LATEST_SCHEMA_VERSION + 1,
       name: "seed_more",
       seed: (now) => [
         {
@@ -131,7 +150,7 @@ describe("indexeddb migration upgrades", () => {
     };
     const upgraded = new BrowserAdapter(name, [...MIGRATIONS, v2], () => FIXED_NOW);
     await upgraded.init();
-    expect(await upgraded.schemaVersion()).toBe(2);
+    expect(await upgraded.schemaVersion()).toBe(LATEST_SCHEMA_VERSION + 1);
     expect(await upgraded.count("import_rules")).toBe(1);
     expect(await upgraded.count("categories")).toBe(BUILTIN_CATEGORIES.length);
     await upgraded.destroy();

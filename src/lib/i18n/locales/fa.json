@@ -258,6 +258,7 @@
   "categories": {
     "builtin": {
       "rent": "اجاره (بدون شارژ)",
+      "rent_warm": "اجاره با شارژ (Warmmiete)",
       "utilities": "شارژ ساختمان (Nebenkosten)",
       "energy": "برق و گاز",
       "internet_phone": "اینترنت و تلفن",
