@@ -770,7 +770,42 @@
       "income": "Einnahmen",
       "expense": "Ausgaben",
       "net": "Saldo",
-      "balance": "Vermögen"
+      "balance": "Vermögen",
+      "metric": "Kennzahl"
+    },
+    "title": "Berichte",
+    "description": "Wohin dein Geld fließt – nach Kategorie und im Zeitverlauf.",
+    "mode": {
+      "label": "Zeitraum",
+      "month": "Monat",
+      "year": "Jahr"
+    },
+    "previous": {
+      "month": "Vorheriger Monat",
+      "year": "Vorheriges Jahr"
+    },
+    "next": {
+      "month": "Nächster Monat",
+      "year": "Nächstes Jahr"
+    },
+    "current": {
+      "month": "Aktueller Monat",
+      "year": "Aktuelles Jahr"
+    },
+    "summaryTitle": "Zusammenfassung",
+    "expensesByCategory": "Ausgaben nach Kategorie",
+    "incomeByCategory": "Einnahmen nach Kategorie",
+    "monthlyTitle": "Einnahmen & Ausgaben",
+    "monthlyDescription": "Letzte 12 Monate bis zum gewählten Zeitraum",
+    "trendsTitle": "Ausgabentrends",
+    "trendsDescription": "Die fünf größten Ausgabenkategorien pro Monat",
+    "netWorthTitle": "Vermögensentwicklung",
+    "netWorthDescription": "Summe aller Kontosalden jeweils am Monatsende",
+    "noData": "Keine Buchungen in diesem Zeitraum.",
+    "empty": {
+      "title": "Noch nichts auszuwerten",
+      "text": "Sobald du Buchungen erfasst, erscheinen hier Auswertungen und Diagramme.",
+      "action": "Buchung erfassen"
     }
   },
   "export": {

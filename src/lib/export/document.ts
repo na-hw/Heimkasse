@@ -24,8 +24,6 @@ export interface ExportDocument {
   subtitle?: string;
   /** e.g. "Erstellt am 08.11.2026". */
   footnote?: string;
-  /** Short key/value lines shown under the title. */
-  summary?: readonly { label: string; value: string }[];
   tables: readonly ExportTable[];
   direction: "ltr" | "rtl";
   /** BCP 47 language for the PDF renderer (font selection). */

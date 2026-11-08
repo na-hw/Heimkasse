@@ -770,7 +770,42 @@
       "income": "درآمد",
       "expense": "هزینه",
       "net": "تراز",
-      "balance": "دارایی"
+      "balance": "دارایی",
+      "metric": "شاخص"
+    },
+    "title": "گزارش‌ها",
+    "description": "پول شما کجا می‌رود – بر اساس دسته و در طول زمان.",
+    "mode": {
+      "label": "بازه",
+      "month": "ماه",
+      "year": "سال"
+    },
+    "previous": {
+      "month": "ماه قبل",
+      "year": "سال قبل"
+    },
+    "next": {
+      "month": "ماه بعد",
+      "year": "سال بعد"
+    },
+    "current": {
+      "month": "ماه جاری",
+      "year": "سال جاری"
+    },
+    "summaryTitle": "خلاصه",
+    "expensesByCategory": "هزینه‌ها بر اساس دسته",
+    "incomeByCategory": "درآمدها بر اساس دسته",
+    "monthlyTitle": "درآمد و هزینه",
+    "monthlyDescription": "۱۲ ماه گذشته تا بازهٔ انتخاب‌شده",
+    "trendsTitle": "روند هزینه‌ها",
+    "trendsDescription": "پنج دستهٔ بزرگ هزینه در هر ماه",
+    "netWorthTitle": "روند دارایی",
+    "netWorthDescription": "جمع موجودی همهٔ حساب‌ها در پایان هر ماه",
+    "noData": "در این بازه تراکنشی ثبت نشده است.",
+    "empty": {
+      "title": "هنوز چیزی برای تحلیل نیست",
+      "text": "به‌محض ثبت تراکنش، تحلیل‌ها و نمودارها اینجا نمایش داده می‌شوند.",
+      "action": "ثبت تراکنش"
     }
   },
   "export": {

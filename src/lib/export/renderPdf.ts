@@ -189,14 +189,6 @@ function layoutDocument(doc: ExportDocument, family: string): Layout {
     layout.y += 18;
     layout.text(doc.subtitle, { size: 11, color: COLORS.muted });
   }
-  if (doc.summary?.length) {
-    layout.y += 10;
-    for (const item of doc.summary) {
-      layout.y += 16;
-      layout.text(item.label, { size: 10, color: COLORS.muted, width: 160 });
-      layout.text(item.value, { size: 10, weight: 600, offset: 160, width: 200 });
-    }
-  }
   for (const table of doc.tables) layoutTable(layout, table);
   return layout;
 }

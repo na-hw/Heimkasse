@@ -97,6 +97,7 @@ export type DateStyle =
   | "full"
   | "monthYear"
   | "monthShortYear"
+  | "year"
   | "dayMonth"
   | "weekdayShort";
 
@@ -107,6 +108,7 @@ const DATE_STYLES: Record<DateStyle, Intl.DateTimeFormatOptions> = {
   full: { dateStyle: "full" },
   monthYear: { month: "long", year: "numeric" },
   monthShortYear: { month: "short", year: "2-digit" },
+  year: { year: "numeric" },
   dayMonth: { day: "numeric", month: "short" },
   weekdayShort: { weekday: "short" },
 };
