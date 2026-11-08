@@ -7,6 +7,10 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+.valueText {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

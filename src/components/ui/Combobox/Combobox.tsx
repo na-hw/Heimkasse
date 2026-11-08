@@ -74,7 +74,9 @@ export function Combobox({
       >
         <span className={cn(styles.value, !selected && control.placeholder)}>
           {selected?.icon}
-          {selected?.label ?? placeholder ?? t("common.selectPlaceholder")}
+          <span className={styles.valueText}>
+            {selected?.label ?? placeholder ?? t("common.selectPlaceholder")}
+          </span>
         </span>
         <ChevronsUpDown size={16} aria-hidden="true" className={styles.chevron} />
       </PopoverPrimitive.Trigger>
