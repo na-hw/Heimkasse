@@ -1,0 +1,48 @@
+/**
+ * Icon keys for user-selectable icons. Stored as stable keys; the UI maps
+ * them to lucide components in components/ui/CategoryIcon/iconRegistry.ts.
+ */
+export const ICON_KEYS = [
+  "home",
+  "receipt",
+  "zap",
+  "flame",
+  "wifi",
+  "radio",
+  "shopping-cart",
+  "bus",
+  "train",
+  "fuel",
+  "car",
+  "shield",
+  "heart-pulse",
+  "umbrella",
+  "sofa",
+  "spray-can",
+  "shirt",
+  "ticket",
+  "utensils",
+  "coffee",
+  "graduation-cap",
+  "repeat",
+  "gift",
+  "briefcase",
+  "coins",
+  "piggy-bank",
+  "wallet",
+  "landmark",
+  "credit-card",
+  "banknote",
+  "plane",
+  "baby",
+  "paw-print",
+  "dumbbell",
+  "book",
+  "music",
+  "smartphone",
+  "wrench",
+  "tag",
+  "circle",
+] as const;
+
+export type IconKey = (typeof ICON_KEYS)[number];
