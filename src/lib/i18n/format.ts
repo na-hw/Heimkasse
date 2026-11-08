@@ -77,6 +77,24 @@ export function formatNumber(
   }).format(value);
 }
 
+const FILE_UNITS = ["byte", "kilobyte", "megabyte", "gigabyte"] as const;
+
+/** Formats a file size ("1,2 MB" / "۱٫۲ مگابایت"), 1 kB = 1024 bytes. */
+export function formatFileSize(bytes: number, ctx: LocaleContext): string {
+  let value = Math.max(bytes, 0);
+  let unit = 0;
+  while (value >= 1024 && unit < FILE_UNITS.length - 1) {
+    value /= 1024;
+    unit += 1;
+  }
+  return numberFormat(toIntlLocale(ctx), {
+    style: "unit",
+    unit: FILE_UNITS[unit],
+    unitDisplay: "short",
+    maximumFractionDigits: unit === 0 ? 0 : 1,
+  }).format(value);
+}
+
 /** Formats a ratio (0.25 → "25 %" / "٪۲۵"). */
 export function formatPercent(
   ratio: number,

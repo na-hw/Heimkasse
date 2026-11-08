@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { formatDate, formatMoney, formatNumber, formatPercent, weekdayNames } from "./format";
+import {
+  formatDate,
+  formatFileSize,
+  formatMoney,
+  formatNumber,
+  formatPercent,
+  weekdayNames,
+} from "./format";
 import type { LocaleContext } from "./locale";
 import { toIntlLocale } from "./locale";
 
@@ -50,6 +57,14 @@ describe("formatMoney", () => {
   });
   it("uses the configured currency symbol", () => {
     expect(formatMoney(100, { ...de, currency: "USD" })).toBe(`1,00${NBSP}$`);
+  });
+});
+
+describe("formatFileSize", () => {
+  it("picks a readable unit", () => {
+    expect(formatFileSize(512, de).replace(NBSP, " ")).toBe("512 Byte");
+    expect(formatFileSize(1536, de).replace(NBSP, " ")).toBe("1,5 kB");
+    expect(formatFileSize(5 * 1024 * 1024, de).replace(NBSP, " ")).toBe("5 MB");
   });
 });
 
