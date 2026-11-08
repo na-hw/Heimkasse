@@ -1,0 +1,4 @@
+.content {
+  padding: var(--space-3);
+  max-inline-size: calc(100vw - var(--space-6));
+}
