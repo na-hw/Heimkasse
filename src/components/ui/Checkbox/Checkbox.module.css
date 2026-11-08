@@ -1,0 +1,60 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.touch {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--touch-target);
+  block-size: var(--touch-target);
+  flex-shrink: 0;
+}
+
+.row > .touch {
+  margin-inline-start: calc(var(--space-3) * -1);
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  inline-size: 20px;
+  block-size: 20px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-on-primary);
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.box[data-state="checked"],
+.box[data-state="indeterminate"] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.box:disabled {
+  opacity: 0.5;
+}
+
+.indicator {
+  display: grid;
+  place-items: center;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-block-size: var(--touch-target);
+}
+
+.label {
+  cursor: pointer;
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
