@@ -1,7 +1,7 @@
 "use client";
 
 import { Upload } from "lucide-react";
-import { type ReactNode, useRef } from "react";
+import { type ReactNode, useId, useRef } from "react";
 import { Button, type ButtonProps } from "../Button";
 import { useFormFieldControl } from "../FormField";
 
@@ -34,12 +34,15 @@ export function FileInput({
   onFiles,
 }: FileInputProps) {
   const input = useRef<HTMLInputElement>(null);
+  const textId = useId();
   // Buttons don't support aria-invalid/required; only id + description are wired.
   const { id, "aria-describedby": describedBy } = useFormFieldControl();
   return (
     <>
       <Button
         id={id}
+        // The visible text ("Choose CSV file") names the button, not the field label.
+        aria-labelledby={textId}
         aria-describedby={describedBy}
         variant={variant}
         iconStart={icon}
@@ -47,7 +50,7 @@ export function FileInput({
         loading={loading}
         onClick={() => input.current?.click()}
       >
-        {children}
+        <span id={textId}>{children}</span>
       </Button>
       <input
         ref={input}
