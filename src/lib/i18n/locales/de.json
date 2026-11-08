@@ -23,7 +23,9 @@
     "trash": "Papierkorb",
     "more": "Mehr",
     "moreTitle": "Weitere Bereiche",
-    "quickAdd": "Neue Buchung"
+    "quickAdd": "Neue Buchung",
+    "budgets": "Budgets",
+    "reports": "Berichte"
   },
   "common": {
     "save": "Speichern",
@@ -655,7 +657,8 @@
       "transactions": "Buchungen",
       "accounts": "Konten",
       "categories": "Kategorien",
-      "recurring": "Regeln"
+      "recurring": "Regeln",
+      "budgets": "Budgets"
     },
     "empty": {
       "title": "Papierkorb ist leer",
@@ -677,5 +680,50 @@
     "restored": "Wiederhergestellt",
     "purged": "Endgültig gelöscht",
     "accountInUse": "Dieses Konto wird noch von Buchungen verwendet. Lösche zuerst diese Buchungen endgültig."
+  },
+  "budgets": {
+    "title": "Budgets",
+    "description": "Monatliche Limits pro Kategorie – mit Warnung, bevor es knapp wird.",
+    "add": "Budget anlegen",
+    "new": "Neues Budget",
+    "edit": "Budget bearbeiten",
+    "empty": {
+      "title": "Noch keine Budgets",
+      "text": "Lege für Kategorien wie Lebensmittel oder Freizeit ein monatliches Limit fest."
+    },
+    "noCategories": "Alle Ausgabekategorien haben bereits ein Budget.",
+    "fields": {
+      "category": "Kategorie",
+      "categoryHint": "Unterkategorien werden mitgezählt.",
+      "amount": "Monatliches Limit",
+      "threshold": "Warnen ab",
+      "thresholdHint": "Bei diesem Prozentsatz und bei 100 % wirst du benachrichtigt."
+    },
+    "period": "Zeitraum {{start}} – {{end}}",
+    "previousPeriod": "Vorheriger Zeitraum",
+    "nextPeriod": "Nächster Zeitraum",
+    "currentPeriod": "Aktueller Zeitraum",
+    "summary": {
+      "budgeted": "Budgetiert",
+      "spent": "Ausgegeben",
+      "remaining": "Verbleibend"
+    },
+    "spentOf": "{{spent}} von {{amount}}",
+    "remaining": "Noch {{amount}} übrig",
+    "over": "{{amount}} überschritten",
+    "level": {
+      "ok": "Im Rahmen",
+      "warning": "Schwelle erreicht",
+      "exceeded": "Überschritten"
+    },
+    "thresholdInfo": "Warnung ab {{percent}}",
+    "created": "Budget angelegt",
+    "saved": "Budget gespeichert",
+    "deleted": "Budget in den Papierkorb verschoben",
+    "alert": {
+      "warning": "Budget „{{name}}“: {{percent}} verbraucht",
+      "exceeded": "Budget „{{name}}“ überschritten",
+      "detail": "{{spent}} von {{amount}} in diesem Zeitraum"
+    }
   }
 }

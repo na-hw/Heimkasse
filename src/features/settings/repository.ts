@@ -1,3 +1,4 @@
+import type { z } from "zod";
 import { BaseRepository, type RepositoryDeps } from "@/lib/db/repository";
 import {
   DEFAULT_PREFERENCES,
@@ -42,12 +43,20 @@ export class SettingsRepository extends BaseRepository<Setting, SettingCreate, S
 
   /** Validates and upserts a single preference. */
   async setPreference<K extends PreferenceKey>(key: K, value: Preferences[K]): Promise<void> {
-    const validated = preferencesSchema.shape[key].parse(value);
+    await this.setValue(key, preferencesSchema.shape[key].parse(value));
+  }
+
+  /** Reads an internal (non-preference) value; invalid or missing values yield `fallback`. */
+  async getValue<T>(key: string, schema: z.ZodType<T>, fallback: T): Promise<T> {
+    const [row] = await this.list({ where: [{ field: "key", op: "eq", value: key }] });
+    const parsed = row ? schema.safeParse(row.value) : null;
+    return parsed?.success ? parsed.data : fallback;
+  }
+
+  /** Upserts a JSON value under `key`. */
+  async setValue(key: string, value: z.core.util.JSONType): Promise<void> {
     const [existing] = await this.list({ where: [{ field: "key", op: "eq", value: key }] });
-    if (existing) {
-      await this.update(existing.id, { value: validated });
-    } else {
-      await this.create({ key, value: validated });
-    }
+    if (existing) await this.update(existing.id, { value });
+    else await this.create({ key, value });
   }
 }

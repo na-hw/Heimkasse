@@ -64,6 +64,15 @@ export function useTransactionList(filters: TransactionFilters, sort: Transactio
   return { ...query, data };
 }
 
+/** Every active transaction (for dashboards, budgets and reports – all data is local). */
+export function useAllTransactions() {
+  const repos = useRepositories();
+  return useQuery({
+    queryKey: queryKeys.allTransactions,
+    queryFn: () => repos.transactions.list(),
+  });
+}
+
 /** Known tags and payees for suggestions. */
 export function useTransactionMeta() {
   const repos = useRepositories();

@@ -8,6 +8,8 @@ export const queryKeys = {
   transactions: ["transactions"] as const,
   transactionList: (storageFilters: unknown) => ["transactions", "list", storageFilters] as const,
   transactionMeta: ["transactions", "meta"] as const,
+  allTransactions: ["transactions", "all"] as const,
+  budgets: ["budgets"] as const,
   recurring: ["recurring"] as const,
   trash: ["trash"] as const,
   overview: ["overview"] as const,
@@ -18,6 +20,7 @@ const DATA_KEYS = [
   queryKeys.categories,
   queryKeys.transactions,
   queryKeys.recurring,
+  queryKeys.budgets,
   queryKeys.trash,
   queryKeys.overview,
 ];
