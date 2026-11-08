@@ -772,5 +772,14 @@
       "net": "Saldo",
       "balance": "Vermögen"
     }
+  },
+  "export": {
+    "button": "Exportieren",
+    "csv": "Als CSV (Tabellenkalkulation)",
+    "pdf": "Als PDF",
+    "done": "Export gespeichert",
+    "failed": "Export fehlgeschlagen",
+    "page": "Seite {{page}} von {{total}}",
+    "createdOn": "Erstellt am {{date}} mit Heimkasse"
   }
 }
