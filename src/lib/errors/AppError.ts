@@ -5,6 +5,7 @@ export type AppErrorCode =
   | "not_found"
   | "validation_failed"
   | "write_failed"
+  | "in_use"
   | "unknown";
 
 /** Application error with a code that the UI can translate. */
