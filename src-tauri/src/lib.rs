@@ -10,6 +10,8 @@ pub fn run() {
         // Exports: save dialog + writing the chosen file (dialog adds the path to the fs scope).
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
+        // Contract cancellation reminders.
+        .plugin(tauri_plugin_notification::init())
         .invoke_handler(tauri::generate_handler![db::db_batch])
         .setup(|app| {
             // heimkasse.db lives in the app data directory.
