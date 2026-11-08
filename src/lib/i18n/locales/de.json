@@ -433,7 +433,10 @@
     "smartphone": "Handy",
     "wrench": "Reparatur",
     "tag": "Etikett",
-    "circle": "Kreis"
+    "circle": "Kreis",
+    "droplet": "Tropfen",
+    "thermometer": "Thermometer",
+    "target": "Ziel"
   },
   "tagInput": {
     "placeholder": "Tag eingeben, Enter drücken",

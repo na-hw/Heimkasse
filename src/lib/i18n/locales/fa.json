@@ -433,7 +433,10 @@
     "smartphone": "موبایل",
     "wrench": "تعمیرات",
     "tag": "برچسب",
-    "circle": "دایره"
+    "circle": "دایره",
+    "droplet": "قطره",
+    "thermometer": "دماسنج",
+    "target": "هدف"
   },
   "tagInput": {
     "placeholder": "برچسب را بنویسید و Enter بزنید",

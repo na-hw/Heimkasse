@@ -43,6 +43,9 @@ export const ICON_KEYS = [
   "wrench",
   "tag",
   "circle",
+  "droplet",
+  "thermometer",
+  "target",
 ] as const;
 
 export type IconKey = (typeof ICON_KEYS)[number];
