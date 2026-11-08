@@ -16,6 +16,10 @@ export const queryKeys = {
   goals: ["goals"] as const,
   recurring: ["recurring"] as const,
   trash: ["trash"] as const,
+  importRules: ["import", "rules"] as const,
+  importPresets: ["import", "presets"] as const,
+  attachments: ["attachments"] as const,
+  backup: ["backup"] as const,
   overview: ["overview"] as const,
 };
 
@@ -30,6 +34,9 @@ const DATA_KEYS = [
   queryKeys.settlements,
   queryKeys.goals,
   queryKeys.trash,
+  ["import"] as const,
+  queryKeys.attachments,
+  queryKeys.backup,
   queryKeys.overview,
 ];
 

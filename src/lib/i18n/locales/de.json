@@ -29,7 +29,8 @@
     "contracts": "Verträge",
     "utilities": "Zähler & Nebenkosten",
     "tax": "Steuer",
-    "goals": "Sparziele"
+    "goals": "Sparziele",
+    "import": "CSV-Import"
   },
   "common": {
     "save": "Speichern",
@@ -1121,5 +1122,154 @@
     "deleted": "Sparziel in den Papierkorb verschoben",
     "archived": "Sparziel archiviert",
     "unarchived": "Sparziel wiederhergestellt"
+  },
+  "import": {
+    "title": "CSV-Import",
+    "description": "Kontoauszüge deiner Bank als CSV importieren – mit Vorschau, Regeln und Dublettenerkennung.",
+    "needAccount": "Lege zuerst das Konto an, in das du die Umsätze importieren möchtest.",
+    "tabs": {
+      "label": "Import-Bereiche",
+      "import": "Import",
+      "rules": "Regeln"
+    },
+    "steps": {
+      "label": "Import-Schritte",
+      "file": "Datei",
+      "mapping": "Spalten",
+      "review": "Prüfen"
+    },
+    "file": {
+      "account": "Zielkonto",
+      "label": "CSV-Datei",
+      "hint": "Vorlagen für {{banks}}. Kodierung, Trennzeichen und Formate werden automatisch erkannt.",
+      "choose": "CSV-Datei auswählen",
+      "tooLarge": "Die Datei ist größer als 10 MB.",
+      "empty": "Die Datei enthält keine lesbaren Umsätze.",
+      "detected": "{{bank}}-Format erkannt",
+      "current": "Datei: {{name}}"
+    },
+    "mapping": {
+      "fileSettings": "Dateieinstellungen",
+      "preset": "Bankvorlage",
+      "presetHint": "Eigene Vorlagen stehen oben in der Liste.",
+      "noPreset": "Keine Vorlage (automatisch)",
+      "encoding": "Zeichenkodierung",
+      "delimiter": "Trennzeichen",
+      "headerRow": "Kopfzeile",
+      "headerRowHint": "Infozeilen darüber werden übersprungen.",
+      "rowOption": "Zeile {{number}}: {{text}}",
+      "dateFormat": "Datumsformat",
+      "decimal": "Zahlenformat",
+      "invert": "Vorzeichen umkehren",
+      "invertHint": "Für Banken, die Ausgaben als positive Beträge exportieren.",
+      "columns": "Spaltenzuordnung",
+      "notMapped": "– nicht zuordnen –",
+      "column": "Spalte {{number}}",
+      "required": "Bitte eine Spalte zuordnen.",
+      "preview_one": "Vorschau ({{formatted}} Zeile)",
+      "preview_other": "Vorschau ({{formatted}} Zeilen)",
+      "next": "Weiter zur Prüfung"
+    },
+    "encodings": {
+      "utf-8": "UTF-8",
+      "windows-1252": "ISO-8859-1 / Windows-1252"
+    },
+    "delimiters": {
+      "semicolon": "Semikolon (;)",
+      "comma": "Komma (,)",
+      "tab": "Tabulator",
+      "pipe": "Senkrechter Strich (|)"
+    },
+    "dateFormats": {
+      "dmyDots": "TT.MM.JJJJ",
+      "dmyShort": "TT.MM.JJ",
+      "iso": "JJJJ-MM-TT",
+      "dmySlash": "TT/MM/JJJJ",
+      "mdySlash": "MM/TT/JJJJ"
+    },
+    "decimals": {
+      "comma": "1.234,56 (Komma)",
+      "dot": "1,234.56 (Punkt)"
+    },
+    "fields": {
+      "date": "Datum",
+      "amount": "Betrag",
+      "payee": "Empfänger / Zahler",
+      "payeeIncome": "Zahler bei Gutschriften",
+      "payeeIncomeHint": "Optional, z. B. bei DKB: „Zahlungspflichtige*r“.",
+      "note": "Verwendungszweck"
+    },
+    "errors": {
+      "date": "Datum unlesbar",
+      "amount": "Betrag unlesbar"
+    },
+    "status": {
+      "new": "Neu",
+      "duplicate": "Bereits importiert",
+      "possibleDuplicate": "Mögliche Dublette",
+      "invalid": "Fehlerhaft"
+    },
+    "review": {
+      "include": "{{title}} vom {{date}} importieren",
+      "ruleApplied": "Regel",
+      "categoryFor": "Kategorie für {{title}}",
+      "summary": {
+        "total": "Zeilen",
+        "selected": "Ausgewählt",
+        "duplicates": "Bereits importiert",
+        "possibleDuplicates": "Mögliche Dubletten",
+        "invalid": "Fehlerhaft"
+      },
+      "duplicateHint": "Bereits importierte Umsätze und mögliche Dubletten (gleicher Tag und Betrag wie eine manuelle Buchung) sind abgewählt. Du kannst sie bei Bedarf trotzdem auswählen.",
+      "selectAll": "Alle auswählen",
+      "listLabel": "Zu importierende Umsätze",
+      "import_one": "{{formatted}} Buchung importieren",
+      "import_other": "{{formatted}} Buchungen importieren"
+    },
+    "doneTitle": "Import abgeschlossen",
+    "done_one": "{{formatted}} Buchung wurde importiert.",
+    "done_other": "{{formatted}} Buchungen wurden importiert.",
+    "again": "Weitere Datei importieren",
+    "toTransactions": "Zu den Buchungen",
+    "presets": {
+      "saveAs": "Als Vorlage speichern",
+      "saveTitle": "Vorlage speichern",
+      "saveDescription": "Speichert Kodierung, Formate und die Spaltenzuordnung anhand der Spaltennamen.",
+      "name": "Name der Vorlage",
+      "saved": "Vorlage gespeichert",
+      "deleted": "Vorlage gelöscht"
+    },
+    "rules": {
+      "title": "Import-Regeln",
+      "description": "Die erste passende Regel (von oben) setzt Kategorie und Empfängernamen.",
+      "add": "Regel hinzufügen",
+      "new": "Neue Regel",
+      "edit": "Regel bearbeiten",
+      "formHint": "Groß- und Kleinschreibung spielt keine Rolle.",
+      "fields": {
+        "matchField": "Suchen in",
+        "matchText": "Enthält",
+        "matchTextPlaceholder": "z. B. REWE",
+        "category": "Kategorie setzen",
+        "payeeRename": "Empfänger umbenennen in",
+        "payeeRenameHint": "Leer lassen, um den Namen aus der Datei zu behalten."
+      },
+      "matchFields": {
+        "payee": "Empfänger",
+        "note": "Verwendungszweck",
+        "any": "Empfänger oder Verwendungszweck"
+      },
+      "summary": "{{field}} enthält „{{text}}“",
+      "setsCategory": "→ {{category}}",
+      "renames": "Name: {{payee}}",
+      "noEffect": "Keine Änderung festgelegt",
+      "empty": {
+        "title": "Noch keine Regeln",
+        "text": "Regeln ordnen importierte Umsätze automatisch Kategorien zu, z. B. „REWE“ → Lebensmittel."
+      },
+      "created": "Regel angelegt",
+      "saved": "Regel gespeichert",
+      "deleted": "Regel gelöscht"
+    }
   }
 }

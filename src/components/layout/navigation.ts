@@ -11,6 +11,7 @@ import {
   Receipt,
   Repeat,
   Target,
+  Upload,
   Settings,
   Trash2,
   type LucideIcon,
@@ -28,6 +29,7 @@ export type NavLabelKey =
   | "nav.utilities"
   | "nav.tax"
   | "nav.goals"
+  | "nav.import"
   | "nav.trash"
   | "nav.settings"
   | "nav.design";
@@ -69,6 +71,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { id: "utilities", href: "/utilities/", labelKey: "nav.utilities", icon: Gauge, mobile: false },
   { id: "goals", href: "/goals/", labelKey: "nav.goals", icon: Target, mobile: false },
   { id: "tax", href: "/tax/", labelKey: "nav.tax", icon: Receipt, mobile: false },
+  { id: "import", href: "/import/", labelKey: "nav.import", icon: Upload, mobile: false },
   {
     id: "categories",
     href: "/categories/",

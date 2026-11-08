@@ -1,6 +1,8 @@
 import type { Repositories } from "@/features/repositories";
+import { reorder } from "@/features/shared/reorder";
 import type { WriteOp } from "@/lib/db/types";
 import { type BankPreset, IMPORT_PRESETS_KEY, userPresetsSchema } from "./format";
+import type { ImportRule } from "./schemas";
 import { type DuplicateContext, type ImportCandidate, duplicateContext } from "./review";
 
 /** Stored transactions of the account (incl. trash) for duplicate detection. */
@@ -58,4 +60,18 @@ export async function deleteUserPreset(repos: Repositories, id: string): Promise
     IMPORT_PRESETS_KEY,
     presets.filter((p) => p.id !== id),
   );
+}
+
+/** Moves an import rule one step up/down (rules apply in this order). */
+export async function moveImportRule(
+  repos: Repositories,
+  rules: readonly ImportRule[],
+  id: string,
+  direction: "up" | "down",
+): Promise<boolean> {
+  const changes = reorder(rules, id, direction);
+  await repos.storage.write(
+    changes.map((c) => repos.importRules.prepareUpdate(c.id, { sort_order: c.sort_order })),
+  );
+  return changes.length > 0;
 }

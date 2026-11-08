@@ -79,3 +79,33 @@ export function applyPreset(
     mapping: mappingFromColumns(file.header, preset.columns),
   });
 }
+
+/**
+ * Applies a settings change. Changing encoding, delimiter or header row
+ * re-parses the file and re-detects the column mapping (with the chosen
+ * preset, otherwise by detection/guessing).
+ */
+export function updateFormat(
+  bytes: Uint8Array,
+  current: { file: ParsedFile; format: ImportFormat },
+  patch: Partial<ImportFormat>,
+  presets: readonly BankPreset[],
+  presetId: string | null,
+): { file: ParsedFile; format: ImportFormat; presetId: string | null } {
+  const format = { ...current.format, ...patch };
+  const structural =
+    format.encoding !== current.format.encoding ||
+    format.delimiter !== current.format.delimiter ||
+    format.headerRow !== current.format.headerRow;
+  if (!structural) return { file: current.file, format, presetId };
+
+  const file = parseFile(bytes, format.encoding, format.delimiter, format.headerRow);
+  const chosen =
+    presets.find((p) => p.id === presetId) ?? detectPreset(file.header, presets) ?? null;
+  if (chosen) return { file, format: applyPreset(file, format, chosen), presetId: chosen.id };
+  return {
+    file,
+    format: refineFormat(file.rows, { ...format, mapping: guessMapping(file.header) }),
+    presetId: null,
+  };
+}

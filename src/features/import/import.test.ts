@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Category } from "@/features/categories/schemas";
-import { applyPreset, detectFormat } from "./detect";
+import { applyPreset, detectFormat, updateFormat } from "./detect";
 import { importHashes } from "./duplicates";
 import { extractRows } from "./extract";
 import { BUILTIN_PRESETS, detectPreset, presetFromMapping } from "./presets";
@@ -207,5 +207,25 @@ describe("duplicates and review", () => {
       ["possibleDuplicate", false],
     ]);
     expect(summarize(second)).toMatchObject({ selected: 0, duplicates: 3, possibleDuplicates: 1 });
+  });
+});
+
+describe("updateFormat", () => {
+  it("re-parses and re-maps when the delimiter changes", () => {
+    const bytes = encode(sparkasse);
+    const detected = detectFormat(bytes, BUILTIN_PRESETS);
+    const broken = updateFormat(bytes, detected, { delimiter: "," }, BUILTIN_PRESETS, null);
+    expect(broken.format.mapping.amount).toBeNull();
+    const fixed = updateFormat(bytes, broken, { delimiter: ";" }, BUILTIN_PRESETS, null);
+    expect(fixed.presetId).toBe("sparkasse");
+    expect(fixed.format.mapping.amount).toBe(7);
+  });
+
+  it("keeps the file for non-structural changes", () => {
+    const bytes = encode(sparkasse);
+    const detected = detectFormat(bytes, BUILTIN_PRESETS);
+    const next = updateFormat(bytes, detected, { invertAmounts: true }, BUILTIN_PRESETS, "x");
+    expect(next.file).toBe(detected.file);
+    expect(next.format.invertAmounts).toBe(true);
   });
 });
