@@ -3,10 +3,5 @@
   "identifier": "default",
   "description": "Minimal permissions for the main window: resolve the app data path and read via the SQL plugin. Writes use the app's own db_batch command. Exports: save dialog and writing the file the user picked.",
   "windows": ["main"],
-  "permissions": [
-    "core:path:default",
-    "sql:default",
-    "dialog:allow-save",
-    "fs:allow-write-file"
-  ]
+  "permissions": ["core:path:default", "sql:default", "dialog:allow-save", "fs:allow-write-file"]
 }
