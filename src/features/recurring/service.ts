@@ -92,6 +92,18 @@ export async function bookNext(repos: Repositories, rule: RecurringRule) {
   await repos.storage.write(bookOps(repos, rule, [rule.next_run_date]));
 }
 
+/**
+ * Resumes a paused rule. Occurrences that fell into the pause are not
+ * backfilled; the rule continues with the first occurrence from today.
+ */
+export function resumeRule(repos: Repositories, rule: RecurringRule, today: string) {
+  const next =
+    rule.next_run_date >= today
+      ? rule.next_run_date
+      : (firstOnOrAfter(rule, today) ?? occurrenceAfter(rule, today));
+  return repos.recurringRules.update(rule.id, { paused: false, next_run_date: next });
+}
+
 /** Skips the next occurrence without booking it. */
 export function skipNext(repos: Repositories, rule: RecurringRule) {
   return repos.recurringRules.update(rule.id, {

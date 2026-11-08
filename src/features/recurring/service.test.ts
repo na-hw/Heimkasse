@@ -82,6 +82,13 @@ describe("recurring service", () => {
     expect(booked.every((t) => t.amount_cents === 950_00)).toBe(true);
   });
 
+  it("resumes without backfilling the paused period", async () => {
+    const rule = await rent({ start_date: "2026-08-01", paused: true });
+    const resumed = await resumeRule(repos, rule, "2026-11-08");
+    expect(resumed).toMatchObject({ paused: false, next_run_date: "2026-12-01" });
+    expect(await generateDueTransactions(repos, "2026-11-08")).toBe(0);
+  });
+
   it("lists upcoming occurrences with due flags", async () => {
     await rent({ auto_create: false, start_date: "2026-11-01" });
     const rules = await repos.recurringRules.list();

@@ -226,16 +226,14 @@ export function RecurringScreen() {
                                 id: "resume",
                                 label: t("recurring.resume"),
                                 icon: <Play />,
-                                onSelect: () =>
-                                  mutations.setPaused.mutate({ id: rule.id, paused: false }),
+                                onSelect: () => mutations.setPaused.mutate({ rule, paused: false }),
                               }
                             : {
                                 id: "pause",
                                 label: t("recurring.pause"),
                                 icon: <Pause />,
                                 disabled: status === "ended",
-                                onSelect: () =>
-                                  mutations.setPaused.mutate({ id: rule.id, paused: true }),
+                                onSelect: () => mutations.setPaused.mutate({ rule, paused: true }),
                               },
                           {
                             id: "skip",
