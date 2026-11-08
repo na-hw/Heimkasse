@@ -579,6 +579,10 @@
       "dateAsc": "قدیمی‌ترین",
       "amountDesc": "بیشترین مبلغ",
       "amountAsc": "کمترین مبلغ"
+    },
+    "export": {
+      "all": "همهٔ تراکنش‌ها",
+      "filtered": "انتخاب فیلترشده"
     }
   },
   "recurring": {

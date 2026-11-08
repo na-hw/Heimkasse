@@ -31,6 +31,7 @@ import { BulkActionsBar } from "./BulkActionsBar";
 import { ChangeCategoryDialog } from "./ChangeCategoryDialog";
 import { TransactionFiltersPanel } from "./TransactionFiltersPanel";
 import { TransactionList } from "./TransactionList";
+import { TransactionsExportMenu } from "./TransactionsExportMenu";
 import styles from "./TransactionsScreen.module.css";
 
 const SORTS: TransactionSort[] = ["dateDesc", "dateAsc", "amountDesc", "amountAsc"];
@@ -151,15 +152,20 @@ export function TransactionsScreen() {
         title={t("transactions.title")}
         description={t("transactions.description")}
         actions={
-          <Button
-            variant="primary"
-            iconStart={<Plus />}
-            onClick={() => editor.openCreate()}
-            aria-keyshortcuts="Meta+N Control+N"
-          >
-            {t("transactions.add")}
-            <Kbd>{shortcutLabel("n")}</Kbd>
-          </Button>
+          <>
+            {hasAccounts && (
+              <TransactionsExportMenu transactions={transactions} isFiltered={isFiltered} />
+            )}
+            <Button
+              variant="primary"
+              iconStart={<Plus />}
+              onClick={() => editor.openCreate()}
+              aria-keyshortcuts="Meta+N Control+N"
+            >
+              {t("transactions.add")}
+              <Kbd>{shortcutLabel("n")}</Kbd>
+            </Button>
+          </>
         }
       />
       <div className={styles.toolbar} role="search">
