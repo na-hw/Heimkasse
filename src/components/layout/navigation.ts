@@ -1,12 +1,16 @@
 import {
   ArrowLeftRight,
   ChartPie,
+  FileText,
   FolderTree,
+  Gauge,
   House,
   Landmark,
   Palette,
   PiggyBank,
+  Receipt,
   Repeat,
+  Target,
   Settings,
   Trash2,
   type LucideIcon,
@@ -20,6 +24,10 @@ export type NavLabelKey =
   | "nav.recurring"
   | "nav.budgets"
   | "nav.reports"
+  | "nav.contracts"
+  | "nav.utilities"
+  | "nav.tax"
+  | "nav.goals"
   | "nav.trash"
   | "nav.settings"
   | "nav.design";
@@ -51,6 +59,16 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { id: "reports", href: "/reports/", labelKey: "nav.reports", icon: ChartPie, mobile: true },
   { id: "accounts", href: "/accounts/", labelKey: "nav.accounts", icon: Landmark, mobile: false },
   { id: "recurring", href: "/recurring/", labelKey: "nav.recurring", icon: Repeat, mobile: false },
+  {
+    id: "contracts",
+    href: "/contracts/",
+    labelKey: "nav.contracts",
+    icon: FileText,
+    mobile: false,
+  },
+  { id: "utilities", href: "/utilities/", labelKey: "nav.utilities", icon: Gauge, mobile: false },
+  { id: "goals", href: "/goals/", labelKey: "nav.goals", icon: Target, mobile: false },
+  { id: "tax", href: "/tax/", labelKey: "nav.tax", icon: Receipt, mobile: false },
   {
     id: "categories",
     href: "/categories/",
