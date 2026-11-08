@@ -52,20 +52,18 @@ export function RadioGroup<T extends string>({
         onValueChange={(v) => onValueChange(v as T)}
         className={cn(styles.options, styles[orientation], styles[appearance])}
       >
-        {options.map((option) => {
-          const optionId = `rg-${id}-${option.value}`;
-          return (
-            <div key={option.value} className={styles.option}>
-              <RadioPrimitive.Item id={optionId} value={option.value} disabled={option.disabled} className={styles.radio}>
-                <RadioPrimitive.Indicator className={styles.indicator} />
-              </RadioPrimitive.Item>
-              <label htmlFor={optionId} className={styles.optionLabel}>
-                <span>{option.label}</span>
-                {option.description && <span className={styles.description}>{option.description}</span>}
-              </label>
-            </div>
-          );
-        })}
+        {options.map((option) => (
+          // The label wraps the radio, so the whole option (tile) is clickable.
+          <label key={option.value} className={styles.option} data-disabled={option.disabled || undefined}>
+            <RadioPrimitive.Item value={option.value} disabled={option.disabled} className={styles.radio}>
+              <RadioPrimitive.Indicator className={styles.indicator} />
+            </RadioPrimitive.Item>
+            <span className={styles.optionLabel}>
+              <span>{option.label}</span>
+              {option.description && <span className={styles.description}>{option.description}</span>}
+            </span>
+          </label>
+        ))}
       </RadioPrimitive.Root>
       {hint && (
         <p id={hintId} className={styles.hint}>

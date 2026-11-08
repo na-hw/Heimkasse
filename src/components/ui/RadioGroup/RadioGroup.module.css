@@ -24,8 +24,8 @@
 }
 
 .option {
-  position: relative;
   display: flex;
+  cursor: pointer;
   align-items: center;
   gap: var(--space-3);
   min-block-size: var(--touch-target);
@@ -56,7 +56,6 @@
 .optionLabel {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
 }
 
 .description {
@@ -84,8 +83,7 @@
   background: var(--color-primary-soft);
 }
 
-.cards .optionLabel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+.option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
