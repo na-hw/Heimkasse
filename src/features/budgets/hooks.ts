@@ -7,6 +7,7 @@ import { useRepositories } from "@/components/providers/RepositoriesContext";
 import { announce, toast } from "@/components/ui";
 import { useAllCategories } from "@/features/categories/hooks";
 import { queryKeys } from "@/features/queryKeys";
+import { combineQueries } from "@/features/shared/combineQueries";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 import { useAllTransactions } from "@/features/transactions/hooks";
 import { usePreferences } from "@/lib/preferences/store";
@@ -39,13 +40,7 @@ export function useBudgetStatuses(period: DateRange) {
         : undefined,
     [budgets.data, transactions.data, categories.data, period],
   );
-  const queries = [budgets, transactions, categories];
-  return {
-    data,
-    isError: queries.some((q) => q.isError),
-    error: queries.find((q) => q.error)?.error ?? null,
-    refetch: () => Promise.all(queries.map((q) => q.refetch())),
-  };
+  return { data, ...combineQueries([budgets, transactions, categories]) };
 }
 
 export function useBudgetMutations() {
