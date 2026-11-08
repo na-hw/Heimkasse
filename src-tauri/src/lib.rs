@@ -1,12 +1,15 @@
+mod db;
+
 use tauri::Manager;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        // SQLite access from the frontend (see src/lib/db). Migrations come later.
+        // Reads/connection handling; writes go through `db::db_batch`.
         .plugin(tauri_plugin_sql::Builder::default().build())
+        .invoke_handler(tauri::generate_handler![db::db_batch])
         .setup(|app| {
-            // Make sure the app data directory exists – kiseh.db lives there.
+            // kiseh.db lives in the app data directory.
             let data_dir = app.path().app_data_dir()?;
             std::fs::create_dir_all(&data_dir)?;
 
