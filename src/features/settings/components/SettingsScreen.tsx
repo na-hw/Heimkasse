@@ -11,6 +11,7 @@ import { preferencesSchema } from "@/lib/preferences/types";
 import { useDocumentTitle } from "@/lib/utils/useDocumentTitle";
 import { useUpdatePreference } from "../hooks";
 import styles from "./SettingsScreen.module.css";
+import { StorageInfoCard } from "./StorageInfoCard";
 
 const CURRENCIES = preferencesSchema.shape.currency.unwrap().options;
 const WEEKDAY_ORDER = [1, 2, 3, 4, 5, 6, 0] as const;
@@ -150,6 +151,8 @@ export function SettingsScreen() {
             </FormField>
           </div>
         </Card>
+
+        <StorageInfoCard />
       </div>
     </>
   );

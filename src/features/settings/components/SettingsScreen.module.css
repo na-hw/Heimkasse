@@ -25,3 +25,13 @@
   inline-size: 18px;
   block-size: 18px;
 }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: var(--space-3);
+}
+
+.small {
+  font-size: var(--font-size-lg);
+}

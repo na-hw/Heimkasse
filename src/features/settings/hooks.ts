@@ -1,10 +1,11 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useRepositories } from "@/components/providers/RepositoriesContext";
 import { announce, toast } from "@/components/ui";
+import { queryKeys } from "@/features/queryKeys";
 import { useErrorMessage } from "@/lib/errors/useErrorMessage";
 import { usePreferences } from "@/lib/preferences/store";
 import type { PreferenceKey, Preferences } from "@/lib/preferences/types";
@@ -43,4 +44,20 @@ export function useUpdatePreference() {
     <K extends PreferenceKey>(key: K, value: Preferences[K]) => mutate({ key, value }),
     [mutate],
   );
+}
+
+/** Counts and storage details for the data section. */
+export function useStorageInfo() {
+  const repos = useRepositories();
+  return useQuery({
+    queryKey: [...queryKeys.overview, "storage"],
+    queryFn: async () => {
+      const [accounts, categories, schemaVersion] = await Promise.all([
+        repos.accounts.count(),
+        repos.categories.count(),
+        repos.storage.schemaVersion(),
+      ]);
+      return { accounts, categories, schemaVersion, storage: repos.storage.kind };
+    },
+  });
 }
