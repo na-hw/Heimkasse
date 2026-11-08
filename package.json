@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "Heimkasse – personal home & living expense manager",
+  "sideEffects": [
+    "*.css",
+    "./src/lib/validation/zodConfig.ts",
+    "./src/lib/i18n/i18n.ts"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
