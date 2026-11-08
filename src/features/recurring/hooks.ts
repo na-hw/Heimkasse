@@ -8,7 +8,14 @@ import { queryKeys } from "@/features/queryKeys";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 import { todayIso } from "@/lib/utils/dates";
 import type { RecurringRule, RecurringRuleCreate, RecurringRuleUpdate } from "./schemas";
-import { bookNext, createRule, generateDueTransactions, skipNext, updateRule } from "./service";
+import {
+  bookNext,
+  createRule,
+  generateDueTransactions,
+  resumeRule,
+  skipNext,
+  updateRule,
+} from "./service";
 
 export function useRecurringRules() {
   const repos = useRepositories();
