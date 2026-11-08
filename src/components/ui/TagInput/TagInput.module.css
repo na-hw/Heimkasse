@@ -1,0 +1,39 @@
+.wrapper {
+  flex-wrap: wrap;
+  padding-block: var(--space-1);
+  gap: var(--space-1);
+}
+
+.tags {
+  display: contents;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding-inline-start: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-soft-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.remove {
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: var(--radius-full);
+  color: inherit;
+}
+
+.remove:hover {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.input {
+  min-inline-size: 8rem;
+  min-block-size: 34px;
+}
