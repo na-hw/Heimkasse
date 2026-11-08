@@ -22,6 +22,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  // The on-screen keyboard shrinks the layout, so dialog footers stay above it.
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f5f6f5" },
     { media: "(prefers-color-scheme: dark)", color: "#0f1311" },
