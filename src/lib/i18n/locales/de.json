@@ -1161,7 +1161,7 @@
       "choose": "CSV-Datei auswählen",
       "tooLarge": "Die Datei ist größer als 10 MB.",
       "empty": "Die Datei enthält keine lesbaren Umsätze.",
-      "detected": "{{bank}}-Format erkannt",
+      "detected": "Vorlage: {{bank}}",
       "current": "Datei: {{name}}"
     },
     "mapping": {

@@ -101,7 +101,6 @@ export function ImportWizard() {
     setParsed({ file: detected.file, format: detected.format });
     setPresetId(detected.preset?.id ?? null);
     setStep("mapping");
-    if (detected.preset) toast.success(t("import.file.detected", { bank: detected.preset.name }));
   };
 
   const handlePreset = (id: string) => {
@@ -166,6 +165,7 @@ export function ImportWizard() {
   };
 
   const currentUserPreset = presets.user.find((p) => p.id === presetId);
+  const detectedBank = presets.all.find((p) => p.id === presetId)?.name;
 
   return (
     <div className={styles.wizard}>
@@ -182,7 +182,10 @@ export function ImportWizard() {
         </ol>
       )}
       {source && step !== "file" && step !== "done" && (
-        <p className={styles.hint}>{t("import.file.current", { name: source.name })}</p>
+        <p className={styles.hint} role="status">
+          {t("import.file.current", { name: source.name })}
+          {detectedBank && ` · ${t("import.file.detected", { bank: detectedBank })}`}
+        </p>
       )}
 
       {step === "file" && (

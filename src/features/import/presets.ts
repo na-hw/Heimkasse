@@ -139,17 +139,20 @@ export function guessMapping(header: readonly string[]): ColumnMapping {
 }
 
 /**
- * The preset whose date and amount columns exist in the header and that
- * matches the most columns. User presets win ties (they are listed first).
+ * The preset all of whose main columns (date, amount and – if the preset
+ * defines them – payee and note) exist in the header; the one matching most
+ * columns wins. User presets win ties (they are listed first).
  */
 export function detectPreset(
   header: readonly string[],
   presets: readonly BankPreset[],
 ): BankPreset | null {
+  const main = ["date", "amount", "payee", "note"] as const;
   let best: { preset: BankPreset; score: number } | null = null;
   for (const p of presets) {
     const mapping = mappingFromColumns(header, p.columns);
-    if (mapping.date === null || mapping.amount === null) continue;
+    const complete = main.every((f) => p.columns[f].length === 0 || mapping[f] !== null);
+    if (!complete || mapping.date === null || mapping.amount === null) continue;
     const score = Object.values(mapping).filter((v) => v !== null).length;
     if (!best || score > best.score) best = { preset: p, score };
   }
