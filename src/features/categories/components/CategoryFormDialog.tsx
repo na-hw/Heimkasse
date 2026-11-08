@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useId, useMemo } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
   ColorPicker,
@@ -80,9 +80,9 @@ export function CategoryFormDialog({ target, onClose, all }: CategoryFormDialogP
     if (target !== null) form.reset(initial);
   }, [target, initial, form]);
   const { errors } = form.formState;
-  const type = form.watch("type");
-  const parentId = form.watch("parent_id");
-  const color = form.watch("color") ?? "gray";
+  const type = useWatch({ control: form.control, name: "type" });
+  const parentId = useWatch({ control: form.control, name: "parent_id" });
+  const color = useWatch({ control: form.control, name: "color" }) ?? "gray";
   const parentOptions = all.filter(
     (c) => !c.parent_id && !c.archived && c.type === type && c.id !== category?.id,
   );

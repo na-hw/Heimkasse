@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useId, useMemo } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
   ColorPicker,
@@ -68,7 +68,7 @@ export function AccountFormDialog({
     if (open) form.reset(initial);
   }, [open, initial, form]);
   const { errors } = form.formState;
-  const color = form.watch("color") ?? "teal";
+  const color = useWatch({ control: form.control, name: "color" }) ?? "teal";
 
   const submit = form.handleSubmit(async (values) => {
     if (account) {
