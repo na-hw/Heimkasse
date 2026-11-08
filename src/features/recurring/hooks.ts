@@ -13,7 +13,6 @@ import {
   createRule,
   generateDueTransactions,
   resumeRule,
-  resumeRule,
   skipNext,
   updateRule,
 } from "./service";
