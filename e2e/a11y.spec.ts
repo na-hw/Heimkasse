@@ -75,21 +75,50 @@ test.describe("accessibility (WCAG 2.2 AA, axe)", () => {
 
 test.describe("reflow (200 % zoom ≙ 320 px)", () => {
   test.skip(({ isMobile }) => isMobile, "Uses its own viewport.");
-  test.setTimeout(120_000);
+  test.setTimeout(180_000);
 
-  test("no page scrolls horizontally at 320 px", async ({ page }) => {
+  test("no page scrolls horizontally at 320 and 375 px, even with long content", async ({
+    page,
+  }) => {
     await useGerman(page);
     await seed(page);
-    await page.setViewportSize({ width: 320, height: 640 });
+    // Stress content: long names, a seven-digit amount and an entry in the trash.
+    await createAccount(page, "Gemeinschaftskonto Sparkasse Hannover Tagesgeld", "1234567,89");
+    await page.goto("/transactions/");
+    await addExpense(page, "1234567,89", "Autohaus Mustermann Vertriebsgesellschaft mbH", "Abos");
+    await page.getByRole("button", { name: "Aktionen für Streaming" }).click();
+    await page.getByRole("menuitem", { name: "Löschen" }).click();
+
     const overflowing: string[] = [];
-    for (const route of ROUTES) {
-      await openPage(page, route);
-      const { scroll, client } = await page.evaluate(() => ({
-        scroll: document.documentElement.scrollWidth,
-        client: document.documentElement.clientWidth,
-      }));
-      if (scroll > client) overflowing.push(`${route}: ${scroll} > ${client}`);
+    for (const width of [320, 375]) {
+      await page.setViewportSize({ width, height: 640 });
+      for (const route of ROUTES) {
+        await openPage(page, route);
+        const { scroll, client } = await page.evaluate(() => ({
+          scroll: document.documentElement.scrollWidth,
+          client: document.documentElement.clientWidth,
+        }));
+        if (scroll > client) overflowing.push(`${width} ${route}: ${scroll} > ${client}`);
+      }
     }
     expect(overflowing).toEqual([]);
+  });
+
+  test("the date picker fits a 320 px screen", async ({ page }) => {
+    await useGerman(page);
+    await createAccount(page, "Giro", "0");
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto("/transactions/");
+    await page
+      .getByRole("button", { name: /Buchung erfassen/ })
+      .first()
+      .click();
+    const dialog = page.getByRole("dialog", { name: "Neue Buchung" });
+    await dialog.getByRole("button", { name: /Datum/ }).first().click();
+    const grid = page.getByRole("grid");
+    await expect(grid).toBeVisible();
+    const box = await grid.boundingBox();
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(320);
   });
 });
