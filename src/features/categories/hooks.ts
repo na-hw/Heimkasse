@@ -1,9 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useRepositories } from "@/components/providers/RepositoriesContext";
 import { announce, toast } from "@/components/ui";
+import { categoryDisplayName } from "./displayName";
 import { queryKeys } from "@/features/queryKeys";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 import type { Category, CategoryCreate, CategoryType, CategoryUpdate } from "./schemas";
@@ -104,4 +106,20 @@ export function useCategoryMutations() {
   });
 
   return { create, update, setArchived, remove, restore, move };
+}
+
+/** Lookup for display name and appearance by category id (null/unknown = "uncategorized"). */
+export function useCategoryLookup() {
+  const { t } = useTranslation();
+  const categories = useAllCategories();
+  return useMemo(() => {
+    const byId = new Map((categories.data ?? []).map((c) => [c.id, c]));
+    return {
+      get: (id: string | null) => (id ? byId.get(id) : undefined),
+      name: (id: string | null) => {
+        const category = id ? byId.get(id) : undefined;
+        return category ? categoryDisplayName(t, category) : t("categories.uncategorized");
+      },
+    };
+  }, [categories.data, t]);
 }
