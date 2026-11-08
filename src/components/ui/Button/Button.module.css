@@ -1,0 +1,100 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-block-size: var(--control-height-md);
+  padding-inline: var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard),
+    transform var(--duration-instant) var(--easing-standard);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.55;
+}
+
+.button[aria-busy="true"] {
+  opacity: 0.85;
+  cursor: progress;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.button svg {
+  inline-size: 18px;
+  block-size: 18px;
+  flex-shrink: 0;
+}
+
+.primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+.secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+.ghost:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-on-danger);
+}
+.danger:hover:not(:disabled) {
+  background: var(--color-danger-hover);
+}
+
+.sm {
+  min-block-size: var(--control-height-sm);
+  padding-inline: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.lg {
+  min-block-size: var(--control-height-lg);
+  padding-inline: var(--space-5);
+  font-size: var(--font-size-lg);
+}
+
+.fullWidth {
+  inline-size: 100%;
+}
+
+@media (pointer: coarse) {
+  .sm {
+    min-block-size: var(--touch-target);
+  }
+}
