@@ -79,6 +79,8 @@ h3,
 h4 {
   line-height: var(--line-height-tight);
   text-wrap: balance;
+  /* Long German compounds ("Top-Ausgabenkategorien") break at syllables, not mid-letter. */
+  hyphens: auto;
 }
 
 ul[role="list"],
