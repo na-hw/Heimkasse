@@ -1,15 +1,29 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useId } from "react";
+import { useEffect, useId, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ColorPicker, Dialog, FormField, IconPicker, Input, RadioGroup, Select } from "@/components/ui";
+import {
+  ColorPicker,
+  Dialog,
+  FormField,
+  IconPicker,
+  Input,
+  RadioGroup,
+  Select,
+} from "@/components/ui";
 import { FormDialogFooter } from "@/features/shared/components/FormDialogFooter";
 import styles from "@/features/shared/components/EntityList.module.css";
 import { categoryDisplayName } from "../displayName";
 import { useCategoryMutations } from "../hooks";
-import { CATEGORY_TYPES, type Category, type CategoryCreate, type CategoryType, categoryCreateSchema } from "../schemas";
+import {
+  CATEGORY_TYPES,
+  type Category,
+  type CategoryCreate,
+  type CategoryType,
+  categoryCreateSchema,
+} from "../schemas";
 
 const NO_PARENT = "__none";
 
@@ -36,30 +50,42 @@ export function CategoryFormDialog({ target, onClose, all }: CategoryFormDialogP
   const displayName = category ? categoryDisplayName(t, category) : "";
   const hasChildren = category ? all.some((c) => c.parent_id === category.id) : false;
 
+  const initial = useMemo<CategoryCreate>(
+    () =>
+      category
+        ? {
+            name: displayName,
+            type: category.type,
+            parent_id: category.parent_id,
+            color: category.color,
+            icon: category.icon,
+          }
+        : {
+            name: "",
+            type: target?.type ?? "expense",
+            parent_id: target?.parentId ?? null,
+            color: "gray",
+            icon: "tag",
+            sort_order: all.length,
+          },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- recompute only when the dialog target changes
+    [target],
+  );
   const form = useForm<CategoryCreate>({
     resolver: zodResolver(categoryCreateSchema),
-    values: category
-      ? {
-          name: displayName,
-          type: category.type,
-          parent_id: category.parent_id,
-          color: category.color,
-          icon: category.icon,
-        }
-      : {
-          name: "",
-          type: target?.type ?? "expense",
-          parent_id: target?.parentId ?? null,
-          color: "gray",
-          icon: "tag",
-          sort_order: all.length,
-        },
+    defaultValues: initial,
   });
+  // Fresh form for every opening (the dialog component stays mounted).
+  useEffect(() => {
+    if (target !== null) form.reset(initial);
+  }, [target, initial, form]);
   const { errors } = form.formState;
   const type = form.watch("type");
   const parentId = form.watch("parent_id");
   const color = form.watch("color") ?? "gray";
-  const parentOptions = all.filter((c) => !c.parent_id && !c.archived && c.type === type && c.id !== category?.id);
+  const parentOptions = all.filter(
+    (c) => !c.parent_id && !c.archived && c.type === type && c.id !== category?.id,
+  );
   const isChild = Boolean(parentId);
 
   const submit = form.handleSubmit(async (values) => {
@@ -68,10 +94,19 @@ export function CategoryFormDialog({ target, onClose, all }: CategoryFormDialogP
     const data = { ...values, type: parent?.type ?? values.type };
     if (category) {
       // Only fields edited here – never reset sort order or archive state.
-      const patch = { type: data.type, parent_id: data.parent_id, color: data.color, icon: data.icon };
+      const patch = {
+        type: data.type,
+        parent_id: data.parent_id,
+        color: data.color,
+        icon: data.icon,
+      };
       // Keep built-in names translatable unless the user actually renamed them.
       const renamed = !(category.name_key && data.name === displayName);
-      await update.mutateAsync({ id: category.id, patch: renamed ? { ...patch, name: data.name } : patch, all });
+      await update.mutateAsync({
+        id: category.id,
+        patch: renamed ? { ...patch, name: data.name } : patch,
+        all,
+      });
     } else {
       await create.mutateAsync(data);
     }
@@ -135,12 +170,16 @@ export function CategoryFormDialog({ target, onClose, all }: CategoryFormDialogP
         <Controller
           control={form.control}
           name="color"
-          render={({ field }) => <ColorPicker value={field.value ?? "gray"} onChange={field.onChange} />}
+          render={({ field }) => (
+            <ColorPicker value={field.value ?? "gray"} onChange={field.onChange} />
+          )}
         />
         <Controller
           control={form.control}
           name="icon"
-          render={({ field }) => <IconPicker value={field.value ?? "tag"} onChange={field.onChange} color={color} />}
+          render={({ field }) => (
+            <IconPicker value={field.value ?? "tag"} onChange={field.onChange} color={color} />
+          )}
         />
       </form>
     </Dialog>

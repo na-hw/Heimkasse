@@ -1,6 +1,17 @@
 "use client";
 
-import { Archive, ArchiveRestore, ArrowDown, ArrowUp, Landmark, MoreHorizontal, Pencil, Plus, Trash2, Wallet } from "lucide-react";
+import {
+  Archive,
+  ArchiveRestore,
+  ArrowDown,
+  ArrowUp,
+  Landmark,
+  MoreHorizontal,
+  Pencil,
+  Plus,
+  Trash2,
+  Wallet,
+} from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -23,7 +34,12 @@ import styles from "@/features/shared/components/EntityList.module.css";
 import { useErrorMessage } from "@/lib/errors/useErrorMessage";
 import { useDocumentTitle } from "@/lib/utils/useDocumentTitle";
 import { totalBalance } from "../balances";
-import { useAccountBalances, useAccountMutations, useAccounts, useAccountUsageCheck } from "../hooks";
+import {
+  useAccountBalances,
+  useAccountMutations,
+  useAccounts,
+  useAccountUsageCheck,
+} from "../hooks";
 import type { Account } from "../schemas";
 import { AccountFormDialog } from "./AccountFormDialog";
 
@@ -38,7 +54,10 @@ export function AccountsScreen() {
   const usageOf = useAccountUsageCheck();
   const [editing, setEditing] = useState<Account | null>(null);
   const [formOpen, setFormOpen] = useState(false);
-  const [archiveCandidate, setArchiveCandidate] = useState<{ account: Account; usage: number } | null>(null);
+  const [archiveCandidate, setArchiveCandidate] = useState<{
+    account: Account;
+    usage: number;
+  } | null>(null);
 
   const openCreate = () => {
     setEditing(null);
@@ -52,7 +71,12 @@ export function AccountsScreen() {
   };
 
   const menu = (account: Account, siblings: Account[], index: number): MenuEntry[] => [
-    { id: "edit", label: t("common.edit"), icon: <Pencil />, onSelect: () => (setEditing(account), setFormOpen(true)) },
+    {
+      id: "edit",
+      label: t("common.edit"),
+      icon: <Pencil />,
+      onSelect: () => (setEditing(account), setFormOpen(true)),
+    },
     {
       id: "up",
       label: t("common.moveUp"),
@@ -81,7 +105,13 @@ export function AccountsScreen() {
           icon: <Archive />,
           onSelect: () => mutations.setArchived.mutate({ id: account.id, archived: true }),
         },
-    { id: "delete", label: t("common.delete"), icon: <Trash2 />, tone: "danger", onSelect: () => void requestDelete(account) },
+    {
+      id: "delete",
+      label: t("common.delete"),
+      icon: <Trash2 />,
+      tone: "danger",
+      onSelect: () => void requestDelete(account),
+    },
   ];
 
   const renderList = (list: Account[]) => (
@@ -97,9 +127,17 @@ export function AccountsScreen() {
             <span className={styles.meta}>{t(`accountTypes.${account.type}`)}</span>
           </div>
           <div className={styles.end}>
-            <Amount cents={balances.data?.get(account.id) ?? account.initial_balance_cents} variant="neutral" />
+            <Amount
+              cents={balances.data?.get(account.id) ?? account.initial_balance_cents}
+              variant="neutral"
+            />
             <DropdownMenu
-              trigger={<IconButton label={t("common.actionsFor", { name: account.name })} icon={<MoreHorizontal />} />}
+              trigger={
+                <IconButton
+                  label={t("common.actionsFor", { name: account.name })}
+                  icon={<MoreHorizontal />}
+                />
+              }
               items={menu(account, list, index)}
             />
           </div>
@@ -121,7 +159,10 @@ export function AccountsScreen() {
         }
       />
       {accounts.isError ? (
-        <ErrorState description={errorMessage(accounts.error)} onRetry={() => void accounts.refetch()} />
+        <ErrorState
+          description={errorMessage(accounts.error)}
+          onRetry={() => void accounts.refetch()}
+        />
       ) : !data ? (
         <Card padding="none">
           <ListSkeleton />
@@ -148,14 +189,19 @@ export function AccountsScreen() {
             loading={balances.isPending}
             value={
               balances.data ? (
-                <Amount cents={totalBalance(balances.data, data.active.map((a) => a.id))} variant="neutral" size="lg" />
+                <Amount
+                  cents={totalBalance(
+                    balances.data,
+                    data.active.map((a) => a.id),
+                  )}
+                  variant="neutral"
+                  size="lg"
+                />
               ) : null
             }
           />
           <h2 className="visually-hidden">{t("accounts.title")}</h2>
-          <Card padding="none">
-            {renderList(data.active)}
-          </Card>
+          <Card padding="none">{renderList(data.active)}</Card>
           {data.archived.length > 0 && (
             <>
               <h2 className={styles.sectionTitle}>{t("accounts.archivedSection")}</h2>
@@ -165,7 +211,12 @@ export function AccountsScreen() {
         </>
       )}
 
-      <AccountFormDialog open={formOpen} onOpenChange={setFormOpen} account={editing} nextSortOrder={data?.all.length ?? 0} />
+      <AccountFormDialog
+        open={formOpen}
+        onOpenChange={setFormOpen}
+        account={editing}
+        nextSortOrder={data?.all.length ?? 0}
+      />
       <ConfirmDialog
         open={archiveCandidate !== null}
         onOpenChange={(open) => !open && setArchiveCandidate(null)}
@@ -177,7 +228,11 @@ export function AccountsScreen() {
         })}
         confirmLabel={t("accounts.archiveInstead.confirm")}
         onConfirm={async () => {
-          if (archiveCandidate) await mutations.setArchived.mutateAsync({ id: archiveCandidate.account.id, archived: true });
+          if (archiveCandidate)
+            await mutations.setArchived.mutateAsync({
+              id: archiveCandidate.account.id,
+              archived: true,
+            });
         }}
       />
     </>

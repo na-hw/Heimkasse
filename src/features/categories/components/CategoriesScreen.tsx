@@ -1,6 +1,17 @@
 "use client";
 
-import { Archive, ArchiveRestore, ArrowDown, ArrowUp, FolderPlus, FolderTree, MoreHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
+import {
+  Archive,
+  ArchiveRestore,
+  ArrowDown,
+  ArrowUp,
+  FolderPlus,
+  FolderTree,
+  MoreHorizontal,
+  Pencil,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -38,7 +49,10 @@ export function CategoriesScreen() {
   const usageOf = useCategoryUsageCheck();
   const [tab, setTab] = useState<CategoryType>("expense");
   const [formTarget, setFormTarget] = useState<CategoryFormTarget | null>(null);
-  const [archiveCandidate, setArchiveCandidate] = useState<{ category: Category; usage: number } | null>(null);
+  const [archiveCandidate, setArchiveCandidate] = useState<{
+    category: Category;
+    usage: number;
+  } | null>(null);
   const all = categories.data ?? [];
 
   const requestDelete = async (category: Category) => {
@@ -51,14 +65,20 @@ export function CategoriesScreen() {
     const siblings = siblingsOf(all, category);
     const index = siblings.findIndex((s) => s.id === category.id);
     return [
-      { id: "edit", label: t("common.edit"), icon: <Pencil />, onSelect: () => setFormTarget({ category }) },
+      {
+        id: "edit",
+        label: t("common.edit"),
+        icon: <Pencil />,
+        onSelect: () => setFormTarget({ category }),
+      },
       ...(!category.parent_id && !category.archived
         ? [
             {
               id: "sub",
               label: t("categories.addSub"),
               icon: <FolderPlus />,
-              onSelect: () => setFormTarget({ category: null, type: category.type, parentId: category.id }),
+              onSelect: () =>
+                setFormTarget({ category: null, type: category.type, parentId: category.id }),
             },
           ]
         : []),
@@ -90,7 +110,13 @@ export function CategoriesScreen() {
             icon: <Archive />,
             onSelect: () => mutations.setArchived.mutate({ id: category.id, archived: true, all }),
           },
-      { id: "delete", label: t("common.delete"), icon: <Trash2 />, tone: "danger", onSelect: () => void requestDelete(category) },
+      {
+        id: "delete",
+        label: t("common.delete"),
+        icon: <Trash2 />,
+        tone: "danger",
+        onSelect: () => void requestDelete(category),
+      },
     ];
   };
 
@@ -108,7 +134,9 @@ export function CategoriesScreen() {
         </div>
         <div className={styles.end}>
           <DropdownMenu
-            trigger={<IconButton label={t("common.actionsFor", { name })} icon={<MoreHorizontal />} />}
+            trigger={
+              <IconButton label={t("common.actionsFor", { name })} icon={<MoreHorizontal />} />
+            }
             items={menu(category)}
           />
         </div>
@@ -117,7 +145,10 @@ export function CategoriesScreen() {
   };
 
   const treeFor = (type: CategoryType) => {
-    const tree = buildCategoryTree(all.filter((c) => !c.archived), type);
+    const tree = buildCategoryTree(
+      all.filter((c) => !c.archived),
+      type,
+    );
     if (tree.length === 0) {
       return (
         <EmptyState
@@ -126,7 +157,11 @@ export function CategoriesScreen() {
           title={t("categories.empty.title")}
           description={t("categories.empty.text")}
           action={
-            <Button variant="primary" iconStart={<Plus />} onClick={() => setFormTarget({ category: null, type })}>
+            <Button
+              variant="primary"
+              iconStart={<Plus />}
+              onClick={() => setFormTarget({ category: null, type })}
+            >
               {t("categories.add")}
             </Button>
           }
@@ -137,7 +172,13 @@ export function CategoriesScreen() {
       <Card padding="none">
         <ul role="list" className={styles.list}>
           {tree.flatMap(({ category, children }) => [
-            row(category, false, children.length ? t("categories.subcategoryCount", { count: children.length }) : undefined),
+            row(
+              category,
+              false,
+              children.length
+                ? t("categories.subcategoryCount", { count: children.length })
+                : undefined,
+            ),
             ...children.map((child) => row(child, true)),
           ])}
         </ul>
@@ -153,13 +194,20 @@ export function CategoriesScreen() {
         title={t("categories.title")}
         description={t("categories.description")}
         actions={
-          <Button variant="primary" iconStart={<Plus />} onClick={() => setFormTarget({ category: null, type: tab })}>
+          <Button
+            variant="primary"
+            iconStart={<Plus />}
+            onClick={() => setFormTarget({ category: null, type: tab })}
+          >
             {t("categories.add")}
           </Button>
         }
       />
       {categories.isError ? (
-        <ErrorState description={errorMessage(categories.error)} onRetry={() => void categories.refetch()} />
+        <ErrorState
+          description={errorMessage(categories.error)}
+          onRetry={() => void categories.refetch()}
+        />
       ) : !categories.data ? (
         <Card padding="none">
           <ListSkeleton rows={6} />
@@ -201,7 +249,11 @@ export function CategoriesScreen() {
         confirmLabel={t("categories.archiveInstead.confirm")}
         onConfirm={async () => {
           if (archiveCandidate) {
-            await mutations.setArchived.mutateAsync({ id: archiveCandidate.category.id, archived: true, all });
+            await mutations.setArchived.mutateAsync({
+              id: archiveCandidate.category.id,
+              archived: true,
+              all,
+            });
           }
         }}
       />
