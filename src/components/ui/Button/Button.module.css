@@ -98,3 +98,8 @@
     min-block-size: var(--touch-target);
   }
 }
+
+/* A shortcut hint after the label (e.g. "Buchung erfassen ⌘N"). */
+.label > kbd {
+  margin-inline-start: var(--space-2);
+}
