@@ -7,7 +7,7 @@ import { announce, toast } from "@/components/ui";
 import { queryKeys } from "@/features/queryKeys";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 import type { Category, CategoryCreate, CategoryType, CategoryUpdate } from "./schemas";
-import { moveCategory, setCategoryArchived, softDeleteCategory } from "./service";
+import { categoryUsage, moveCategory, setCategoryArchived, softDeleteCategory } from "./service";
 import { withDescendants } from "./tree";
 
 /** All non-deleted categories (active and archived) in display order. */
@@ -24,6 +24,12 @@ export function useCategories(type?: CategoryType) {
   const query = useAllCategories();
   const data = query.data?.filter((c) => !c.archived && (!type || c.type === type));
   return { ...query, data } as typeof query;
+}
+
+/** Returns how many transactions/rules/budgets use a category incl. subcategories. */
+export function useCategoryUsageCheck() {
+  const repos = useRepositories();
+  return (all: Category[], id: string) => categoryUsage(repos, all, id);
 }
 
 export function useCategoryMutations() {

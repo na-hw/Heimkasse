@@ -8,7 +8,7 @@ import { queryKeys } from "@/features/queryKeys";
 import { useDataMutation } from "@/features/shared/useDataMutation";
 import { computeBalances } from "./balances";
 import type { Account, AccountCreate, AccountUpdate } from "./schemas";
-import { moveAccount } from "./service";
+import { accountUsage, moveAccount } from "./service";
 
 /** All non-deleted accounts in display order, split into active and archived. */
 export function useAccounts() {
@@ -32,6 +32,12 @@ export function useAccountBalances() {
       return computeBalances(accounts, transactions);
     },
   });
+}
+
+/** Returns how many transactions/rules use an account (for archive-instead-of-delete). */
+export function useAccountUsageCheck() {
+  const repos = useRepositories();
+  return (id: string) => accountUsage(repos, id);
 }
 
 export function useAccountMutations() {
