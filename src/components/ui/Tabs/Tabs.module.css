@@ -1,0 +1,71 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.list {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--touch-target);
+  padding-inline: var(--space-3);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.trigger svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.trigger[data-state="active"] {
+  color: var(--color-text);
+}
+
+.underline {
+  border-block-end: 1px solid var(--color-border);
+}
+
+.underline .trigger {
+  margin-block-end: -1px;
+  border-block-end: 2px solid transparent;
+}
+
+.underline .trigger[data-state="active"] {
+  border-block-end-color: var(--color-primary);
+}
+
+.segmented {
+  align-self: flex-start;
+  padding: 3px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+}
+
+.segmented .trigger {
+  min-block-size: 36px;
+  border-radius: calc(var(--radius-md) - 3px);
+}
+
+.segmented .trigger[data-state="active"] {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (pointer: coarse) {
+  .segmented .trigger {
+    min-block-size: var(--touch-target);
+  }
+}
+
+.content:focus-visible {
+  outline-offset: 4px;
+}
