@@ -32,6 +32,7 @@ export * from "./Select";
 export * from "./Sheet";
 export * from "./Skeleton";
 export * from "./Spinner";
+export * from "./StatCard";
 export * from "./Switch";
 export * from "./Tabs";
 export * from "./Textarea";
