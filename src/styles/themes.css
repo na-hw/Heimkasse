@@ -48,6 +48,20 @@
 
   --color-focus-ring: #2a7fff;
 
+  /* Swatches for user colors (accounts, categories, goals); AA on surface */
+  --swatch-teal: #17695a;
+  --swatch-green: #2f7034;
+  --swatch-olive: #5f6a12;
+  --swatch-amber: #8a5a00;
+  --swatch-orange: #b04a0e;
+  --swatch-red: #b4302b;
+  --swatch-pink: #b02a68;
+  --swatch-purple: #7b3fb0;
+  --swatch-indigo: #4a4fc4;
+  --swatch-blue: #1f62b8;
+  --swatch-cyan: #0f6b80;
+  --swatch-gray: #59625e;
+
   /* Charts: categorical palette, distinguishable in both themes */
   --chart-1: #1d6b58;
   --chart-2: #3b6fd6;
@@ -100,7 +114,31 @@
     --color-info: #82b6f2;
     --color-info-soft: #172840;
     --color-focus-ring: #7fb2ff;
-    --chart-1: #5cc2a4;
+    --swatch-teal: #5cc8b1;
+    --swatch-green: #7bd27f;
+    --swatch-olive: #c1cf62;
+    --swatch-amber: #f0b64c;
+    --swatch-orange: #f59a5c;
+    --swatch-red: #ff8a80;
+    --swatch-pink: #f48bbd;
+    --swatch-purple: #c79af0;
+    --swatch-indigo: #a3a8ff;
+    --swatch-blue: #82b4f5;
+    --swatch-cyan: #5fcbe0;
+    --swatch-gray: #a7b0ab;
+    --swatch-teal: #5cc8b1;
+  --swatch-green: #7bd27f;
+  --swatch-olive: #c1cf62;
+  --swatch-amber: #f0b64c;
+  --swatch-orange: #f59a5c;
+  --swatch-red: #ff8a80;
+  --swatch-pink: #f48bbd;
+  --swatch-purple: #c79af0;
+  --swatch-indigo: #a3a8ff;
+  --swatch-blue: #82b4f5;
+  --swatch-cyan: #5fcbe0;
+  --swatch-gray: #a7b0ab;
+  --chart-1: #5cc2a4;
     --chart-2: #7ea6ff;
     --chart-3: #f0a35a;
     --chart-4: #c79af0;
