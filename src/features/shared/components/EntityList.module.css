@@ -34,6 +34,9 @@
 /* Block (not flex) so the ellipsis also applies to the plain text node. */
 .title {
   font-weight: var(--font-weight-semibold);
+  /* User text ("Telekom GmbH" in the Persian UI) gets its own direction, so it is cut at its end. */
+  unicode-bidi: plaintext;
+  text-align: match-parent;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -42,6 +45,11 @@
 .title > * {
   margin-inline-start: var(--space-2);
   vertical-align: middle;
+}
+
+/* Icons are block-level by default (globals.css), which would break the line. */
+.title > svg {
+  display: inline-block;
 }
 
 .meta {
