@@ -28,7 +28,10 @@ export async function addExpense(page: Page, amount: string, payee: string, cate
   await dialog.getByLabel("Betrag").fill(amount);
   if (category) {
     await dialog.getByRole("combobox", { name: "Kategorie" }).click();
-    await page.getByRole("option", { name: category, exact: true }).click();
+    const option = page.getByRole("option", { name: category, exact: true });
+    // Enabled options must not look disabled (cmdk sets data-disabled="false").
+    await expect(option).not.toHaveCSS("cursor", "not-allowed");
+    await option.click();
   }
   await dialog.getByLabel("Empfänger / Zahler").fill(payee);
   await page.getByRole("button", { name: "Speichern", exact: true }).click();
