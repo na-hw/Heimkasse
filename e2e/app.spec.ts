@@ -6,7 +6,7 @@ test.describe("app shell", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "fa");
     await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.getByText("دسته‌بندی‌ها", { exact: true })).toBeVisible();
+    await expect(page.locator("#main").getByText("دسته‌بندی‌ها", { exact: true })).toBeVisible();
     // 24 built-in categories, shown with Persian digits.
     await expect(page.getByText("۲۴", { exact: true })).toBeVisible();
   });
@@ -35,6 +35,8 @@ test.describe("app shell", () => {
     await page.getByRole("radio", { name: "تیره" }).click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     await page.getByRole("radio", { name: "لاتین (123)" }).click();
+    // Wait until the change is persisted (announced via the live region) before reloading.
+    await expect(page.getByRole("status").filter({ hasText: "تنظیمات ذخیره شد" })).toBeAttached();
     await page.goto("/");
     await expect(page.getByText("24", { exact: true })).toBeVisible();
   });
@@ -48,6 +50,11 @@ test.describe("app shell", () => {
     await page.keyboard.press("Enter");
     await expect(page.locator("#main")).toBeFocused();
   });
+});
+
+test("labels the notification region in the UI language", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("region", { name: "اعلان‌ها (F8)" })).toBeAttached();
 });
 
 test.describe("command palette", () => {
