@@ -1,0 +1,66 @@
+.trigger {
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.panel {
+  inline-size: max(var(--radix-popover-trigger-width), 16rem);
+  max-block-size: none;
+  padding: 0;
+}
+
+.command {
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  min-block-size: var(--touch-target);
+  padding-inline: var(--space-3);
+  border: none;
+  border-block-end: 1px solid var(--color-border);
+  background: transparent;
+  outline: none;
+}
+
+.list {
+  max-block-size: min(18rem, 50dvh);
+  overflow-y: auto;
+  padding: var(--space-1);
+}
+
+.group :global([cmdk-group-heading]) {
+  padding-inline: var(--space-3);
+  padding-block: var(--space-2) var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.label {
+  flex: 1;
+}
+
+.check {
+  color: var(--color-primary);
+}
+
+.empty {
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--color-text-muted);
+}
