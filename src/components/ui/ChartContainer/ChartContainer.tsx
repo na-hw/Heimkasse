@@ -33,7 +33,7 @@ export interface ChartContainerProps<R> {
 /**
  * Chart card with a Chart/Table switch. The data table is always present
  * for assistive technology (visually hidden in chart view), so every chart
- * has an accessible equivalent.
+ * has an accessible equivalent. The chart itself is `inert`.
  */
 export function ChartContainer<R>({
   title,
@@ -49,39 +49,43 @@ export function ChartContainer<R>({
   const { t } = useTranslation();
   const [view, setView] = useState<"chart" | "table">(defaultView);
 
-  const table = (
-    <div className={styles.tableScroll}>
-      <table className={styles.table}>
-        <caption className="visually-hidden">{title}</caption>
-        <thead>
-          <tr>
-            {columns.map((c) => (
-              <th key={c.key} scope="col" className={styles[c.align ?? "start"]}>
-                {c.header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, i) => (
-            <tr key={i}>
-              {columns.map((c, j) => {
-                const value = row[c.key];
-                const content = c.format ? c.format(value, row) : String(value);
-                return j === 0 ? (
-                  <th key={c.key} scope="row" className={styles[c.align ?? "start"]}>
-                    {content}
-                  </th>
-                ) : (
-                  <td key={c.key} className={styles[c.align ?? "start"]}>
-                    {content}
-                  </td>
-                );
-              })}
-            </tr>
+  const tableElement = (
+    <table className={styles.table}>
+      <caption className="visually-hidden">{title}</caption>
+      <thead>
+        <tr>
+          {columns.map((c) => (
+            <th key={c.key} scope="col" className={styles[c.align ?? "start"]}>
+              {c.header}
+            </th>
           ))}
-        </tbody>
-      </table>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((row, i) => (
+          <tr key={i}>
+            {columns.map((c, j) => {
+              const value = row[c.key];
+              const content = c.format ? c.format(value, row) : String(value);
+              return j === 0 ? (
+                <th key={c.key} scope="row" className={styles[c.align ?? "start"]}>
+                  {content}
+                </th>
+              ) : (
+                <td key={c.key} className={styles[c.align ?? "start"]}>
+                  {content}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+  // Visible table: keyboard-scrollable region. Hidden (chart view): plain table for screen readers.
+  const table = (
+    <div className={styles.tableScroll} role="region" aria-label={title} tabIndex={0}>
+      {tableElement}
     </div>
   );
 
@@ -99,10 +103,11 @@ export function ChartContainer<R>({
             icon: <ChartColumnBig />,
             content: (
               <>
-                <div className={styles.chart} style={{ blockSize: height }} aria-hidden="true">
+                {/* inert: purely visual (not focusable, hidden from AT); the table is the equivalent. */}
+                <div className={styles.chart} style={{ blockSize: height }} inert>
                   {children}
                 </div>
-                <div className="visually-hidden">{table}</div>
+                <div className="visually-hidden">{tableElement}</div>
               </>
             ),
           },
