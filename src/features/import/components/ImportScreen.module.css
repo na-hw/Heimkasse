@@ -149,6 +149,7 @@
 }
 
 .candidates {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -205,7 +206,8 @@
   text-align: end;
 }
 
-@media (max-width: 767px) {
+/* Depends on the list's own width (the sidebar narrows it on tablets), not the viewport. */
+@container (max-width: 40rem) {
   .candidate {
     grid-template-columns: auto minmax(0, 1fr) auto;
   }
