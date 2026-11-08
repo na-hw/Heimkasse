@@ -12,8 +12,8 @@ Read it before starting a phase.** Decisions below override the brief where they
 | --------------------------------------------------------------- | ------- |
 | 1 Foundation                                                    | ✅ done |
 | 2 Core (accounts, categories, transactions, recurring, trash)   | ✅ done |
-| 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ⏳ next |
-| 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | open    |
+| 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ✅ done |
+| 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | ⏳ next |
 | 5 Data (CSV import, attachments, backup, delete all, app lock)  | open    |
 | 6 Polish (a11y audit, performance, coverage, build, README)     | open    |
 
@@ -43,7 +43,16 @@ Update this table when a phase is finished.
 - `settings` rows have a UUID `id` plus a unique `key`; values are JSON.
 - Writes in Tauri go through the custom Rust command `db_batch` (one SQLite transaction), because tauri-plugin-sql's
   pool cannot guarantee BEGIN/COMMIT across calls. Reads use the plugin.
-- Mobile bottom nav: 4 destinations + "More" sheet; floating "+" quick add.
+- Mobile bottom nav: 4 destinations (Übersicht, Buchungen, Budgets, Berichte) + "More" sheet; floating "+" quick add.
+- Dashboard "this month" and budgets use the **budget month** (`budgetMonthStartDay`); reports use calendar
+  months/years. Budgets count the category incl. subcategories; one budget per expense category.
+- Budget alerts: toast at the threshold and at 100 %, once per budget/period/level; bookkeeping in the settings row
+  `budget_alerts` (`SettingsRepository.getValue/setValue` for internal non-preference values).
+- Exports: CSV in German spreadsheet format (`;`, decimal comma, `dd.mm.yyyy`, UTF-8 BOM, formula-injection safe).
+  PDF = own minimal writer (`lib/export/pdf.ts`) with canvas-rendered A4 pages (correct Persian shaping/RTL offline;
+  text is not selectable). Export content is a format-neutral `ExportDocument`. Desktop saves via
+  tauri-plugin-dialog (save) + tauri-plugin-fs (`write-file`, scope = path picked in the dialog); browser downloads.
+- Contract cancellation deadlines on the dashboard come with Phase 4 (contracts).
 
 ## Architecture (where things live)
 
@@ -60,7 +69,10 @@ Update this table when a phase is finished.
   All numbers/money/dates via `useFormat()` (Intl). Money parsing in `parse.ts`.
 - `src/components/ui/`: design system (Radix + CSS Modules); `src/components/layout/`: shell, nav (`navigation.ts` is the
   single nav source), command palette.
-- Global overlays (quick add, recurring auto-runner) are composed in `src/app/layout.tsx` via `AppShell overlays`.
+- Insights: pure aggregations in `features/reports/aggregate.ts`, `features/budgets/status.ts`,
+  `features/overview/dashboard.ts`, periods in `lib/utils/period.ts`. Charts (Recharts) live in
+  `features/reports/components/charts/` and are lazy-loaded; always wrap them in `ChartContainer` (table fallback).
+- Global overlays (quick add, recurring auto-runner, budget alert watcher) are composed in `src/app/layout.tsx` via `AppShell overlays`.
 
 ## Conventions
 
