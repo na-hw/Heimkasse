@@ -6,8 +6,9 @@
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2) var(--space-3);
   min-block-size: 64px;
   padding-block: var(--space-2);
   padding-inline: var(--space-4) var(--space-2);
@@ -22,21 +23,25 @@
   padding-inline-start: calc(var(--space-4) + 40px + var(--space-3));
 }
 
+/* The text keeps at least 8rem; if the end actions need more, they wrap below instead. */
 .main {
   display: flex;
-  flex: 1;
+  flex: 1 1 8rem;
   flex-direction: column;
   min-inline-size: 0;
 }
 
+/* Block (not flex) so the ellipsis also applies to the plain text node. */
 .title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
   font-weight: var(--font-weight-semibold);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.title > * {
+  margin-inline-start: var(--space-2);
+  vertical-align: middle;
 }
 
 .meta {
@@ -49,9 +54,13 @@
 
 .end {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: var(--space-1);
   flex-shrink: 0;
+  max-inline-size: 100%;
+  margin-inline-start: auto;
 }
 
 .sectionTitle {
