@@ -45,6 +45,9 @@ describe("formatMoney", () => {
     expect(formatMoney(4500, de, { signDisplay: "always" })).toBe(`+45,00${NBSP}€`);
     expect(formatMoney(4500, de, { hideCurrency: true })).toBe("45,00");
   });
+  it("rounds to whole units on request", () => {
+    expect(formatMoney(123456, de, { wholeUnits: true })).toBe(`1.235${NBSP}€`);
+  });
   it("uses the configured currency symbol", () => {
     expect(formatMoney(100, { ...de, currency: "USD" })).toBe(`1,00${NBSP}$`);
   });

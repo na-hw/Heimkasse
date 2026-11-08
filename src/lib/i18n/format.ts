@@ -35,6 +35,8 @@ export interface MoneyFormatOptions {
   signDisplay?: SignDisplay;
   /** Hide the currency symbol (e.g. inside an input with a currency suffix). */
   hideCurrency?: boolean;
+  /** Round to whole currency units (chart axes, compact summaries). */
+  wholeUnits?: boolean;
 }
 
 /** Returns the currency symbol as Germans write it (e.g. "€", "$", "CHF"). */
@@ -53,9 +55,10 @@ export function formatMoney(
   options: MoneyFormatOptions = {},
 ): string {
   const locale = toIntlLocale(ctx);
+  const decimals = options.wholeUnits ? 0 : 2;
   const number = numberFormat(locale, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
     signDisplay: options.signDisplay ?? "auto",
   }).format(cents / 100);
   if (options.hideCurrency) return number;
@@ -88,7 +91,14 @@ export function formatPercent(
 }
 
 export type DateStyle =
-  "short" | "medium" | "long" | "full" | "monthYear" | "dayMonth" | "weekdayShort";
+  | "short"
+  | "medium"
+  | "long"
+  | "full"
+  | "monthYear"
+  | "monthShortYear"
+  | "dayMonth"
+  | "weekdayShort";
 
 const DATE_STYLES: Record<DateStyle, Intl.DateTimeFormatOptions> = {
   short: { dateStyle: "short" },
@@ -96,6 +106,7 @@ const DATE_STYLES: Record<DateStyle, Intl.DateTimeFormatOptions> = {
   long: { dateStyle: "long" },
   full: { dateStyle: "full" },
   monthYear: { month: "long", year: "numeric" },
+  monthShortYear: { month: "short", year: "2-digit" },
   dayMonth: { day: "numeric", month: "short" },
   weekdayShort: { weekday: "short" },
 };
