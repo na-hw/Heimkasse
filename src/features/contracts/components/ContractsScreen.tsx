@@ -5,6 +5,7 @@ import {
   CalendarX2,
   FileText,
   Link2,
+  Paperclip,
   MoreHorizontal,
   Pencil,
   Plus,
@@ -27,6 +28,11 @@ import {
   PageHeader,
   StatCard,
 } from "@/components/ui";
+import {
+  AttachmentsDialog,
+  type AttachmentsTarget,
+} from "@/features/attachments/components/AttachmentsDialog";
+import { useAttachmentCounts } from "@/features/attachments/hooks";
 import { useCategoryLookup } from "@/features/categories/hooks";
 import { ListSkeleton } from "@/features/shared/components/ListSkeleton";
 import styles from "@/features/shared/components/EntityList.module.css";
@@ -52,6 +58,8 @@ export function ContractsScreen() {
   const mutations = useContractMutations();
   const [target, setTarget] = useState<{ contract: Contract | null } | null>(null);
   const [cancelling, setCancelling] = useState<ContractView | null>(null);
+  const [attachmentsFor, setAttachmentsFor] = useState<AttachmentsTarget | null>(null);
+  const attachmentCounts = useAttachmentCounts("contract");
   const data = contracts.data;
 
   const addButton = (
@@ -80,6 +88,17 @@ export function ContractsScreen() {
           icon: <RotateCcw />,
           onSelect: () => mutations.reactivate.mutate(view.contract),
         },
+    {
+      id: "attachments",
+      label: t("attachments.menu"),
+      icon: <Paperclip />,
+      onSelect: () =>
+        setAttachmentsFor({
+          entityType: "contract",
+          entityId: view.contract.id,
+          title: view.contract.name,
+        }),
+    },
     { type: "separator", id: "sep" },
     {
       id: "delete",
@@ -109,6 +128,15 @@ export function ContractsScreen() {
                   <Link2
                     size={16}
                     aria-label={t("contracts.linkedPayment")}
+                    className={screen.linkIcon}
+                  />
+                )}
+                {(attachmentCounts.get(contract.id) ?? 0) > 0 && (
+                  <Paperclip
+                    size={16}
+                    aria-label={t("attachments.count", {
+                      count: attachmentCounts.get(contract.id) ?? 0,
+                    })}
                     className={screen.linkIcon}
                   />
                 )}
@@ -221,6 +249,7 @@ export function ContractsScreen() {
       )}
       <ContractFormDialog target={target} onClose={() => setTarget(null)} />
       <CancelContractDialog view={cancelling} onClose={() => setCancelling(null)} />
+      <AttachmentsDialog target={attachmentsFor} onClose={() => setAttachmentsFor(null)} />
     </>
   );
 }

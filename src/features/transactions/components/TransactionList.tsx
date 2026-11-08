@@ -24,6 +24,8 @@ interface TransactionListProps {
   onEdit: (tx: Transaction) => void;
   onDuplicate: (tx: Transaction) => void;
   onDelete: (tx: Transaction) => void;
+  attachmentCounts: ReadonlyMap<string, number>;
+  onAttachments: (tx: Transaction, title: string) => void;
 }
 
 /**
@@ -113,6 +115,8 @@ export function TransactionList({
                 onEdit={rowProps.onEdit}
                 onDuplicate={rowProps.onDuplicate}
                 onDelete={rowProps.onDelete}
+                attachmentCount={rowProps.attachmentCounts.get(item.tx.id) ?? 0}
+                onAttachments={rowProps.onAttachments}
               />
             )}
           </div>

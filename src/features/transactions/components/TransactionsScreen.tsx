@@ -1,6 +1,15 @@
 "use client";
 
-import { ListChecks, Plus, Receipt, Search, SearchX, SlidersHorizontal } from "lucide-react";
+import {
+  ListChecks,
+  Plus,
+  Receipt,
+  Search,
+  SearchX,
+  SlidersHorizontal,
+  Upload,
+} from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,6 +26,11 @@ import {
   announce,
 } from "@/components/ui";
 import { useAccounts } from "@/features/accounts/hooks";
+import {
+  AttachmentsDialog,
+  type AttachmentsTarget,
+} from "@/features/attachments/components/AttachmentsDialog";
+import { useAttachmentCounts } from "@/features/attachments/hooks";
 import { useAllCategories } from "@/features/categories/hooks";
 import { ListSkeleton } from "@/features/shared/components/ListSkeleton";
 import { useErrorMessage } from "@/lib/errors/useErrorMessage";
@@ -51,6 +65,8 @@ export function TransactionsScreen() {
   const [selectMode, setSelectMode] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [changeOpen, setChangeOpen] = useState(false);
+  const [attachmentsFor, setAttachmentsFor] = useState<AttachmentsTarget | null>(null);
+  const attachmentCounts = useAttachmentCounts("transaction");
   const activeFilters = countActiveFilters(filters);
   const transactions = useMemo(() => list.data ?? [], [list.data]);
 
@@ -142,6 +158,10 @@ export function TransactionsScreen() {
         onEdit={editor.openEdit}
         onDuplicate={editor.openDuplicate}
         onDelete={(tx: Transaction) => remove.mutate([tx.id])}
+        attachmentCounts={attachmentCounts}
+        onAttachments={(tx: Transaction, title: string) =>
+          setAttachmentsFor({ entityType: "transaction", entityId: tx.id, title })
+        }
       />
     );
   };
@@ -156,6 +176,9 @@ export function TransactionsScreen() {
             {hasAccounts && (
               <TransactionsExportMenu transactions={transactions} isFiltered={isFiltered} />
             )}
+            <Button asChild iconStart={<Upload />}>
+              <Link href="/import/">{t("import.action")}</Link>
+            </Button>
             <Button
               variant="primary"
               iconStart={<Plus />}
@@ -245,6 +268,7 @@ export function TransactionsScreen() {
           onClear={endSelection}
         />
       )}
+      <AttachmentsDialog target={attachmentsFor} onClose={() => setAttachmentsFor(null)} />
       <ChangeCategoryDialog
         open={changeOpen}
         count={selected.size}

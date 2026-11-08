@@ -1270,6 +1270,31 @@
       "created": "Regel angelegt",
       "saved": "Regel gespeichert",
       "deleted": "Regel gelöscht"
+    },
+    "action": "Importieren"
+  },
+  "attachments": {
+    "menu": "Belege",
+    "title": "Belege: {{name}}",
+    "hint": "Bilder (JPG, PNG, WebP, HEIC) und PDF bis 20 MB. Sie bleiben lokal auf diesem Gerät.",
+    "add": "Beleg hinzufügen",
+    "listLabel": "Belege",
+    "preview": "{{name}} ansehen",
+    "backToList": "Zurück zur Liste",
+    "save": "{{name}} speichern",
+    "delete": "{{name}} löschen",
+    "count_one": "{{count}} Beleg",
+    "count_other": "{{count}} Belege",
+    "added_one": "Beleg hinzugefügt",
+    "added_other": "{{count}} Belege hinzugefügt",
+    "deleted": "{{name}} gelöscht",
+    "rejected": {
+      "type": "Dateityp nicht unterstützt (nur Bilder und PDF)",
+      "size": "Datei ist größer als 20 MB"
+    },
+    "empty": {
+      "title": "Noch keine Belege",
+      "text": "Hänge Kassenbons, Rechnungen oder Vertragsunterlagen an."
     }
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, MoreHorizontal, Pencil, Repeat, Trash2 } from "lucide-react";
+import { Copy, MoreHorizontal, Paperclip, Pencil, Repeat, Trash2 } from "lucide-react";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Amount, Badge, CategoryIcon, Checkbox, DropdownMenu, IconButton } from "@/components/ui";
@@ -23,6 +23,9 @@ export interface TransactionRowProps {
   onEdit: (tx: Transaction) => void;
   onDuplicate: (tx: Transaction) => void;
   onDelete: (tx: Transaction) => void;
+  /** Number of receipts attached to this transaction. */
+  attachmentCount: number;
+  onAttachments: (tx: Transaction, title: string) => void;
 }
 
 /** One transaction: icon, title, meta, amount (with sign + screen-reader text) and actions. */
@@ -37,6 +40,8 @@ export const TransactionRow = memo(function TransactionRow({
   onEdit,
   onDuplicate,
   onDelete,
+  attachmentCount,
+  onAttachments,
 }: TransactionRowProps) {
   const { t } = useTranslation();
   const format = useFormat();
@@ -73,11 +78,16 @@ export const TransactionRow = memo(function TransactionRow({
         type="button"
         className={styles.rowButton}
         onClick={() => (selectMode ? onToggle(tx.id) : onEdit(tx))}
-        aria-label={t("transactions.rowSummary", {
-          title,
-          amount: format.money(signed, { signDisplay: isTransfer ? "auto" : "exceptZero" }),
-          date: format.date(tx.date, "medium"),
-        })}
+        aria-label={[
+          t("transactions.rowSummary", {
+            title,
+            amount: format.money(signed, { signDisplay: isTransfer ? "auto" : "exceptZero" }),
+            date: format.date(tx.date, "medium"),
+          }),
+          attachmentCount > 0 ? t("attachments.count", { count: attachmentCount }) : null,
+        ]
+          .filter(Boolean)
+          .join(", ")}
       >
         {isTransfer ? (
           <CategoryIcon icon="repeat" color="gray" />
@@ -89,6 +99,9 @@ export const TransactionRow = memo(function TransactionRow({
             {title}
             {tx.recurring_rule_id && (
               <Repeat size={14} aria-hidden="true" className={styles.recurringIcon} />
+            )}
+            {attachmentCount > 0 && (
+              <Paperclip size={14} aria-hidden="true" className={styles.recurringIcon} />
             )}
           </span>
           <span className={styles.meta}>{meta}</span>
@@ -124,6 +137,12 @@ export const TransactionRow = memo(function TransactionRow({
               label: t("common.duplicate"),
               icon: <Copy />,
               onSelect: () => onDuplicate(tx),
+            },
+            {
+              id: "attachments",
+              label: t("attachments.menu"),
+              icon: <Paperclip />,
+              onSelect: () => onAttachments(tx, title),
             },
             { type: "separator", id: "sep" },
             {
