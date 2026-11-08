@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { BudgetAlertWatcher } from "@/features/budgets/components/BudgetAlertWatcher";
+import { ContractReminderWatcher } from "@/features/contracts/components/ContractReminderWatcher";
 import { RecurringAutoRunner } from "@/features/recurring/components/RecurringAutoRunner";
 import { QuickAddHost } from "@/features/transactions/components/QuickAddHost";
 import { BOOT_SCRIPT } from "@/lib/preferences/bootCache";
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <QuickAddHost />
                 <RecurringAutoRunner />
                 <BudgetAlertWatcher />
+                <ContractReminderWatcher />
               </>
             }
           >
