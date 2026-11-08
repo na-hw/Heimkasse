@@ -22,9 +22,9 @@ npm install
 | Command                   | What it does                                                               |
 | ------------------------- | -------------------------------------------------------------------------- |
 | `npm run dev`             | Browser version → http://localhost:3000 (data in IndexedDB)                |
-| `npm run tauri:dev`       | Desktop window with hot reload (data in SQLite `heimkasse.db`)                 |
+| `npm run tauri:dev`       | Desktop window with hot reload (data in SQLite `heimkasse.db`)             |
 | `npm run build`           | Static export of the frontend to `out/`                                    |
-| `npm run tauri:build:mac` | macOS app → `src-tauri/target/release/bundle/macos/Heimkasse.app`              |
+| `npm run tauri:build:mac` | macOS app → `src-tauri/target/release/bundle/macos/Heimkasse.app`          |
 | `npm run tauri:build`     | All bundle targets for the current OS (`.app` + `.dmg` on macOS)           |
 | `npm run check`           | Typecheck + ESLint + unit tests                                            |
 | `npm run typecheck`       | TypeScript only                                                            |
