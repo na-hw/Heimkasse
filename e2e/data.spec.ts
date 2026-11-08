@@ -103,6 +103,8 @@ test.describe("data management", () => {
 
     await dialog.getByRole("button", { name: "kassenbon.png löschen" }).click();
     await expect(dialog.getByText("Noch keine Belege")).toBeVisible();
+    // Focus stays inside the dialog after the focused delete button disappeared.
+    await expect(dialog.locator(":focus")).toHaveCount(1);
     await dialog.getByRole("button", { name: "Schließen" }).click();
     await expect(dialog).toBeHidden();
     await expect(page.getByRole("button", { name: /^Baumarkt .*-12,50/ })).toBeVisible();

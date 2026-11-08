@@ -1,7 +1,7 @@
 "use client";
 
 import { Download, FileText, Paperclip, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -86,6 +86,9 @@ export function AttachmentsDialog({
   const attachments = useAttachments(target?.entityType ?? "transaction", target?.entityId ?? null);
   const { add, addFiles, remove, download } = useAttachmentMutations();
   const [previewId, setPreviewId] = useState<string | null>(null);
+  /** Receives focus when the focused control disappears (delete, closing the preview). */
+  const contentRef = useRef<HTMLDivElement>(null);
+  const keepFocus = () => contentRef.current?.focus();
   const preview = attachments.data.find((a) => a.id === previewId);
 
   const picker = target && (
@@ -112,51 +115,62 @@ export function AttachmentsDialog({
       title={t("attachments.title", { name: target?.title ?? "" })}
       description={t("attachments.hint")}
     >
-      {preview ? (
-        <Preview attachment={preview} onClose={() => setPreviewId(null)} />
-      ) : attachments.isError ? (
-        <ErrorState
-          description={errorMessage(attachments.error)}
-          onRetry={() => void attachments.refetch()}
-        />
-      ) : attachments.isPending ? (
-        <Skeleton height="4rem" />
-      ) : attachments.data.length === 0 ? (
-        <EmptyState
-          headingLevel={3}
-          icon={<Paperclip />}
-          title={t("attachments.empty.title")}
-          description={t("attachments.empty.text")}
-          action={picker}
-        />
-      ) : (
-        <div className={styles.body}>
-          <ul className={styles.list} aria-label={t("attachments.listLabel")}>
-            {attachments.data.map((a) => (
-              <li key={a.id} className={styles.item}>
-                <Thumbnail attachment={a} onOpen={() => setPreviewId(a.id)} />
-                <div className={styles.text}>
-                  <span className={styles.name}>{a.file_name}</span>
-                  <span className={styles.meta}>
-                    {format.fileSize(a.size_bytes)} · {format.date(a.created_at.slice(0, 10))}
-                  </span>
-                </div>
-                <IconButton
-                  label={t("attachments.save", { name: a.file_name })}
-                  icon={<Download />}
-                  onClick={() => void download(a)}
-                />
-                <IconButton
-                  label={t("attachments.delete", { name: a.file_name })}
-                  icon={<Trash2 />}
-                  onClick={() => remove.mutate(a)}
-                />
-              </li>
-            ))}
-          </ul>
-          <div>{picker}</div>
-        </div>
-      )}
+      <div ref={contentRef} tabIndex={-1} className={styles.content}>
+        {preview ? (
+          <Preview
+            attachment={preview}
+            onClose={() => {
+              setPreviewId(null);
+              keepFocus();
+            }}
+          />
+        ) : attachments.isError ? (
+          <ErrorState
+            description={errorMessage(attachments.error)}
+            onRetry={() => void attachments.refetch()}
+          />
+        ) : attachments.isPending ? (
+          <Skeleton height="4rem" />
+        ) : attachments.data.length === 0 ? (
+          <EmptyState
+            headingLevel={3}
+            icon={<Paperclip />}
+            title={t("attachments.empty.title")}
+            description={t("attachments.empty.text")}
+            action={picker}
+          />
+        ) : (
+          <div className={styles.body}>
+            <ul className={styles.list} aria-label={t("attachments.listLabel")}>
+              {attachments.data.map((a) => (
+                <li key={a.id} className={styles.item}>
+                  <Thumbnail attachment={a} onOpen={() => setPreviewId(a.id)} />
+                  <div className={styles.text}>
+                    <span className={styles.name}>{a.file_name}</span>
+                    <span className={styles.meta}>
+                      {format.fileSize(a.size_bytes)} · {format.date(a.created_at.slice(0, 10))}
+                    </span>
+                  </div>
+                  <IconButton
+                    label={t("attachments.save", { name: a.file_name })}
+                    icon={<Download />}
+                    onClick={() => void download(a)}
+                  />
+                  <IconButton
+                    label={t("attachments.delete", { name: a.file_name })}
+                    icon={<Trash2 />}
+                    onClick={() => {
+                      remove.mutate(a);
+                      keepFocus();
+                    }}
+                  />
+                </li>
+              ))}
+            </ul>
+            <div>{picker}</div>
+          </div>
+        )}
+      </div>
     </Dialog>
   );
 }

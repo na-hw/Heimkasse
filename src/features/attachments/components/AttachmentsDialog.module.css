@@ -1,3 +1,7 @@
+.content:focus {
+  outline: none;
+}
+
 .body {
   display: flex;
   flex-direction: column;
