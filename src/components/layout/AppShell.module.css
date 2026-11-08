@@ -43,7 +43,9 @@
   inline-size: 100%;
   max-inline-size: var(--content-max-width);
   margin-inline: auto;
-  padding-block: var(--space-5) calc(var(--bottom-nav-height) + var(--space-6) + var(--safe-bottom));
+  /* Room for the bottom nav and the FAB, so the last row's actions are not covered. */
+  padding-block: var(--space-5)
+    calc(var(--bottom-nav-height) + var(--fab-size) + var(--space-6) + var(--safe-bottom));
   padding-inline: max(var(--space-4), var(--safe-start)) max(var(--space-4), var(--safe-end));
 }
 
