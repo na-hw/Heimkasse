@@ -1,0 +1,19 @@
+.content {
+  z-index: var(--z-tooltip);
+  max-inline-size: 18rem;
+  padding-block: var(--space-1);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn var(--duration-fast) var(--easing-standard);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
