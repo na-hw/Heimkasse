@@ -1,0 +1,22 @@
+.splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-block-size: 100dvh;
+  color: var(--color-primary);
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  inline-size: 64px;
+  block-size: 64px;
+  border-radius: var(--radius-xl);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-persian);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
