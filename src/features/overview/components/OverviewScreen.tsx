@@ -11,6 +11,7 @@ import { useDocumentTitle } from "@/lib/utils/useDocumentTitle";
 import { greetingKey } from "../greeting";
 import { useDashboard } from "../hooks";
 import { BudgetStatusCard } from "./BudgetStatusCard";
+import { ContractDeadlinesCard } from "./ContractDeadlinesCard";
 import { DashboardKpis } from "./DashboardKpis";
 import { TopCategoriesCard } from "./TopCategoriesCard";
 import { UpcomingPaymentsCard } from "./UpcomingPaymentsCard";
@@ -63,6 +64,7 @@ export function OverviewScreen() {
           <div className={styles.columns}>
             <BudgetStatusCard />
             {data && <UpcomingPaymentsCard items={data.upcoming} />}
+            <ContractDeadlinesCard />
           </div>
           {data && <TopCategoriesCard items={data.topCategories} />}
         </div>
