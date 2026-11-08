@@ -107,3 +107,7 @@ export function buildUpdate(table: TableDef, id: string, patch: DomainRow): SqlS
 export function buildDelete(table: TableDef, id: string): SqlStatement {
   return { sql: `DELETE FROM ${quoteIdent(table.name)} WHERE "id" = ?`, params: [id] };
 }
+
+export function buildClear(table: TableDef): SqlStatement {
+  return { sql: `DELETE FROM ${quoteIdent(table.name)}`, params: [] };
+}

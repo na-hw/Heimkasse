@@ -56,7 +56,9 @@ export interface Query {
 export type WriteOp =
   | { type: "insert"; table: string; row: DomainRow; onConflict?: "abort" | "ignore" }
   | { type: "update"; table: string; id: string; patch: DomainRow }
-  | { type: "delete"; table: string; id: string };
+  | { type: "delete"; table: string; id: string }
+  /** Removes every row of a table (restore backup, delete all data). */
+  | { type: "clear"; table: string };
 
 export type StorageKind = "sqlite" | "indexeddb";
 

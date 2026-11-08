@@ -150,6 +150,13 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
     expect(await repos.accounts.get(entity.id)).toBeNull();
   });
 
+  it("clears a table and refills it in the same batch", async () => {
+    await repos.accounts.create({ name: "Old", type: "bank" });
+    const fresh = repos.accounts.prepareCreate({ name: "New", type: "bank" });
+    await storage.write([{ type: "clear", table: "accounts" }, fresh.op]);
+    expect((await repos.accounts.list({ deleted: "include" })).map((a) => a.name)).toEqual(["New"]);
+  });
+
   it("throws not_found for missing entities", async () => {
     await expect(
       repos.accounts.getOrThrow("00000000-0000-4000-8000-000000000000"),

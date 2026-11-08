@@ -2,7 +2,13 @@ import { AppError } from "@/lib/errors/AppError";
 import type { Migration } from "../../migrations";
 import { schemaAt } from "../../schema";
 import { addColumnSql, createIndexSql, createTableSql } from "../../sql/ddl";
-import { type SqlStatement, buildInsert, buildUpdate, buildDelete } from "../../sql/sqlBuilder";
+import {
+  type SqlStatement,
+  buildClear,
+  buildDelete,
+  buildInsert,
+  buildUpdate,
+} from "../../sql/sqlBuilder";
 import type { WriteOp } from "../../types";
 import type { SqlExecutor } from "./SqlExecutor";
 
@@ -25,6 +31,7 @@ export function compileOps(ops: WriteOp[], version: number): SqlStatement[] {
     if (!def) throw new Error(`Unknown table ${op.table}`);
     if (op.type === "insert") return buildInsert(def, op.row, op.onConflict);
     if (op.type === "update") return buildUpdate(def, op.id, op.patch);
+    if (op.type === "clear") return buildClear(def);
     return buildDelete(def, op.id);
   });
 }

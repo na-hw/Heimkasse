@@ -120,6 +120,8 @@ export class BrowserAdapter implements StorageAdapter {
       } else if (op.type === "update") {
         const updated = await store.update(op.id, encodePatch(def, op.patch));
         if (updated === 0) throw new AppError("not_found", `${op.table}.${op.id}`);
+      } else if (op.type === "clear") {
+        await store.clear();
       } else {
         await store.delete(op.id);
       }
