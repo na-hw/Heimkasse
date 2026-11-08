@@ -1,12 +1,13 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Minimal permissions for the main window: resolve the app data path and read via the SQL plugin. Writes use the app's own db_batch command. Exports: save dialog and writing the file the user picked. Attachments: files in $APPDATA/attachments only. Notifications for contract reminders.",
+  "description": "Minimal permissions for the main window: resolve the app data path and read via the SQL plugin. Writes use the app's own db_batch command. Exports and backups: save/open dialogs; files and folders the user picked (auto-backup folder persisted by persisted-scope). Attachments: files in $APPDATA/attachments only. Notifications for contract reminders.",
   "windows": ["main"],
   "permissions": [
     "core:path:default",
     "sql:default",
     "dialog:allow-save",
+    "dialog:allow-open",
     "fs:allow-write-file",
     "fs:allow-read-file",
     "fs:allow-mkdir",
