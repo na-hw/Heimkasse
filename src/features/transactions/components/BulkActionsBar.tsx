@@ -17,7 +17,7 @@ interface Props {
 export function BulkActionsBar({ count, onSelectAll, onChangeCategory, onDelete, onClear }: Props) {
   const { t } = useTranslation();
   return (
-    <section className={styles.bulkBar} aria-label={t("transactions.bulk.selected", { count })}>
+    <section data-bottom-bar className={styles.bulkBar} aria-label={t("transactions.bulk.selected", { count })}>
       <IconButton label={t("transactions.bulk.clear")} icon={<X />} onClick={onClear} />
       <span className={styles.bulkCount} aria-live="polite">
         {t("transactions.bulk.selected", { count })}

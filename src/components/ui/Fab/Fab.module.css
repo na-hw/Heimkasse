@@ -5,8 +5,8 @@
   inset-block-end: calc(var(--bottom-nav-height) + var(--space-4) + var(--safe-bottom));
   display: grid;
   place-items: center;
-  inline-size: 56px;
-  block-size: 56px;
+  inline-size: var(--fab-size);
+  block-size: var(--fab-size);
   border-radius: var(--radius-full);
   background: var(--color-primary);
   color: var(--color-on-primary);
@@ -31,4 +31,9 @@
   .fab {
     display: none;
   }
+}
+
+/* A sticky bottom bar (e.g. bulk actions) takes the FAB's place. */
+:global(body:has([data-bottom-bar])) .fab {
+  display: none;
 }
