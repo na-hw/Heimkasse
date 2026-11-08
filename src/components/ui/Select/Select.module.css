@@ -1,0 +1,32 @@
+.trigger {
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.trigger > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  color: var(--color-text-muted);
+}
+
+.content {
+  min-inline-size: var(--radix-select-trigger-width);
+  max-block-size: var(--radix-select-content-available-height);
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+}
+
+.check {
+  margin-inline-start: auto;
+  color: var(--color-primary);
+}
