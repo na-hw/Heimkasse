@@ -276,9 +276,14 @@
       "household": "Haushalt",
       "clothing": "Kleidung",
       "leisure": "Freizeit",
+      "sport": "Sport",
+      "sport_parents": "Sport (Eltern)",
+      "sport_children": "Sport (Kinder)",
       "restaurants": "Restaurants & Café",
       "education": "Bildung",
+      "childcare": "Kita & Kindergarten",
       "subscriptions": "Abos",
+      "subscriptions_streaming": "Streaming (Netflix & Co.)",
       "gifts": "Geschenke",
       "salary": "Gehalt",
       "other_income": "Sonstige Einnahmen"
@@ -508,6 +513,7 @@
     "home_office": "Home-Office",
     "craftsman_services": "Handwerkerleistungen",
     "household_services": "Haushaltsnahe Dienstleistungen",
+    "childcare": "Kinderbetreuung",
     "medical_costs": "Krankheitskosten",
     "donations": "Spenden",
     "insurance": "Versicherungen"
@@ -1077,6 +1083,7 @@
       "home_office": "Tagespauschale für Tage im Homeoffice (Anlage N)",
       "craftsman_services": "Arbeitskosten von Handwerkern – 20 % absetzbar (§ 35a EStG)",
       "household_services": "Reinigung, Gartenpflege u. ä. – 20 % absetzbar (§ 35a EStG)",
+      "childcare": "Kita, Tagesmutter, Hort – 80 %, max. 4.800 € je Kind absetzbar, ohne Verpflegung (§ 10 Abs. 1 Nr. 5 EStG)",
       "medical_costs": "Außergewöhnliche Belastungen (zumutbare Belastung beachten)",
       "donations": "Spenden und Mitgliedsbeiträge (Zuwendungsbestätigung aufbewahren)",
       "insurance": "Vorsorgeaufwendungen, z. B. Haftpflicht, Berufsunfähigkeit"

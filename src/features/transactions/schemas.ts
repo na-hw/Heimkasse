@@ -26,6 +26,7 @@ export const TAX_CATEGORIES = [
   "home_office",
   "craftsman_services",
   "household_services",
+  "childcare",
   "medical_costs",
   "donations",
   "insurance",

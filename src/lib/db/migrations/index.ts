@@ -1,9 +1,10 @@
 import { migration001 } from "./001_initial";
 import { migration002 } from "./002_warm_rent";
+import { migration003 } from "./003_more_categories";
 import type { Migration } from "./types";
 
 /** All migrations in ascending order. Append new ones; never edit released ones. */
-export const MIGRATIONS: readonly Migration[] = [migration001, migration002];
+export const MIGRATIONS: readonly Migration[] = [migration001, migration002, migration003];
 
 export const LATEST_SCHEMA_VERSION = MIGRATIONS.at(-1)?.version ?? 0;
 

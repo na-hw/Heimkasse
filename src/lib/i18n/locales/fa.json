@@ -276,9 +276,14 @@
       "household": "خانه‌داری",
       "clothing": "پوشاک",
       "leisure": "اوقات فراغت",
+      "sport": "ورزش",
+      "sport_parents": "ورزش (والدین)",
+      "sport_children": "ورزش (کودکان)",
       "restaurants": "رستوران و کافه",
       "education": "آموزش",
+      "childcare": "مهدکودک (Kita و Kindergarten)",
       "subscriptions": "اشتراک‌ها",
+      "subscriptions_streaming": "استریم (Netflix و غیره)",
       "gifts": "هدیه‌ها",
       "salary": "حقوق",
       "other_income": "سایر درآمدها"
@@ -508,6 +513,7 @@
     "home_office": "دفتر خانگی (Home-Office)",
     "craftsman_services": "خدمات فنی (Handwerkerleistungen)",
     "household_services": "خدمات منزل (haushaltsnahe Dienstleistungen)",
+    "childcare": "هزینهٔ نگهداری کودک (Kinderbetreuung)",
     "medical_costs": "هزینه‌های درمانی (Krankheitskosten)",
     "donations": "کمک‌های خیریه (Spenden)",
     "insurance": "بیمه‌ها (Versicherungen)"
@@ -1077,6 +1083,7 @@
       "home_office": "مبلغ روزانه برای روزهای کار در خانه (Anlage N)",
       "craftsman_services": "دستمزد استادکاران – ۲۰٪ قابل کسر (§ 35a EStG)",
       "household_services": "نظافت، باغبانی و مانند آن – ۲۰٪ قابل کسر (§ 35a EStG)",
+      "childcare": "مهدکودک، پرستار کودک، Hort – ۸۰٪ تا سقف ۴٬۸۰۰ € برای هر کودک قابل کسر، بدون هزینهٔ غذا (§ 10 Abs. 1 Nr. 5 EStG)",
       "medical_costs": "هزینه‌های فوق‌العاده (سهم قابل‌تحمل را در نظر بگیرید)",
       "donations": "کمک‌های خیریه و حق عضویت (رسید را نگه دارید)",
       "insurance": "هزینه‌های بیمه‌ای، مثلاً مسئولیت، ازکارافتادگی"
