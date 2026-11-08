@@ -1,0 +1,32 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-sunken);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.dot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-subtle);
+  flex-shrink: 0;
+}
+
+.status[data-kind="ok"] .dot {
+  background: var(--color-income);
+}
+
+.status[data-kind="browser"] .dot {
+  background: var(--color-warning);
+}
+
+.status[data-kind="error"] .dot {
+  background: var(--color-expense);
+}

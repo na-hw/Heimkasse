@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Kiseh – global styles
+   1. Design tokens (light default)
+   2. Dark theme (system preference + manual override via [data-theme])
+   3. Reset
+   4. Base elements
+   Rule: use CSS logical properties only (inline/block, start/end) so the UI
+   mirrors correctly for RTL (fa) and LTR (de, en).
+   ========================================================================== */
+
+/* 1. Design tokens -------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+
+  /* Colors – neutral surfaces */
+  --color-bg: #f7f7f5;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #efefec;
+  --color-border: #e2e2dd;
+  --color-border-strong: #c9c9c2;
+
+  /* Colors – text */
+  --color-text: #1c1c1a;
+  --color-text-muted: #66665f;
+  --color-text-subtle: #8e8e86;
+  --color-text-on-accent: #ffffff;
+
+  /* Colors – brand / semantic */
+  --color-accent: #2f6f5e;
+  --color-accent-hover: #275d4f;
+  --color-accent-soft: #e3efea;
+  --color-income: #2e7d4f;
+  --color-expense: #c0392b;
+  --color-warning: #b7791f;
+  --color-info: #2b6cb0;
+  --color-focus-ring: #4a9c86;
+
+  /* Spacing scale (4px base) */
+  --space-0: 0;
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem;  /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem;    /* 16px */
+  --space-5: 1.5rem;  /* 24px */
+  --space-6: 2rem;    /* 32px */
+  --space-7: 3rem;    /* 48px */
+  --space-8: 4rem;    /* 64px */
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Vazirmatn",
+    "Tahoma", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.5rem;    /* 24px */
+  --font-size-2xl: 2rem;     /* 32px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* 2. Dark theme ----------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #141413;
+    --color-surface: #1c1c1b;
+    --color-surface-raised: #242423;
+    --color-surface-sunken: #101010;
+    --color-border: #2e2e2c;
+    --color-border-strong: #44443f;
+
+    --color-text: #ececea;
+    --color-text-muted: #a3a39b;
+    --color-text-subtle: #76766f;
+    --color-text-on-accent: #0f1f1a;
+
+    --color-accent: #6cc3a8;
+    --color-accent-hover: #86d1ba;
+    --color-accent-soft: #1d332c;
+    --color-income: #5fc38a;
+    --color-expense: #ef7a6c;
+    --color-warning: #e3a84a;
+    --color-info: #6aa7e8;
+    --color-focus-ring: #6cc3a8;
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* Manual override (for a future theme switch) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #141413;
+  --color-surface: #1c1c1b;
+  --color-surface-raised: #242423;
+  --color-surface-sunken: #101010;
+  --color-border: #2e2e2c;
+  --color-border-strong: #44443f;
+  --color-text: #ececea;
+  --color-text-muted: #a3a39b;
+  --color-text-subtle: #76766f;
+  --color-text-on-accent: #0f1f1a;
+  --color-accent: #6cc3a8;
+  --color-accent-hover: #86d1ba;
+  --color-accent-soft: #1d332c;
+  --color-income: #5fc38a;
+  --color-expense: #ef7a6c;
+  --color-warning: #e3a84a;
+  --color-info: #6aa7e8;
+  --color-focus-ring: #6cc3a8;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+/* 3. Reset ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-block-size: 100dvh;
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 4. Base ----------------------------------------------------------------- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  /* Desktop-app feel: no rubber-band selection of UI chrome */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Allow text selection where it makes sense */
+input,
+textarea,
+[contenteditable],
+.selectable {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Numbers (amounts) should align nicely in tables */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
