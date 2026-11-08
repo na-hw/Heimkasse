@@ -19,51 +19,56 @@ npm install
 
 ## Scripts
 
-| Command                   | What it does                                                             |
-| ------------------------- | ------------------------------------------------------------------------ |
-| `npm run dev`             | Next.js dev server in the browser → http://localhost:3000 (no DB)        |
-| `npm run tauri:dev`       | Starts Next.js + opens the app in a Tauri window (hot reload, DB on)     |
-| `npm run build`           | Static export of the frontend to `out/`                                  |
-| `npm run tauri:build:mac` | Builds the macOS app → `src-tauri/target/release/bundle/macos/Kiseh.app` |
-| `npm run tauri:build`     | Builds all bundle targets for the current OS (`.app` + `.dmg` on macOS)  |
-| `npm run lint`            | TypeScript type check                                                    |
+| Command                   | What it does                                                               |
+| ------------------------- | -------------------------------------------------------------------------- |
+| `npm run dev`             | Browser version → http://localhost:3000 (data in IndexedDB)                |
+| `npm run tauri:dev`       | Desktop window with hot reload (data in SQLite `kiseh.db`)                 |
+| `npm run build`           | Static export of the frontend to `out/`                                    |
+| `npm run tauri:build:mac` | macOS app → `src-tauri/target/release/bundle/macos/Kiseh.app`              |
+| `npm run tauri:build`     | All bundle targets for the current OS (`.app` + `.dmg` on macOS)           |
+| `npm run check`           | Typecheck + ESLint + unit tests                                            |
+| `npm run typecheck`       | TypeScript only                                                            |
+| `npm run lint`            | ESLint (incl. jsx-a11y)                                                    |
+| `npm run format`          | Prettier                                                                   |
+| `npm test`                | Vitest unit/component tests (SQLite via `node:sqlite`, IndexedDB via fake) |
+| `npm run test:e2e`        | Playwright against the static build (desktop + mobile viewport)            |
 
 The first `tauri:dev` / build compiles the Rust dependencies and takes a minute or two; later runs are fast.
+In development the sidebar shows **Komponenten** (`/design/`), a live gallery of all UI components.
 
 ## Project structure
 
 ```
 src/
-  app/            Next.js App Router (layout, pages) — static export only
-  components/     UI components (one folder per component + .module.css)
-  styles/         globals.css: reset, design tokens, light/dark theme
-  lib/db/         SQLite connection helper (getDb / closeDb)
-  types/          Shared TypeScript types
-src-tauri/
-  src/lib.rs      Tauri builder, plugins (sql, log)
-  capabilities/   Permissions granted to the webview
-  tauri.conf.json App/window/bundle configuration
+  app/                  Routes only (thin pages, error boundaries) — static export
+  features/<feature>/   Schemas (Zod), repository, hooks, components per feature
+  components/ui/        Design-system components (CSS Modules + Radix)
+  components/layout/    App shell, sidebar, bottom nav, command palette
+  components/providers/ Query client, storage init, preferences effects
+  lib/db/               StorageAdapter, SQLite + IndexedDB adapters, migrations, BaseRepository
+  lib/i18n/             i18next setup, fa/de locales, Intl formatters, number parsing
+  lib/preferences/      Zustand stores (preferences, UI state)
+  lib/validation/       Shared Zod helpers and translatable error messages
+  styles/               tokens.css, themes.css, globals.css
+src-tauri/              Rust shell: SQL plugin + atomic `db_batch` command, CSP, capabilities
+e2e/                    Playwright tests
 ```
 
 ## Conventions
 
-- **No server code.** `output: 'export'` — no API routes, server actions or dynamic SSR. All data access goes through Tauri plugins/commands.
-- **Styling:** CSS Modules + the CSS variables in `src/styles/globals.css`. No hard-coded colors or spacing.
-- **RTL-ready:** use logical properties only (`margin-inline-start`, `padding-block`, `inset-inline-end`, `inline-size` …), never `left`/`right`/`width`-style physical properties for layout. `<html dir>` will follow the locale (`fa` → `rtl`, `de`/`en` → `ltr`).
+- **No server code.** `output: 'export'` — no API routes, server actions or dynamic SSR. Data access goes through repositories (SQLite in Tauri, IndexedDB in the browser).
+- **Styling:** CSS Modules + the design tokens in `src/styles/tokens.css` / `themes.css`. No hard-coded colors or spacing.
+- **RTL-ready:** use logical properties only (`margin-inline-start`, `padding-block`, `inset-inline-end`, `inline-size` …), never `left`/`right`/`width`-style physical properties for layout. `<html lang/dir>` follows the language setting (`fa` → `rtl`, `de` → `ltr`); directional icons use `DirectionalIcon`.
 - **Theme:** follows `prefers-color-scheme`; can be forced with `<html data-theme="light|dark">`.
-- **Accessible primitives:** build interactive components on `radix-ui` (installed, not used yet).
+- **Accessible primitives:** interactive components are built on `radix-ui`; every list has loading, empty and error states.
+- **i18n:** no hard-coded UI strings; keys are typed, `fa.json` must match `de.json` (checked by TypeScript and tests).
 
 ## Database
 
-`src/lib/db/index.ts` opens `kiseh.db` in the app data directory:
+UI code never touches the database directly: components → hooks (TanStack Query) → repositories → `StorageAdapter`.
+In Tauri the adapter opens `kiseh.db` in the app data directory:
 
 - macOS: `~/Library/Application Support/app.kiseh.desktop/kiseh.db`
 
-```ts
-import { getDb } from "@/lib/db";
-
-const db = await getDb();
-const rows = await db.select("SELECT 1");
-```
-
-The database is only available inside the Tauri window — in the plain browser (`npm run dev`) the helper throws. No tables exist yet; schema & migrations will be added with the first feature.
+Migrations are declarative and versioned (`src/lib/db/migrations`, tracked in `schema_version`), run on
+startup for both adapters and are idempotent. Money is stored as integer cents, dates as ISO strings, ids as UUIDs.
