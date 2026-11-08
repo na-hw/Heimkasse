@@ -68,9 +68,6 @@
 }
 
 .title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
   font-weight: var(--font-weight-semibold);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,7 +75,8 @@
 }
 
 .recurringIcon {
-  flex-shrink: 0;
+  margin-inline-start: var(--space-1);
+  vertical-align: -2px;
   color: var(--color-text-muted);
 }
 
