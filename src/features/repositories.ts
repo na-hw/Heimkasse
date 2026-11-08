@@ -11,11 +11,17 @@ import { SettingsRepository } from "@/features/settings/repository";
 import { TransactionsRepository } from "@/features/transactions/repository";
 import { UtilitySettlementsRepository } from "@/features/utilities/repository";
 import type { RepositoryDeps } from "@/lib/db/repository";
+import { MemoryFileStore } from "@/lib/files/MemoryFileStore";
+import type { FileStore } from "@/lib/files/types";
 
-/** Composition root of the data layer: one repository per entity. */
-export function createRepositories(deps: RepositoryDeps) {
+/**
+ * Composition root of the data layer: one repository per entity plus the
+ * file store for attachments (in-memory unless given – used by unit tests).
+ */
+export function createRepositories(deps: RepositoryDeps & { files?: FileStore }) {
   return {
     storage: deps.storage,
+    files: deps.files ?? new MemoryFileStore(),
     accounts: new AccountsRepository(deps),
     categories: new CategoriesRepository(deps),
     transactions: new TransactionsRepository(deps),

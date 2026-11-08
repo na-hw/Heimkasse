@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { ErrorState } from "@/components/ui";
 import { createRepositories } from "@/features/repositories";
 import { initStorage } from "@/lib/db/runtime";
+import { createFileStore } from "@/lib/files/runtime";
 import { useErrorMessage } from "@/lib/errors/useErrorMessage";
 import { usePreferences } from "@/lib/preferences/store";
 import { RepositoriesContext } from "./RepositoriesContext";
@@ -23,8 +24,8 @@ export function StorageGate({ children }: { children: ReactNode }) {
   const query = useQuery({
     queryKey: STORAGE_QUERY_KEY,
     queryFn: async () => {
-      const storage = await initStorage();
-      const repos = createRepositories({ storage });
+      const [storage, files] = await Promise.all([initStorage(), createFileStore()]);
+      const repos = createRepositories({ storage, files });
       usePreferences.getState().setAll(await repos.settings.getPreferences());
       return repos;
     },
