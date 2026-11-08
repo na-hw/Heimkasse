@@ -1,0 +1,33 @@
+.icon {
+  display: inline-grid;
+  place-items: center;
+  color: var(--color-text-muted);
+}
+
+.icon svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.text {
+  flex: 1;
+}
+
+.danger,
+.danger .icon {
+  color: var(--color-danger);
+}
+
+.separator {
+  block-size: 1px;
+  margin-block: var(--space-1);
+  background: var(--color-border);
+}
+
+.label {
+  padding-inline: var(--space-3);
+  padding-block: var(--space-2) var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+}
