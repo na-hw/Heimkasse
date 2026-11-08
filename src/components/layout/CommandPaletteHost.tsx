@@ -1,10 +1,11 @@
 "use client";
 
 import { Languages, Monitor, Moon, Plus, Sun } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { type CommandGroup, CommandPalette } from "@/components/ui";
+import type { CommandGroup } from "@/components/ui";
 import { useUpdatePreference } from "@/features/settings/hooks";
 import { useTransactionEditor } from "@/features/transactions/editorStore";
 import { LANGUAGES, LANGUAGE_NATIVE_NAME } from "@/lib/i18n/config";
@@ -12,6 +13,12 @@ import { usePreferences } from "@/lib/preferences/store";
 import { useUiStore } from "@/lib/preferences/uiStore";
 import { shortcutLabel, useModHotkey } from "@/lib/utils/useHotkey";
 import { visibleNavItems } from "./navigation";
+
+/** cmdk is loaded when the palette is opened for the first time. */
+const CommandPalette = dynamic(
+  () => import("@/components/ui/CommandPalette").then((m) => m.CommandPalette),
+  { ssr: false },
+);
 
 /** Wires the command palette to navigation and preferences; opens with ⌘K / Ctrl+K. */
 export function CommandPaletteHost() {
@@ -22,6 +29,8 @@ export function CommandPaletteHost() {
   const language = usePreferences((s) => s.language);
   const updatePreference = useUpdatePreference();
   const openCreate = useTransactionEditor((s) => s.openCreate);
+  const [used, setUsed] = useState(false);
+  if (open && !used) setUsed(true);
 
   useModHotkey("k", () => setOpen(!useUiStore.getState().commandPaletteOpen));
 
@@ -82,6 +91,7 @@ export function CommandPaletteHost() {
     [t, router, language, updatePreference, openCreate],
   );
 
+  if (!used) return null;
   return (
     <CommandPalette
       open={open}

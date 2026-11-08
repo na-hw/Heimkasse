@@ -5,6 +5,8 @@ export type EditorMode = "create" | "edit" | "duplicate";
 
 interface EditorState {
   open: boolean;
+  /** True after the first opening (the lazily loaded dialog stays mounted for exit animations). */
+  used: boolean;
   mode: EditorMode;
   transaction: Transaction | null;
   defaults: Partial<TransactionCreate>;
@@ -17,11 +19,15 @@ interface EditorState {
 /** Controls the single, app-wide transaction dialog (⌘N, "+" button, edit from lists). */
 export const useTransactionEditor = create<EditorState>((set) => ({
   open: false,
+  used: false,
   mode: "create",
   transaction: null,
   defaults: {},
-  openCreate: (defaults = {}) => set({ open: true, mode: "create", transaction: null, defaults }),
-  openEdit: (transaction) => set({ open: true, mode: "edit", transaction, defaults: {} }),
-  openDuplicate: (transaction) => set({ open: true, mode: "duplicate", transaction, defaults: {} }),
+  openCreate: (defaults = {}) =>
+    set({ open: true, used: true, mode: "create", transaction: null, defaults }),
+  openEdit: (transaction) =>
+    set({ open: true, used: true, mode: "edit", transaction, defaults: {} }),
+  openDuplicate: (transaction) =>
+    set({ open: true, used: true, mode: "duplicate", transaction, defaults: {} }),
   close: () => set({ open: false }),
 }));
