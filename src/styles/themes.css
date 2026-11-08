@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Color themes. Every pair used for text is WCAG AA (≥ 4.5:1) in both themes
+   (checked in src/styles/contrast.test.ts).
+   Theme selection: system (prefers-color-scheme) unless <html data-theme>.
+   ========================================================================== */
+:root {
+  color-scheme: light;
+
+  /* Neutral */
+  --color-bg: #f5f6f5;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #eef0ee;
+  --color-surface-hover: #f0f2f0;
+  --color-border: #dfe3e0;
+  --color-border-strong: #b9c0bc;
+  --color-overlay: rgb(16 22 19 / 0.45);
+
+  /* Text */
+  --color-text: #17201c;
+  --color-text-muted: #4d5853;
+  --color-text-subtle: #5f6a65;
+  --color-text-inverse: #ffffff;
+
+  /* Primary */
+  --color-primary: #1d6b58;
+  --color-primary-hover: #175746;
+  --color-primary-active: #12473a;
+  --color-primary-soft: #e2f0eb;
+  --color-primary-soft-text: #14513f;
+  --color-on-primary: #ffffff;
+
+  /* Semantic */
+  --color-success: #1c7442;
+  --color-success-soft: #e3f3e9;
+  --color-danger: #b8322a;
+  --color-danger-hover: #9c2a23;
+  --color-danger-soft: #fbe9e7;
+  --color-on-danger: #ffffff;
+  --color-warning: #8a5300;
+  --color-warning-soft: #fdf1da;
+  --color-info: #1d5ea6;
+  --color-info-soft: #e5eefa;
+
+  /* Money semantics (never color-only: always with sign/icon) */
+  --color-income: var(--color-success);
+  --color-expense: var(--color-danger);
+
+  --color-focus-ring: #2a7fff;
+
+  /* Charts: categorical palette, distinguishable in both themes */
+  --chart-1: #1d6b58;
+  --chart-2: #3b6fd6;
+  --chart-3: #c2701b;
+  --chart-4: #9a4fc4;
+  --chart-5: #c23b6a;
+  --chart-6: #2b8a9e;
+  --chart-7: #7a8a1f;
+  --chart-8: #6b7570;
+  --chart-grid: #e3e7e4;
+  --chart-axis: #5f6a65;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 1px rgb(16 24 20 / 0.04);
+  --shadow-sm: 0 1px 3px rgb(16 24 20 / 0.08), 0 1px 2px rgb(16 24 20 / 0.04);
+  --shadow-md: 0 6px 16px rgb(16 24 20 / 0.08), 0 2px 4px rgb(16 24 20 / 0.04);
+  --shadow-lg: 0 16px 40px rgb(16 24 20 / 0.14), 0 4px 10px rgb(16 24 20 / 0.06);
+}
+
+/* Dark tokens – applied for system dark (unless forced light) and forced dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #0f1311;
+    --color-surface: #161b19;
+    --color-surface-raised: #1d2320;
+    --color-surface-sunken: #0b0e0d;
+    --color-surface-hover: #212825;
+    --color-border: #2a322e;
+    --color-border-strong: #45504a;
+    --color-overlay: rgb(0 0 0 / 0.6);
+    --color-text: #e7ece9;
+    --color-text-muted: #aab4af;
+    --color-text-subtle: #939d98;
+    --color-text-inverse: #0f1311;
+    --color-primary: #5cc2a4;
+    --color-primary-hover: #77cfb4;
+    --color-primary-active: #92dbc4;
+    --color-primary-soft: #18352c;
+    --color-primary-soft-text: #9fe0cb;
+    --color-on-primary: #072219;
+    --color-success: #5fd08f;
+    --color-success-soft: #173323;
+    --color-danger: #ff8a7e;
+    --color-danger-hover: #ffa49a;
+    --color-danger-soft: #3a1c19;
+    --color-on-danger: #2b0805;
+    --color-warning: #f2b553;
+    --color-warning-soft: #352712;
+    --color-info: #82b6f2;
+    --color-info-soft: #172840;
+    --color-focus-ring: #7fb2ff;
+    --chart-1: #5cc2a4;
+    --chart-2: #7ea6ff;
+    --chart-3: #f0a35a;
+    --chart-4: #c79af0;
+    --chart-5: #f283a8;
+    --chart-6: #62c6d8;
+    --chart-7: #c2d05a;
+    --chart-8: #9aa59f;
+    --chart-grid: #26302b;
+    --chart-axis: #939d98;
+    --shadow-xs: 0 1px 1px rgb(0 0 0 / 0.3);
+    --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 6px 16px rgb(0 0 0 / 0.45);
+    --shadow-lg: 0 16px 40px rgb(0 0 0 / 0.55);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0f1311;
+  --color-surface: #161b19;
+  --color-surface-raised: #1d2320;
+  --color-surface-sunken: #0b0e0d;
+  --color-surface-hover: #212825;
+  --color-border: #2a322e;
+  --color-border-strong: #45504a;
+  --color-overlay: rgb(0 0 0 / 0.6);
+  --color-text: #e7ece9;
+  --color-text-muted: #aab4af;
+  --color-text-subtle: #939d98;
+  --color-text-inverse: #0f1311;
+  --color-primary: #5cc2a4;
+  --color-primary-hover: #77cfb4;
+  --color-primary-active: #92dbc4;
+  --color-primary-soft: #18352c;
+  --color-primary-soft-text: #9fe0cb;
+  --color-on-primary: #072219;
+  --color-success: #5fd08f;
+  --color-success-soft: #173323;
+  --color-danger: #ff8a7e;
+  --color-danger-hover: #ffa49a;
+  --color-danger-soft: #3a1c19;
+  --color-on-danger: #2b0805;
+  --color-warning: #f2b553;
+  --color-warning-soft: #352712;
+  --color-info: #82b6f2;
+  --color-info-soft: #172840;
+  --color-focus-ring: #7fb2ff;
+  --chart-1: #5cc2a4;
+  --chart-2: #7ea6ff;
+  --chart-3: #f0a35a;
+  --chart-4: #c79af0;
+  --chart-5: #f283a8;
+  --chart-6: #62c6d8;
+  --chart-7: #c2d05a;
+  --chart-8: #9aa59f;
+  --chart-grid: #26302b;
+  --chart-axis: #939d98;
+  --shadow-xs: 0 1px 1px rgb(0 0 0 / 0.3);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 6px 16px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 16px 40px rgb(0 0 0 / 0.55);
+}
