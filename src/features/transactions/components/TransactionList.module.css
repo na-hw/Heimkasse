@@ -26,6 +26,7 @@
 }
 
 .row {
+  container-type: inline-size;
   display: flex;
   align-items: center;
   gap: var(--space-1);
@@ -96,4 +97,40 @@
 
 .amount {
   flex-shrink: 0;
+}
+
+/*
+ * Phones: the amount would leave only a few characters for the payee. The title gets the
+ * full first line; meta (category · account) and amount share the second one.
+ */
+@container (max-width: 26rem) {
+  .rowButton {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "icon title title"
+      "icon meta amount"
+      "icon tags tags";
+    align-items: center;
+    column-gap: var(--space-3);
+    row-gap: 2px;
+  }
+  .rowButton > :first-child {
+    grid-area: icon;
+  }
+  .text {
+    display: contents;
+  }
+  .title {
+    grid-area: title;
+  }
+  .meta {
+    grid-area: meta;
+  }
+  .tags {
+    grid-area: tags;
+  }
+  .amount {
+    grid-area: amount;
+  }
 }
