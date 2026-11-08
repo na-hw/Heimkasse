@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-3);
+}
+
+.small {
+  font-size: var(--font-size-lg);
+}
