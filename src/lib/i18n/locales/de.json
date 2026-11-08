@@ -138,6 +138,16 @@
       "categories": "Kategorien",
       "storage": "Speicher",
       "schemaVersion": "Datenbankversion"
+    },
+    "deleteAll": {
+      "title": "Alle Daten löschen",
+      "description": "Löscht alle Konten, Buchungen, Verträge, Belege und weiteren Daten auf diesem Gerät. Sprache und Darstellung bleiben erhalten.",
+      "action": "Alle Daten löschen …",
+      "confirmTitle": "Wirklich alle Daten löschen?",
+      "confirmText": "Das kann nicht rückgängig gemacht werden. Exportiere vorher eine Sicherung. Gib zur Bestätigung „{{word}}“ ein.",
+      "word": "LÖSCHEN",
+      "confirmAction": "Endgültig löschen",
+      "done": "Alle Daten wurden gelöscht"
     }
   },
   "errors": {
@@ -1298,6 +1308,45 @@
     "empty": {
       "title": "Noch keine Belege",
       "text": "Hänge Kassenbons, Rechnungen oder Vertragsunterlagen an."
+    }
+  },
+  "backup": {
+    "title": "Sicherung",
+    "description": "Vollständige Sicherung als JSON-Datei – inkl. Papierkorb, Einstellungen und Belegen.",
+    "export": "Sicherung exportieren",
+    "restore": "Sicherung wiederherstellen",
+    "exported": "Sicherung gespeichert",
+    "restored": "Sicherung wiederhergestellt",
+    "confirm": {
+      "title": "Sicherung wiederherstellen?",
+      "text": "Alle aktuellen Daten werden durch die Sicherung vom {{date}} ersetzt. Das kann nicht rückgängig gemacht werden.",
+      "counts": "Enthält {{transactions}} Buchungen, {{accounts}} Konten und {{attachments}} Belege.",
+      "action": "Daten ersetzen"
+    },
+    "auto": {
+      "title": "Automatische Sicherung",
+      "description": "Speichert regelmäßig eine Sicherung in einem Ordner deiner Wahl, z. B. in einem Cloud-Ordner.",
+      "desktopOnly": "Nur in der Desktop-App verfügbar. Im Browser kannst du Sicherungen manuell exportieren.",
+      "folder": "Ordner",
+      "noFolder": "Kein Ordner gewählt",
+      "chooseFolder": "Ordner wählen",
+      "enabled": "Automatisch sichern",
+      "needFolder": "Wähle zuerst einen Ordner.",
+      "frequency": "Häufigkeit",
+      "frequencies": {
+        "daily": "Täglich",
+        "weekly": "Wöchentlich"
+      },
+      "keep": "Aufbewahren",
+      "keepHint": "Ältere automatische Sicherungen werden gelöscht.",
+      "keepOption_one": "Letzte {{formatted}} Sicherung",
+      "keepOption_other": "Letzte {{formatted}} Sicherungen",
+      "lastRun": "Letzte Sicherung: {{date}}",
+      "never": "Noch keine automatische Sicherung.",
+      "lastError": "Letzter Fehler: {{message}}",
+      "runNow": "Jetzt sichern",
+      "ran": "Automatische Sicherung gespeichert",
+      "failed": "Automatische Sicherung fehlgeschlagen"
     }
   }
 }

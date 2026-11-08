@@ -5,6 +5,7 @@ import "react-day-picker/style.css";
 import "@/styles/globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { DataMaintenance } from "@/features/backup/components/DataMaintenance";
 import { BudgetAlertWatcher } from "@/features/budgets/components/BudgetAlertWatcher";
 import { ContractReminderWatcher } from "@/features/contracts/components/ContractReminderWatcher";
 import { RecurringAutoRunner } from "@/features/recurring/components/RecurringAutoRunner";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <RecurringAutoRunner />
                 <BudgetAlertWatcher />
                 <ContractReminderWatcher />
+                <DataMaintenance />
               </>
             }
           >

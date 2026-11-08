@@ -2,6 +2,9 @@
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { AutoBackupCard } from "@/features/backup/components/AutoBackupCard";
+import { BackupCard } from "@/features/backup/components/BackupCard";
+import { DeleteAllCard } from "@/features/backup/components/DeleteAllCard";
 import { Card, FormField, PageHeader, RadioGroup, Select } from "@/components/ui";
 import { LANGUAGES, LANGUAGE_NATIVE_NAME } from "@/lib/i18n/config";
 import { currencySymbol } from "@/lib/i18n/format";
@@ -153,6 +156,9 @@ export function SettingsScreen() {
         </Card>
 
         <StorageInfoCard />
+        <BackupCard />
+        <AutoBackupCard />
+        <DeleteAllCard />
       </div>
     </>
   );
