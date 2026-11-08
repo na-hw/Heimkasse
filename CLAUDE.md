@@ -1,0 +1,85 @@
+# Heimkasse – guide for Claude
+
+Personal home & living expense manager for someone living in Germany. Local-first desktop app
+(Next.js static export + Tauri 2), also runs in the browser.
+
+**The full brief (requirements, data model, features, phases) is in [`docs/PROJECT_BRIEF.md`](docs/PROJECT_BRIEF.md).
+Read it before starting a phase.** Decisions below override the brief where they differ.
+
+## Phase status
+
+| Phase                                                           | Status  |
+| --------------------------------------------------------------- | ------- |
+| 1 Foundation                                                    | ✅ done |
+| 2 Core (accounts, categories, transactions, recurring, trash)   | ✅ done |
+| 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ⏳ next |
+| 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | open    |
+| 5 Data (CSV import, attachments, backup, delete all, app lock)  | open    |
+| 6 Polish (a11y audit, performance, coverage, build, README)     | open    |
+
+Update this table when a phase is finished.
+
+## Working method (from the user)
+
+- Work strictly phase by phase; never start the next phase without the user's confirmation.
+- Before a phase: short plan (files to create/change). After a phase: `npm run check` + `npm run test:e2e`, fix
+  everything, then summarize what was built and what to test manually.
+- No TODOs, placeholders or mock data in finished features. If ambiguous: choose, state the assumption, continue.
+- **Git:** one commit per step/component, short one-line messages (e.g. `feat(ui): add Button`).
+  **Never add `Co-Authored-By` or any AI attribution.** Don't push unless asked.
+- The user writes Persian or German; reply in the user's language.
+
+## Decisions made so far (override the brief)
+
+- App name is **Heimkasse** (Persian UI also shows "Heimkasse"). Bundle id `app.heimkasse.desktop`, DB `heimkasse.db`.
+- **German is the default language**; Persian (RTL) is selectable.
+- Soft delete = trash + undo toast (no confirm dialog). Confirm dialogs only for irreversible actions (purge, delete all).
+- Accounts/categories in use are **archived instead of deleted**, with an explanatory dialog.
+- Reordering via "move up/down" menu actions (keyboard-accessible), not drag & drop.
+- Recurring rules: past occurrences since start date are booked immediately on create and on app start; edits apply to
+  future occurrences only; resuming a paused rule does not backfill the paused period. Month ends are anchored to the
+  start date (31.01. → 28.02. → 31.03.).
+- `meters.price_per_unit_millicents` (1/1000 cent) instead of `price_per_unit_cents` – cents are too coarse for ct/kWh.
+- `settings` rows have a UUID `id` plus a unique `key`; values are JSON.
+- Writes in Tauri go through the custom Rust command `db_batch` (one SQLite transaction), because tauri-plugin-sql's
+  pool cannot guarantee BEGIN/COMMIT across calls. Reads use the plugin.
+- Mobile bottom nav: 4 destinations + "More" sheet; floating "+" quick add.
+
+## Architecture (where things live)
+
+- `src/app/` routes only (thin pages + `error.tsx` per route). Static export, `trailingSlash: true`, no dynamic routes.
+- `src/features/<feature>/`: `schemas.ts` (Zod, shared by forms + repository), `repository.ts`, `service.ts` (multi-entity
+  operations, atomic via `storage.write(ops)`), pure logic modules with tests, `hooks.ts` (TanStack Query),
+  `components/`.
+- `src/features/repositories.ts` composition root; `src/features/queryKeys.ts` + `invalidateData()`;
+  `src/features/shared/useDataMutation.ts` (optimistic update + error toast + invalidate).
+- `src/lib/db/`: `StorageAdapter` interface, SQLite + IndexedDB adapters, declarative migrations (schema is derived from
+  migrations – **never edit a released migration, append a new one**), `BaseRepository` (CRUD, softDelete, restore, purge,
+  `prepare*` ops for atomic batches).
+- `src/lib/i18n/`: `locales/de.json` + `fa.json` must have identical keys (TS + test enforce it). Add keys to both.
+  All numbers/money/dates via `useFormat()` (Intl). Money parsing in `parse.ts`.
+- `src/components/ui/`: design system (Radix + CSS Modules); `src/components/layout/`: shell, nav (`navigation.ts` is the
+  single nav source), command palette.
+- Global overlays (quick add, recurring auto-runner) are composed in `src/app/layout.tsx` via `AppShell overlays`.
+
+## Conventions
+
+- Money = integer cents; dates = `YYYY-MM-DD`; timestamps = ISO; ids = UUID. Entity fields are snake_case.
+- CSS: tokens only (`src/styles/tokens.css`, `themes.css`), **logical properties only**, 44px touch targets,
+  `DirectionalIcon` for arrows/chevrons. Colors for user entities are `ColorKey`s mapped to `--swatch-*`.
+- No hard-coded UI strings. Validation messages are translation keys (`lib/validation/messages.ts`).
+- Update forms must send only edited fields (create schemas carry defaults like `sort_order`/`archived`).
+- Use `useWatch` (not `form.watch`) for React-Compiler compatibility.
+
+## Commands
+
+```bash
+npm run dev            # browser (IndexedDB)
+npm run tauri:dev      # desktop window (SQLite) – needs port 3000 free
+npm run check          # typecheck + eslint + vitest
+npm run test:e2e       # Playwright against the static build (desktop + mobile)
+npm run tauri:build:mac
+npx prettier --write .
+```
+
+Rust is installed via rustup (`source ~/.cargo/env` if `cargo` is missing in a shell).
