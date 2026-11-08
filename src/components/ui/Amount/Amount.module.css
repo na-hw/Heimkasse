@@ -1,0 +1,41 @@
+.amount {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.value {
+  unicode-bidi: isolate;
+}
+
+.icon {
+  inline-size: 1em;
+  block-size: 1em;
+  flex-shrink: 0;
+}
+
+.sm {
+  font-size: var(--font-size-sm);
+}
+.md {
+  font-size: var(--font-size-md);
+}
+.lg {
+  font-size: var(--font-size-xl);
+}
+.xl {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.income {
+  color: var(--color-income);
+}
+
+.expense {
+  color: var(--color-expense);
+}
