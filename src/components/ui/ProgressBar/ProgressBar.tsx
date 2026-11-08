@@ -2,7 +2,7 @@
 
 import { CircleAlert, TriangleAlert } from "lucide-react";
 import { Progress } from "radix-ui";
-import type { ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import { cn } from "@/lib/utils/cn";
 import styles from "./ProgressBar.module.css";
 
@@ -42,6 +42,7 @@ export function ProgressBar({
   hideLabel,
   className,
 }: ProgressBarProps) {
+  const labelId = useId();
   const percent = max > 0 ? (value / max) * 100 : 0;
   const resolvedTone = tone ?? toneFor(percent, warnAt);
   const StateIcon =
@@ -49,7 +50,9 @@ export function ProgressBar({
   return (
     <div className={cn(styles.wrapper, className)}>
       <div className={cn(styles.meta, hideLabel && "visually-hidden")}>
-        <span className={styles.label}>{label}</span>
+        <span id={labelId} className={styles.label}>
+          {label}
+        </span>
         {valueText && (
           <span className={cn(styles.value, styles[`text-${resolvedTone}`])}>
             {StateIcon && <StateIcon size={14} aria-hidden="true" />}
@@ -62,7 +65,7 @@ export function ProgressBar({
         value={Math.min(value, max)}
         max={max}
         getValueLabel={() => valueText ?? `${Math.round(percent)}%`}
-        aria-label={typeof label === "string" ? label : undefined}
+        aria-labelledby={labelId}
       >
         <Progress.Indicator
           className={cn(styles.indicator, styles[resolvedTone])}
