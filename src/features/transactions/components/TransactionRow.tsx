@@ -78,16 +78,6 @@ export const TransactionRow = memo(function TransactionRow({
         type="button"
         className={styles.rowButton}
         onClick={() => (selectMode ? onToggle(tx.id) : onEdit(tx))}
-        aria-label={[
-          t("transactions.rowSummary", {
-            title,
-            amount: format.money(signed, { signDisplay: isTransfer ? "auto" : "exceptZero" }),
-            date: format.date(tx.date, "medium"),
-          }),
-          attachmentCount > 0 ? t("attachments.count", { count: attachmentCount }) : null,
-        ]
-          .filter(Boolean)
-          .join(", ")}
       >
         {isTransfer ? (
           <CategoryIcon icon="repeat" color="gray" />
@@ -103,8 +93,9 @@ export const TransactionRow = memo(function TransactionRow({
             {attachmentCount > 0 && (
               <Paperclip size={14} aria-hidden="true" className={styles.recurringIcon} />
             )}
-          </span>
-          <span className={styles.meta}>{meta}</span>
+          </span>{" "}
+          {/* Spaces keep the visible words separate for "label in name" checks. */}
+          <span className={styles.meta}>{meta}</span>{" "}
           {tx.tags.length > 0 && (
             <span className={styles.tags}>
               {tx.tags.map((tag) => (
@@ -112,13 +103,24 @@ export const TransactionRow = memo(function TransactionRow({
               ))}
             </span>
           )}
-        </span>
-        <span className={styles.amount} aria-hidden="true">
+        </span>{" "}
+        <span className={styles.amount}>
           <Amount
             cents={signed}
             variant={isTransfer ? "neutral" : "signed"}
             withIcon={!isTransfer}
+            decorative
           />
+        </span>
+        {/* The content names the button (WCAG 2.5.3); date and receipts are added for screen readers. */}
+        <span className="visually-hidden">
+          {[
+            "",
+            format.date(tx.date, "medium"),
+            attachmentCount > 0 ? t("attachments.count", { count: attachmentCount }) : null,
+          ]
+            .filter((part) => part !== null)
+            .join(t("transactions.rowSeparator"))}
         </span>
       </button>
       {!selectMode && (

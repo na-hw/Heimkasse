@@ -14,6 +14,11 @@ export interface AmountProps {
   /** Show an arrow icon in addition to sign and color. */
   withIcon?: boolean;
   size?: "sm" | "md" | "lg" | "xl";
+  /**
+   * Inside an element that already names the amount (e.g. a row button's
+   * aria-label): render only the visible value, no extra screen-reader text.
+   */
+  decorative?: boolean;
   className?: string;
 }
 
@@ -26,6 +31,7 @@ export function Amount({
   variant = "signed",
   withIcon = false,
   size = "md",
+  decorative = false,
   className,
 }: AmountProps) {
   const { t } = useTranslation();
@@ -45,10 +51,10 @@ export function Amount({
   return (
     <span className={cn(styles.amount, styles[size], signed && styles[direction], className)}>
       {withIcon && direction !== "zero" && <Icon className={styles.icon} aria-hidden="true" />}
-      <span aria-hidden="true" className={styles.value}>
+      <span aria-hidden={decorative ? undefined : "true"} className={styles.value}>
         {visible}
       </span>
-      <span className="visually-hidden">{spoken}</span>
+      {!decorative && <span className="visually-hidden">{spoken}</span>}
     </span>
   );
 }

@@ -562,7 +562,7 @@
     "transferFrom": "← {{account}}",
     "search": "Buchungen durchsuchen",
     "listLabel": "Buchungen nach Tag",
-    "rowSummary": "{{title}}, {{amount}}, {{date}}",
+    "rowSeparator": ", ",
     "count_one": "{{count}} Buchung",
     "count_other": "{{count}} Buchungen",
     "dayNet": "Tagessumme",

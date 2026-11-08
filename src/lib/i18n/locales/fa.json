@@ -562,7 +562,7 @@
     "transferFrom": "→ {{account}}",
     "search": "جستجو در تراکنش‌ها",
     "listLabel": "تراکنش‌ها به تفکیک روز",
-    "rowSummary": "{{title}}، {{amount}}، {{date}}",
+    "rowSeparator": "، ",
     "count_one": "{{count}} تراکنش",
     "count_other": "{{count}} تراکنش",
     "dayNet": "جمع روز",
