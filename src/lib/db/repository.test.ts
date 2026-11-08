@@ -161,7 +161,7 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
   describe("settings", () => {
     it("returns defaults when nothing is stored", async () => {
       expect(await repos.settings.getPreferences()).toEqual({
-        language: "fa",
+        language: "de",
         theme: "system",
         digitStyle: "persian",
         calendar: "gregorian",

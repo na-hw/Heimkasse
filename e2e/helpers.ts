@@ -1,13 +1,10 @@
 import { type Page, expect } from "@playwright/test";
 
-/** Switches the UI to German (tests read better and match German formats). */
+/** Opens the app in its default language (German) and waits until it is ready. */
 export async function useGerman(page: Page) {
-  await page.goto("/settings/");
-  await page.getByRole("radio", { name: "Deutsch" }).click();
+  await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "de");
-  await expect(
-    page.getByRole("status").filter({ hasText: "Einstellung gespeichert" }),
-  ).toBeAttached();
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 }
 
 /** Creates an account through the UI. */
