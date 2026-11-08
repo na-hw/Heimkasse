@@ -1,0 +1,9 @@
+.next
+out
+node_modules
+src-tauri/target
+src-tauri/gen
+package-lock.json
+playwright-report
+test-results
+coverage

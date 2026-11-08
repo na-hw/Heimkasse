@@ -15,3 +15,8 @@ src-tauri/gen/schemas/
 .DS_Store
 *.log
 .env*.local
+
+# tests
+playwright-report/
+test-results/
+coverage/
