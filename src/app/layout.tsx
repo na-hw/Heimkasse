@@ -8,7 +8,7 @@ import { AppProviders } from "@/components/providers/AppProviders";
 import { BOOT_SCRIPT } from "@/lib/preferences/bootCache";
 
 export const metadata: Metadata = {
-  title: "Kiseh",
+  title: "Heimkasse",
   description: "Personal home & living expense manager",
   robots: { index: false, follow: false },
 };

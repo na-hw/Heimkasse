@@ -6,7 +6,7 @@ import type { ThemePreference } from "./types";
  * before first paint to avoid a flash of wrong direction/theme.
  * The database stays the source of truth.
  */
-export const BOOT_CACHE_KEY = "kiseh.boot";
+export const BOOT_CACHE_KEY = "heimkasse.boot";
 
 export interface BootCache {
   language: Language;

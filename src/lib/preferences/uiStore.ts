@@ -18,7 +18,7 @@ export const useUiStore = create<UiState>()(
       setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
     }),
     {
-      name: "kiseh.ui",
+      name: "heimkasse.ui",
       storage: createJSONStorage(() => localStorage),
       partialize: (s) => ({ sidebarCollapsed: s.sidebarCollapsed }),
     },

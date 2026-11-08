@@ -41,7 +41,7 @@ export class BrowserAdapter implements StorageAdapter {
   private readonly db: Dexie;
 
   constructor(
-    name = "kiseh",
+    name = "heimkasse",
     private readonly migrations: readonly Migration[] = MIGRATIONS,
     private readonly clock: () => string = nowIso,
   ) {

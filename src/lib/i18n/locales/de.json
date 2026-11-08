@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "Kiseh",
+    "name": "Heimkasse",
     "tagline": "Dein Haushaltsbuch – privat und offline",
-    "loading": "Kiseh wird geladen …",
-    "pageTitle": "{{page}} · Kiseh"
+    "loading": "Heimkasse wird geladen …",
+    "pageTitle": "{{page}} · Heimkasse"
   },
   "nav": {
     "home": "Übersicht",
@@ -59,7 +59,7 @@
     "categories": "Kategorien",
     "storage": "Speicher",
     "schemaVersion": "Datenbankversion",
-    "customizeTitle": "Kiseh anpassen",
+    "customizeTitle": "Heimkasse anpassen",
     "customizeText": "Sprache, Darstellung, Zahlen und Kalender kannst du in den Einstellungen festlegen.",
     "openSettings": "Einstellungen öffnen"
   },

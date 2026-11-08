@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "کیسه",
+    "name": "Heimkasse",
     "tagline": "دفتر هزینه‌های خانه – خصوصی و آفلاین",
-    "loading": "کیسه در حال بارگذاری است …",
-    "pageTitle": "{{page}} · کیسه"
+    "loading": "Heimkasse در حال بارگذاری است …",
+    "pageTitle": "{{page}} · Heimkasse"
   },
   "nav": {
     "home": "نمای کلی",
@@ -59,7 +59,7 @@
     "categories": "دسته‌بندی‌ها",
     "storage": "محل ذخیره",
     "schemaVersion": "نسخهٔ پایگاه داده",
-    "customizeTitle": "شخصی‌سازی کیسه",
+    "customizeTitle": "شخصی‌سازی Heimkasse",
     "customizeText": "زبان، ظاهر، اعداد و تقویم را می‌توانید در تنظیمات تعیین کنید.",
     "openSettings": "باز کردن تنظیمات"
   },

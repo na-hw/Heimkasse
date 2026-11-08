@@ -1,4 +1,4 @@
-# Kiseh (کیسه)
+# Heimkasse
 
 Personal home & living expense manager — a local-first desktop app.
 
@@ -22,9 +22,9 @@ npm install
 | Command                   | What it does                                                               |
 | ------------------------- | -------------------------------------------------------------------------- |
 | `npm run dev`             | Browser version → http://localhost:3000 (data in IndexedDB)                |
-| `npm run tauri:dev`       | Desktop window with hot reload (data in SQLite `kiseh.db`)                 |
+| `npm run tauri:dev`       | Desktop window with hot reload (data in SQLite `heimkasse.db`)                 |
 | `npm run build`           | Static export of the frontend to `out/`                                    |
-| `npm run tauri:build:mac` | macOS app → `src-tauri/target/release/bundle/macos/Kiseh.app`              |
+| `npm run tauri:build:mac` | macOS app → `src-tauri/target/release/bundle/macos/Heimkasse.app`              |
 | `npm run tauri:build`     | All bundle targets for the current OS (`.app` + `.dmg` on macOS)           |
 | `npm run check`           | Typecheck + ESLint + unit tests                                            |
 | `npm run typecheck`       | TypeScript only                                                            |
@@ -66,9 +66,9 @@ e2e/                    Playwright tests
 ## Database
 
 UI code never touches the database directly: components → hooks (TanStack Query) → repositories → `StorageAdapter`.
-In Tauri the adapter opens `kiseh.db` in the app data directory:
+In Tauri the adapter opens `heimkasse.db` in the app data directory:
 
-- macOS: `~/Library/Application Support/app.kiseh.desktop/kiseh.db`
+- macOS: `~/Library/Application Support/app.heimkasse.desktop/heimkasse.db`
 
 Migrations are declarative and versioned (`src/lib/db/migrations`, tracked in `schema_version`), run on
 startup for both adapters and are idempotent. Money is stored as integer cents, dates as ISO strings, ids as UUIDs.

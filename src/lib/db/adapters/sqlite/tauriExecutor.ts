@@ -2,10 +2,10 @@ import type { SqlStatement } from "../../sql/sqlBuilder";
 import type { SqlExecutor } from "./SqlExecutor";
 
 /** File name of the local SQLite database inside the app data directory. */
-export const DB_FILE = "kiseh.db";
+export const DB_FILE = "heimkasse.db";
 
 /**
- * Opens `kiseh.db` in the app data directory via tauri-plugin-sql.
+ * Opens `heimkasse.db` in the app data directory via tauri-plugin-sql.
  * Reads use the plugin; writes go through the `db_batch` command, which runs
  * all statements in one SQLite transaction on a single pooled connection.
  */

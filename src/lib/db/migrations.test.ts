@@ -107,7 +107,7 @@ describe("sqlite migration safety", () => {
 
 describe("indexeddb migration upgrades", () => {
   it("upgrades an existing database to a new version with seeds", async () => {
-    const name = "kiseh-upgrade-test";
+    const name = "heimkasse-upgrade-test";
     const v1 = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);
     await v1.init();
     await v1.close();

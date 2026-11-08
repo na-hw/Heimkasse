@@ -19,7 +19,7 @@ test.describe("app shell", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "de");
     await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
     await expect(page.getByRole("heading", { level: 1, name: "Einstellungen" })).toBeVisible();
-    await expect(page).toHaveTitle("Einstellungen · Kiseh");
+    await expect(page).toHaveTitle("Einstellungen · Heimkasse");
 
     await page.reload();
     await expect(page.getByRole("heading", { level: 1, name: "Einstellungen" })).toBeVisible();

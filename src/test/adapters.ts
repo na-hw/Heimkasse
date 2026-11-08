@@ -22,6 +22,6 @@ export const ADAPTER_FACTORIES: Array<{
   {
     name: "indexeddb",
     create: (migrations = MIGRATIONS) =>
-      new BrowserAdapter(`kiseh-test-${++dbCounter}`, migrations, () => FIXED_NOW),
+      new BrowserAdapter(`heimkasse-test-${++dbCounter}`, migrations, () => FIXED_NOW),
   },
 ];

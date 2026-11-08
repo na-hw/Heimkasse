@@ -10,7 +10,7 @@ export function Splash() {
   return (
     <div className={styles.splash} role="status" aria-live="polite">
       <span className={styles.logo} aria-hidden="true">
-        ک
+        H
       </span>
       <Spinner size={20} />
       <span className="visually-hidden">{t("app.loading")}</span>

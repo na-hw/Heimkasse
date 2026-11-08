@@ -9,7 +9,7 @@ export function Brand({ compact }: { compact?: boolean }) {
   return (
     <span className={styles.brand}>
       <span className={styles.brandMark} aria-hidden="true">
-        ک
+        H
       </span>
       <span className={compact ? "visually-hidden" : styles.brandName}>{t("app.name")}</span>
     </span>
