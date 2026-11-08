@@ -29,8 +29,7 @@ export function groupByDay(sorted: readonly Transaction[]): DayGroup[] {
 }
 
 export type ListItem =
-  | { kind: "header"; key: string; group: DayGroup }
-  | { kind: "row"; key: string; tx: Transaction };
+  { kind: "header"; key: string; group: DayGroup } | { kind: "row"; key: string; tx: Transaction };
 
 /** Flattens day groups into header + row items for a virtualized list. */
 export function flattenGroups(groups: readonly DayGroup[]): ListItem[] {

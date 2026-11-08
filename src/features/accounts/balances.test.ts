@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { computeBalances, effectOnAccount, totalBalance } from "./balances";
 
-const tx = (type: "income" | "expense" | "transfer", amount: number, account: string, to: string | null = null) => ({
+const tx = (
+  type: "income" | "expense" | "transfer",
+  amount: number,
+  account: string,
+  to: string | null = null,
+) => ({
   type,
   amount_cents: amount,
   account_id: account,
@@ -39,7 +44,9 @@ describe("balances", () => {
   });
 
   it("ignores transactions of unknown accounts", () => {
-    expect(computeBalances([{ id: "a", initial_balance_cents: 1 }], [tx("expense", 5, "x")]).get("a")).toBe(1);
+    expect(
+      computeBalances([{ id: "a", initial_balance_cents: 1 }], [tx("expense", 5, "x")]).get("a"),
+    ).toBe(1);
   });
 
   it("computes the effect per account", () => {

@@ -26,10 +26,22 @@ export function BulkActionsBar({ count, onSelectAll, onChangeCategory, onDelete,
         <Button size="sm" variant="ghost" iconStart={<CheckCheck />} onClick={onSelectAll}>
           {t("transactions.bulk.selectAll")}
         </Button>
-        <Button size="sm" variant="secondary" iconStart={<FolderInput />} onClick={onChangeCategory} disabled={count === 0}>
+        <Button
+          size="sm"
+          variant="secondary"
+          iconStart={<FolderInput />}
+          onClick={onChangeCategory}
+          disabled={count === 0}
+        >
           {t("transactions.bulk.changeCategory")}
         </Button>
-        <Button size="sm" variant="danger" iconStart={<Trash2 />} onClick={onDelete} disabled={count === 0}>
+        <Button
+          size="sm"
+          variant="danger"
+          iconStart={<Trash2 />}
+          onClick={onDelete}
+          disabled={count === 0}
+        >
           {t("transactions.bulk.delete")}
         </Button>
       </div>

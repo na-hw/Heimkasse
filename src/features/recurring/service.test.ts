@@ -3,7 +3,14 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { createRepositories, type Repositories } from "@/features/repositories";
 import { ADAPTER_FACTORIES } from "@/test/adapters";
 import { ruleStatus } from "./schedule";
-import { bookNext, createRule, generateDueTransactions, skipNext, updateRule, upcomingOccurrences } from "./service";
+import {
+  bookNext,
+  createRule,
+  generateDueTransactions,
+  skipNext,
+  updateRule,
+  upcomingOccurrences,
+} from "./service";
 
 const sqlite = ADAPTER_FACTORIES[0];
 
@@ -36,7 +43,9 @@ describe("recurring service", () => {
     expect(await generateDueTransactions(repos, "2026-11-08")).toBe(0);
     const txs = await repos.transactions.list({ orderBy: [{ field: "date" }] });
     expect(txs.map((t) => t.date)).toEqual(["2026-08-31", "2026-09-30", "2026-10-31"]);
-    expect(txs.every((t) => t.recurring_rule_id === rule.id && t.amount_cents === 950_00)).toBe(true);
+    expect(txs.every((t) => t.recurring_rule_id === rule.id && t.amount_cents === 950_00)).toBe(
+      true,
+    );
     expect((await repos.recurringRules.getOrThrow(rule.id)).next_run_date).toBe("2026-11-30");
   });
 

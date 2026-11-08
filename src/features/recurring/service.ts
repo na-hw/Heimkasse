@@ -3,7 +3,13 @@ import type { TransactionCreate } from "@/features/transactions/schemas";
 import type { WriteOp } from "@/lib/db/types";
 import { addDaysIso } from "@/lib/utils/dateMath";
 import type { RecurringRule, RecurringRuleCreate, RecurringRuleUpdate } from "./schemas";
-import { dueDates, firstOnOrAfter, occurrenceAfter, occurrencesBetween, ruleStatus } from "./schedule";
+import {
+  dueDates,
+  firstOnOrAfter,
+  occurrenceAfter,
+  occurrencesBetween,
+  ruleStatus,
+} from "./schedule";
 
 /** Transaction fields generated from a rule for one occurrence date. */
 export function transactionFromRule(rule: RecurringRule, date: string): TransactionCreate {
@@ -34,9 +40,16 @@ const SCHEDULE_FIELDS = ["frequency", "interval", "start_date", "end_date"] as c
  * Updates a rule. Changes apply to future occurrences only; if the schedule
  * changes, the next date is recalculated from today (no retroactive bookings).
  */
-export function updateRule(repos: Repositories, rule: RecurringRule, patch: RecurringRuleUpdate, today: string) {
+export function updateRule(
+  repos: Repositories,
+  rule: RecurringRule,
+  patch: RecurringRuleUpdate,
+  today: string,
+) {
   const merged = { ...rule, ...patch } as RecurringRule;
-  const scheduleChanged = SCHEDULE_FIELDS.some((f) => patch[f] !== undefined && patch[f] !== rule[f]);
+  const scheduleChanged = SCHEDULE_FIELDS.some(
+    (f) => patch[f] !== undefined && patch[f] !== rule[f],
+  );
   if (!scheduleChanged) return repos.recurringRules.update(rule.id, patch);
   const from = rule.next_run_date > today ? rule.next_run_date : today;
   const next = firstOnOrAfter(merged, from < merged.start_date ? merged.start_date : from);
@@ -61,7 +74,9 @@ function bookOps(repos: Repositories, rule: RecurringRule, dates: readonly strin
  * written atomically and advanced, so running this again never duplicates.
  */
 export async function generateDueTransactions(repos: Repositories, today: string): Promise<number> {
-  const rules = await repos.recurringRules.list({ where: [{ field: "auto_create", op: "eq", value: true }] });
+  const rules = await repos.recurringRules.list({
+    where: [{ field: "auto_create", op: "eq", value: true }],
+  });
   let created = 0;
   for (const rule of rules) {
     const dates = dueDates(rule, today);
@@ -79,7 +94,9 @@ export async function bookNext(repos: Repositories, rule: RecurringRule) {
 
 /** Skips the next occurrence without booking it. */
 export function skipNext(repos: Repositories, rule: RecurringRule) {
-  return repos.recurringRules.update(rule.id, { next_run_date: occurrenceAfter(rule, rule.next_run_date) });
+  return repos.recurringRules.update(rule.id, {
+    next_run_date: occurrenceAfter(rule, rule.next_run_date),
+  });
 }
 
 export interface UpcomingItem {
@@ -90,12 +107,20 @@ export interface UpcomingItem {
 }
 
 /** Occurrences of active rules from their next date through today + `days`. */
-export function upcomingOccurrences(rules: readonly RecurringRule[], today: string, days = 30): UpcomingItem[] {
+export function upcomingOccurrences(
+  rules: readonly RecurringRule[],
+  today: string,
+  days = 30,
+): UpcomingItem[] {
   const until = addDaysIso(today, days);
   return rules
     .filter((r) => ruleStatus(r) === "active")
     .flatMap((rule) =>
-      occurrencesBetween(rule, rule.next_run_date, until, 60).map((date) => ({ rule, date, due: date <= today })),
+      occurrencesBetween(rule, rule.next_run_date, until, 60).map((date) => ({
+        rule,
+        date,
+        due: date <= today,
+      })),
     )
     .sort((a, b) => a.date.localeCompare(b.date));
 }

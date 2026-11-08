@@ -36,7 +36,12 @@ export function IconPicker({ value, onChange, color = "teal", label }: IconPicke
         {ICON_KEYS.map((key) => {
           const Icon = ICON_REGISTRY[key];
           return (
-            <RadioPrimitive.Item key={key} value={key} aria-label={t(`icons.${key}`)} className={styles.item}>
+            <RadioPrimitive.Item
+              key={key}
+              value={key}
+              aria-label={t(`icons.${key}`)}
+              className={styles.item}
+            >
               <Icon aria-hidden="true" />
             </RadioPrimitive.Item>
           );

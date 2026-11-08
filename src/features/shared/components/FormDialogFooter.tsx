@@ -12,7 +12,12 @@ interface FormDialogFooterProps {
 }
 
 /** Cancel + submit buttons for forms rendered inside Dialog/Sheet bodies. */
-export function FormDialogFooter({ formId, submitLabel, loading, onCancel }: FormDialogFooterProps) {
+export function FormDialogFooter({
+  formId,
+  submitLabel,
+  loading,
+  onCancel,
+}: FormDialogFooterProps) {
   const { t } = useTranslation();
   return (
     <>

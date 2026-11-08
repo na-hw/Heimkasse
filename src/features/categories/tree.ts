@@ -8,7 +8,10 @@ export interface CategoryNode {
 const bySortOrder = (a: Category, b: Category) => a.sort_order - b.sort_order;
 
 /** Groups categories into top-level nodes with their children (sorted). Orphans become top-level. */
-export function buildCategoryTree(categories: readonly Category[], type?: CategoryType): CategoryNode[] {
+export function buildCategoryTree(
+  categories: readonly Category[],
+  type?: CategoryType,
+): CategoryNode[] {
   const list = type ? categories.filter((c) => c.type === type) : [...categories];
   const ids = new Set(list.map((c) => c.id));
   const roots = list.filter((c) => !c.parent_id || !ids.has(c.parent_id)).sort(bySortOrder);
@@ -26,6 +29,11 @@ export function withDescendants(categories: readonly Category[], id: string): st
 /** Siblings in display order (same parent and type), used for reordering. */
 export function siblingsOf(categories: readonly Category[], category: Category): Category[] {
   return categories
-    .filter((c) => c.type === category.type && c.parent_id === category.parent_id && c.archived === category.archived)
+    .filter(
+      (c) =>
+        c.type === category.type &&
+        c.parent_id === category.parent_id &&
+        c.archived === category.archived,
+    )
     .sort(bySortOrder);
 }

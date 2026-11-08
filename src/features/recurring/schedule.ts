@@ -8,7 +8,11 @@ export interface Schedule {
   end_date: string | null;
 }
 
-const MONTHS_PER_STEP: Record<Exclude<Frequency, "weekly">, number> = { monthly: 1, quarterly: 3, yearly: 12 };
+const MONTHS_PER_STEP: Record<Exclude<Frequency, "weekly">, number> = {
+  monthly: 1,
+  quarterly: 3,
+  yearly: 12,
+};
 
 /**
  * The n-th occurrence (0 = start). Months are always counted from the start
@@ -20,7 +24,9 @@ export function occurrenceAt(s: Schedule, n: number): string {
 }
 
 function approxStepDays(s: Schedule): number {
-  return s.frequency === "weekly" ? 7 * s.interval : 30.44 * MONTHS_PER_STEP[s.frequency] * s.interval;
+  return s.frequency === "weekly"
+    ? 7 * s.interval
+    : 30.44 * MONTHS_PER_STEP[s.frequency] * s.interval;
 }
 
 /** Index of the first occurrence on or after `date` (ignores the end date). */
@@ -46,7 +52,11 @@ export function occurrenceAfter(s: Schedule, date: string): string {
 export function occurrencesBetween(s: Schedule, from: string, to: string, limit = 400): string[] {
   const result: string[] = [];
   let n = firstIndexOnOrAfter(s, from);
-  for (let occ = occurrenceAt(s, n); occ <= to && result.length < limit; occ = occurrenceAt(s, ++n)) {
+  for (
+    let occ = occurrenceAt(s, n);
+    occ <= to && result.length < limit;
+    occ = occurrenceAt(s, ++n)
+  ) {
     if (s.end_date && occ > s.end_date) break;
     result.push(occ);
   }
@@ -55,7 +65,9 @@ export function occurrencesBetween(s: Schedule, from: string, to: string, limit 
 
 export type RuleStatus = "active" | "paused" | "ended";
 
-export function ruleStatus(rule: Pick<RecurringRule, "paused" | "end_date" | "next_run_date">): RuleStatus {
+export function ruleStatus(
+  rule: Pick<RecurringRule, "paused" | "end_date" | "next_run_date">,
+): RuleStatus {
   if (rule.end_date && rule.next_run_date > rule.end_date) return "ended";
   return rule.paused ? "paused" : "active";
 }

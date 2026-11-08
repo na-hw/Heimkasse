@@ -63,15 +63,27 @@ export interface SearchContext {
 }
 
 /** Filters that need OR logic or derived text (account incl. transfer target, tags, search). */
-export function matchesClientFilters(tx: Transaction, f: TransactionFilters, ctx: SearchContext): boolean {
+export function matchesClientFilters(
+  tx: Transaction,
+  f: TransactionFilters,
+  ctx: SearchContext,
+): boolean {
   if (f.accountIds.length) {
-    const hit = f.accountIds.includes(tx.account_id) || (tx.transfer_account_id !== null && f.accountIds.includes(tx.transfer_account_id));
+    const hit =
+      f.accountIds.includes(tx.account_id) ||
+      (tx.transfer_account_id !== null && f.accountIds.includes(tx.transfer_account_id));
     if (!hit) return false;
   }
   if (f.tags.length && !f.tags.some((tag) => tx.tags.includes(tag))) return false;
   const query = f.search.trim().toLocaleLowerCase();
   if (query) {
-    const haystack = [tx.payee, tx.note, ...tx.tags, ctx.categoryName(tx.category_id), ctx.accountName(tx.account_id)]
+    const haystack = [
+      tx.payee,
+      tx.note,
+      ...tx.tags,
+      ctx.categoryName(tx.category_id),
+      ctx.accountName(tx.account_id),
+    ]
       .filter(Boolean)
       .join(" ")
       .toLocaleLowerCase();
@@ -81,7 +93,10 @@ export function matchesClientFilters(tx: Transaction, f: TransactionFilters, ctx
 }
 
 /** Stable sort; ties are broken by creation time so new entries appear first. */
-export function sortTransactions(list: readonly Transaction[], sort: TransactionSort): Transaction[] {
+export function sortTransactions(
+  list: readonly Transaction[],
+  sort: TransactionSort,
+): Transaction[] {
   const sign = sort === "dateAsc" || sort === "amountAsc" ? 1 : -1;
   return [...list].sort((a, b) => {
     const primary =
@@ -102,5 +117,7 @@ export function collectTags(list: readonly Pick<Transaction, "tags">[]): string[
 export function collectPayees(list: readonly Pick<Transaction, "payee">[]): string[] {
   const counts = new Map<string, number>();
   for (const { payee } of list) if (payee) counts.set(payee, (counts.get(payee) ?? 0) + 1);
-  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([p]) => p);
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([p]) => p);
 }

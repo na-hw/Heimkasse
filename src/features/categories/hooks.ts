@@ -41,10 +41,15 @@ export function useCategoryMutations() {
   });
 
   const update = useDataMutation({
-    mutationFn: async (repos, { id, patch, all }: { id: string; patch: CategoryUpdate; all: Category[] }) => {
+    mutationFn: async (
+      repos,
+      { id, patch, all }: { id: string; patch: CategoryUpdate; all: Category[] },
+    ) => {
       // Subcategories always share the type of their parent.
       const childOps = patch.type
-        ? all.filter((c) => c.parent_id === id).map((c) => repos.categories.prepareUpdate(c.id, { type: patch.type }))
+        ? all
+            .filter((c) => c.parent_id === id)
+            .map((c) => repos.categories.prepareUpdate(c.id, { type: patch.type }))
         : [];
       await repos.storage.write([repos.categories.prepareUpdate(id, patch), ...childOps]);
     },
@@ -56,9 +61,12 @@ export function useCategoryMutations() {
   });
 
   const setArchived = useDataMutation({
-    mutationFn: (repos, { id, archived, all }: { id: string; archived: boolean; all: Category[] }) =>
-      setCategoryArchived(repos, all, id, archived),
-    onSuccess: (_r, { archived }) => toast.success(t(archived ? "categories.archived" : "categories.unarchived")),
+    mutationFn: (
+      repos,
+      { id, archived, all }: { id: string; archived: boolean; all: Category[] },
+    ) => setCategoryArchived(repos, all, id, archived),
+    onSuccess: (_r, { archived }) =>
+      toast.success(t(archived ? "categories.archived" : "categories.unarchived")),
   });
 
   const restore = useDataMutation({
@@ -67,10 +75,13 @@ export function useCategoryMutations() {
   });
 
   const remove = useDataMutation({
-    mutationFn: (repos, { id, all }: { id: string; all: Category[] }) => softDeleteCategory(repos, all, id),
+    mutationFn: (repos, { id, all }: { id: string; all: Category[] }) =>
+      softDeleteCategory(repos, all, id),
     optimistic: ({ id, all }, cache) => {
       const ids = new Set(withDescendants(all, id));
-      return cache.updateLists<Category>(queryKeys.categories, (list) => list.filter((c) => !ids.has(c.id)));
+      return cache.updateLists<Category>(queryKeys.categories, (list) =>
+        list.filter((c) => !ids.has(c.id)),
+      );
     },
     onSuccess: (_r, { id, all }) =>
       toast.show({
@@ -85,8 +96,10 @@ export function useCategoryMutations() {
   });
 
   const move = useDataMutation({
-    mutationFn: (repos, { siblings, id, direction }: { siblings: Category[]; id: string; direction: "up" | "down" }) =>
-      moveCategory(repos, siblings, id, direction),
+    mutationFn: (
+      repos,
+      { siblings, id, direction }: { siblings: Category[]; id: string; direction: "up" | "down" },
+    ) => moveCategory(repos, siblings, id, direction),
     onSuccess: () => announce(t("common.moved")),
   });
 

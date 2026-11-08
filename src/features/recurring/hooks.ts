@@ -22,7 +22,8 @@ export function useRecurringMutations() {
   const { t } = useTranslation();
 
   const create = useDataMutation({
-    mutationFn: (repos, input: Omit<RecurringRuleCreate, "next_run_date">) => createRule(repos, input),
+    mutationFn: (repos, input: Omit<RecurringRuleCreate, "next_run_date">) =>
+      createRule(repos, input),
     onSuccess: () => toast.success(t("recurring.created")),
   });
 
@@ -33,8 +34,10 @@ export function useRecurringMutations() {
   });
 
   const setPaused = useDataMutation({
-    mutationFn: (repos, { id, paused }: { id: string; paused: boolean }) => repos.recurringRules.update(id, { paused }),
-    onSuccess: (_r, { paused }) => toast.success(t(paused ? "recurring.paused" : "recurring.resumed")),
+    mutationFn: (repos, { id, paused }: { id: string; paused: boolean }) =>
+      repos.recurringRules.update(id, { paused }),
+    onSuccess: (_r, { paused }) =>
+      toast.success(t(paused ? "recurring.paused" : "recurring.resumed")),
   });
 
   const skip = useDataMutation({
@@ -58,7 +61,11 @@ export function useRecurringMutations() {
       toast.show({
         title: t("recurring.deleted"),
         tone: "success",
-        action: { label: t("common.undo"), altText: t("common.undo"), onAction: () => restore.mutate(id) },
+        action: {
+          label: t("common.undo"),
+          altText: t("common.undo"),
+          onAction: () => restore.mutate(id),
+        },
       }),
   });
 

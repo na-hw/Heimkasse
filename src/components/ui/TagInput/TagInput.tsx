@@ -30,7 +30,8 @@ export function TagInput({ value, onChange, suggestions = [], maxTags = 20, id }
       .map((s) => s.trim())
       .filter(Boolean);
     const next = [...value];
-    for (const tag of tags) if (!next.includes(tag) && next.length < maxTags) next.push(tag.slice(0, 40));
+    for (const tag of tags)
+      if (!next.includes(tag) && next.length < maxTags) next.push(tag.slice(0, 40));
     if (next.length !== value.length) onChange(next);
     setDraft("");
   };

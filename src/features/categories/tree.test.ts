@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { buildCategoryTree, siblingsOf, withDescendants } from "./tree";
 import type { Category } from "./schemas";
 
-const cat = (id: string, sort: number, parent: string | null = null, type: "income" | "expense" = "expense"): Category => ({
+const cat = (
+  id: string,
+  sort: number,
+  parent: string | null = null,
+  type: "income" | "expense" = "expense",
+): Category => ({
   id,
   created_at: "2026-11-08T10:00:00.000Z",
   updated_at: "2026-11-08T10:00:00.000Z",
@@ -18,7 +23,14 @@ const cat = (id: string, sort: number, parent: string | null = null, type: "inco
   sort_order: sort,
 });
 
-const list = [cat("b", 2), cat("a", 1), cat("a2", 2, "a"), cat("a1", 1, "a"), cat("salary", 0, null, "income"), cat("orphan", 9, "gone")];
+const list = [
+  cat("b", 2),
+  cat("a", 1),
+  cat("a2", 2, "a"),
+  cat("a1", 1, "a"),
+  cat("salary", 0, null, "income"),
+  cat("orphan", 9, "gone"),
+];
 
 describe("category tree", () => {
   it("builds sorted roots with sorted children", () => {

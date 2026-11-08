@@ -32,7 +32,9 @@ export function useTransactionList(filters: TransactionFilters, sort: Transactio
   const accounts = useAccounts();
 
   const expandedCategories = useMemo(
-    () => [...new Set(filters.categoryIds.flatMap((id) => withDescendants(categories.data ?? [], id)))],
+    () => [
+      ...new Set(filters.categoryIds.flatMap((id) => withDescendants(categories.data ?? [], id))),
+    ],
     [filters.categoryIds, categories.data],
   );
   const storageWhere = toStorageConditions({ ...filters, categoryIds: expandedCategories });
@@ -74,7 +76,8 @@ export function useTransactionMeta() {
   });
 }
 
-const removeIds = (ids: readonly string[]) => (list: Transaction[]) => list.filter((tx) => !ids.includes(tx.id));
+const removeIds = (ids: readonly string[]) => (list: Transaction[]) =>
+  list.filter((tx) => !ids.includes(tx.id));
 
 export function useTransactionMutations() {
   const { t } = useTranslation();
@@ -89,7 +92,8 @@ export function useTransactionMutations() {
   });
 
   const update = useDataMutation({
-    mutationFn: (repos, { id, patch }: { id: string; patch: TransactionUpdate }) => repos.transactions.update(id, patch),
+    mutationFn: (repos, { id, patch }: { id: string; patch: TransactionUpdate }) =>
+      repos.transactions.update(id, patch),
     optimistic: ({ id, patch }, cache) =>
       cache.updateLists<Transaction>(queryKeys.transactions, (list) =>
         list.map((tx) => (tx.id === id ? ({ ...tx, ...patch } as Transaction) : tx)),
@@ -104,12 +108,17 @@ export function useTransactionMutations() {
 
   const remove = useDataMutation({
     mutationFn: (repos, ids: string[]) => repos.transactions.softDelete(ids),
-    optimistic: (ids, cache) => cache.updateLists<Transaction>(queryKeys.transactions, removeIds(ids)),
+    optimistic: (ids, cache) =>
+      cache.updateLists<Transaction>(queryKeys.transactions, removeIds(ids)),
     onSuccess: (_r, ids) =>
       toast.show({
         title: t("transactions.deleted", { count: ids.length }),
         tone: "success",
-        action: { label: t("common.undo"), altText: t("common.undo"), onAction: () => restore.mutate(ids) },
+        action: {
+          label: t("common.undo"),
+          altText: t("common.undo"),
+          onAction: () => restore.mutate(ids),
+        },
       }),
   });
 
@@ -120,7 +129,8 @@ export function useTransactionMutations() {
       cache.updateLists<Transaction>(queryKeys.transactions, (list) =>
         list.map((tx) => (ids.includes(tx.id) ? { ...tx, category_id: categoryId } : tx)),
       ),
-    onSuccess: (_r, { ids }) => toast.success(t("transactions.changeCategory.done", { count: ids.length })),
+    onSuccess: (_r, { ids }) =>
+      toast.success(t("transactions.changeCategory.done", { count: ids.length })),
   });
 
   return { create, update, remove, restore, setCategory };

@@ -1,4 +1,8 @@
-import { addDays as fnsAddDays, addMonths as fnsAddMonths, differenceInCalendarDays } from "date-fns";
+import {
+  addDays as fnsAddDays,
+  addMonths as fnsAddMonths,
+  differenceInCalendarDays,
+} from "date-fns";
 import { parseIsoDate, toIsoDate } from "./dates";
 
 /** Date arithmetic on ISO calendar dates (`YYYY-MM-DD`), timezone-safe. */

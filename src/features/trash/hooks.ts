@@ -27,7 +27,10 @@ export function useTrash() {
   return useQuery({
     queryKey: queryKeys.trash,
     queryFn: async () => {
-      const opts = { deleted: "only" as const, orderBy: [{ field: "deleted_at", direction: "desc" as const }] };
+      const opts = {
+        deleted: "only" as const,
+        orderBy: [{ field: "deleted_at", direction: "desc" as const }],
+      };
       const [transactions, accounts, categories, recurring] = await Promise.all([
         repos.transactions.list(opts),
         repos.accounts.list(opts),
@@ -48,11 +51,13 @@ async function purge(repos: Repositories, kind: TrashKind, ids: readonly string[
 export function useTrashMutations() {
   const { t } = useTranslation();
   const restore = useDataMutation({
-    mutationFn: (repos, { kind, ids }: { kind: TrashKind; ids: string[] }) => repoFor(repos, kind).restore(ids),
+    mutationFn: (repos, { kind, ids }: { kind: TrashKind; ids: string[] }) =>
+      repoFor(repos, kind).restore(ids),
     onSuccess: () => toast.success(t("trash.restored")),
   });
   const remove = useDataMutation({
-    mutationFn: (repos, { kind, ids }: { kind: TrashKind; ids: string[] }) => purge(repos, kind, ids),
+    mutationFn: (repos, { kind, ids }: { kind: TrashKind; ids: string[] }) =>
+      purge(repos, kind, ids),
     onSuccess: () => toast.success(t("trash.purged")),
   });
   return { restore, remove };

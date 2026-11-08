@@ -23,15 +23,20 @@ export interface OptimisticCache {
  * Standard mutation for local data: optional optimistic update, error toast
  * with rollback, and a refresh of all data queries afterwards.
  */
-export function useDataMutation<TVars, TResult = unknown>({ mutationFn, optimistic, onSuccess }: Options<TVars, TResult>) {
+export function useDataMutation<TVars, TResult = unknown>({
+  mutationFn,
+  optimistic,
+  onSuccess,
+}: Options<TVars, TResult>) {
   const repos = useRepositories();
   const queryClient = useQueryClient();
   const errorMessage = useErrorMessage();
 
   const cache: OptimisticCache = {
-    updateLists: <T,>(prefix: QueryKey, update: (list: T[]) => T[]) => {
+    updateLists: <T>(prefix: QueryKey, update: (list: T[]) => T[]) => {
       const snapshot = queryClient.getQueriesData<T[]>({ queryKey: prefix });
-      for (const [key, data] of snapshot) if (Array.isArray(data)) queryClient.setQueryData(key, update(data));
+      for (const [key, data] of snapshot)
+        if (Array.isArray(data)) queryClient.setQueryData(key, update(data));
       return () => snapshot.forEach(([key, data]) => queryClient.setQueryData(key, data));
     },
   };

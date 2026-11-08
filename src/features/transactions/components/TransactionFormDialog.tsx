@@ -56,7 +56,15 @@ function initialValues(
 }
 
 /** The form is mounted fresh for every opening, so defaults always apply. */
-function TransactionForm({ formId, accounts, onDone }: { formId: string; accounts: Account[]; onDone: () => void }) {
+function TransactionForm({
+  formId,
+  accounts,
+  onDone,
+}: {
+  formId: string;
+  accounts: Account[];
+  onDone: () => void;
+}) {
   const { t } = useTranslation();
   const { mode, transaction, defaults } = useTransactionEditor();
   const lastAccountId = useUiStore((s) => s.lastAccountId);
@@ -69,9 +77,15 @@ function TransactionForm({ formId, accounts, onDone }: { formId: string; account
 
   // Archived accounts stay selectable when editing a transaction that uses them.
   const usedArchived = transaction
-    ? accounts.filter((a) => a.id === transaction.account_id || a.id === transaction.transfer_account_id)
+    ? accounts.filter(
+        (a) => a.id === transaction.account_id || a.id === transaction.transfer_account_id,
+      )
     : [];
-  const selectable = [...new Map([...accounts.filter((a) => !a.archived), ...usedArchived].map((a) => [a.id, a])).values()];
+  const selectable = [
+    ...new Map(
+      [...accounts.filter((a) => !a.archived), ...usedArchived].map((a) => [a.id, a]),
+    ).values(),
+  ];
 
   const submit = form.handleSubmit(async (values) => {
     if (mode === "edit" && transaction) {
@@ -89,11 +103,17 @@ function TransactionForm({ formId, accounts, onDone }: { formId: string; account
         <TransactionFields
           accounts={selectable}
           besideAmount={
-            <FormField label={t("transactions.fields.date")} required error={form.formState.errors.date?.message}>
+            <FormField
+              label={t("transactions.fields.date")}
+              required
+              error={form.formState.errors.date?.message}
+            >
               <Controller
                 control={form.control}
                 name="date"
-                render={({ field }) => <DatePicker value={field.value} onChange={(v) => field.onChange(v ?? "")} />}
+                render={({ field }) => (
+                  <DatePicker value={field.value} onChange={(v) => field.onChange(v ?? "")} />
+                )}
               />
             </FormField>
           }
@@ -112,7 +132,11 @@ export function TransactionFormDialog() {
   const { create, update } = useTransactionMutations();
   const all = accounts.data?.all ?? [];
   const hasAccounts = (accounts.data?.active.length ?? 0) > 0;
-  const title = { create: t("transactions.new"), edit: t("transactions.edit"), duplicate: t("transactions.duplicateTitle") }[mode];
+  const title = {
+    create: t("transactions.new"),
+    edit: t("transactions.edit"),
+    duplicate: t("transactions.duplicateTitle"),
+  }[mode];
 
   return (
     <Dialog

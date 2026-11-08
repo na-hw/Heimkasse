@@ -30,7 +30,13 @@ interface TransactionListProps {
  * Virtualized list (window scrolling). Date sorts are grouped by day with a
  * daily net total; amount sorts are a flat list.
  */
-export function TransactionList({ transactions, sort, categories, accounts, ...rowProps }: TransactionListProps) {
+export function TransactionList({
+  transactions,
+  sort,
+  categories,
+  accounts,
+  ...rowProps
+}: TransactionListProps) {
   const { t } = useTranslation();
   const format = useFormat();
   const listRef = useRef<HTMLDivElement>(null);
@@ -58,7 +64,10 @@ export function TransactionList({ transactions, sort, categories, accounts, ...r
     getItemKey: (i) => items[i]?.key ?? i,
   });
 
-  const measure = useCallback((el: HTMLElement | null) => virtualizer.measureElement(el), [virtualizer]);
+  const measure = useCallback(
+    (el: HTMLElement | null) => virtualizer.measureElement(el),
+    [virtualizer],
+  );
 
   return (
     <div
@@ -93,7 +102,11 @@ export function TransactionList({ transactions, sort, categories, accounts, ...r
                 tx={item.tx}
                 category={item.tx.category_id ? categoryById.get(item.tx.category_id) : undefined}
                 account={accountById.get(item.tx.account_id)}
-                transferAccount={item.tx.transfer_account_id ? accountById.get(item.tx.transfer_account_id) : undefined}
+                transferAccount={
+                  item.tx.transfer_account_id
+                    ? accountById.get(item.tx.transfer_account_id)
+                    : undefined
+                }
                 selected={rowProps.selected.has(item.tx.id)}
                 selectMode={rowProps.selectMode}
                 onToggle={rowProps.onToggle}

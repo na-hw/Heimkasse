@@ -5,7 +5,11 @@ import type { Category } from "./schemas";
 import { withDescendants } from "./tree";
 
 /** Active transactions, rules and budgets that use the category or its subcategories. */
-export async function categoryUsage(repos: Repositories, categories: readonly Category[], id: string): Promise<number> {
+export async function categoryUsage(
+  repos: Repositories,
+  categories: readonly Category[],
+  id: string,
+): Promise<number> {
   const ids = withDescendants(categories, id);
   const where = [{ field: "category_id", op: "in" as const, values: ids }];
   const counts = await Promise.all([
@@ -17,7 +21,11 @@ export async function categoryUsage(repos: Repositories, categories: readonly Ca
 }
 
 /** Moves a category (with its subcategories) to the trash. */
-export async function softDeleteCategory(repos: Repositories, categories: readonly Category[], id: string) {
+export async function softDeleteCategory(
+  repos: Repositories,
+  categories: readonly Category[],
+  id: string,
+) {
   await repos.categories.softDelete(withDescendants(categories, id));
 }
 
@@ -28,11 +36,18 @@ export async function setCategoryArchived(
   id: string,
   archived: boolean,
 ) {
-  const ops = withDescendants(categories, id).map((cid) => repos.categories.prepareUpdate(cid, { archived }));
+  const ops = withDescendants(categories, id).map((cid) =>
+    repos.categories.prepareUpdate(cid, { archived }),
+  );
   await repos.storage.write(ops);
 }
 
-export async function moveCategory(repos: Repositories, siblings: readonly Category[], id: string, direction: "up" | "down") {
+export async function moveCategory(
+  repos: Repositories,
+  siblings: readonly Category[],
+  id: string,
+  direction: "up" | "down",
+) {
   const ops: WriteOp[] = reorder(siblings, id, direction).map((c) =>
     repos.categories.prepareUpdate(c.id, { sort_order: c.sort_order }),
   );
@@ -50,7 +65,10 @@ export async function purgeCategory(repos: Repositories, id: string): Promise<vo
     repos.transactions.list({ where, deleted: "include" }),
     repos.recurringRules.list({ where, deleted: "include" }),
     repos.budgets.list({ where, deleted: "include" }),
-    repos.categories.list({ where: [{ field: "parent_id", op: "eq", value: id }], deleted: "include" }),
+    repos.categories.list({
+      where: [{ field: "parent_id", op: "eq", value: id }],
+      deleted: "include",
+    }),
   ]);
   await repos.storage.write([
     ...transactions.map((t) => repos.transactions.prepareUpdate(t.id, { category_id: null })),

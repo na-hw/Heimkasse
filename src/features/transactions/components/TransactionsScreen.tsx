@@ -56,7 +56,10 @@ export function TransactionsScreen() {
   // Announce the number of results after search/filter changes.
   useEffect(() => {
     if (!list.data) return;
-    const id = setTimeout(() => announce(t("transactions.count", { count: list.data?.length ?? 0 })), 600);
+    const id = setTimeout(
+      () => announce(t("transactions.count", { count: list.data?.length ?? 0 })),
+      600,
+    );
     return () => clearTimeout(id);
   }, [list.data, t]);
 
@@ -77,7 +80,10 @@ export function TransactionsScreen() {
   const isFiltered = activeFilters > 0 || filters.search.trim() !== "";
 
   const content = () => {
-    if (list.isError) return <ErrorState description={errorMessage(list.error)} onRetry={() => void list.refetch()} />;
+    if (list.isError)
+      return (
+        <ErrorState description={errorMessage(list.error)} onRetry={() => void list.refetch()} />
+      );
     if (!list.data || !accounts.data || !categories.data) {
       return (
         <Card padding="none">
@@ -107,8 +113,12 @@ export function TransactionsScreen() {
           ) : (
             <EmptyState
               icon={<Receipt />}
-              title={hasAccounts ? t("transactions.empty.title") : t("transactions.needAccount.title")}
-              description={hasAccounts ? t("transactions.empty.text") : t("transactions.needAccount.text")}
+              title={
+                hasAccounts ? t("transactions.empty.title") : t("transactions.needAccount.title")
+              }
+              description={
+                hasAccounts ? t("transactions.empty.text") : t("transactions.needAccount.text")
+              }
               action={
                 <Button variant="primary" iconStart={<Plus />} onClick={() => editor.openCreate()}>
                   {hasAccounts ? t("transactions.add") : t("transactions.needAccount.action")}
@@ -141,7 +151,12 @@ export function TransactionsScreen() {
         title={t("transactions.title")}
         description={t("transactions.description")}
         actions={
-          <Button variant="primary" iconStart={<Plus />} onClick={() => editor.openCreate()} aria-keyshortcuts="Meta+N Control+N">
+          <Button
+            variant="primary"
+            iconStart={<Plus />}
+            onClick={() => editor.openCreate()}
+            aria-keyshortcuts="Meta+N Control+N"
+          >
             {t("transactions.add")}
             <Kbd>{shortcutLabel("n")}</Kbd>
           </Button>
@@ -165,7 +180,9 @@ export function TransactionsScreen() {
               {activeFilters > 0 && (
                 <Badge tone="primary">
                   <span aria-hidden="true">{activeFilters}</span>
-                  <span className="visually-hidden">{t("transactions.filters.active", { count: activeFilters })}</span>
+                  <span className="visually-hidden">
+                    {t("transactions.filters.active", { count: activeFilters })}
+                  </span>
                 </Badge>
               )}
             </Button>
@@ -191,7 +208,9 @@ export function TransactionsScreen() {
           aria-pressed={selectMode}
           onClick={() => (selectMode ? endSelection() : setSelectMode(true))}
         >
-          <span className={styles.hideSmall}>{selectMode ? t("common.done") : t("common.selectMode")}</span>
+          <span className={styles.hideSmall}>
+            {selectMode ? t("common.done") : t("common.selectMode")}
+          </span>
         </Button>
       </div>
       {list.data && (

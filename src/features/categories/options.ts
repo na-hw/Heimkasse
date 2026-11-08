@@ -5,7 +5,11 @@ import type { Category, CategoryType } from "./schemas";
 import { buildCategoryTree } from "./tree";
 
 /** Combobox options grouped by main category (main category first, then its subcategories). */
-export function categoryOptions(t: TFunction, categories: readonly Category[], type?: CategoryType): ComboboxOption[] {
+export function categoryOptions(
+  t: TFunction,
+  categories: readonly Category[],
+  type?: CategoryType,
+): ComboboxOption[] {
   return buildCategoryTree(
     categories.filter((c) => !c.archived),
     type,

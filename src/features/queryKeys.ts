@@ -24,5 +24,7 @@ const DATA_KEYS = [
 
 /** Refreshes every data query (cheap: all data is local). */
 export function invalidateData(queryClient: QueryClient): Promise<void> {
-  return Promise.all(DATA_KEYS.map((queryKey) => queryClient.invalidateQueries({ queryKey }))).then(() => undefined);
+  return Promise.all(DATA_KEYS.map((queryKey) => queryClient.invalidateQueries({ queryKey }))).then(
+    () => undefined,
+  );
 }
