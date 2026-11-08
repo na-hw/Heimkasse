@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  display: flex;
+}
+
+.trigger {
+  cursor: pointer;
+  padding-inline-end: var(--space-7);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.value {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+}
+
+.clear {
+  position: absolute;
+  inset-inline-end: var(--space-1);
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.clear:hover {
+  background: var(--color-surface-hover);
+}
+
+.panel {
+  max-block-size: none;
+  padding: var(--space-2);
+}
