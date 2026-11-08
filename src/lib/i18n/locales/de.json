@@ -25,7 +25,11 @@
     "moreTitle": "Weitere Bereiche",
     "quickAdd": "Neue Buchung",
     "budgets": "Budgets",
-    "reports": "Berichte"
+    "reports": "Berichte",
+    "contracts": "Verträge",
+    "utilities": "Zähler & Nebenkosten",
+    "tax": "Steuer",
+    "goals": "Sparziele"
   },
   "common": {
     "save": "Speichern",
@@ -661,7 +665,11 @@
       "accounts": "Konten",
       "categories": "Kategorien",
       "recurring": "Regeln",
-      "budgets": "Budgets"
+      "budgets": "Budgets",
+      "contracts": "Verträge",
+      "meters": "Zähler",
+      "settlements": "Abrechnungen",
+      "goals": "Sparziele"
     },
     "empty": {
       "title": "Papierkorb ist leer",
@@ -820,5 +828,295 @@
     "failed": "Export fehlgeschlagen",
     "page": "Seite {{page}} von {{total}}",
     "createdOn": "Erstellt am {{date}} mit Heimkasse"
+  },
+  "contracts": {
+    "title": "Verträge",
+    "description": "Laufzeiten und Kündigungsfristen im Blick – Heimkasse erinnert dich rechtzeitig.",
+    "add": "Vertrag anlegen",
+    "new": "Neuer Vertrag",
+    "edit": "Vertrag bearbeiten",
+    "empty": {
+      "title": "Noch keine Verträge",
+      "text": "Lege Handy, Internet, Strom, Versicherungen oder das Fitnessstudio an – mit Mindestlaufzeit und Kündigungsfrist."
+    },
+    "sections": {
+      "active": "Laufende Verträge",
+      "inactive": "Gekündigte und beendete Verträge"
+    },
+    "summary": {
+      "monthly": "Kosten pro Monat",
+      "yearly": "Kosten pro Jahr",
+      "count": "Laufende Verträge",
+      "nextDeadline": "Nächste Kündigungsfrist",
+      "none": "Keine"
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "z. B. Handyvertrag",
+      "provider": "Anbieter",
+      "providerPlaceholder": "z. B. Telekom",
+      "category": "Kategorie",
+      "amount": "Betrag",
+      "frequency": "Abrechnung",
+      "startDate": "Vertragsbeginn",
+      "minimumTerm": "Mindestlaufzeit",
+      "minimumTermHint": "0 = keine Mindestlaufzeit",
+      "noticeValue": "Kündigungsfrist",
+      "noticeUnit": "Einheit",
+      "autoRenew": "Verlängerung danach",
+      "autoRenewHint": "0 = danach jederzeit mit der Kündigungsfrist kündbar",
+      "notes": "Notizen",
+      "createPayment": "Zahlung als wiederkehrende Buchung anlegen",
+      "createPaymentHint": "Heimkasse bucht den Betrag automatisch im gewählten Rhythmus.",
+      "account": "Konto",
+      "firstPayment": "Erste Zahlung"
+    },
+    "months_one": "{{count}} Monat",
+    "months_other": "{{count}} Monate",
+    "units": {
+      "days": "Tage",
+      "weeks": "Wochen",
+      "months": "Monate"
+    },
+    "frequencies": {
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "quarterly": "Vierteljährlich",
+      "yearly": "Jährlich"
+    },
+    "perFrequency": {
+      "weekly": "{{amount}} / Woche",
+      "monthly": "{{amount}} / Monat",
+      "quarterly": "{{amount}} / Quartal",
+      "yearly": "{{amount}} / Jahr"
+    },
+    "deadline": {
+      "fixed": "Kündigen bis {{date}}",
+      "renewing": "Kündigen bis {{date}} (verlängert sich sonst)",
+      "open": "Jederzeit kündbar – Ende frühestens {{date}}",
+      "termEnd": "Laufzeit bis {{date}}",
+      "daysLeft_one": "noch {{count}} Tag",
+      "daysLeft_other": "noch {{count}} Tage",
+      "today": "heute",
+      "preview": "Nächste Kündigungsfrist",
+      "previewOpen": "Jederzeit kündbar, frühestes Ende {{date}}",
+      "previewFixed": "Kündigen bis {{deadline}} zum {{termEnd}}"
+    },
+    "status": {
+      "active": "Aktiv",
+      "cancelled": "Gekündigt zum {{date}}",
+      "ended": "Beendet am {{date}}"
+    },
+    "linkedPayment": "Mit wiederkehrender Zahlung verknüpft",
+    "cancel": "Als gekündigt markieren",
+    "reactivate": "Kündigung zurücknehmen",
+    "cancelDialog": {
+      "title": "Vertrag gekündigt",
+      "text": "Zu welchem Datum endet „{{name}}“? Eine verknüpfte wiederkehrende Zahlung endet ebenfalls an diesem Tag.",
+      "endDate": "Vertragsende",
+      "confirm": "Speichern"
+    },
+    "created": "Vertrag angelegt",
+    "saved": "Vertrag gespeichert",
+    "deleted": "Vertrag in den Papierkorb verschoben",
+    "cancelled": "Als gekündigt gespeichert",
+    "reactivated": "Vertrag wieder aktiv",
+    "reminder": {
+      "title": "Kündigungsfrist: {{name}}",
+      "body_one": "Noch {{count}} Tag – kündigen bis {{date}}.",
+      "body_other": "Noch {{count}} Tage – kündigen bis {{date}}.",
+      "today": "Heute ist der letzte Tag zum Kündigen ({{date}})."
+    },
+    "dashboard": {
+      "title": "Kündigungsfristen",
+      "description": "Die nächsten 60 Tage",
+      "empty": "In den nächsten 60 Tagen läuft keine Kündigungsfrist ab.",
+      "all": "Alle Verträge"
+    }
+  },
+  "utilities": {
+    "title": "Zähler & Nebenkosten",
+    "description": "Zählerstände erfassen, Verbrauch und Kosten schätzen, Nebenkostenabrechnungen vergleichen.",
+    "tabs": {
+      "label": "Bereich",
+      "meters": "Zähler",
+      "settlements": "Nebenkosten"
+    }
+  },
+  "meters": {
+    "add": "Zähler anlegen",
+    "new": "Neuer Zähler",
+    "edit": "Zähler bearbeiten",
+    "empty": {
+      "title": "Noch keine Zähler",
+      "text": "Lege Strom-, Gas-, Wasser- oder Heizungszähler an und trage regelmäßig den Stand ein."
+    },
+    "types": {
+      "electricity": "Strom",
+      "gas": "Gas",
+      "water": "Wasser",
+      "heating": "Heizung"
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "z. B. Strom Wohnung",
+      "type": "Art",
+      "unit": "Einheit",
+      "meterNumber": "Zählernummer",
+      "price": "Preis pro Einheit",
+      "priceHint": "Arbeitspreis in Cent, z. B. 32,15",
+      "date": "Ablesedatum",
+      "value": "Zählerstand",
+      "note": "Notiz"
+    },
+    "priceUnit": "ct/{{unit}}",
+    "readings": {
+      "title": "Zählerstände",
+      "add": "Zählerstand erfassen",
+      "new": "Neuer Zählerstand",
+      "edit": "Zählerstand bearbeiten",
+      "empty": "Noch keine Zählerstände. Trage mindestens zwei Stände ein, um den Verbrauch zu sehen.",
+      "created": "Zählerstand gespeichert",
+      "deleted": "Zählerstand gelöscht",
+      "tooLow": "Der Stand ist kleiner als der vorherige ({{value}}).",
+      "tooHigh": "Der Stand ist größer als der nächste ({{value}})."
+    },
+    "stats": {
+      "latest": "Letzter Stand",
+      "latestOn": "am {{date}}",
+      "perDay": "Ø pro Tag",
+      "yearly": "Hochrechnung pro Jahr",
+      "yearlyCost": "Geschätzte Kosten pro Jahr",
+      "needTwo": "Mindestens zwei Stände nötig"
+    },
+    "consumption": {
+      "title": "Verbrauch je Ableseperiode",
+      "description": "Differenz zwischen zwei Ablesungen",
+      "period": "Zeitraum",
+      "amount": "Verbrauch",
+      "days": "Tage",
+      "perDay": "Ø pro Tag",
+      "cost": "Kosten"
+    },
+    "select": "Zähler auswählen",
+    "created": "Zähler angelegt",
+    "saved": "Zähler gespeichert",
+    "deleted": "Zähler in den Papierkorb verschoben"
+  },
+  "settlements": {
+    "add": "Abrechnung erfassen",
+    "new": "Neue Nebenkostenabrechnung",
+    "edit": "Abrechnung bearbeiten",
+    "empty": {
+      "title": "Noch keine Abrechnungen",
+      "text": "Erfasse deine jährliche Nebenkostenabrechnung, um Vorauszahlungen und tatsächliche Kosten zu vergleichen."
+    },
+    "fields": {
+      "year": "Abrechnungsjahr",
+      "prepayment": "Monatliche Vorauszahlung",
+      "actual": "Tatsächliche Kosten laut Abrechnung",
+      "notes": "Notizen"
+    },
+    "prepaidTotal": "Vorauszahlungen gesamt",
+    "refund": "Guthaben",
+    "backPayment": "Nachzahlung",
+    "balanced": "Ausgeglichen",
+    "suggestion": "Empfohlene neue Vorauszahlung: {{amount}} / Monat",
+    "booked": "In der Kategorie „Nebenkosten“ gebucht: {{amount}}",
+    "columns": {
+      "year": "Jahr",
+      "prepaid": "Vorausgezahlt",
+      "actual": "Tatsächlich",
+      "result": "Ergebnis"
+    },
+    "chartTitle": "Vorauszahlung vs. tatsächliche Kosten",
+    "duplicateYear": "Für dieses Jahr gibt es bereits eine Abrechnung.",
+    "created": "Abrechnung gespeichert",
+    "saved": "Abrechnung gespeichert",
+    "deleted": "Abrechnung in den Papierkorb verschoben"
+  },
+  "tax": {
+    "title": "Steuerhelfer",
+    "description": "Steuerlich relevante Ausgaben je Kategorie – als Grundlage für deine Steuererklärung.",
+    "yearLabel": "Steuerjahr {{year}}",
+    "previous": "Vorheriges Jahr",
+    "next": "Nächstes Jahr",
+    "current": "Aktuelles Jahr",
+    "total": "Summe aller Kategorien",
+    "count_one": "{{count}} Buchung",
+    "count_other": "{{count}} Buchungen",
+    "empty": {
+      "title": "Keine steuerrelevanten Buchungen",
+      "text": "Ordne Buchungen beim Erfassen eine Steuerkategorie zu (unter „Weitere Angaben“) – sie erscheinen dann hier."
+    },
+    "showTransactions": "Buchungen anzeigen",
+    "hideTransactions": "Buchungen ausblenden",
+    "hints": {
+      "work_expenses": "Arbeitsmittel, Fahrtkosten, Fortbildung (Anlage N)",
+      "home_office": "Tagespauschale für Tage im Homeoffice (Anlage N)",
+      "craftsman_services": "Arbeitskosten von Handwerkern – 20 % absetzbar (§ 35a EStG)",
+      "household_services": "Reinigung, Gartenpflege u. ä. – 20 % absetzbar (§ 35a EStG)",
+      "medical_costs": "Außergewöhnliche Belastungen (zumutbare Belastung beachten)",
+      "donations": "Spenden und Mitgliedsbeiträge (Zuwendungsbestätigung aufbewahren)",
+      "insurance": "Vorsorgeaufwendungen, z. B. Haftpflicht, Berufsunfähigkeit"
+    },
+    "columns": {
+      "category": "Steuerkategorie",
+      "amount": "Betrag",
+      "count": "Anzahl",
+      "date": "Datum",
+      "payee": "Empfänger",
+      "note": "Notiz"
+    },
+    "detailsTitle": "Einzelbuchungen",
+    "refundNote": "Erstattungen (Einnahmen mit Steuerkategorie) werden abgezogen."
+  },
+  "goals": {
+    "title": "Sparziele",
+    "description": "Spare gezielt – mit Fortschritt und Prognose, wann du dein Ziel erreichst.",
+    "add": "Sparziel anlegen",
+    "new": "Neues Sparziel",
+    "edit": "Sparziel bearbeiten",
+    "empty": {
+      "title": "Noch keine Sparziele",
+      "text": "Ob Notgroschen, Urlaub oder neue Küche – lege ein Ziel an und verfolge deine Einzahlungen."
+    },
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "z. B. Notgroschen",
+      "target": "Zielbetrag",
+      "targetDate": "Zieldatum"
+    },
+    "saved": "{{saved}} von {{target}}",
+    "remaining": "Noch {{amount}}",
+    "reached": "Ziel erreicht",
+    "projection": {
+      "on": "Voraussichtlich erreicht im {{date}}",
+      "none": "Noch keine Prognose – es fehlen regelmäßige Einzahlungen.",
+      "needed": "Nötig bis {{date}}: {{amount}} / Monat",
+      "overdue": "Zieldatum {{date}} ist überschritten",
+      "average": "Ø Einzahlung der letzten 3 Monate: {{amount}} / Monat"
+    },
+    "contribution": {
+      "add": "Einzahlen",
+      "withdraw": "Entnehmen",
+      "newDeposit": "Einzahlung",
+      "newWithdrawal": "Entnahme",
+      "amount": "Betrag",
+      "date": "Datum",
+      "note": "Notiz",
+      "history": "Verlauf",
+      "empty": "Noch keine Einzahlungen.",
+      "created": "Gespeichert",
+      "deleted": "Eintrag gelöscht",
+      "deposit": "Einzahlung",
+      "withdrawal": "Entnahme"
+    },
+    "archivedSection": "Archivierte Sparziele",
+    "created": "Sparziel angelegt",
+    "savedToast": "Sparziel gespeichert",
+    "deleted": "Sparziel in den Papierkorb verschoben",
+    "archived": "Sparziel archiviert",
+    "unarchived": "Sparziel wiederhergestellt"
   }
 }
