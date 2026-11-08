@@ -19,7 +19,7 @@ test.describe("accounts & transactions", () => {
 
     const row = page.getByRole("button", { name: /^REWE .*-45,99/ });
     await expect(row).toBeVisible();
-    await expect(page.getByText("1 Buchung", { exact: true })).toBeVisible();
+    await expect(page.locator("#main").getByText("1 Buchung", { exact: true })).toBeVisible();
 
     // Edit: amount 50
     await row.click();
@@ -48,7 +48,7 @@ test.describe("accounts & transactions", () => {
     await addExpense(page, "10", "Bäcker");
     await addExpense(page, "20", "Apotheke");
     await page.getByRole("searchbox", { name: "Buchungen durchsuchen" }).fill("bäck");
-    await expect(page.getByText("1 Buchung", { exact: true })).toBeVisible();
+    await expect(page.locator("#main").getByText("1 Buchung", { exact: true })).toBeVisible();
     await page.getByRole("searchbox", { name: "Buchungen durchsuchen" }).fill("");
 
     await page.getByRole("button", { name: "Auswählen" }).click();
