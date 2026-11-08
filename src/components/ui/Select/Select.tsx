@@ -41,7 +41,11 @@ export function Select<T extends string = string>({
   const { t } = useTranslation();
   const a11y = useFormFieldControl({ id });
   return (
-    <SelectPrimitive.Root value={value} onValueChange={(v) => onValueChange(v as T)} disabled={disabled}>
+    <SelectPrimitive.Root
+      value={value}
+      onValueChange={(v) => onValueChange(v as T)}
+      disabled={disabled}
+    >
       <SelectPrimitive.Trigger
         className={cn(control.control, styles.trigger, className)}
         aria-label={ariaLabel}
@@ -49,14 +53,22 @@ export function Select<T extends string = string>({
         {...a11y}
       >
         <SelectPrimitive.Value
-          placeholder={<span className={control.placeholder}>{placeholder ?? t("common.selectPlaceholder")}</span>}
+          placeholder={
+            <span className={control.placeholder}>
+              {placeholder ?? t("common.selectPlaceholder")}
+            </span>
+          }
         />
         <SelectPrimitive.Icon className={styles.chevron}>
           <ChevronDown size={18} aria-hidden="true" />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
-        <SelectPrimitive.Content className={cn(control.panel, styles.content)} position="popper" sideOffset={6}>
+        <SelectPrimitive.Content
+          className={cn(control.panel, styles.content)}
+          position="popper"
+          sideOffset={6}
+        >
           <SelectPrimitive.Viewport>
             {options.map((option) => (
               <SelectPrimitive.Item

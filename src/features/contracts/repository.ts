@@ -10,6 +10,10 @@ import {
 
 export class ContractsRepository extends BaseRepository<Contract, ContractCreate, ContractUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("contracts", { entity: contractSchema, create: contractCreateSchema, update: contractUpdateSchema }, deps);
+    super(
+      "contracts",
+      { entity: contractSchema, create: contractCreateSchema, update: contractUpdateSchema },
+      deps,
+    );
   }
 }

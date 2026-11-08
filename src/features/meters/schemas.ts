@@ -1,5 +1,11 @@
 import { z } from "zod";
-import { baseEntitySchema, idSchema, isoDateSchema, optionalText, requiredText } from "@/lib/validation/common";
+import {
+  baseEntitySchema,
+  idSchema,
+  isoDateSchema,
+  optionalText,
+  requiredText,
+} from "@/lib/validation/common";
 
 export const METER_TYPES = ["electricity", "gas", "water", "heating"] as const;
 
@@ -31,7 +37,10 @@ const readingFields = {
 };
 
 export const meterReadingSchema = baseEntitySchema.extend(readingFields);
-export const meterReadingCreateSchema = z.object({ ...readingFields, note: readingFields.note.default(null) });
+export const meterReadingCreateSchema = z.object({
+  ...readingFields,
+  note: readingFields.note.default(null),
+});
 export const meterReadingUpdateSchema = z.object(readingFields).partial();
 
 export type Meter = z.infer<typeof meterSchema>;

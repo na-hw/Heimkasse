@@ -92,9 +92,15 @@ export function Combobox({
               className={styles.search}
             />
             <Command.List id={listId} className={styles.list}>
-              <Command.Empty className={styles.empty}>{emptyText ?? t("combobox.empty")}</Command.Empty>
+              <Command.Empty className={styles.empty}>
+                {emptyText ?? t("combobox.empty")}
+              </Command.Empty>
               {groupOptions(options).map(([group, items]) => (
-                <Command.Group key={group || "default"} heading={group || undefined} className={styles.group}>
+                <Command.Group
+                  key={group || "default"}
+                  heading={group || undefined}
+                  className={styles.group}
+                >
                   {items.map((option) => (
                     <Command.Item
                       key={option.value}
@@ -109,7 +115,9 @@ export function Combobox({
                     >
                       {option.icon}
                       <span className={styles.label}>{option.label}</span>
-                      {option.value === value && <Check size={16} aria-hidden="true" className={styles.check} />}
+                      {option.value === value && (
+                        <Check size={16} aria-hidden="true" className={styles.check} />
+                      )}
                     </Command.Item>
                   ))}
                 </Command.Group>

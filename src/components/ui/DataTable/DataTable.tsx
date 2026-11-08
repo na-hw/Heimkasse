@@ -93,7 +93,13 @@ export function DataTable<T>({
       header: ({ table }) => (
         <Checkbox
           aria-label={t("dataTable.selectAll")}
-          checked={table.getIsAllRowsSelected() ? true : table.getIsSomeRowsSelected() ? "indeterminate" : false}
+          checked={
+            table.getIsAllRowsSelected()
+              ? true
+              : table.getIsSomeRowsSelected()
+                ? "indeterminate"
+                : false
+          }
           onCheckedChange={(v) => table.toggleAllRowsSelected(v === true)}
         />
       ),
@@ -152,7 +158,9 @@ export function DataTable<T>({
   const virtualItems = virtualize ? virtualizer.getVirtualItems() : [];
   const padStart = virtualItems[0]?.start ?? 0;
   const padEnd = virtualize ? virtualizer.getTotalSize() - (virtualItems.at(-1)?.end ?? 0) : 0;
-  const visibleRows = virtualize ? virtualItems.flatMap((v) => (rows[v.index] ? [rows[v.index]] : [])) : rows;
+  const visibleRows = virtualize
+    ? virtualItems.flatMap((v) => (rows[v.index] ? [rows[v.index]] : []))
+    : rows;
 
   if (error) return <ErrorState description={error} onRetry={onRetry} />;
 
@@ -177,7 +185,13 @@ export function DataTable<T>({
         row ? (
           <tr key={row.id} className={styles.row} data-selected={row.getIsSelected() || undefined}>
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className={cn(styles.cell, styles[`align-${cell.column.columnDef.meta?.align ?? "start"}`])}>
+              <td
+                key={cell.id}
+                className={cn(
+                  styles.cell,
+                  styles[`align-${cell.column.columnDef.meta?.align ?? "start"}`],
+                )}
+              >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
@@ -213,10 +227,22 @@ export function DataTable<T>({
                       key={header.id}
                       scope="col"
                       className={cn(styles.th, styles[`align-${align}`])}
-                      aria-sort={sorted === "asc" ? "ascending" : sorted === "desc" ? "descending" : canSort ? "none" : undefined}
+                      aria-sort={
+                        sorted === "asc"
+                          ? "ascending"
+                          : sorted === "desc"
+                            ? "descending"
+                            : canSort
+                              ? "none"
+                              : undefined
+                      }
                     >
                       {canSort ? (
-                        <button type="button" className={styles.sortButton} onClick={header.column.getToggleSortingHandler()}>
+                        <button
+                          type="button"
+                          className={styles.sortButton}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
                           {content}
                           {sorted === "asc" ? (
                             <ArrowUp size={14} aria-hidden="true" />

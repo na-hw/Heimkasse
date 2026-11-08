@@ -51,7 +51,12 @@ export function Sidebar() {
             .filter((i) => !i.secondary)
             .map((item) => (
               <li key={item.id}>
-                <NavLink item={item} className={styles.navLink} activeClassName={styles.navLinkActive} iconOnly={collapsed} />
+                <NavLink
+                  item={item}
+                  className={styles.navLink}
+                  activeClassName={styles.navLinkActive}
+                  iconOnly={collapsed}
+                />
               </li>
             ))}
         </ul>
@@ -60,7 +65,12 @@ export function Sidebar() {
             .filter((i) => i.secondary)
             .map((item) => (
               <li key={item.id}>
-                <NavLink item={item} className={styles.navLink} activeClassName={styles.navLinkActive} iconOnly={collapsed} />
+                <NavLink
+                  item={item}
+                  className={styles.navLink}
+                  activeClassName={styles.navLinkActive}
+                  iconOnly={collapsed}
+                />
               </li>
             ))}
         </ul>

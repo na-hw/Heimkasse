@@ -16,20 +16,35 @@ import {
 
 export class MetersRepository extends BaseRepository<Meter, MeterCreate, MeterUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("meters", { entity: meterSchema, create: meterCreateSchema, update: meterUpdateSchema }, deps);
+    super(
+      "meters",
+      { entity: meterSchema, create: meterCreateSchema, update: meterUpdateSchema },
+      deps,
+    );
   }
 }
 
-export class MeterReadingsRepository extends BaseRepository<MeterReading, MeterReadingCreate, MeterReadingUpdate> {
+export class MeterReadingsRepository extends BaseRepository<
+  MeterReading,
+  MeterReadingCreate,
+  MeterReadingUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "meter_readings",
-      { entity: meterReadingSchema, create: meterReadingCreateSchema, update: meterReadingUpdateSchema },
+      {
+        entity: meterReadingSchema,
+        create: meterReadingCreateSchema,
+        update: meterReadingUpdateSchema,
+      },
       deps,
     );
   }
 
   listForMeter(meterId: string): Promise<MeterReading[]> {
-    return this.list({ where: [{ field: "meter_id", op: "eq", value: meterId }], orderBy: [{ field: "date" }] });
+    return this.list({
+      where: [{ field: "meter_id", op: "eq", value: meterId }],
+      orderBy: [{ field: "date" }],
+    });
   }
 }

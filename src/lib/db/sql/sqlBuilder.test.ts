@@ -25,8 +25,12 @@ describe("sqlBuilder", () => {
   });
 
   it("rejects unknown columns and invalid identifiers", () => {
-    expect(() => buildSelect(accounts, { where: [{ field: "nope", op: "isNull" }] })).toThrow(/Unknown column/);
-    expect(() => buildSelect(accounts, { orderBy: [{ field: 'name"; DROP TABLE x;--' }] })).toThrow();
+    expect(() => buildSelect(accounts, { where: [{ field: "nope", op: "isNull" }] })).toThrow(
+      /Unknown column/,
+    );
+    expect(() =>
+      buildSelect(accounts, { orderBy: [{ field: 'name"; DROP TABLE x;--' }] }),
+    ).toThrow();
     expect(() => quoteIdent("a b")).toThrow();
   });
 
@@ -62,7 +66,9 @@ describe("sqlBuilder", () => {
 
   it("generates idempotent DDL", () => {
     expect(createTableSql(accounts)).toMatch(/^CREATE TABLE IF NOT EXISTS "accounts"/);
-    expect(createTableSql(accounts)).toContain('"archived" INTEGER NOT NULL DEFAULT 0 CHECK ("archived" IN (0, 1))');
+    expect(createTableSql(accounts)).toContain(
+      '"archived" INTEGER NOT NULL DEFAULT 0 CHECK ("archived" IN (0, 1))',
+    );
     expect(createIndexSql("settings", { columns: ["key"], unique: true })).toBe(
       'CREATE UNIQUE INDEX IF NOT EXISTS "ux_settings_key" ON "settings" ("key")',
     );

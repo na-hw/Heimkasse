@@ -14,11 +14,19 @@ import {
   savingsGoalUpdateSchema,
 } from "./schemas";
 
-export class SavingsGoalsRepository extends BaseRepository<SavingsGoal, SavingsGoalCreate, SavingsGoalUpdate> {
+export class SavingsGoalsRepository extends BaseRepository<
+  SavingsGoal,
+  SavingsGoalCreate,
+  SavingsGoalUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "savings_goals",
-      { entity: savingsGoalSchema, create: savingsGoalCreateSchema, update: savingsGoalUpdateSchema },
+      {
+        entity: savingsGoalSchema,
+        create: savingsGoalCreateSchema,
+        update: savingsGoalUpdateSchema,
+      },
       deps,
     );
   }
@@ -32,7 +40,11 @@ export class GoalContributionsRepository extends BaseRepository<
   constructor(deps: RepositoryDeps) {
     super(
       "goal_contributions",
-      { entity: goalContributionSchema, create: goalContributionCreateSchema, update: goalContributionUpdateSchema },
+      {
+        entity: goalContributionSchema,
+        create: goalContributionCreateSchema,
+        update: goalContributionUpdateSchema,
+      },
       deps,
     );
   }

@@ -22,7 +22,10 @@ export interface ToastItem {
 
 interface ToastState {
   toasts: ToastItem[];
-  show: (toast: Omit<ToastItem, "id" | "duration" | "tone"> & Partial<Pick<ToastItem, "duration" | "tone">>) => string;
+  show: (
+    toast: Omit<ToastItem, "id" | "duration" | "tone"> &
+      Partial<Pick<ToastItem, "duration" | "tone">>,
+  ) => string;
   dismiss: (id: string) => void;
 }
 

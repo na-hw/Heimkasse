@@ -11,7 +11,10 @@ const fields = {
 };
 
 export const utilitySettlementSchema = baseEntitySchema.extend(fields);
-export const utilitySettlementCreateSchema = z.object({ ...fields, notes: fields.notes.default(null) });
+export const utilitySettlementCreateSchema = z.object({
+  ...fields,
+  notes: fields.notes.default(null),
+});
 export const utilitySettlementUpdateSchema = z.object(fields).partial();
 
 export type UtilitySettlement = z.infer<typeof utilitySettlementSchema>;

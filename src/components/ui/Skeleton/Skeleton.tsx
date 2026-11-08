@@ -13,7 +13,12 @@ export interface SkeletonProps {
  * Loading placeholder. Decorative: put aria-busy="true" and an accessible
  * loading label on the surrounding region instead.
  */
-export function Skeleton({ width = "100%", height = "1em", radius = "sm", className }: SkeletonProps) {
+export function Skeleton({
+  width = "100%",
+  height = "1em",
+  radius = "sm",
+  className,
+}: SkeletonProps) {
   return (
     <span
       aria-hidden="true"

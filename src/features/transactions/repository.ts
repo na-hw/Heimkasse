@@ -8,11 +8,19 @@ import {
   transactionUpdateSchema,
 } from "./schemas";
 
-export class TransactionsRepository extends BaseRepository<Transaction, TransactionCreate, TransactionUpdate> {
+export class TransactionsRepository extends BaseRepository<
+  Transaction,
+  TransactionCreate,
+  TransactionUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "transactions",
-      { entity: transactionSchema, create: transactionCreateSchema, update: transactionUpdateSchema },
+      {
+        entity: transactionSchema,
+        create: transactionCreateSchema,
+        update: transactionUpdateSchema,
+      },
       deps,
     );
   }

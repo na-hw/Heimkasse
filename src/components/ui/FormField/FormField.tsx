@@ -64,7 +64,9 @@ export function FormField({
             *
           </span>
         )}
-        {!required && showOptional && <span className={styles.optional}>({t("common.optional")})</span>}
+        {!required && showOptional && (
+          <span className={styles.optional}>({t("common.optional")})</span>
+        )}
       </label>
       <FormFieldContext.Provider value={context}>{children}</FormFieldContext.Provider>
       {hint && (

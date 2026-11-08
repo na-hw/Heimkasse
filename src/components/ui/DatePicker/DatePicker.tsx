@@ -27,7 +27,17 @@ export interface DatePickerProps {
 }
 
 /** Date field with a popover calendar. Stores ISO dates; displays them per locale/calendar. */
-export function DatePicker({ value, onChange, placeholder, clearable, min, max, disabled, id, className }: DatePickerProps) {
+export function DatePicker({
+  value,
+  onChange,
+  placeholder,
+  clearable,
+  min,
+  max,
+  disabled,
+  id,
+  className,
+}: DatePickerProps) {
   const { t } = useTranslation();
   const format = useFormat();
   const [open, setOpen] = useState(false);
@@ -75,7 +85,12 @@ export function DatePicker({ value, onChange, placeholder, clearable, min, max, 
         </PopoverPrimitive.Portal>
       </PopoverPrimitive.Root>
       {clearable && value && !disabled && (
-        <button type="button" className={styles.clear} aria-label={t("datePicker.clear")} onClick={() => onChange(null)}>
+        <button
+          type="button"
+          className={styles.clear}
+          aria-label={t("datePicker.clear")}
+          onClick={() => onChange(null)}
+        >
           <X size={16} aria-hidden="true" />
         </button>
       )}

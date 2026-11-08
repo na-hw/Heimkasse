@@ -39,7 +39,10 @@ const contributionFields = {
 };
 
 export const goalContributionSchema = baseEntitySchema.extend(contributionFields);
-export const goalContributionCreateSchema = z.object({ ...contributionFields, note: contributionFields.note.default(null) });
+export const goalContributionCreateSchema = z.object({
+  ...contributionFields,
+  note: contributionFields.note.default(null),
+});
 export const goalContributionUpdateSchema = z.object(contributionFields).partial();
 
 export type SavingsGoal = z.infer<typeof savingsGoalSchema>;

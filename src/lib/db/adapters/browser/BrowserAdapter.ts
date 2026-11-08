@@ -16,7 +16,10 @@ interface VersionRow {
 }
 
 /** Dexie store spec for all tables as of a migration version. */
-export function dexieStores(version: number, migrations: readonly Migration[]): Record<string, string> {
+export function dexieStores(
+  version: number,
+  migrations: readonly Migration[],
+): Record<string, string> {
   const stores: Record<string, string> = { [VERSION_STORE]: "version" };
   for (const table of schemaAt(version, migrations).values()) {
     const indexes = (table.indexes ?? []).map((i) => {

@@ -22,7 +22,13 @@ import {
 import { useCategories } from "@/features/categories/hooks";
 import { categoryDisplayName } from "@/features/categories/displayName";
 import { todayIso } from "@/lib/utils/dates";
-import { idSchema, isoDateSchema, optionalText, positiveCentsSchema, requiredText } from "@/lib/validation/common";
+import {
+  idSchema,
+  isoDateSchema,
+  optionalText,
+  positiveCentsSchema,
+  requiredText,
+} from "@/lib/validation/common";
 import { GallerySection } from "./GallerySection";
 import styles from "./DesignGallery.module.css";
 
@@ -70,7 +76,12 @@ export function FormDemo() {
         className={styles.form}
         onSubmit={form.handleSubmit(() => announce(t("design.form.submitted")))}
       >
-        <FormField label={t("design.form.name")} hint={t("design.form.nameHint")} required error={errors.name?.message}>
+        <FormField
+          label={t("design.form.name")}
+          hint={t("design.form.nameHint")}
+          required
+          error={errors.name?.message}
+        >
           <Input autoFocus {...form.register("name")} />
         </FormField>
         <div className={styles.formRow}>
@@ -79,7 +90,12 @@ export function FormDemo() {
               control={form.control}
               name="amount"
               render={({ field }) => (
-                <MoneyInput value={field.value ?? null} onChange={field.onChange} onBlur={field.onBlur} ref={field.ref} />
+                <MoneyInput
+                  value={field.value ?? null}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  ref={field.ref}
+                />
               )}
             />
           </FormField>
@@ -88,7 +104,13 @@ export function FormDemo() {
               control={form.control}
               name="quantity"
               render={({ field }) => (
-                <NumberInput value={field.value ?? null} onChange={field.onChange} onBlur={field.onBlur} unit="kWh" maxDecimals={3} />
+                <NumberInput
+                  value={field.value ?? null}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  unit="kWh"
+                  maxDecimals={3}
+                />
               )}
             />
           </FormField>
@@ -98,14 +120,18 @@ export function FormDemo() {
             <Controller
               control={form.control}
               name="date"
-              render={({ field }) => <DatePicker value={field.value} onChange={(v) => field.onChange(v ?? "")} />}
+              render={({ field }) => (
+                <DatePicker value={field.value} onChange={(v) => field.onChange(v ?? "")} />
+              )}
             />
           </FormField>
           <FormField label={t("design.form.range")} showOptional>
             <Controller
               control={form.control}
               name="range"
-              render={({ field }) => <DateRangePicker value={field.value} onChange={field.onChange} />}
+              render={({ field }) => (
+                <DateRangePicker value={field.value} onChange={field.onChange} />
+              )}
             />
           </FormField>
         </div>
@@ -149,7 +175,11 @@ export function FormDemo() {
           control={form.control}
           name="recurring"
           render={({ field }) => (
-            <Switch label={t("design.form.recurring")} checked={field.value} onCheckedChange={field.onChange} />
+            <Switch
+              label={t("design.form.recurring")}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           )}
         />
         <FormField label={t("design.form.accept")} hideLabel error={errors.accept?.message}>
@@ -157,13 +187,21 @@ export function FormDemo() {
             control={form.control}
             name="accept"
             render={({ field }) => (
-              <Checkbox label={t("design.form.accept")} checked={field.value === true} onCheckedChange={(v) => field.onChange(v === true)} />
+              <Checkbox
+                label={t("design.form.accept")}
+                checked={field.value === true}
+                onCheckedChange={(v) => field.onChange(v === true)}
+              />
             )}
           />
         </FormField>
         <div className={styles.row}>
-          <Button type="submit" variant="primary">{t("common.save")}</Button>
-          <Button type="button" variant="ghost" onClick={() => form.reset()}>{t("common.clear")}</Button>
+          <Button type="submit" variant="primary">
+            {t("common.save")}
+          </Button>
+          <Button type="button" variant="ghost" onClick={() => form.reset()}>
+            {t("common.clear")}
+          </Button>
         </div>
       </form>
     </GallerySection>

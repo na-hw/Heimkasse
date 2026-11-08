@@ -16,7 +16,11 @@ import {
 
 export class SettingsRepository extends BaseRepository<Setting, SettingCreate, SettingUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("settings", { entity: settingSchema, create: settingCreateSchema, update: settingUpdateSchema }, deps);
+    super(
+      "settings",
+      { entity: settingSchema, create: settingCreateSchema, update: settingUpdateSchema },
+      deps,
+    );
   }
 
   /**

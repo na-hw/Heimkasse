@@ -1,5 +1,11 @@
 import { z } from "zod";
-import { baseEntitySchema, centsSchema, colorKeySchema, iconKeySchema, requiredText } from "@/lib/validation/common";
+import {
+  baseEntitySchema,
+  centsSchema,
+  colorKeySchema,
+  iconKeySchema,
+  requiredText,
+} from "@/lib/validation/common";
 
 export const ACCOUNT_TYPES = ["bank", "cash", "credit_card", "paypal"] as const;
 export type AccountType = (typeof ACCOUNT_TYPES)[number];

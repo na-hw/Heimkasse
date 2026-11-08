@@ -13,7 +13,9 @@ export function FeedbackDemo() {
   return (
     <GallerySection title={t("design.sections.feedback")}>
       <div className={styles.row}>
-        <Button onClick={() => toast.success(t("design.feedback.toastSavedTitle"))}>{t("design.feedback.toastSuccess")}</Button>
+        <Button onClick={() => toast.success(t("design.feedback.toastSavedTitle"))}>
+          {t("design.feedback.toastSuccess")}
+        </Button>
         <Button
           onClick={() =>
             toast.show({
@@ -28,12 +30,22 @@ export function FeedbackDemo() {
         >
           {t("design.feedback.toastUndo")}
         </Button>
-        <Button onClick={() => toast.error(t("design.feedback.toastErrorTitle"), { description: t("errors.codes.write_failed") })}>
+        <Button
+          onClick={() =>
+            toast.error(t("design.feedback.toastErrorTitle"), {
+              description: t("errors.codes.write_failed"),
+            })
+          }
+        >
           {t("design.feedback.toastError")}
         </Button>
       </div>
       <div className={styles.stats}>
-        <StatCard label={t("design.feedback.balance")} icon={<Wallet />} value={<Amount cents={1234567} variant="neutral" size="lg" />} />
+        <StatCard
+          label={t("design.feedback.balance")}
+          icon={<Wallet />}
+          value={<Amount cents={1234567} variant="neutral" size="lg" />}
+        />
         <StatCard
           label={t("design.feedback.income")}
           icon={<ArrowDownLeft />}

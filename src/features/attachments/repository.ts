@@ -8,7 +8,11 @@ import {
   attachmentUpdateSchema,
 } from "./schemas";
 
-export class AttachmentsRepository extends BaseRepository<Attachment, AttachmentCreate, AttachmentUpdate> {
+export class AttachmentsRepository extends BaseRepository<
+  Attachment,
+  AttachmentCreate,
+  AttachmentUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "attachments",

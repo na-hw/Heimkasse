@@ -7,7 +7,11 @@ import type { Condition, OrderBy, Query, TableDef } from "../../types";
  * (null-safe eq/neq, nulls never match range comparisons, NULLs sort first
  * ascending like SQLite). Used by the IndexedDB adapter.
  */
-export function matchesCondition(table: TableDef, row: Record<string, unknown>, c: Condition): boolean {
+export function matchesCondition(
+  table: TableDef,
+  row: Record<string, unknown>,
+  c: Condition,
+): boolean {
   assertColumn(table, c.field);
   const def = table.columns[c.field];
   if (!def) return false;
@@ -45,7 +49,11 @@ function compare(a: unknown, b: unknown): number {
   return (a as string | number) < (b as string | number) ? -1 : 1;
 }
 
-export function sortRows<T extends Record<string, unknown>>(table: TableDef, rows: T[], orderBy: OrderBy[] = []): T[] {
+export function sortRows<T extends Record<string, unknown>>(
+  table: TableDef,
+  rows: T[],
+  orderBy: OrderBy[] = [],
+): T[] {
   if (orderBy.length === 0) return rows;
   orderBy.forEach((o) => assertColumn(table, o.field));
   return [...rows].sort((x, y) => {
@@ -58,8 +66,14 @@ export function sortRows<T extends Record<string, unknown>>(table: TableDef, row
 }
 
 /** Filters, sorts and paginates stored rows. */
-export function applyQuery<T extends Record<string, unknown>>(table: TableDef, rows: T[], query: Query = {}): T[] {
-  const filtered = rows.filter((row) => (query.where ?? []).every((c) => matchesCondition(table, row, c)));
+export function applyQuery<T extends Record<string, unknown>>(
+  table: TableDef,
+  rows: T[],
+  query: Query = {},
+): T[] {
+  const filtered = rows.filter((row) =>
+    (query.where ?? []).every((c) => matchesCondition(table, row, c)),
+  );
   const sorted = sortRows(table, filtered, query.orderBy);
   const start = query.offset ?? 0;
   const end = query.limit !== undefined ? start + query.limit : undefined;

@@ -10,7 +10,11 @@ import {
 
 export class AccountsRepository extends BaseRepository<Account, AccountCreate, AccountUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("accounts", { entity: accountSchema, create: accountCreateSchema, update: accountUpdateSchema }, deps);
+    super(
+      "accounts",
+      { entity: accountSchema, create: accountCreateSchema, update: accountUpdateSchema },
+      deps,
+    );
   }
 
   /** Non-archived, non-deleted accounts in display order. */

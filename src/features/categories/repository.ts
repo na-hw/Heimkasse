@@ -11,7 +11,11 @@ import {
 
 export class CategoriesRepository extends BaseRepository<Category, CategoryCreate, CategoryUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("categories", { entity: categorySchema, create: categoryCreateSchema, update: categoryUpdateSchema }, deps);
+    super(
+      "categories",
+      { entity: categorySchema, create: categoryCreateSchema, update: categoryUpdateSchema },
+      deps,
+    );
   }
 
   /** Active categories (optionally of one type) in display order. */

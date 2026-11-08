@@ -27,7 +27,10 @@ export function useModHotkey(key: string, handler: () => void, enabled = true): 
     const onKeyDown = (event: KeyboardEvent) => {
       const mod = isApplePlatform() ? event.metaKey : event.ctrlKey;
       if (!mod || event.altKey || event.shiftKey) return;
-      if (event.code === `Key${key.toUpperCase()}` || event.key.toLowerCase() === key.toLowerCase()) {
+      if (
+        event.code === `Key${key.toUpperCase()}` ||
+        event.key.toLowerCase() === key.toLowerCase()
+      ) {
         event.preventDefault();
         handlerRef.current();
       }

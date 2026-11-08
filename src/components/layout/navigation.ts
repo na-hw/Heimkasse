@@ -17,8 +17,23 @@ export interface NavItem {
 /** Single source of truth for app navigation. New features add their route here. */
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: "home", href: "/", labelKey: "nav.home", icon: House, mobile: true },
-  { id: "design", href: "/design/", labelKey: "nav.design", icon: Palette, mobile: false, secondary: true, devOnly: true },
-  { id: "settings", href: "/settings/", labelKey: "nav.settings", icon: Settings, mobile: true, secondary: true },
+  {
+    id: "design",
+    href: "/design/",
+    labelKey: "nav.design",
+    icon: Palette,
+    mobile: false,
+    secondary: true,
+    devOnly: true,
+  },
+  {
+    id: "settings",
+    href: "/settings/",
+    labelKey: "nav.settings",
+    icon: Settings,
+    mobile: true,
+    secondary: true,
+  },
 ];
 
 export const MAX_BOTTOM_NAV_ITEMS = 5;

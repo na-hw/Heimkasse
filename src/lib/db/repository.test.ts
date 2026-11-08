@@ -39,9 +39,17 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
   });
 
   it("updates only given fields and bumps updated_at", async () => {
-    const a = await repos.accounts.create({ name: "Bar", type: "cash", initial_balance_cents: 5000 });
+    const a = await repos.accounts.create({
+      name: "Bar",
+      type: "cash",
+      initial_balance_cents: 5000,
+    });
     const updated = await repos.accounts.update(a.id, { name: "Portemonnaie" });
-    expect(updated).toMatchObject({ name: "Portemonnaie", initial_balance_cents: 5000, type: "cash" });
+    expect(updated).toMatchObject({
+      name: "Portemonnaie",
+      initial_balance_cents: 5000,
+      type: "cash",
+    });
     expect(updated.updated_at > a.updated_at).toBe(true);
     expect(updated.created_at).toBe(a.created_at);
   });
@@ -64,21 +72,38 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
   it("filters, sorts and paginates consistently", async () => {
     const names = ["Delta", "alpha", "Charlie", "Bravo"];
     for (const [i, name] of names.entries()) {
-      await repos.accounts.create({ name, type: i % 2 ? "cash" : "bank", sort_order: i, archived: i === 3 });
+      await repos.accounts.create({
+        name,
+        type: i % 2 ? "cash" : "bank",
+        sort_order: i,
+        archived: i === 3,
+      });
     }
     const active = await repos.accounts.listActive();
     expect(active.map((a) => a.name)).toEqual(["Delta", "alpha", "Charlie"]);
 
-    const page = await repos.accounts.list({ orderBy: [{ field: "sort_order", direction: "desc" }], limit: 2, offset: 1 });
+    const page = await repos.accounts.list({
+      orderBy: [{ field: "sort_order", direction: "desc" }],
+      limit: 2,
+      offset: 1,
+    });
     expect(page.map((a) => a.name)).toEqual(["Charlie", "alpha"]);
 
-    const contains = await repos.accounts.list({ where: [{ field: "name", op: "contains", value: "ALP" }] });
+    const contains = await repos.accounts.list({
+      where: [{ field: "name", op: "contains", value: "ALP" }],
+    });
     expect(contains.map((a) => a.name)).toEqual(["alpha"]);
 
-    const byType = await repos.accounts.list({ where: [{ field: "type", op: "in", values: ["cash"] }], orderBy: [{ field: "name" }] });
+    const byType = await repos.accounts.list({
+      where: [{ field: "type", op: "in", values: ["cash"] }],
+      orderBy: [{ field: "name" }],
+    });
     expect(byType.map((a) => a.name)).toEqual(["Bravo", "alpha"]);
 
-    const range = await repos.accounts.list({ where: [{ field: "sort_order", op: "gte", value: 2 }], orderBy: [{ field: "sort_order" }] });
+    const range = await repos.accounts.list({
+      where: [{ field: "sort_order", op: "gte", value: 2 }],
+      orderBy: [{ field: "sort_order" }],
+    });
     expect(range.map((a) => a.name)).toEqual(["Charlie", "Bravo"]);
   });
 
@@ -104,20 +129,31 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
   it("validates transfers need a different target account", async () => {
     const a = await repos.accounts.create({ name: "A", type: "bank" });
     await expect(
-      repos.transactions.create({ account_id: a.id, type: "transfer", amount_cents: 100, date: "2026-11-08", transfer_account_id: a.id }),
+      repos.transactions.create({
+        account_id: a.id,
+        type: "transfer",
+        amount_cents: 100,
+        date: "2026-11-08",
+        transfer_account_id: a.id,
+      }),
     ).rejects.toThrow();
   });
 
   it("applies batched writes atomically", async () => {
     const { entity, op } = repos.accounts.prepareCreate({ name: "Atomic", type: "bank" });
     const duplicate = repos.accounts.prepareCreate({ name: "Dup", type: "bank" });
-    const conflicting = { ...duplicate.op, row: { ...duplicate.entity, id: entity.id } } as typeof op;
+    const conflicting = {
+      ...duplicate.op,
+      row: { ...duplicate.entity, id: entity.id },
+    } as typeof op;
     await expect(storage.write([op, conflicting])).rejects.toMatchObject({ code: "write_failed" });
     expect(await repos.accounts.get(entity.id)).toBeNull();
   });
 
   it("throws not_found for missing entities", async () => {
-    await expect(repos.accounts.getOrThrow("00000000-0000-4000-8000-000000000000")).rejects.toMatchObject({
+    await expect(
+      repos.accounts.getOrThrow("00000000-0000-4000-8000-000000000000"),
+    ).rejects.toMatchObject({
       code: "not_found",
     });
   });
@@ -140,14 +176,20 @@ describe.each(ADAPTER_FACTORIES)("repositories on $name", ({ create }) => {
       await repos.settings.setPreference("language", "fa");
       await repos.settings.setPreference("budgetMonthStartDay", 25);
       expect(await repos.settings.count()).toBe(2);
-      expect(await repos.settings.getPreferences()).toMatchObject({ language: "fa", budgetMonthStartDay: 25 });
+      expect(await repos.settings.getPreferences()).toMatchObject({
+        language: "fa",
+        budgetMonthStartDay: 25,
+      });
       await expect(repos.settings.setPreference("budgetMonthStartDay", 31)).rejects.toThrow();
     });
 
     it("falls back per key when a stored value is invalid", async () => {
       await repos.settings.create({ key: "theme", value: "neon" });
       await repos.settings.create({ key: "weekStart", value: 6 });
-      expect(await repos.settings.getPreferences()).toMatchObject({ theme: "system", weekStart: 6 });
+      expect(await repos.settings.getPreferences()).toMatchObject({
+        theme: "system",
+        weekStart: 6,
+      });
     });
   });
 });

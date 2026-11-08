@@ -13,6 +13,8 @@ export function renderWithProviders(
 ) {
   usePreferences.getState().setAll({ ...DEFAULT_PREFERENCES, language, digitStyle: "persian" });
   void i18n.changeLanguage(language);
-  const Wrapper = ({ children }: { children: ReactNode }) => <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  const Wrapper = ({ children }: { children: ReactNode }) => (
+    <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
+  );
   return render(ui, { wrapper: Wrapper, ...options });
 }

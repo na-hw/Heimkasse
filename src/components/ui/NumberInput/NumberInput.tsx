@@ -6,8 +6,10 @@ import { normalizeDecimalInput } from "@/lib/i18n/parse";
 import { useLocaleContext } from "@/lib/i18n/useFormat";
 import { Input } from "../Input";
 
-export interface NumberInputProps
-  extends Omit<ComponentPropsWithRef<"input">, "value" | "onChange" | "defaultValue" | "type" | "min" | "max"> {
+export interface NumberInputProps extends Omit<
+  ComponentPropsWithRef<"input">,
+  "value" | "onChange" | "defaultValue" | "type" | "min" | "max"
+> {
   value: number | null;
   onChange: (value: number | null) => void;
   /** Maximum number of decimal places (default 2). */
@@ -38,7 +40,9 @@ export function NumberInput({
 
   useEffect(() => {
     if (!focused.current) {
-      setText(value === null ? "" : formatNumber(value, ctx, { maximumFractionDigits: maxDecimals }));
+      setText(
+        value === null ? "" : formatNumber(value, ctx, { maximumFractionDigits: maxDecimals }),
+      );
     }
   }, [value, ctx, maxDecimals]);
 

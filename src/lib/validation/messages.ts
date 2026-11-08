@@ -10,7 +10,10 @@ export function validationMessage(key: string, params?: Record<string, string | 
 }
 
 /** Translates an encoded validation message; plain text passes through unchanged. */
-export function translateValidationMessage(t: TFunction, message: string | undefined): string | undefined {
+export function translateValidationMessage(
+  t: TFunction,
+  message: string | undefined,
+): string | undefined {
   if (!message) return undefined;
   const [key = "", rawParams] = message.split("|", 2);
   if (!key.startsWith("validation.")) return message;

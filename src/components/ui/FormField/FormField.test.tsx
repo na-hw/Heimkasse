@@ -8,7 +8,12 @@ import { FormField } from "./FormField";
 describe("FormField", () => {
   it("labels the control and links hint and error via aria-describedby", () => {
     renderWithProviders(
-      <FormField label="Name" hint="Shown in lists" error={validationMessage("validation.tooLong", { max: 5 })} required>
+      <FormField
+        label="Name"
+        hint="Shown in lists"
+        error={validationMessage("validation.tooLong", { max: 5 })}
+        required
+      >
         <Input />
       </FormField>,
     );

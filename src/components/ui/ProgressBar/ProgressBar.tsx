@@ -32,10 +32,20 @@ function toneFor(percent: number, warnAt: number | undefined): ProgressTone {
 }
 
 /** Progress with threshold states that use icons in addition to color. */
-export function ProgressBar({ value, max = 100, label, valueText, warnAt, tone, hideLabel, className }: ProgressBarProps) {
+export function ProgressBar({
+  value,
+  max = 100,
+  label,
+  valueText,
+  warnAt,
+  tone,
+  hideLabel,
+  className,
+}: ProgressBarProps) {
   const percent = max > 0 ? (value / max) * 100 : 0;
   const resolvedTone = tone ?? toneFor(percent, warnAt);
-  const StateIcon = resolvedTone === "danger" ? CircleAlert : resolvedTone === "warning" ? TriangleAlert : null;
+  const StateIcon =
+    resolvedTone === "danger" ? CircleAlert : resolvedTone === "warning" ? TriangleAlert : null;
   return (
     <div className={cn(styles.wrapper, className)}>
       <div className={cn(styles.meta, hideLabel && "visually-hidden")}>

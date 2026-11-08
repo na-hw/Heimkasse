@@ -64,9 +64,33 @@ export function SettingsScreen() {
             value={prefs.theme}
             onValueChange={(v) => update("theme", v)}
             options={[
-              { value: "system", label: <span className={styles.option}><Monitor aria-hidden="true" />{t("theme.system")}</span> },
-              { value: "light", label: <span className={styles.option}><Sun aria-hidden="true" />{t("theme.light")}</span> },
-              { value: "dark", label: <span className={styles.option}><Moon aria-hidden="true" />{t("theme.dark")}</span> },
+              {
+                value: "system",
+                label: (
+                  <span className={styles.option}>
+                    <Monitor aria-hidden="true" />
+                    {t("theme.system")}
+                  </span>
+                ),
+              },
+              {
+                value: "light",
+                label: (
+                  <span className={styles.option}>
+                    <Sun aria-hidden="true" />
+                    {t("theme.light")}
+                  </span>
+                ),
+              },
+              {
+                value: "dark",
+                label: (
+                  <span className={styles.option}>
+                    <Moon aria-hidden="true" />
+                    {t("theme.dark")}
+                  </span>
+                ),
+              },
             ]}
           />
           {isPersian && (
@@ -105,10 +129,16 @@ export function SettingsScreen() {
               <Select
                 value={String(prefs.weekStart)}
                 onValueChange={(v) => update("weekStart", Number(v))}
-                options={WEEKDAY_ORDER.map((d) => ({ value: String(d), label: weekdays[d] ?? String(d) }))}
+                options={WEEKDAY_ORDER.map((d) => ({
+                  value: String(d),
+                  label: weekdays[d] ?? String(d),
+                }))}
               />
             </FormField>
-            <FormField label={t("settings.budgetMonthStartDay.label")} hint={t("settings.budgetMonthStartDay.hint")}>
+            <FormField
+              label={t("settings.budgetMonthStartDay.label")}
+              hint={t("settings.budgetMonthStartDay.hint")}
+            >
               <Select
                 value={String(prefs.budgetMonthStartDay)}
                 onValueChange={(v) => update("budgetMonthStartDay", Number(v))}

@@ -21,7 +21,13 @@ export interface AmountProps {
  * Money amount with tabular digits. Income/expense are distinguished by
  * sign, optional icon and color – and read as "minus 45 euros" by screen readers.
  */
-export function Amount({ cents, variant = "signed", withIcon = false, size = "md", className }: AmountProps) {
+export function Amount({
+  cents,
+  variant = "signed",
+  withIcon = false,
+  size = "md",
+  className,
+}: AmountProps) {
   const { t } = useTranslation();
   const format = useFormat();
   const signed = variant === "signed";

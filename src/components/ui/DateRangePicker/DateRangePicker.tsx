@@ -30,7 +30,15 @@ export interface DateRangePickerProps {
 }
 
 /** Range selection (filters, reports). Shows two months on wide screens. */
-export function DateRangePicker({ value, onChange, placeholder, clearable = true, disabled, id, className }: DateRangePickerProps) {
+export function DateRangePicker({
+  value,
+  onChange,
+  placeholder,
+  clearable = true,
+  disabled,
+  id,
+  className,
+}: DateRangePickerProps) {
   const { t } = useTranslation();
   const format = useFormat();
   const wide = useMediaQuery("(min-width: 768px)");

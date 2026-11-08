@@ -2,7 +2,13 @@ import { z } from "zod";
 import { baseEntitySchema, idSchema, requiredText } from "@/lib/validation/common";
 
 export const ATTACHMENT_ENTITY_TYPES = ["transaction", "contract"] as const;
-export const ATTACHMENT_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/heic", "application/pdf"] as const;
+export const ATTACHMENT_MIME_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+  "application/pdf",
+] as const;
 
 const fields = {
   entity_type: z.enum(ATTACHMENT_ENTITY_TYPES),

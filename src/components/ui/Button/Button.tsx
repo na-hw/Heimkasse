@@ -34,7 +34,13 @@ export function Button({
   type = "button",
   ...props
 }: ButtonProps) {
-  const classes = cn(styles.button, styles[variant], styles[size], fullWidth && styles.fullWidth, className);
+  const classes = cn(
+    styles.button,
+    styles[variant],
+    styles[size],
+    fullWidth && styles.fullWidth,
+    className,
+  );
 
   if (asChild) {
     return (

@@ -11,15 +11,23 @@ export function ButtonsDemo() {
   return (
     <GallerySection title={t("design.sections.buttons")}>
       <div className={styles.row}>
-        <Button variant="primary" iconStart={<Plus />}>{t("design.variants.primary")}</Button>
+        <Button variant="primary" iconStart={<Plus />}>
+          {t("design.variants.primary")}
+        </Button>
         <Button variant="secondary">{t("design.variants.secondary")}</Button>
         <Button variant="ghost">{t("design.variants.ghost")}</Button>
-        <Button variant="danger" iconStart={<Trash2 />}>{t("design.variants.danger")}</Button>
-        <Button variant="primary" loading>{t("design.variants.loading")}</Button>
+        <Button variant="danger" iconStart={<Trash2 />}>
+          {t("design.variants.danger")}
+        </Button>
+        <Button variant="primary" loading>
+          {t("design.variants.loading")}
+        </Button>
       </div>
       <div className={styles.row}>
         <Button size="sm">{t("common.edit")}</Button>
-        <Button size="lg" variant="primary">{t("common.save")}</Button>
+        <Button size="lg" variant="primary">
+          {t("common.save")}
+        </Button>
         <IconButton label={t("common.edit")} icon={<Pencil />} />
         <IconButton label={t("common.more")} icon={<MoreHorizontal />} variant="secondary" />
       </div>

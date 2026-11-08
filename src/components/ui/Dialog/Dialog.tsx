@@ -51,12 +51,23 @@ export function Dialog({
           {...(description ? {} : { "aria-describedby": undefined })}
         >
           <header className={styles.header}>
-            <DialogPrimitive.Title className={cn(styles.title, hideTitle && "visually-hidden")}>{title}</DialogPrimitive.Title>
+            <DialogPrimitive.Title className={cn(styles.title, hideTitle && "visually-hidden")}>
+              {title}
+            </DialogPrimitive.Title>
             <DialogPrimitive.Close asChild>
-              <IconButton label={t("common.close")} icon={<X />} showTooltip={false} className={styles.close} />
+              <IconButton
+                label={t("common.close")}
+                icon={<X />}
+                showTooltip={false}
+                className={styles.close}
+              />
             </DialogPrimitive.Close>
           </header>
-          {description && <DialogPrimitive.Description className={styles.description}>{description}</DialogPrimitive.Description>}
+          {description && (
+            <DialogPrimitive.Description className={styles.description}>
+              {description}
+            </DialogPrimitive.Description>
+          )}
           {children && <div className={styles.body}>{children}</div>}
           {footer && <footer className={styles.footer}>{footer}</footer>}
         </DialogPrimitive.Content>

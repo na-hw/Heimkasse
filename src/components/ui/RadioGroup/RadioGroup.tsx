@@ -54,13 +54,23 @@ export function RadioGroup<T extends string>({
       >
         {options.map((option) => (
           // The label wraps the radio, so the whole option (tile) is clickable.
-          <label key={option.value} className={styles.option} data-disabled={option.disabled || undefined}>
-            <RadioPrimitive.Item value={option.value} disabled={option.disabled} className={styles.radio}>
+          <label
+            key={option.value}
+            className={styles.option}
+            data-disabled={option.disabled || undefined}
+          >
+            <RadioPrimitive.Item
+              value={option.value}
+              disabled={option.disabled}
+              className={styles.radio}
+            >
               <RadioPrimitive.Indicator className={styles.indicator} />
             </RadioPrimitive.Item>
             <span className={styles.optionLabel}>
               <span>{option.label}</span>
-              {option.description && <span className={styles.description}>{option.description}</span>}
+              {option.description && (
+                <span className={styles.description}>{option.description}</span>
+              )}
             </span>
           </label>
         ))}

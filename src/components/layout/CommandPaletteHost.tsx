@@ -30,7 +30,12 @@ export function CommandPaletteHost() {
         heading: t("command.groups.navigation"),
         items: visibleNavItems().map((item) => {
           const Icon = item.icon;
-          return { id: `nav-${item.id}`, label: t(item.labelKey), icon: <Icon />, onSelect: () => router.push(item.href) };
+          return {
+            id: `nav-${item.id}`,
+            label: t(item.labelKey),
+            icon: <Icon />,
+            onSelect: () => router.push(item.href),
+          };
         }),
       },
       {

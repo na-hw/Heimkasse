@@ -14,7 +14,9 @@ describe("schema", () => {
     const tables = schemaAt(LATEST_SCHEMA_VERSION);
     expect([...tables.keys()].sort()).toEqual([...TABLE_NAMES].sort());
     for (const t of tables.values()) {
-      expect(Object.keys(t.columns)).toEqual(expect.arrayContaining(["id", "created_at", "updated_at", "deleted_at"]));
+      expect(Object.keys(t.columns)).toEqual(
+        expect.arrayContaining(["id", "created_at", "updated_at", "deleted_at"]),
+      );
     }
   });
 
@@ -32,8 +34,15 @@ describe.each(ADAPTER_FACTORIES)("migrations on $name", ({ create }) => {
     for (const table of TABLE_NAMES) {
       await expect(adapter.count(table)).resolves.toBeGreaterThanOrEqual(0);
     }
-    const [rent] = await adapter.find("categories", { where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent" }] });
-    expect(rent).toMatchObject({ is_system: true, archived: false, type: "expense", created_at: FIXED_NOW });
+    const [rent] = await adapter.find("categories", {
+      where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent" }],
+    });
+    expect(rent).toMatchObject({
+      is_system: true,
+      archived: false,
+      type: "expense",
+      created_at: FIXED_NOW,
+    });
   });
 
   it("is idempotent when run again", async () => {
@@ -47,7 +56,9 @@ describe.each(ADAPTER_FACTORIES)("migrations on $name", ({ create }) => {
   it("links subcategories to existing parents", async () => {
     const adapter = create();
     await adapter.init();
-    const children = await adapter.find("categories", { where: [{ field: "parent_id", op: "notNull" }] });
+    const children = await adapter.find("categories", {
+      where: [{ field: "parent_id", op: "notNull" }],
+    });
     expect(children.length).toBe(BUILTIN_CATEGORIES.filter((c) => c.parentKey).length);
     for (const child of children) {
       expect(await adapter.get("categories", String(child.parent_id))).not.toBeNull();
@@ -108,7 +119,13 @@ describe("indexeddb migration upgrades", () => {
           type: "insert",
           table: "import_rules",
           onConflict: "ignore",
-          row: { id: "3f0a3f0e-8f39-4a43-9f0c-2b8f0c1d2e3f", created_at: now, updated_at: now, match_field: "payee", match_text: "REWE" },
+          row: {
+            id: "3f0a3f0e-8f39-4a43-9f0c-2b8f0c1d2e3f",
+            created_at: now,
+            updated_at: now,
+            match_field: "payee",
+            match_text: "REWE",
+          },
         },
       ],
     };

@@ -5,7 +5,13 @@ import { describe, expect, it, vi } from "vitest";
 import { renderWithProviders } from "@/test/render";
 import { MoneyInput } from "./MoneyInput";
 
-function Harness({ onValue, initial = null }: { onValue: (v: number | null) => void; initial?: number | null }) {
+function Harness({
+  onValue,
+  initial = null,
+}: {
+  onValue: (v: number | null) => void;
+  initial?: number | null;
+}) {
   const [value, setValue] = useState<number | null>(initial);
   return (
     <MoneyInput
@@ -50,6 +56,8 @@ describe("MoneyInput", () => {
 
   it("shows an initial value formatted in Persian digits", () => {
     renderWithProviders(<Harness onValue={vi.fn()} initial={123456} />, { language: "fa" });
-    expect((screen.getByRole("textbox") as HTMLInputElement).value.replace(/[‎‏]/g, "")).toBe("۱٬۲۳۴٫۵۶");
+    expect((screen.getByRole("textbox") as HTMLInputElement).value.replace(/[‎‏]/g, "")).toBe(
+      "۱٬۲۳۴٫۵۶",
+    );
   });
 });

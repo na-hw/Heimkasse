@@ -30,6 +30,9 @@ describe("Button", () => {
         <a href="/settings/">Einstellungen</a>
       </Button>,
     );
-    expect(screen.getByRole("link", { name: "Einstellungen" })).toHaveAttribute("href", "/settings/");
+    expect(screen.getByRole("link", { name: "Einstellungen" })).toHaveAttribute(
+      "href",
+      "/settings/",
+    );
   });
 });

@@ -10,7 +10,14 @@ import {
 export const TRANSACTION_TYPES = ["income", "expense", "transfer"] as const;
 export type TransactionType = (typeof TRANSACTION_TYPES)[number];
 
-export const PAYMENT_METHODS = ["card", "cash", "bank_transfer", "direct_debit", "paypal", "other"] as const;
+export const PAYMENT_METHODS = [
+  "card",
+  "cash",
+  "bank_transfer",
+  "direct_debit",
+  "paypal",
+  "other",
+] as const;
 export type PaymentMethod = (typeof PAYMENT_METHODS)[number];
 
 /** German tax-relevant categories (Steuerhelfer). */
@@ -59,10 +66,15 @@ export const transactionCreateSchema = z
     transfer_account_id: fields.transfer_account_id.default(null),
     import_hash: fields.import_hash.default(null),
   })
-  .refine((t) => t.type !== "transfer" || (t.transfer_account_id !== null && t.transfer_account_id !== t.account_id), {
-    path: ["transfer_account_id"],
-    message: "validation.required",
-  });
+  .refine(
+    (t) =>
+      t.type !== "transfer" ||
+      (t.transfer_account_id !== null && t.transfer_account_id !== t.account_id),
+    {
+      path: ["transfer_account_id"],
+      message: "validation.required",
+    },
+  );
 
 export const transactionUpdateSchema = z.object(fields).partial();
 

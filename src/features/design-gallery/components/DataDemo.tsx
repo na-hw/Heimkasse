@@ -65,7 +65,11 @@ export function DataDemo() {
         header: t("design.data.name"),
         cell: (info) => (
           <span className={styles.nameCell}>
-            <CategoryIcon icon={info.row.original.category.icon} color={info.row.original.category.color} size="sm" />
+            <CategoryIcon
+              icon={info.row.original.category.icon}
+              color={info.row.original.category.color}
+              size="sm"
+            />
             {info.getValue()}
           </span>
         ),
@@ -73,7 +77,9 @@ export function DataDemo() {
       column.accessor("type", {
         header: t("design.data.type"),
         cell: (info) => (
-          <Badge tone={info.getValue() === "income" ? "success" : "neutral"}>{t(`categoryTypes.${info.getValue()}`)}</Badge>
+          <Badge tone={info.getValue() === "income" ? "success" : "neutral"}>
+            {t(`categoryTypes.${info.getValue()}`)}
+          </Badge>
         ),
       }),
       column.accessor("parent", { header: t("design.data.parent") }),
@@ -83,7 +89,8 @@ export function DataDemo() {
 
   const chartData = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const row of rows) if (row.parent !== "—") counts.set(row.parent, (counts.get(row.parent) ?? 0) + 1);
+    for (const row of rows)
+      if (row.parent !== "—") counts.set(row.parent, (counts.get(row.parent) ?? 0) + 1);
     return [...counts.entries()].map(([name, count]) => ({ name, count }));
   }, [rows]);
 
@@ -117,7 +124,12 @@ export function DataDemo() {
         data={chartData}
         columns={[
           { key: "name", header: t("design.data.name") },
-          { key: "count", header: t("design.data.count"), align: "end", format: (v) => format.number(Number(v)) },
+          {
+            key: "count",
+            header: t("design.data.count"),
+            align: "end",
+            format: (v) => format.number(Number(v)),
+          },
         ]}
       >
         <SubcategoryChart data={chartData} />

@@ -13,7 +13,14 @@ export interface EmptyStateProps {
 }
 
 /** Friendly empty list state that always points to a next action. */
-export function EmptyState({ icon, title, description, action, headingLevel = 2, className }: EmptyStateProps) {
+export function EmptyState({
+  icon,
+  title,
+  description,
+  action,
+  headingLevel = 2,
+  className,
+}: EmptyStateProps) {
   const Heading = `h${headingLevel}` as const;
   return (
     <div className={cn(styles.empty, className)}>

@@ -7,8 +7,10 @@ import { useLocaleContext } from "@/lib/i18n/useFormat";
 import { Input } from "../Input";
 import styles from "./MoneyInput.module.css";
 
-export interface MoneyInputProps
-  extends Omit<ComponentPropsWithRef<"input">, "value" | "onChange" | "defaultValue" | "type"> {
+export interface MoneyInputProps extends Omit<
+  ComponentPropsWithRef<"input">,
+  "value" | "onChange" | "defaultValue" | "type"
+> {
   /** Amount in integer cents, or null when empty/invalid. */
   value: number | null;
   onChange: (cents: number | null) => void;
@@ -20,7 +22,14 @@ export interface MoneyInputProps
  * Money input that accepts German ("1.234,56") and Persian ("۱٬۲۳۴٫۵۶")
  * digits and separators. Emits integer cents; formats nicely on blur.
  */
-export function MoneyInput({ value, onChange, allowNegative = false, onBlur, onFocus, ...props }: MoneyInputProps) {
+export function MoneyInput({
+  value,
+  onChange,
+  allowNegative = false,
+  onBlur,
+  onFocus,
+  ...props
+}: MoneyInputProps) {
   const ctx = useLocaleContext();
   const [text, setText] = useState(() =>
     value === null ? "" : formatMoney(value, ctx, { hideCurrency: true }),
@@ -29,7 +38,8 @@ export function MoneyInput({ value, onChange, allowNegative = false, onBlur, onF
 
   // Sync external value changes (form reset, language switch) while not editing.
   useEffect(() => {
-    if (!focused.current) setText(value === null ? "" : formatMoney(value, ctx, { hideCurrency: true }));
+    if (!focused.current)
+      setText(value === null ? "" : formatMoney(value, ctx, { hideCurrency: true }));
   }, [value, ctx]);
 
   const parse = (input: string): number | null => {

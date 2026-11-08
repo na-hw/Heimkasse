@@ -8,11 +8,19 @@ import {
   recurringRuleUpdateSchema,
 } from "./schemas";
 
-export class RecurringRulesRepository extends BaseRepository<RecurringRule, RecurringRuleCreate, RecurringRuleUpdate> {
+export class RecurringRulesRepository extends BaseRepository<
+  RecurringRule,
+  RecurringRuleCreate,
+  RecurringRuleUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "recurring_rules",
-      { entity: recurringRuleSchema, create: recurringRuleCreateSchema, update: recurringRuleUpdateSchema },
+      {
+        entity: recurringRuleSchema,
+        create: recurringRuleCreateSchema,
+        update: recurringRuleUpdateSchema,
+      },
       deps,
     );
   }

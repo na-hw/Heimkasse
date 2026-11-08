@@ -39,7 +39,11 @@ function deletedCondition(filter: DeletedFilter = "exclude"): Condition[] {
  * Entity-specific repositories extend this class. `prepare*` methods return
  * write operations so several changes can be committed atomically.
  */
-export class BaseRepository<TEntity extends BaseEntity, TCreate extends object, TUpdate extends object> {
+export class BaseRepository<
+  TEntity extends BaseEntity,
+  TCreate extends object,
+  TUpdate extends object,
+> {
   protected readonly storage: StorageAdapter;
   protected readonly clock: () => string;
   protected readonly idFactory: () => string;
@@ -69,7 +73,10 @@ export class BaseRepository<TEntity extends BaseEntity, TCreate extends object, 
   }
 
   async count(options: Pick<ListOptions, "where" | "deleted"> = {}): Promise<number> {
-    return this.storage.count(this.table, [...deletedCondition(options.deleted), ...(options.where ?? [])]);
+    return this.storage.count(this.table, [
+      ...deletedCondition(options.deleted),
+      ...(options.where ?? []),
+    ]);
   }
 
   /** Returns the entity (including soft-deleted ones) or null. */
@@ -116,7 +123,12 @@ export class BaseRepository<TEntity extends BaseEntity, TCreate extends object, 
 
   prepareSoftDelete(ids: readonly string[]): WriteOp[] {
     const now = this.clock();
-    return ids.map((id) => ({ type: "update", table: this.table, id, patch: { deleted_at: now, updated_at: now } }));
+    return ids.map((id) => ({
+      type: "update",
+      table: this.table,
+      id,
+      patch: { deleted_at: now, updated_at: now },
+    }));
   }
 
   /** Moves entities to the trash. */
@@ -126,7 +138,12 @@ export class BaseRepository<TEntity extends BaseEntity, TCreate extends object, 
 
   prepareRestore(ids: readonly string[]): WriteOp[] {
     const now = this.clock();
-    return ids.map((id) => ({ type: "update", table: this.table, id, patch: { deleted_at: null, updated_at: now } }));
+    return ids.map((id) => ({
+      type: "update",
+      table: this.table,
+      id,
+      patch: { deleted_at: null, updated_at: now },
+    }));
   }
 
   /** Restores entities from the trash. */

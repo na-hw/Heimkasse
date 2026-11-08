@@ -23,7 +23,17 @@ export interface SheetProps {
 }
 
 /** Side panel / drawer for detail views and longer forms. Modal with focus trap. */
-export function Sheet({ open, onOpenChange, trigger, title, description, children, footer, side = "end", className }: SheetProps) {
+export function Sheet({
+  open,
+  onOpenChange,
+  trigger,
+  title,
+  description,
+  children,
+  footer,
+  side = "end",
+  className,
+}: SheetProps) {
   const { t } = useTranslation();
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
@@ -40,7 +50,11 @@ export function Sheet({ open, onOpenChange, trigger, title, description, childre
               <IconButton label={t("common.close")} icon={<X />} showTooltip={false} />
             </DialogPrimitive.Close>
           </header>
-          {description && <DialogPrimitive.Description className={dialog.description}>{description}</DialogPrimitive.Description>}
+          {description && (
+            <DialogPrimitive.Description className={dialog.description}>
+              {description}
+            </DialogPrimitive.Description>
+          )}
           <div className={dialog.body}>{children}</div>
           {footer && <footer className={dialog.footer}>{footer}</footer>}
         </DialogPrimitive.Content>

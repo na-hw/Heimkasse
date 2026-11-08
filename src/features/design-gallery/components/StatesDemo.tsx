@@ -20,7 +20,11 @@ export function StatesDemo() {
             icon={<Inbox />}
             title={t("design.states.emptyTitle")}
             description={t("design.states.emptyText")}
-            action={<Button variant="primary" iconStart={<Plus />}>{t("design.states.emptyAction")}</Button>}
+            action={
+              <Button variant="primary" iconStart={<Plus />}>
+                {t("design.states.emptyAction")}
+              </Button>
+            }
           />
         </div>
         <div className={styles.stateBox}>

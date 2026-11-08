@@ -20,7 +20,16 @@ export interface PopoverProps {
 }
 
 /** Non-modal floating panel anchored to its trigger. Escape closes and returns focus. */
-export function Popover({ trigger, children, label, open, onOpenChange, side = "bottom", align = "start", className }: PopoverProps) {
+export function Popover({
+  trigger,
+  children,
+  label,
+  open,
+  onOpenChange,
+  side = "bottom",
+  align = "start",
+  className,
+}: PopoverProps) {
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <PopoverPrimitive.Trigger asChild>{trigger}</PopoverPrimitive.Trigger>

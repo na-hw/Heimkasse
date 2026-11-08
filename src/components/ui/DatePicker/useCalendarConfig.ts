@@ -18,7 +18,8 @@ export function useCalendarConfig() {
       jalali,
       dir: LANGUAGE_DIRECTION[ctx.language],
       locale: ctx.language === "de" ? deLocale : faGregorianLocale,
-      numerals: (ctx.language === "fa" && ctx.digits === "persian" ? "arabext" : "latn") as "arabext" | "latn",
+      numerals: (ctx.language === "fa" && ctx.digits === "persian" ? "arabext" : "latn") as
+        "arabext" | "latn",
       weekStartsOn: weekStart,
     };
   }, [ctx, weekStart]);

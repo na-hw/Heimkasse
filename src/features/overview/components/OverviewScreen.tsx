@@ -28,7 +28,10 @@ export function OverviewScreen() {
             {t("home.statusTitle")}
           </h2>
           {stats.isError ? (
-            <ErrorState description={errorMessage(stats.error)} onRetry={() => void stats.refetch()} />
+            <ErrorState
+              description={errorMessage(stats.error)}
+              onRetry={() => void stats.refetch()}
+            />
           ) : (
             <div className={styles.stats}>
               <StatCard
@@ -47,7 +50,11 @@ export function OverviewScreen() {
                 label={t("home.storage")}
                 icon={<Database />}
                 loading={stats.isPending}
-                value={stats.data ? <span className={styles.small}>{t(`storage.${stats.data.storage}`)}</span> : null}
+                value={
+                  stats.data ? (
+                    <span className={styles.small}>{t(`storage.${stats.data.storage}`)}</span>
+                  ) : null
+                }
               />
               <StatCard
                 label={t("home.schemaVersion")}

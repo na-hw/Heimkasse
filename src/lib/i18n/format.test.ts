@@ -3,8 +3,18 @@ import { formatDate, formatMoney, formatNumber, formatPercent, weekdayNames } fr
 import type { LocaleContext } from "./locale";
 import { toIntlLocale } from "./locale";
 
-const de: LocaleContext = { language: "de", digits: "latin", calendar: "gregorian", currency: "EUR" };
-const fa: LocaleContext = { language: "fa", digits: "persian", calendar: "gregorian", currency: "EUR" };
+const de: LocaleContext = {
+  language: "de",
+  digits: "latin",
+  calendar: "gregorian",
+  currency: "EUR",
+};
+const fa: LocaleContext = {
+  language: "fa",
+  digits: "persian",
+  calendar: "gregorian",
+  currency: "EUR",
+};
 const faLatin: LocaleContext = { ...fa, digits: "latin" };
 const faJalali: LocaleContext = { ...fa, calendar: "jalali" };
 

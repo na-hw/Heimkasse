@@ -14,7 +14,12 @@ export function MobileHeader() {
   return (
     <header className={styles.mobileHeader}>
       <Brand />
-      <IconButton label={t("nav.openCommandPalette")} icon={<Search />} onClick={() => openPalette(true)} showTooltip={false} />
+      <IconButton
+        label={t("nav.openCommandPalette")}
+        icon={<Search />}
+        onClick={() => openPalette(true)}
+        showTooltip={false}
+      />
     </header>
   );
 }

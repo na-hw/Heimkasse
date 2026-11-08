@@ -49,29 +49,61 @@ export function OverlaysDemo() {
             toast.success(t("design.feedback.toastDeletedTitle"));
           }}
         />
-        <Sheet trigger={<Button>{t("design.overlays.openSheet")}</Button>} title={t("design.overlays.sheetTitle")}>
+        <Sheet
+          trigger={<Button>{t("design.overlays.openSheet")}</Button>}
+          title={t("design.overlays.sheetTitle")}
+        >
           <p>{t("design.overlays.dialogText")}</p>
         </Sheet>
-        <Popover trigger={<Button>{t("design.overlays.popover")}</Button>} label={t("design.overlays.popover")}>
+        <Popover
+          trigger={<Button>{t("design.overlays.popover")}</Button>}
+          label={t("design.overlays.popover")}
+        >
           <p>{t("design.overlays.popoverText")}</p>
         </Popover>
         <Tooltip content={t("design.overlays.tooltip")}>
           <Button variant="ghost">{t("design.overlays.tooltip")}</Button>
         </Tooltip>
         <DropdownMenu
-          trigger={<IconButton label={t("design.overlays.openMenu")} icon={<MoreHorizontal />} variant="secondary" />}
+          trigger={
+            <IconButton
+              label={t("design.overlays.openMenu")}
+              icon={<MoreHorizontal />}
+              variant="secondary"
+            />
+          }
           items={[
-            { id: "edit", label: t("common.edit"), icon: <Pencil />, onSelect: () => toast.success(t("common.edit")) },
-            { id: "dup", label: t("common.add"), icon: <Copy />, onSelect: () => toast.success(t("common.add")) },
+            {
+              id: "edit",
+              label: t("common.edit"),
+              icon: <Pencil />,
+              onSelect: () => toast.success(t("common.edit")),
+            },
+            {
+              id: "dup",
+              label: t("common.add"),
+              icon: <Copy />,
+              onSelect: () => toast.success(t("common.add")),
+            },
             { type: "separator", id: "sep" },
-            { id: "del", label: t("common.delete"), icon: <Trash2 />, tone: "danger", onSelect: () => setConfirmOpen(true) },
+            {
+              id: "del",
+              label: t("common.delete"),
+              icon: <Trash2 />,
+              tone: "danger",
+              onSelect: () => setConfirmOpen(true),
+            },
           ]}
         />
       </div>
       <Tabs
         label={t("design.sections.overlays")}
         items={[
-          { value: "a", label: t("theme.light"), content: <p>{t("design.overlays.popoverText")}</p> },
+          {
+            value: "a",
+            label: t("theme.light"),
+            content: <p>{t("design.overlays.popoverText")}</p>,
+          },
           { value: "b", label: t("theme.dark"), content: <p>{t("design.overlays.dialogText")}</p> },
         ]}
       />

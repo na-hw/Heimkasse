@@ -10,7 +10,10 @@ const VERSION_TABLE_SQL =
   'CREATE TABLE IF NOT EXISTS "schema_version" ("version" INTEGER PRIMARY KEY NOT NULL, "name" TEXT NOT NULL, "applied_at" TEXT NOT NULL)';
 
 export async function readSqlSchemaVersion(executor: SqlExecutor): Promise<number> {
-  const rows = await executor.select({ sql: 'SELECT MAX("version") AS v FROM "schema_version"', params: [] });
+  const rows = await executor.select({
+    sql: 'SELECT MAX("version") AS v FROM "schema_version"',
+    params: [],
+  });
   return Number(rows[0]?.v ?? 0);
 }
 
@@ -59,7 +62,10 @@ export async function migrateSql(
   let current = await readSqlSchemaVersion(executor);
   const latest = migrations.at(-1)?.version ?? 0;
   if (current > latest) {
-    throw new AppError("storage_init_failed", `Database version ${current} is newer than app version ${latest}`);
+    throw new AppError(
+      "storage_init_failed",
+      `Database version ${current} is newer than app version ${latest}`,
+    );
   }
   for (const m of migrations) {
     if (m.version <= current) continue;

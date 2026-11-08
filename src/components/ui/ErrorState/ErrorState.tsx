@@ -19,7 +19,14 @@ export interface ErrorStateProps {
 }
 
 /** Error state with retry. Announced to screen readers via role="alert". */
-export function ErrorState({ title, description, onRetry, retrying, details, className }: ErrorStateProps) {
+export function ErrorState({
+  title,
+  description,
+  onRetry,
+  retrying,
+  details,
+  className,
+}: ErrorStateProps) {
   const { t } = useTranslation();
   return (
     <div className={cn(styles.error, className)} role="alert">

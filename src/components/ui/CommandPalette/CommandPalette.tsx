@@ -34,7 +34,14 @@ export interface CommandPaletteProps {
 }
 
 /** Keyboard-first launcher for navigation and actions (Cmd/Ctrl+K). */
-export function CommandPalette({ open, onOpenChange, groups, title, placeholder, emptyText }: CommandPaletteProps) {
+export function CommandPalette({
+  open,
+  onOpenChange,
+  groups,
+  title,
+  placeholder,
+  emptyText,
+}: CommandPaletteProps) {
   return (
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>

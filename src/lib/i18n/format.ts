@@ -47,7 +47,11 @@ export function currencySymbol(currency: string): string {
  * Formats integer cents as money.
  * de → "1.234,56 €", fa → "۱٬۲۳۴٫۵۶ €" (or Latin digits per setting).
  */
-export function formatMoney(cents: number, ctx: LocaleContext, options: MoneyFormatOptions = {}): string {
+export function formatMoney(
+  cents: number,
+  ctx: LocaleContext,
+  options: MoneyFormatOptions = {},
+): string {
   const locale = toIntlLocale(ctx);
   const number = numberFormat(locale, {
     minimumFractionDigits: 2,
@@ -83,7 +87,8 @@ export function formatPercent(
   }).format(ratio);
 }
 
-export type DateStyle = "short" | "medium" | "long" | "full" | "monthYear" | "dayMonth" | "weekdayShort";
+export type DateStyle =
+  "short" | "medium" | "long" | "full" | "monthYear" | "dayMonth" | "weekdayShort";
 
 const DATE_STYLES: Record<DateStyle, Intl.DateTimeFormatOptions> = {
   short: { dateStyle: "short" },
@@ -96,7 +101,11 @@ const DATE_STYLES: Record<DateStyle, Intl.DateTimeFormatOptions> = {
 };
 
 /** Formats an ISO calendar date (`YYYY-MM-DD`) or a Date. */
-export function formatDate(value: string | Date, ctx: LocaleContext, style: DateStyle = "medium"): string {
+export function formatDate(
+  value: string | Date,
+  ctx: LocaleContext,
+  style: DateStyle = "medium",
+): string {
   const date = typeof value === "string" ? parseIsoDate(value) : value;
   return dateFormat(toIntlLocale(ctx), DATE_STYLES[style]).format(date);
 }

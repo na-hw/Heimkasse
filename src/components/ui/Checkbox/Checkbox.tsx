@@ -7,7 +7,10 @@ import { cn } from "@/lib/utils/cn";
 import { useFormFieldControl } from "../FormField";
 import styles from "./Checkbox.module.css";
 
-export interface CheckboxProps extends Omit<ComponentPropsWithRef<typeof CheckboxPrimitive.Root>, "children"> {
+export interface CheckboxProps extends Omit<
+  ComponentPropsWithRef<typeof CheckboxPrimitive.Root>,
+  "children"
+> {
   /** Visible label. Omit only when labelled another way (e.g. aria-label in tables). */
   label?: ReactNode;
   description?: ReactNode;
@@ -22,7 +25,9 @@ export function Checkbox({ label, description, className, id, ...props }: Checkb
     <CheckboxPrimitive.Root
       className={cn(styles.box, className)}
       {...a11y}
-      aria-describedby={[a11y["aria-describedby"], descriptionId].filter(Boolean).join(" ") || undefined}
+      aria-describedby={
+        [a11y["aria-describedby"], descriptionId].filter(Boolean).join(" ") || undefined
+      }
       {...props}
     >
       <CheckboxPrimitive.Indicator className={styles.indicator}>

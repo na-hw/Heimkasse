@@ -80,7 +80,11 @@ export function buildGet(table: TableDef, id: string): SqlStatement {
   return { sql: `SELECT * FROM ${quoteIdent(table.name)} WHERE "id" = ? LIMIT 1`, params: [id] };
 }
 
-export function buildInsert(table: TableDef, row: DomainRow, onConflict: "abort" | "ignore" = "abort"): SqlStatement {
+export function buildInsert(
+  table: TableDef,
+  row: DomainRow,
+  onConflict: "abort" | "ignore" = "abort",
+): SqlStatement {
   const encoded = encodeRow(table, row);
   const columns = Object.keys(encoded);
   const verb = onConflict === "ignore" ? "INSERT OR IGNORE" : "INSERT";

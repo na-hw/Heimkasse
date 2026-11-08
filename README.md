@@ -19,14 +19,14 @@ npm install
 
 ## Scripts
 
-| Command                   | What it does                                                         |
-| ------------------------- | -------------------------------------------------------------------- |
-| `npm run dev`             | Next.js dev server in the browser → http://localhost:3000 (no DB)    |
-| `npm run tauri:dev`       | Starts Next.js + opens the app in a Tauri window (hot reload, DB on) |
-| `npm run build`           | Static export of the frontend to `out/`                              |
+| Command                   | What it does                                                             |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `npm run dev`             | Next.js dev server in the browser → http://localhost:3000 (no DB)        |
+| `npm run tauri:dev`       | Starts Next.js + opens the app in a Tauri window (hot reload, DB on)     |
+| `npm run build`           | Static export of the frontend to `out/`                                  |
 | `npm run tauri:build:mac` | Builds the macOS app → `src-tauri/target/release/bundle/macos/Kiseh.app` |
-| `npm run tauri:build`     | Builds all bundle targets for the current OS (`.app` + `.dmg` on macOS) |
-| `npm run lint`            | TypeScript type check                                                |
+| `npm run tauri:build`     | Builds all bundle targets for the current OS (`.app` + `.dmg` on macOS)  |
+| `npm run lint`            | TypeScript type check                                                    |
 
 The first `tauri:dev` / build compiles the Rust dependencies and takes a minute or two; later runs are fast.
 

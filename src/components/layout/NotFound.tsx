@@ -14,7 +14,11 @@ export function NotFound() {
     <EmptyState
       headingLevel={2}
       icon={<SearchX />}
-      title={<span role="heading" aria-level={1}>{t("errors.notFoundTitle")}</span>}
+      title={
+        <span role="heading" aria-level={1}>
+          {t("errors.notFoundTitle")}
+        </span>
+      }
       description={t("errors.notFoundDescription")}
       action={
         <Button asChild variant="primary">

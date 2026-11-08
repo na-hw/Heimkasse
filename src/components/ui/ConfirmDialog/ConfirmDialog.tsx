@@ -75,13 +75,21 @@ export function ConfirmDialog({
           <div className={styles.header}>
             <AlertDialog.Title className={dialog.title}>{title}</AlertDialog.Title>
           </div>
-          <AlertDialog.Description className={dialog.description}>{description}</AlertDialog.Description>
+          <AlertDialog.Description className={dialog.description}>
+            {description}
+          </AlertDialog.Description>
           {confirmationWord && (
             <div className={dialog.body}>
               <FormField
                 id={inputId}
                 label={t("validation.confirmationMismatch", { word: confirmationWord })}
-                error={typed && !matches ? validationMessage("validation.confirmationMismatch", { word: confirmationWord }) : undefined}
+                error={
+                  typed && !matches
+                    ? validationMessage("validation.confirmationMismatch", {
+                        word: confirmationWord,
+                      })
+                    : undefined
+                }
               >
                 <Input
                   value={typed}

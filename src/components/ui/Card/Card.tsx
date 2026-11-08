@@ -30,7 +30,10 @@ export function Card({
   const Heading = `h${headingLevel}` as const;
   const headingId = title ? `card-${id}` : undefined;
   return (
-    <Tag className={cn(styles.card, styles[`pad-${padding}`], className)} aria-labelledby={Tag !== "div" ? headingId : undefined}>
+    <Tag
+      className={cn(styles.card, styles[`pad-${padding}`], className)}
+      aria-labelledby={Tag !== "div" ? headingId : undefined}
+    >
       {(title || actions) && (
         <header className={styles.header}>
           <div className={styles.headings}>

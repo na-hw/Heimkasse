@@ -56,7 +56,9 @@ test.describe("command palette", () => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     // The app uses ⌘ on Apple platforms and Ctrl elsewhere, based on the user agent.
-    const mod = await page.evaluate(() => (/Mac|iPhone|iPad/i.test(navigator.userAgent) ? "Meta" : "Control"));
+    const mod = await page.evaluate(() =>
+      /Mac|iPhone|iPad/i.test(navigator.userAgent) ? "Meta" : "Control",
+    );
     await page.keyboard.press(`${mod}+k`);
     const dialog = page.getByRole("dialog", { name: "پالت فرمان" });
     await expect(dialog).toBeVisible();

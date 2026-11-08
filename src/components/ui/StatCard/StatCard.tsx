@@ -31,8 +31,10 @@ export interface StatCardProps {
 export function StatCard({ label, value, icon, trend, hint, loading, className }: StatCardProps) {
   const { t } = useTranslation();
   const format = useFormat();
-  const direction = !trend || Math.abs(trend.ratio) < 0.005 ? "flat" : trend.ratio > 0 ? "up" : "down";
-  const quality = direction === "flat" || !trend ? "neutral" : direction === trend.goodWhen ? "good" : "bad";
+  const direction =
+    !trend || Math.abs(trend.ratio) < 0.005 ? "flat" : trend.ratio > 0 ? "up" : "down";
+  const quality =
+    direction === "flat" || !trend ? "neutral" : direction === trend.goodWhen ? "good" : "bad";
   const TrendIcon = direction === "up" ? TrendingUp : direction === "down" ? TrendingDown : Minus;
   const percent = trend ? format.percent(Math.abs(trend.ratio), { maximumFractionDigits: 1 }) : "";
   const spoken =
@@ -52,7 +54,9 @@ export function StatCard({ label, value, icon, trend, hint, loading, className }
           </span>
         )}
       </div>
-      <div className={styles.value}>{loading ? <Skeleton width="60%" height="1.6em" /> : value}</div>
+      <div className={styles.value}>
+        {loading ? <Skeleton width="60%" height="1.6em" /> : value}
+      </div>
       {trend && !loading && (
         <p className={cn(styles.trend, styles[quality])}>
           <TrendIcon size={16} aria-hidden="true" className="flip-rtl" />

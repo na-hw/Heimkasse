@@ -26,7 +26,8 @@ export interface ControlA11yProps {
 export function useFormFieldControl(props: ControlA11yProps = {}): ControlA11yProps {
   const field = useContext(FormFieldContext);
   if (!field) return props;
-  const describedBy = [field.describedBy, props["aria-describedby"]].filter(Boolean).join(" ") || undefined;
+  const describedBy =
+    [field.describedBy, props["aria-describedby"]].filter(Boolean).join(" ") || undefined;
   return {
     id: props.id ?? field.id,
     "aria-describedby": describedBy,

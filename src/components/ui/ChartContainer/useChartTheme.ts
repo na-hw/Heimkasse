@@ -48,7 +48,10 @@ export function useChartTheme(): ChartTheme {
     const update = () => setTheme(readTheme());
     update();
     const observer = new MutationObserver(update);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
     const mql = window.matchMedia("(prefers-color-scheme: dark)");
     mql.addEventListener("change", update);
     return () => {

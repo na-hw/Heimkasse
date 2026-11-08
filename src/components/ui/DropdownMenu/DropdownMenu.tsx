@@ -34,9 +34,15 @@ export function DropdownMenu({ trigger, items, align = "end" }: DropdownMenuProp
     <MenuPrimitive.Root>
       <MenuPrimitive.Trigger asChild>{trigger}</MenuPrimitive.Trigger>
       <MenuPrimitive.Portal>
-        <MenuPrimitive.Content align={align} sideOffset={6} collisionPadding={16} className={control.panel}>
+        <MenuPrimitive.Content
+          align={align}
+          sideOffset={6}
+          collisionPadding={16}
+          className={control.panel}
+        >
           {items.map((entry) => {
-            if (entry.type === "separator") return <MenuPrimitive.Separator key={entry.id} className={styles.separator} />;
+            if (entry.type === "separator")
+              return <MenuPrimitive.Separator key={entry.id} className={styles.separator} />;
             if (entry.type === "label")
               return (
                 <MenuPrimitive.Label key={entry.id} className={styles.label}>

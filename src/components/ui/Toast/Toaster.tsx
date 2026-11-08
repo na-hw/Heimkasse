@@ -23,7 +23,10 @@ export function Toaster({ dir }: { dir: "ltr" | "rtl" }) {
   const dismiss = useToastStore((s) => s.dismiss);
 
   return (
-    <ToastPrimitive.Provider swipeDirection={dir === "rtl" ? "left" : "right"} label={t("toast.region", { hotkey: "F8" })}>
+    <ToastPrimitive.Provider
+      swipeDirection={dir === "rtl" ? "left" : "right"}
+      label={t("toast.region", { hotkey: "F8" })}
+    >
       {toasts.map((item) => {
         const Icon = ICONS[item.tone];
         return (
@@ -40,7 +43,9 @@ export function Toaster({ dir }: { dir: "ltr" | "rtl" }) {
             <div className={styles.text}>
               <ToastPrimitive.Title className={styles.title}>{item.title}</ToastPrimitive.Title>
               {item.description && (
-                <ToastPrimitive.Description className={styles.description}>{item.description}</ToastPrimitive.Description>
+                <ToastPrimitive.Description className={styles.description}>
+                  {item.description}
+                </ToastPrimitive.Description>
               )}
             </div>
             {item.action && (

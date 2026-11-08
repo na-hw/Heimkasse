@@ -10,6 +10,10 @@ import {
 
 export class BudgetsRepository extends BaseRepository<Budget, BudgetCreate, BudgetUpdate> {
   constructor(deps: RepositoryDeps) {
-    super("budgets", { entity: budgetSchema, create: budgetCreateSchema, update: budgetUpdateSchema }, deps);
+    super(
+      "budgets",
+      { entity: budgetSchema, create: budgetCreateSchema, update: budgetUpdateSchema },
+      deps,
+    );
   }
 }

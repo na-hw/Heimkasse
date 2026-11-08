@@ -8,7 +8,11 @@ import {
   importRuleUpdateSchema,
 } from "./schemas";
 
-export class ImportRulesRepository extends BaseRepository<ImportRule, ImportRuleCreate, ImportRuleUpdate> {
+export class ImportRulesRepository extends BaseRepository<
+  ImportRule,
+  ImportRuleCreate,
+  ImportRuleUpdate
+> {
   constructor(deps: RepositoryDeps) {
     super(
       "import_rules",

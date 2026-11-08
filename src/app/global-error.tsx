@@ -13,7 +13,15 @@ export default function GlobalError({ reset }: { error: Error; reset: () => void
   return (
     <html lang={lang} dir={lang === "fa" ? "rtl" : "ltr"}>
       <body>
-        <main style={{ display: "grid", placeItems: "center", minBlockSize: "100dvh", gap: "1rem", padding: "1rem" }}>
+        <main
+          style={{
+            display: "grid",
+            placeItems: "center",
+            minBlockSize: "100dvh",
+            gap: "1rem",
+            padding: "1rem",
+          }}
+        >
           <h1>{t("errors.title")}</h1>
           <p>{t("errors.routeDescription")}</p>
           <button type="button" onClick={reset} style={{ minBlockSize: 44, paddingInline: 16 }}>

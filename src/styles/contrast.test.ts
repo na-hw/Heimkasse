@@ -7,7 +7,9 @@ const css = readFileSync(join(__dirname, "themes.css"), "utf8");
 function block(selector: string): Record<string, string> {
   const start = css.indexOf(`${selector} {`);
   const body = css.slice(start, css.indexOf("\n}", start));
-  return Object.fromEntries([...body.matchAll(/(--[\w-]+):\s*(#[0-9a-f]{6})\s*;/gi)].map((m) => [m[1], m[2]]));
+  return Object.fromEntries(
+    [...body.matchAll(/(--[\w-]+):\s*(#[0-9a-f]{6})\s*;/gi)].map((m) => [m[1], m[2]]),
+  );
 }
 
 function luminance(hex: string): number {
@@ -48,7 +50,20 @@ const TEXT_PAIRS: Array<[string, string]> = [
   ["--color-text-inverse", "--color-text"],
 ];
 
-const SWATCHES = ["teal", "green", "olive", "amber", "orange", "red", "pink", "purple", "indigo", "blue", "cyan", "gray"];
+const SWATCHES = [
+  "teal",
+  "green",
+  "olive",
+  "amber",
+  "orange",
+  "red",
+  "pink",
+  "purple",
+  "indigo",
+  "blue",
+  "cyan",
+  "gray",
+];
 
 describe.each(Object.entries(THEMES))("%s theme contrast", (_name, tokens) => {
   it.each(TEXT_PAIRS)("%s on %s ≥ 4.5:1", (fg, bg) => {
@@ -58,10 +73,14 @@ describe.each(Object.entries(THEMES))("%s theme contrast", (_name, tokens) => {
   });
 
   it.each(SWATCHES)("swatch %s on surface ≥ 4.5:1", (key) => {
-    expect(ratio(tokens[`--swatch-${key}`] as string, tokens["--color-surface"] as string)).toBeGreaterThanOrEqual(4.5);
+    expect(
+      ratio(tokens[`--swatch-${key}`] as string, tokens["--color-surface"] as string),
+    ).toBeGreaterThanOrEqual(4.5);
   });
 
   it("border-strong is visible against surface (≥ 1.8:1 for control outlines)", () => {
-    expect(ratio(tokens["--color-border-strong"] as string, tokens["--color-surface"] as string)).toBeGreaterThanOrEqual(1.8);
+    expect(
+      ratio(tokens["--color-border-strong"] as string, tokens["--color-surface"] as string),
+    ).toBeGreaterThanOrEqual(1.8);
   });
 });

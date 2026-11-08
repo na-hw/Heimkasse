@@ -16,7 +16,11 @@ export class UtilitySettlementsRepository extends BaseRepository<
   constructor(deps: RepositoryDeps) {
     super(
       "utility_settlements",
-      { entity: utilitySettlementSchema, create: utilitySettlementCreateSchema, update: utilitySettlementUpdateSchema },
+      {
+        entity: utilitySettlementSchema,
+        create: utilitySettlementCreateSchema,
+        update: utilitySettlementUpdateSchema,
+      },
       deps,
     );
   }
