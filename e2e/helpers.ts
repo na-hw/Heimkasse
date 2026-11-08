@@ -5,7 +5,9 @@ export async function useGerman(page: Page) {
   await page.goto("/settings/");
   await page.getByRole("radio", { name: "Deutsch" }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "de");
-  await expect(page.getByRole("status").filter({ hasText: "Einstellung gespeichert" })).toBeAttached();
+  await expect(
+    page.getByRole("status").filter({ hasText: "Einstellung gespeichert" }),
+  ).toBeAttached();
 }
 
 /** Creates an account through the UI. */
