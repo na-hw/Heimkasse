@@ -17,7 +17,15 @@
   .viewport {
     inset-inline: var(--space-3);
     inline-size: auto;
-    inset-block-end: calc(var(--bottom-nav-height) + var(--space-3) + var(--safe-bottom));
+    /* Above the FAB so it stays reachable while a toast is shown. */
+    inset-block-end: calc(
+      var(--bottom-nav-height) + var(--fab-size) + var(--space-4) + var(--space-3) + var(--safe-bottom)
+    );
+  }
+
+  /* A sticky bottom bar (bulk actions) would be covered: show toasts below the header instead. */
+  :global(body:has([data-bottom-bar])) .viewport {
+    inset-block: calc(var(--touch-target) + var(--space-5) + var(--safe-top)) auto;
   }
 }
 
