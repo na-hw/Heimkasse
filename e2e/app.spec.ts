@@ -6,8 +6,10 @@ test.describe("app shell", () => {
     await expect(page.locator("html")).toHaveAttribute("lang", "de");
     await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.locator("#main").getByText("Kategorien", { exact: true })).toBeVisible();
-    await expect(page.locator("#main").getByText("24", { exact: true })).toBeVisible();
+    await page.goto("/settings/");
+    const data = page.getByRole("region", { name: "Daten" });
+    await expect(data.getByText("Kategorien", { exact: true })).toBeVisible();
+    await expect(data.getByText("24", { exact: true })).toBeVisible();
   });
 
   test("switches to Persian instantly and persists it", async ({ page }) => {
@@ -40,14 +42,12 @@ test.describe("app shell", () => {
     await page.goto("/settings/");
     await page.getByRole("radio", { name: "فارسی" }).click();
     await expect(page.getByRole("status").filter({ hasText: "تنظیمات ذخیره شد" })).toBeAttached();
-    await page.goto("/");
-    await expect(page.locator("#main").getByText("۲۴", { exact: true })).toBeVisible();
+    const data = page.getByRole("region", { name: "داده‌ها" });
+    await expect(data.getByText("۲۴", { exact: true })).toBeVisible();
 
-    await page.goto("/settings/");
     await page.getByRole("radio", { name: "لاتین (123)" }).click();
     await expect(page.getByRole("status").filter({ hasText: "تنظیمات ذخیره شد" })).toBeAttached();
-    await page.goto("/");
-    await expect(page.locator("#main").getByText("24", { exact: true })).toBeVisible();
+    await expect(data.getByText("24", { exact: true })).toBeVisible();
   });
 
   test("skip link jumps to the main content", async ({ page }) => {
