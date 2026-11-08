@@ -6,6 +6,9 @@ export type AppErrorCode =
   | "validation_failed"
   | "write_failed"
   | "in_use"
+  | "backup_invalid"
+  | "backup_too_new"
+  | "permission_denied"
   | "unknown";
 
 /** Application error with a code that the UI can translate. */

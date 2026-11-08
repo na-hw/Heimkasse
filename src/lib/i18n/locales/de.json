@@ -156,7 +156,10 @@
       "validation_failed": "Die Eingaben sind ungültig.",
       "write_failed": "Die Änderung konnte nicht gespeichert werden.",
       "unknown": "Ein unerwarteter Fehler ist aufgetreten.",
-      "in_use": "Der Eintrag wird noch verwendet."
+      "in_use": "Der Eintrag wird noch verwendet.",
+      "backup_invalid": "Die Datei ist keine gültige Heimkasse-Sicherung. Es wurde nichts geändert.",
+      "backup_too_new": "Die Sicherung stammt aus einer neueren Heimkasse-Version. Bitte aktualisiere die App zuerst.",
+      "permission_denied": "Der Zugriff auf Datei oder Ordner wurde verweigert."
     }
   },
   "validation": {

@@ -62,6 +62,11 @@ export class BaseRepository<
     return this.schemas.entity.parse(row);
   }
 
+  /** Validates a complete stored row (e.g. from a backup file) without writing it. */
+  validateRow(row: unknown): TEntity {
+    return this.schemas.entity.parse(row);
+  }
+
   async list(options: ListOptions = {}): Promise<TEntity[]> {
     const rows = await this.storage.find(this.table, {
       where: [...deletedCondition(options.deleted), ...(options.where ?? [])],
