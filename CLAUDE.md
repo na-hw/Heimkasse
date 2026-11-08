@@ -14,7 +14,7 @@ Read it before starting a phase.** Decisions below override the brief where they
 | 2 Core (accounts, categories, transactions, recurring, trash)   | ✅ done |
 | 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ✅ done |
 | 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | ✅ done |
-| 5 Data (CSV import, attachments, backup, delete all, app lock)  | open    |
+| 5 Data (CSV import, attachments, backup, delete all, app lock)  | ✅ done |
 | 6 Polish (a11y audit, performance, coverage, build, README)     | open    |
 
 Update this table when a phase is finished.
@@ -68,6 +68,30 @@ Update this table when a phase is finished.
 - Trash covers contracts, meters, settlements and goals; purging meters/goals also purges readings/contributions.
   Readings and contributions themselves are deleted with an undo toast only (no trash tab).
 
+- CSV import (`/import/`): encoding UTF-8 or Windows-1252 (= ISO-8859-1; own table decoder), delimiter/header row/
+  date/decimal detection, signed amounts (+ "invert sign"). Presets identify columns by header name (built-in:
+  Sparkasse, N26, DKB, ING, Commerzbank); a preset is detected only if all its main columns exist. User presets live in
+  the settings row `import_presets`. Import rules: first match by `sort_order` sets category (only if the type fits)
+  and payee rename. `import_hash` = hash of account/date/amount/payee/note + occurrence in the file; known hashes
+  (incl. trash) = duplicate, same date+amount manual booking = possible duplicate; both start unselected.
+  Saving is one atomic write.
+- Attachments: images + PDF ≤ 20 MB, files via `FileStore` (`lib/files`: `$APPDATA/attachments/` in Tauri, separate
+  IndexedDB `heimkasse-files` in the browser, memory in tests; `repos.files`). Managed from the row menu of
+  transactions/contracts; images previewed as data URLs, PDF/HEIC only saved. Delete = soft delete + undo; files of
+  deleted attachments are purged on the next start (`DataMaintenance`); purging a transaction/contract purges its
+  attachments + files.
+- Backup: JSON `{app, format: 1, schemaVersion, exportedAt, tables, files(base64)}` incl. trash; every row is
+  validated with its entity schema before writing; newer schema/format is refused, missing columns of older backups
+  get column defaults. Restore replaces everything in one write (`clear` op); device settings `app_lock` and
+  `auto_backup` are neither exported nor overwritten.
+- Auto-backup (desktop only): folder from the open dialog, kept in the fs scope by tauri-plugin-persisted-scope;
+  daily/weekly, keeps the newest N `heimkasse-backup-*.json`; checked on start + hourly.
+- Delete all data: typed confirmation word; keeps only preference rows, removes files, re-seeds built-in categories.
+  Also the "forgot password" escape on the lock screen.
+- App lock: PBKDF2-SHA256 (310k iterations, random salt) in settings row `app_lock`; locked on every start, optional
+  auto-lock after inactivity, back-off after 5 failed attempts. Not encryption. `LockMethod` is extensible for
+  biometrics later. `LockGate` sits inside `StorageGate`; nothing else mounts while locked.
+
 ## Architecture (where things live)
 
 - `src/app/` routes only (thin pages + `error.tsx` per route). Static export, `trailingSlash: true`, no dynamic routes.
@@ -86,7 +110,7 @@ Update this table when a phase is finished.
 - Insights: pure aggregations in `features/reports/aggregate.ts`, `features/budgets/status.ts`,
   `features/overview/dashboard.ts`, periods in `lib/utils/period.ts`. Charts (Recharts) live in
   `features/reports/components/charts/` and are lazy-loaded; always wrap them in `ChartContainer` (table fallback).
-- Global overlays (quick add, recurring auto-runner, budget alert watcher) are composed in `src/app/layout.tsx` via `AppShell overlays`.
+- Global overlays (quick add, recurring auto-runner, budget alert watcher, reminders, data maintenance) are composed in `src/app/layout.tsx` via `AppShell overlays`.
 
 ## Conventions
 
