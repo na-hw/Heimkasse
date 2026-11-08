@@ -2,16 +2,13 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useRepositories } from "@/components/providers/RepositoriesContext";
-
-export const overviewKeys = {
-  stats: ["overview", "stats"] as const,
-};
+import { queryKeys } from "@/features/queryKeys";
 
 /** Counts and storage info for the overview page. */
 export function useOverviewStats() {
   const repos = useRepositories();
   return useQuery({
-    queryKey: overviewKeys.stats,
+    queryKey: [...queryKeys.overview, "stats"],
     queryFn: async () => {
       const [accounts, categories, schemaVersion] = await Promise.all([
         repos.accounts.count(),
