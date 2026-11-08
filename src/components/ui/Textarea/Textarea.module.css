@@ -1,0 +1,8 @@
+.textarea {
+  display: block;
+  padding-block: var(--space-2);
+  resize: vertical;
+  field-sizing: content;
+  min-block-size: 5rem;
+  line-height: var(--line-height-normal);
+}
