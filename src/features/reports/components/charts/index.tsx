@@ -15,3 +15,4 @@ export const IncomeExpenseChart = dynamic(() => import("./IncomeExpenseChart"), 
   loading,
 });
 export const LineSeriesChart = dynamic(() => import("./LineSeriesChart"), { ssr: false, loading });
+export const ValueBarChart = dynamic(() => import("./ValueBarChart"), { ssr: false, loading });
