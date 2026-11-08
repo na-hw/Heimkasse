@@ -41,7 +41,11 @@ export function AccountFormDialog({ open, onOpenChange, account, nextSortOrder }
   const color = form.watch("color") ?? "teal";
 
   const submit = form.handleSubmit(async (values) => {
-    if (account) await update.mutateAsync({ id: account.id, patch: values });
+    if (account) {
+      // Only fields edited here – never reset sort order or archive state.
+      const { name, type, initial_balance_cents, color, icon } = values;
+      await update.mutateAsync({ id: account.id, patch: { name, type, initial_balance_cents, color, icon } });
+    }
     else await create.mutateAsync(values);
     onOpenChange(false);
   });
