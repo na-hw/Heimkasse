@@ -106,51 +106,6 @@ describe("sqlite migration safety", () => {
 });
 
 describe("indexeddb migration upgrades", () => {
-  it("adds Sport, Streaming and Kita categories to a version 2 database", async () => {
-    const name = "heimkasse-sport-test";
-    const v2 = new BrowserAdapter(name, MIGRATIONS.slice(0, 2), () => FIXED_NOW);
-    await v2.init();
-    await v2.close();
-    const upgraded = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);
-    await upgraded.init();
-    expect(await upgraded.count("categories")).toBe(BUILTIN_CATEGORIES.length);
-    const byKey = async (key: string) =>
-      (
-        await upgraded.find("categories", {
-          where: [{ field: "name_key", op: "eq", value: `categories.builtin.${key}` }],
-        })
-      )[0];
-    const sport = await byKey("sport");
-    expect(sport).toMatchObject({ type: "expense", parent_id: null });
-    expect(await byKey("sport_parents")).toMatchObject({ parent_id: sport?.id });
-    expect(await byKey("sport_children")).toMatchObject({ parent_id: sport?.id });
-    expect(await byKey("childcare")).toMatchObject({ type: "expense", parent_id: null });
-    const subscriptions = await byKey("subscriptions");
-    expect(await byKey("subscriptions_streaming")).toMatchObject({
-      parent_id: subscriptions?.id,
-    });
-    await upgraded.destroy();
-  });
-
-  it("adds the warm rent category to a version 1 database after Kaltmiete", async () => {
-    const name = "heimkasse-warm-rent-test";
-    const v1 = new BrowserAdapter(name, MIGRATIONS.slice(0, 1), () => FIXED_NOW);
-    await v1.init();
-    await v1.close();
-    const upgraded = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);
-    await upgraded.init();
-    expect(await upgraded.count("categories")).toBe(BUILTIN_CATEGORIES.length);
-    const [rent] = await upgraded.find("categories", {
-      where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent" }],
-    });
-    const [warm] = await upgraded.find("categories", {
-      where: [{ field: "name_key", op: "eq", value: "categories.builtin.rent_warm" }],
-    });
-    expect(warm).toMatchObject({ type: "expense", parent_id: null, is_system: true });
-    expect(Number(warm?.sort_order)).toBe(Number(rent?.sort_order) + 1);
-    await upgraded.destroy();
-  });
-
   it("upgrades an existing database to a new version with seeds", async () => {
     const name = "heimkasse-upgrade-test";
     const v1 = new BrowserAdapter(name, MIGRATIONS, () => FIXED_NOW);

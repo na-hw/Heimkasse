@@ -258,7 +258,6 @@
   "categories": {
     "builtin": {
       "rent": "Kaltmiete",
-      "rent_warm": "Warmmiete",
       "utilities": "Nebenkosten",
       "energy": "Strom & Gas",
       "internet_phone": "Internet & Telefon",
@@ -276,14 +275,9 @@
       "household": "Haushalt",
       "clothing": "Kleidung",
       "leisure": "Freizeit",
-      "sport": "Sport",
-      "sport_parents": "Sport (Eltern)",
-      "sport_children": "Sport (Kinder)",
       "restaurants": "Restaurants & Café",
       "education": "Bildung",
-      "childcare": "Kita & Kindergarten",
       "subscriptions": "Abos",
-      "subscriptions_streaming": "Streaming (Netflix & Co.)",
       "gifts": "Geschenke",
       "salary": "Gehalt",
       "other_income": "Sonstige Einnahmen"

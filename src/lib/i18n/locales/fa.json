@@ -258,7 +258,6 @@
   "categories": {
     "builtin": {
       "rent": "اجاره (بدون شارژ)",
-      "rent_warm": "اجاره با شارژ (Warmmiete)",
       "utilities": "شارژ ساختمان (Nebenkosten)",
       "energy": "برق و گاز",
       "internet_phone": "اینترنت و تلفن",
@@ -276,14 +275,9 @@
       "household": "خانه‌داری",
       "clothing": "پوشاک",
       "leisure": "اوقات فراغت",
-      "sport": "ورزش",
-      "sport_parents": "ورزش (والدین)",
-      "sport_children": "ورزش (کودکان)",
       "restaurants": "رستوران و کافه",
       "education": "آموزش",
-      "childcare": "مهدکودک (Kita و Kindergarten)",
       "subscriptions": "اشتراک‌ها",
-      "subscriptions_streaming": "استریم (Netflix و غیره)",
       "gifts": "هدیه‌ها",
       "salary": "حقوق",
       "other_income": "سایر درآمدها"
