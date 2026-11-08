@@ -5,6 +5,8 @@ import "react-day-picker/style.css";
 import "@/styles/globals.css";
 import { AppShell } from "@/components/layout/AppShell";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { RecurringAutoRunner } from "@/features/recurring/components/RecurringAutoRunner";
+import { QuickAddHost } from "@/features/transactions/components/QuickAddHost";
 import { BOOT_SCRIPT } from "@/lib/preferences/bootCache";
 
 export const metadata: Metadata = {
@@ -32,7 +34,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <AppProviders>
-          <AppShell>{children}</AppShell>
+          <AppShell
+            overlays={
+              <>
+                <QuickAddHost />
+                <RecurringAutoRunner />
+              </>
+            }
+          >
+            {children}
+          </AppShell>
         </AppProviders>
       </body>
     </html>

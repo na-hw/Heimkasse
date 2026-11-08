@@ -11,9 +11,10 @@ import styles from "./AppShell.module.css";
 
 /**
  * Responsive app frame: sidebar on ≥768px, top bar + bottom navigation on
- * phones. Main content is the skip-link target.
+ * phones. Main content is the skip-link target. `overlays` are app-wide
+ * dialogs/runners composed in the root layout (e.g. quick add).
  */
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, overlays }: { children: ReactNode; overlays?: ReactNode }) {
   const collapsed = useUiStore((s) => s.sidebarCollapsed);
   return (
     <>
@@ -29,6 +30,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <BottomNav />
       </div>
       <CommandPaletteHost />
+      {overlays}
     </>
   );
 }
