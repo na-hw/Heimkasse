@@ -19,7 +19,8 @@
     inline-size: auto;
     /* Above the FAB so it stays reachable while a toast is shown. */
     inset-block-end: calc(
-      var(--bottom-nav-height) + var(--fab-size) + var(--space-4) + var(--space-3) + var(--safe-bottom)
+      var(--bottom-nav-height) + var(--fab-size) + var(--space-4) + var(--space-3) +
+        var(--safe-bottom)
     );
   }
 
