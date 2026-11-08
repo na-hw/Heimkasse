@@ -1,15 +1,16 @@
 "use client";
 
-import { Languages, Monitor, Moon, Sun } from "lucide-react";
+import { Languages, Monitor, Moon, Plus, Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { type CommandGroup, CommandPalette } from "@/components/ui";
 import { useUpdatePreference } from "@/features/settings/hooks";
+import { useTransactionEditor } from "@/features/transactions/editorStore";
 import { LANGUAGES, LANGUAGE_NATIVE_NAME } from "@/lib/i18n/config";
 import { usePreferences } from "@/lib/preferences/store";
 import { useUiStore } from "@/lib/preferences/uiStore";
-import { useModHotkey } from "@/lib/utils/useHotkey";
+import { shortcutLabel, useModHotkey } from "@/lib/utils/useHotkey";
 import { visibleNavItems } from "./navigation";
 
 /** Wires the command palette to navigation and preferences; opens with ⌘K / Ctrl+K. */
@@ -20,11 +21,25 @@ export function CommandPaletteHost() {
   const setOpen = useUiStore((s) => s.setCommandPaletteOpen);
   const language = usePreferences((s) => s.language);
   const updatePreference = useUpdatePreference();
+  const openCreate = useTransactionEditor((s) => s.openCreate);
 
   useModHotkey("k", () => setOpen(!useUiStore.getState().commandPaletteOpen));
 
   const groups = useMemo<CommandGroup[]>(
     () => [
+      {
+        id: "actions",
+        heading: t("common.actions"),
+        items: [
+          {
+            id: "quick-add",
+            label: t("nav.quickAdd"),
+            icon: <Plus />,
+            shortcut: shortcutLabel("n"),
+            onSelect: () => openCreate(),
+          },
+        ],
+      },
       {
         id: "navigation",
         heading: t("command.groups.navigation"),
@@ -64,7 +79,7 @@ export function CommandPaletteHost() {
         ],
       },
     ],
-    [t, router, language, updatePreference],
+    [t, router, language, updatePreference, openCreate],
   );
 
   return (
