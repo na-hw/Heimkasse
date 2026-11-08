@@ -136,3 +136,19 @@
     opacity: 0;
   }
 }
+
+@media (pointer: coarse) {
+  .action {
+    min-block-size: var(--touch-target);
+  }
+
+  /* Larger hit area without enlarging the visible button. */
+  .close {
+    position: relative;
+  }
+  .close::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+  }
+}

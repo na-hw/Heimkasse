@@ -37,3 +37,18 @@
   min-inline-size: 8rem;
   min-block-size: 34px;
 }
+
+@media (pointer: coarse) {
+  .remove {
+    position: relative;
+  }
+  /* 28px + 2 × 8px = 44px hit area; the chip keeps its size. */
+  .remove::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+  }
+  .input {
+    min-block-size: var(--touch-target);
+  }
+}

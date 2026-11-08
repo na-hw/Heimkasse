@@ -29,6 +29,12 @@
   text-underline-offset: 3px;
 }
 
+@media (pointer: coarse) {
+  .linkButton {
+    min-block-size: var(--touch-target);
+  }
+}
+
 @media (max-width: 639px) {
   .hideSmall {
     position: absolute;
