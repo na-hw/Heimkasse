@@ -9,7 +9,7 @@ pub fn run() {
         .plugin(tauri_plugin_sql::Builder::default().build())
         .invoke_handler(tauri::generate_handler![db::db_batch])
         .setup(|app| {
-            // kiseh.db lives in the app data directory.
+            // heimkasse.db lives in the app data directory.
             let data_dir = app.path().app_data_dir()?;
             std::fs::create_dir_all(&data_dir)?;
 
@@ -24,5 +24,5 @@ pub fn run() {
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("error while running Kiseh");
+        .expect("error while running Heimkasse");
 }
