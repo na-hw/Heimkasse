@@ -15,7 +15,7 @@ Read it before starting a phase.** Decisions below override the brief where they
 | 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ✅ done |
 | 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | ✅ done |
 | 5 Data (CSV import, attachments, backup, delete all, app lock)  | ✅ done |
-| 6 Polish (a11y audit, performance, coverage, build, README)     | open    |
+| 6 Polish (a11y audit, performance, coverage, build, README)     | ✅ done |
 
 Update this table when a phase is finished.
 
@@ -92,6 +92,14 @@ Update this table when a phase is finished.
   auto-lock after inactivity, back-off after 5 failed attempts. Not encryption. `LockMethod` is extensible for
   biometrics later. `LockGate` sits inside `StorageGate`; nothing else mounts while locked.
 
+- Accessibility is guarded by `e2e/a11y.spec.ts` (axe WCAG 2.2 AA on every route, de/light + fa/dark, and a 320 px
+  reflow check). Charts are `inert` (the data table is the accessible equivalent). Row buttons are named by their
+  visible content (WCAG 2.5.3); extra info for screen readers goes into visually hidden text, not `aria-label`.
+  Scroll containers with visually hidden content need `position: relative` (otherwise it widens the mobile viewport).
+- `package.json` `sideEffects` enables tree shaking of the `@/components/ui` barrel – modules with import-time side
+  effects must be listed there. Quick-add dialog and command palette are lazy-loaded on first use.
+- Coverage thresholds (90 % lines / 80 % branches) apply to the logic files configured in `vitest.config.mts`.
+
 ## Architecture (where things live)
 
 - `src/app/` routes only (thin pages + `error.tsx` per route). Static export, `trailingSlash: true`, no dynamic routes.
@@ -127,6 +135,7 @@ Update this table when a phase is finished.
 npm run dev            # browser (IndexedDB)
 npm run tauri:dev      # desktop window (SQLite) – needs port 3000 free
 npm run check          # typecheck + eslint + vitest
+npm run test:coverage  # vitest with coverage thresholds
 npm run test:e2e       # Playwright against the static build (desktop + mobile)
 npm run tauri:build:mac
 npx prettier --write .
