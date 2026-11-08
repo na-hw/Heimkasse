@@ -105,7 +105,16 @@ describe.each(ADAPTER_FACTORIES)("entity services on $name", ({ create }) => {
     if (!groceries) throw new Error("seed missing");
     const tx = await expense(giro, groceries.id);
     await repos.budgets.create({ category_id: groceries.id, amount_cents: 300_00 });
+    const contract = await repos.contracts.create({
+      name: "Gemüsekiste",
+      category_id: groceries.id,
+      amount_cents: 25_00,
+      billing_frequency: "weekly",
+      start_date: "2026-01-01",
+    });
+    expect(await categoryUsage(repos, await repos.categories.list(), groceries.id)).toBe(3);
     await purgeCategory(repos, groceries.id);
+    expect((await repos.contracts.getOrThrow(contract.id)).category_id).toBeNull();
     expect((await repos.transactions.getOrThrow(tx.id)).category_id).toBeNull();
     expect(await repos.budgets.count({ deleted: "include" })).toBe(0);
     expect(await repos.categories.get(groceries.id)).toBeNull();
