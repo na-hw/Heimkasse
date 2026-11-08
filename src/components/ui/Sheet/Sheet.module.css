@@ -1,0 +1,68 @@
+.sheet {
+  position: fixed;
+  z-index: var(--z-modal);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-lg);
+}
+
+.sheet:focus {
+  outline: none;
+}
+
+.start,
+.end {
+  inset-block: 0;
+  inline-size: min(28rem, 100vw);
+  padding-block: var(--safe-top) var(--safe-bottom);
+}
+
+.end {
+  inset-inline-end: 0;
+  border-start-start-radius: var(--radius-xl);
+  border-end-start-radius: var(--radius-xl);
+  animation: slideFromEnd var(--duration-normal) var(--easing-standard);
+}
+
+.start {
+  inset-inline-start: 0;
+  border-start-end-radius: var(--radius-xl);
+  border-end-end-radius: var(--radius-xl);
+  animation: slideFromStart var(--duration-normal) var(--easing-standard);
+}
+
+.bottom {
+  inset-inline: 0;
+  inset-block-end: 0;
+  max-block-size: 90dvh;
+  padding-block-end: var(--safe-bottom);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  animation: slideUp var(--duration-normal) var(--easing-standard);
+}
+
+@keyframes slideFromEnd {
+  from {
+    translate: 100% 0;
+  }
+}
+
+@keyframes slideFromStart {
+  from {
+    translate: -100% 0;
+  }
+}
+
+:global([dir="rtl"]) .end {
+  animation-name: slideFromStart;
+}
+
+:global([dir="rtl"]) .start {
+  animation-name: slideFromEnd;
+}
+
+@keyframes slideUp {
+  from {
+    translate: 0 100%;
+  }
+}
