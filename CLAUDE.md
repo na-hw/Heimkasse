@@ -13,7 +13,7 @@ Read it before starting a phase.** Decisions below override the brief where they
 | 1 Foundation                                                    | ✅ done |
 | 2 Core (accounts, categories, transactions, recurring, trash)   | ✅ done |
 | 3 Insights (dashboard, budgets, reports, CSV/PDF export)        | ✅ done |
-| 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | ⏳ next |
+| 4 Germany features (contracts, meters, Nebenkosten, tax, goals) | ✅ done |
 | 5 Data (CSV import, attachments, backup, delete all, app lock)  | open    |
 | 6 Polish (a11y audit, performance, coverage, build, README)     | open    |
 
@@ -52,7 +52,21 @@ Update this table when a phase is finished.
   PDF = own minimal writer (`lib/export/pdf.ts`) with canvas-rendered A4 pages (correct Persian shaping/RTL offline;
   text is not selectable). Export content is a format-neutral `ExportDocument`. Desktop saves via
   tauri-plugin-dialog (save) + tauri-plugin-fs (`write-file`, scope = path picked in the dialog); browser downloads.
-- Contract cancellation deadlines on the dashboard come with Phase 4 (contracts).
+- Contracts: term end = start + minimum term (anchored to the start date), then renews by `auto_renew_months`; with 0
+  it becomes open-ended (cancellable any time with notice, § 309 Nr. 9 BGB). "3 months to 31.12." → deadline 30.09.
+  `cancellation_date` = effective end after cancelling. A linked recurring rule can be created with the contract;
+  amount/frequency/category edits pass to it (future only), cancelling sets the rule's `end_date`. Deleting a contract
+  keeps its rule.
+- Contract reminders 30/14/3 days before the deadline: toast + native notification (tauri-plugin-notification),
+  checked on start/data change/hourly while the app runs, once per stage (settings row `contract_reminders`).
+- Meters: readings may never decrease (validated against neighbours); yearly projection uses the reading closest to
+  one year before the latest one. Price input in ct with 3 decimals → millicents.
+- Nebenkosten: result = 12 × monthly prepayment − actual (stored in `result_cents`); one settlement per year; suggested
+  prepayment = actual / 12 rounded up to whole euros. Meters and settlements share `/utilities/` (tabs).
+- Tax report: expenses with a tax category count, income with a tax category (refunds) reduces; calendar year.
+- Savings goals: withdrawals are negative contributions; projection from the last 3 months' net average.
+- Trash covers contracts, meters, settlements and goals; purging meters/goals also purges readings/contributions.
+  Readings and contributions themselves are deleted with an undo toast only (no trash tab).
 
 ## Architecture (where things live)
 
